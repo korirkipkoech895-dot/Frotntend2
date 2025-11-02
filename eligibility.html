@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Loan - Swift Loan Limited</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #002B5C;
+            --primary-orange: #FF6B35;
+            --light-gray: #F5F5F5;
+            --text-dark: #333;
+            --text-light: #666;
+            --success-green: #28a745;
+            --error-red: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: var(--light-gray);
+            border: 2px dashed var(--primary-orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-align: center;
+            padding: 5px;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .company-name span {
+            color: var(--primary-orange);
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 3px;
+            background: var(--primary-blue);
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: var(--primary-blue);
+            transition: 0.3s;
+        }
+
+        .hamburger::before {
+            top: -8px;
+        }
+
+        .hamburger::after {
+            top: 8px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--primary-blue);
+            transition: 0.3s ease-in-out;
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--primary-orange);
+            padding-left: 10px;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 6rem 5% 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-description {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        /* Progress Steps */
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #ddd;
+            z-index: 0;
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            background: var(--primary-orange);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid #ddd;
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .progress-step.active .step-circle {
+            border-color: var(--primary-orange);
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .progress-step.completed .step-circle {
+            border-color: var(--success-green);
+            background: var(--success-green);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-step.active .step-label {
+            color: var(--primary-orange);
+            font-weight: bold;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .required {
+            color: var(--error-red);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+        }
+
+        .form-group.error input,
+        .form-group.error select {
+            border-color: var(--error-red);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        /* Checkbox Group */
+        .checkbox-group {
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        /* Signature Pad */
+        .signature-container {
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        #signaturePad {
+            width: 100%;
+            height: 200px;
+            cursor: crosshair;
+        }
+
+        .signature-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--light-gray);
+        }
+
+        /* Buttons */
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #e55a25;
+        }
+
+        .btn-secondary {
+            background: var(--text-light);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #555;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-clear {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid #ddd;
+        }
+
+        /* Reference Button */
+        .reference-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            border: none;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            color: var(--primary-blue);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Processing Modal */
+        .processing-modal {
+            text-align: center;
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid var(--light-gray);
+            border-top: 8px solid var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .processing-steps {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .processing-step {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: var(--light-gray);
+            border-radius: 5px;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+
+        .processing-step.active {
+            opacity: 1;
+            background: #d4edda;
+            color: var(--success-green);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 3rem 5% 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-orange);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .progress-container {
+                font-size: 0.85rem;
+            }
+
+            .step-circle {
+                width: 35px;
+                height: 35px;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Kenya Flag */
+        .flag-icon {
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-placeholder">swiftloan logo.png</div>
+            <div class="company-name">Swift <span>Loan</span> Limited</div>
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <div class="hamburger"></div>
+        </button>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="company-name" style="color: white;">Swift <span>Loan</span></div>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#calculator">Loan Calculator</a></li>
+            <li><a href="eligibility.html">Apply for Loan</a></li>
+            <li><a href="index.html#how-to">How It Works</a></li>
+            <li><a href="index.html#faq">FAQs</a></li>
+            <li><a href="index.html#testimonials">Testimonials</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="page-title">Loan Application</h1>
+        <p class="page-description">Complete the form below to check your eligibility and get instant loan offers</p>
+
+        <!-- Progress Steps -->
+        <div class="progress-container">
+            <div class="progress-line">
+                <div class="progress-line-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-step active" id="progressStep1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Personal Details</div>
+            </div>
+            <div class="progress-step" id="progressStep2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Other Details</div>
+            </div>
+            <div class="progress-step" id="progressStep3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Consent</div>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+            <form id="applicationForm">
+                <!-- Step 1: Personal Details -->
+                <div class="form-step active" id="step1">
+                    <h2 style="color: var(--primary-blue); margin-bottom: 2rem;">Step 1: Personal Details</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" required>
+                            <div class="error-message">Please enter at least two valid names (3+ letters each)</div>
+                        </div>
+                        <div class="form-group">
+                            <label>National ID Number <span class="required">*</span></label>
+                            <input type="text" id="nationalId" required>
+                            <div class="error-message">ID must be 8 or 9 digits</div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" value="Kenyan 🇰🇪" readonly style="background: #f9f9f9;">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phoneNumber" placeholder="07XXXXXXXX or 2547XXXXXXXX" required>
+                            <div class="error-message">Enter valid Kenyan number (07... or 2547...)</div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" placeholder="johndoe@gmail.com" required>
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="dob" required>
+                            <div class="error-message">You must be 18 years or older</div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Marital Status <span class="required">*</span></label>
+                            <select id="maritalStatus" required>
+                                <option value="">Select...</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Widowed">Widowed</option>
+                            </select>
+                            <div class="error-message">Please select your marital status</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Alternative Phone Number (Optional)</label>
+                            <input type="tel" id="altPhone" placeholder="07XXXXXXXX or 2547XXXXXXXX">
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <a href="index.html" class="btn btn-secondary">Cancel</a>
+                        <button type="button" class="btn btn-primary" id="nextStep1">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Other Details -->
+                <div class="form-step" id="step2">
+                    <h2 style="color: var(--primary-blue); margin-bottom: 2rem;">Step 2: Other Details</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Employment Status <span class="required">*</span></label>
+                            <select id="employmentStatus" required>
+                                <option value="">Select...</option>
+                                <option value="Employed Full-time">Employed Full-time</option>
+                                <option value="Employed Part-time">Employed Part-time</option>
+                                <option value="Self-employed">Self-employed</option>
+                                <option value="Unemployed">Unemployed</option>
+                                <option value="Retired">Retired</option>
+                            </select>
+                            <div class="error-message">Please select employment status</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Monthly Income (KSh) <span class="required">*</span></label>
+                            <select id="monthlyIncome" required>
+                                <option value="">Select...</option>
+                                <option value="0-10000">0 - 10,000</option>
+                                <option value="10001-30000">10,001 - 30,000</option>
+                                <option value="30001-50000">30,001 - 50,000</option>
+                                <option value="50001-70000">50,001 - 70,000</option>
+                                <option value="70001-100000">70,001 - 100,000</option>
+                                <option value="100000+">100,000+</option>
+                            </select>
+                            <div class="error-message">Please select your monthly income range</div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Desired Loan Amount (KSh) <span class="required">*</span></label>
+                            <input type="number" id="loanAmount" min="6000" max="100000" placeholder="Enter amount between 6,000 - 100,000" required>
+                            <div class="error-message">Loan amount must be between 6,000 and 100,000</div>
+                        </div>
+                        <div class="form-group">
+                            <label>County <span class="required">*</span></label>
+                            <select id="county" required>
+                                <option value="">Select County...</option>
+                                <option value="Nairobi">Nairobi</option>
+                                <option value="Mombasa">Mombasa</option>
+                                <option value="Kisumu">Kisumu</option>
+                                <option value="Nakuru">Nakuru</option>
+                                <option value="Kiambu">Kiambu</option>
+                                <option value="Machakos">Machakos</option>
+                                <option value="Uasin Gishu">Uasin Gishu</option>
+                                <option value="Kajiado">Kajiado</option>
+                                <option value="Kilifi">Kilifi</option>
+                                <option value="Murang'a">Murang'a</option>
+                                <option value="Nyeri">Nyeri</option>
+                                <option value="Meru">Meru</option>
+                                <option value="Kakamega">Kakamega</option>
+                                <option value="Bungoma">Bungoma</option>
+                                <option value="Kisii">Kisii</option>
+                                <option value="Turkana">Turkana</option>
+                                <option value="Kericho">Kericho</option>
+                                <option value="Nandi">Nandi</option>
+                                <option value="Migori">Migori</option>
+                                <option value="Embu">Embu</option>
+                                <option value="Kwale">Kwale</option>
+                                <option value="Trans Nzoia">Trans Nzoia</option>
+                                <option value="Kitui">Kitui</option>
+                                <option value="Nyandarua">Nyandarua</option>
+                                <option value="Nyamira">Nyamira</option>
+                                <option value="Kirinyaga">Kirinyaga</option>
+                                <option value="Makueni">Makueni</option>
+                                <option value="Laikipia">Laikipia</option>
+                                <option value="Bomet">Bomet</option>
+                                <option value="Homa Bay">Homa Bay</option>
+                                <option value="Baringo">Baringo</option>
+                                <option value="Elgeyo Marakwet">Elgeyo Marakwet</option>
+                                <option value="Narok">Narok</option>
+                                <option value="West Pokot">West Pokot</option>
+                                <option value="Siaya">Siaya</option>
+                                <option value="Taita Taveta">Taita Taveta</option>
+                                <option value="Vihiga">Vihiga</option>
+                                <option value="Lamu">Lamu</option>
+                                <option value="Tana River">Tana River</option>
+                                <option value="Garissa">Garissa</option>
+                                <option value="Wajir">Wajir</option>
+                                <option value="Mandera">Mandera</option>
+                                <option value="Marsabit">Marsabit</option>
+                                <option value="Isiolo">Isiolo</option>
+                                <option value="Samburu">Samburu</option>
+                                <option value="Tharaka Nithi">Tharaka Nithi</option>
+                                <option value="Busia">Busia</option>
+                            </select>
+                            <div class="error-message">Please select your county</div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>City/Town <span class="required">*</span></label>
+                            <input type="text" id="city" required>
+                            <div class="error-message">City/Town must be at least 4 letters</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Repayment Period (Months) <span class="required">*</span></label>
+                            <select id="repaymentPeriod" required>
+                                <option value="">Select...</option>
+                                <option value="1">1 Month</option>
+                                <option value="2">2 Months</option>
+                                <option value="3">3 Months</option>
+                                <option value="4">4 Months</option>
+                                <option value="5">5 Months</option>
+                                <option value="6">6 Months</option>
+                                <option value="7">7 Months</option>
+                                <option value="8">8 Months</option>
+                                <option value="9">9 Months</option>
+                                <option value="10">10 Months</option>
+                                <option value="11">11 Months</option>
+                                <option value="12">12 Months</option>
+                            </select>
+                            <div class="error-message">Please select repayment period</div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Postal Code <span class="required">*</span></label>
+                            <input type="text" id="postalCode" placeholder="e.g. 20406" required>
+                            <div class="error-message">Postal code must be 5 digits</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Postal Address / P.O. Box <span class="required">*</span></label>
+                            <input type="text" id="postalAddress" placeholder="e.g. P.O. Box 1234" required>
+                            <div class="error-message">Please enter your postal address</div>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Length of Employment <span class="required">*</span></label>
+                            <select id="employmentLength" required>
+                                <option value="">Select...</option>
+                                <option value="Less than 6 months">Less than 6 months</option>
+                                <option value="6 months - 1 year">6 months - 1 year</option>
+                                <option value="1 - 2 years">1 - 2 years</option>
+                                <option value="2 - 5 years">2 - 5 years</option>
+                                <option value="5+ years">5+ years</option>
+                            </select>
+                            <div class="error-message">Please select length of employment</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Dependents <span class="required">*</span></label>
+                            <select id="dependents" required>
+                                <option value="">Select...</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5+">5+</option>
+                            </select>
+                            <div class="error-message">Please select number of dependents</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Purpose of Loan (Optional)</label>
+                        <textarea id="loanPurpose" rows="3" placeholder="Tell us why you need this loan..."></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-secondary" id="prevStep2">Previous</button>
+                        <button type="button" class="btn btn-primary" id="nextStep2">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Consent -->
+                <div class="form-step" id="step3">
+                    <h2 style="color: var(--primary-blue); margin-bottom: 2rem;">Step 3: Consent & Agreement</h2>
+                    
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="consent1" required>
+                            <span>I consent to Swift Loan Limited accessing my credit information from licensed Credit Reference Bureaus (CRBs) for the purposes of assessing my creditworthiness.</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="consent2" required>
+                            <span>I confirm that all information provided in this application is true, accurate, and complete to the best of my knowledge. I understand that providing false information may result in rejection of my application.</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="consent3" required>
+                            <span>I agree to the Terms and Conditions, Privacy Policy, and loan repayment terms of Swift Loan Limited. I understand that failure to repay may result in legal action and reporting to CRBs.</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <label>Digital Signature <span class="required">*</span></label>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Please sign below using your mouse or finger</p>
+                        <div class="signature-container">
+                            <canvas id="signaturePad"></canvas>
+                            <div class="signature-controls">
+                                <button type="button" class="btn btn-clear" id="clearSignature">Clear Signature</button>
+                                <span style="color: var(--text-light); font-size: 0.9rem;">Draw your signature above</span>
+                            </div>
+                        </div>
+                        <div class="error-message" id="signatureError">Please provide your signature</div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-secondary" id="prevStep3">Previous</button>
+                        <button type="button" class="btn btn-primary" id="submitApplication">Check Eligibility</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reference Button -->
+    <button class="reference-btn" id="referenceBtn" title="View Saved Data">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+        </svg>
+    </button>
+
+    <!-- Reference Modal -->
+    <div class="modal" id="referenceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Your Saved Application Data</h3>
+                <button class="modal-close" id="closeReference">&times;</button>
+            </div>
+            <div id="referenceData"></div>
+        </div>
+    </div>
+
+    <!-- Processing Modal -->
+    <div class="modal" id="processingModal">
+        <div class="modal-content processing-modal">
+            <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">Processing Your Application</h3>
+            <div class="spinner"></div>
+            <div class="processing-steps" id="processingSteps">
+                <div class="processing-step">Transferring data to Swift digital ventures system</div>
+                <div class="processing-step">Preliminary screening</div>
+                <div class="processing-step">Credit Evaluation / Credit Scoring</div>
+                <div class="processing-step">Financial Analysis / Capacity Assessment</div>
+                <div class="processing-step">Validating</div>
+                <div class="processing-step">Processing</div>
+                <div class="processing-step">Loan Approval</div>
+                <div class="processing-step">Creating loan offers</div>
+            </div>
+            <p id="processingMessage" style="font-weight: bold; color: var(--primary-orange);"></p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content" style="text-align: center;">
+            <div style="font-size: 4rem; color: var(--success-green); margin-bottom: 1rem;">✓</div>
+            <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">You're Approved!</h3>
+            <p style="margin-bottom: 2rem; color: var(--text-light);">Congratulations! You have qualified for loan offers.</p>
+            <p style="font-weight: bold; color: var(--primary-orange);">Redirecting to offers...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="eligibility.html">Apply for Loan</a></li>
+                    <li><a href="index.html#how-to">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <span>info@swiftloan.ke</span>
+                </div>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                    <span>Call: 0732202740</span>
+                </div>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+                    </svg>
+                    <span>WhatsApp: 0732202740</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed and regulated by CBK.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sidebar functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+        }
+
+        function closeSidebarFunc() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+        sidebarOverlay.addEventListener('click', closeSidebarFunc);
+
+        // Form Navigation
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function updateProgress() {
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // Update step indicators
+            for (let i = 1; i <= totalSteps; i++) {
+                const stepEl = document.getElementById('progressStep' + i);
+                stepEl.classList.remove('active', 'completed');
+                if (i < currentStep) {
+                    stepEl.classList.add('completed');
+                } else if (i === currentStep) {
+                    stepEl.classList.add('active');
+                }
+            }
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            currentStep = step;
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        // Validation Functions
+        function validateFullName(name) {
+            const parts = name.trim().split(/\s+/);
+            if (parts.length < 2) return false;
+            return parts.every(part => part.length >= 3);
+        }
+
+        function validateNationalId(id) {
+            return /^\d{8,9}$/.test(id);
+        }
+
+        function validatePhone(phone) {
+            return /^(07\d{8}|2547\d{8})$/.test(phone.replace(/\s+/g, ''));
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validateAge(dob) {
+            const today = new Date();
+            const birthDate = new Date(dob);
+            const age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                return age - 1 >= 18;
+            }
+            return age >= 18;
+        }
+
+        // Real-time Validation
+        document.getElementById('fullName').addEventListener('blur', function() {
+            const group = this.closest('.form-group');
+            if (!validateFullName(this.value)) {
+                group.classList.add('error');
+            } else {
+                group.classList.remove('error');
+            }
+        });
+
+        document.getElementById('nationalId').addEventListener('blur', function() {
+            const group = this.closest('.form-group');
+            if (!validateNationalId(this.value)) {
+                group.classList.add('error');
+            } else {
+                group.classList.remove('error');
+            }
+        });
+
+        document.getElementById('phoneNumber').addEventListener('blur', function() {
+            const group = this.closest('.form-group');
+            if (!validatePhone(this.value)) {
+                group.classList.add('error');
+            } else {
+                group.classList.remove('error');
+            }
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            const group = this.closest('.form-group');
+            if (!validateEmail(this.value)) {
+                group.classList.add('error');
+            } else {
+                group.classList.remove('error');
+            }
+        });
+
+        document.getElementById('dob').addEventListener('blur', function() {
+            const group = this.closest('.form-group');
+            if (!this.value || !validateAge(this.value)) {
+                group.classList.add('error');
+            } else {
+                group.classList.remove('error');
+            }
+        });
+
+        document.getElementById('loanAmount').addEventListener('blur', function() {
+            const group = this.closest('.form-group');
+            const value = parseInt(this.value);
+            if (!value || value < 6000 || value > 100000) {
+                group.classList.add('error');
+            } else {
+                group.classList.remove('error');
+            }
+        });
+
+        document.getElementById('city').addEventListener('blur', function() {
+            const group = this.closest('.form-group');
+            if (this.value.length < 4) {
+                group.classList.add('error');
+            } else {
+                group.classList.remove('error');
+            }
+        });
+
+        document.getElementById('postalCode').addEventListener('blur', function() {
+            const group = this.closest('.form-group');
+            if (!/^\d{5}$/.test(this.value)) {
+                group.classList.add('error');
+            } else {
+                group.classList.remove('error');
+            }
+        });
+
+        // Step 1 Validation and Next
+        document.getElementById('nextStep1').addEventListener('click', function() {
+            const step1Data = {
+                fullName: document.getElementById('fullName').value,
+                nationalId: document.getElementById('nationalId').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                email: document.getElementById('email').value,
+                dob: document.getElementById('dob').value,
+                maritalStatus: document.getElementById('maritalStatus').value,
+                altPhone: document.getElementById('altPhone').value
+            };
+
+            let isValid = true;
+
+            if (!validateFullName(step1Data.fullName)) {
+                document.getElementById('fullName').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+            if (!validateNationalId(step1Data.nationalId)) {
+                document.getElementById('nationalId').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+            if (!validatePhone(step1Data.phoneNumber)) {
+                document.getElementById('phoneNumber').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+            if (!validateEmail(step1Data.email)) {
+                document.getElementById('email').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+            if (!step1Data.dob || !validateAge(step1Data.dob)) {
+                document.getElementById('dob').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+            if (!step1Data.maritalStatus) {
+                document.getElementById('maritalStatus').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                localStorage.setItem('swiftLoanStep1', JSON.stringify(step1Data));
+                showStep(2);
+            }
+        });
+
+        document.getElementById('prevStep2').addEventListener('click', () => showStep(1));
+
+        // Step 2 Validation and Next
+        document.getElementById('nextStep2').addEventListener('click', function() {
+            const step2Data = {
+                employmentStatus: document.getElementById('employmentStatus').value,
+                monthlyIncome: document.getElementById('monthlyIncome').value,
+                loanAmount: document.getElementById('loanAmount').value,
+                county: document.getElementById('county').value,
+                city: document.getElementById('city').value,
+                repaymentPeriod: document.getElementById('repaymentPeriod').value,
+                postalCode: document.getElementById('postalCode').value,
+                postalAddress: document.getElementById('postalAddress').value,
+                employmentLength: document.getElementById('employmentLength').value,
+                dependents: document.getElementById('dependents').value,
+                loanPurpose: document.getElementById('loanPurpose').value
+            };
+
+            let isValid = true;
+            const requiredFields = ['employmentStatus', 'monthlyIncome', 'loanAmount', 'county', 'city', 'repaymentPeriod', 'postalCode', 'postalAddress', 'employmentLength', 'dependents'];
+
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field);
+                if (!element.value) {
+                    element.closest('.form-group').classList.add('error');
+                    isValid = false;
+                } else {
+                    element.closest('.form-group').classList.remove('error');
+                }
+            });
+
+            const loanAmount = parseInt(step2Data.loanAmount);
+            if (!loanAmount || loanAmount < 6000 || loanAmount > 100000) {
+                document.getElementById('loanAmount').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            if (step2Data.city.length < 4) {
+                document.getElementById('city').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            if (!/^\d{5}$/.test(step2Data.postalCode)) {
+                document.getElementById('postalCode').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                localStorage.setItem('swiftLoanStep2', JSON.stringify(step2Data));
+                showStep(3);
+            }
+        });
+
+        document.getElementById('prevStep3').addEventListener('click', () => showStep(2));
+
+        // Signature Pad
+        const canvas = document.getElementById('signaturePad');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let hasSignature = false;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        canvas.addEventListener('touchstart', handleTouch);
+        canvas.addEventListener('touchmove', handleTouch);
+        canvas.addEventListener('touchend', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+            hasSignature = true;
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        document.getElementById('clearSignature').addEventListener('click', function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hasSignature = false;
+        });
+
+        // Submit Application
+        document.getElementById('submitApplication').addEventListener('click', function() {
+            const consent1 = document.getElementById('consent1').checked;
+            const consent2 = document.getElementById('consent2').checked;
+            const consent3 = document.getElementById('consent3').checked;
+
+            if (!consent1 || !consent2 || !consent3) {
+                alert('Please accept all consent agreements');
+                return;
+            }
+
+            if (!hasSignature) {
+                document.getElementById('signatureError').style.display = 'block';
+                return;
+            }
+
+            const signatureData = canvas.toDataURL();
+            localStorage.setItem('swiftLoanSignature', signatureData);
+            localStorage.setItem('swiftLoanConsents', JSON.stringify({ consent1, consent2, consent3 }));
+
+            // Process application
+            processApplication();
+        });
+
+        function processApplication() {
+            const processingModal = document.getElementById('processingModal');
+            processingModal.classList.add('active');
+
+            const steps = document.querySelectorAll('.processing-step');
+            let currentProcessStep = 0;
+
+            const interval = setInterval(() => {
+                if (currentProcessStep < steps.length) {
+                    steps[currentProcessStep].classList.add('active');
+                    currentProcessStep++;
+                } else {
+                    clearInterval(interval);
+                    processingModal.classList.remove('active');
+                    
+                    // Check eligibility
+                    checkEligibility();
+                }
+            }, 800);
+        }
+
+        function checkEligibility() {
+            const step2Data = JSON.parse(localStorage.getItem('swiftLoanStep2'));
+            const incomeRange = step2Data.monthlyIncome;
+            
+            let minIncome = 0;
+            if (incomeRange.includes('-')) {
+                minIncome = parseInt(incomeRange.split('-')[0]);
+            } else if (incomeRange.includes('+')) {
+                minIncome = 100000;
+            }
+
+            if (minIncome < 2000) {
+                alert('We apologize, but you do not currently qualify for a loan. Please try again in 24 hours.');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                // Generate offers
+                generateOffers();
+                
+                const successModal = document.getElementById('successModal');
+                successModal.classList.add('active');
+                
+                setTimeout(() => {
+                    window.location.href = 'offers.html';
+                }, 3000);
+            }
+        }
+
+        function generateOffers() {
+            const step1Data = JSON.parse(localStorage.getItem('swiftLoanStep1'));
+            const step2Data = JSON.parse(localStorage.getItem('swiftLoanStep2'));
+            
+            const loanAmount = parseInt(step2Data.loanAmount);
+            const repaymentPeriod = parseInt(step2Data.repaymentPeriod);
+            const monthlyIncome = step2Data.monthlyIncome;
+            
+            // Calculate offers based on various factors
+            const offers = [];
+            
+            // Main requested loan
+            const fee = Math.round(loanAmount * 0.0199);
+            const received = loanAmount - fee;
+            const monthlyRate = 0.0199;
+            const totalRepayment = Math.round(loanAmount * (1 + (monthlyRate * repaymentPeriod)));
+            const monthlyPayment = Math.round(totalRepayment / repaymentPeriod);
+            
+            offers.push({
+                loanAmount: loanAmount,
+                fee: fee,
+                received: received,
+                monthlyRate: 1.99,
+                repaymentPeriod: repaymentPeriod,
+                totalRepayment: totalRepayment,
+                monthlyPayment: monthlyPayment
+            });
+            
+            // Additional offers (if applicable)
+            if (loanAmount < 50000) {
+                const higherAmount = Math.min(loanAmount + 10000, 100000);
+                const higherFee = Math.round(higherAmount * 0.0199);
+                const higherReceived = higherAmount - higherFee;
+                const higherRepayment = Math.round(higherAmount * (1 + (monthlyRate * repaymentPeriod)));
+                const higherMonthly = Math.round(higherRepayment / repaymentPeriod);
+                
+                offers.push({
+                    loanAmount: higherAmount,
+                    fee: higherFee,
+                    received: higherReceived,
+                    monthlyRate: 1.99,
+                    repaymentPeriod: repaymentPeriod,
+                    totalRepayment: higherRepayment,
+                    monthlyPayment: higherMonthly
+                });
+            }
+            
+            localStorage.setItem('swiftLoanOffers', JSON.stringify(offers));
+            localStorage.setItem('hasApplied', 'true');
+        }
+
+        // Reference Data Modal
+        document.getElementById('referenceBtn').addEventListener('click', function() {
+            const step1 = JSON.parse(localStorage.getItem('swiftLoanStep1') || '{}');
+            const step2 = JSON.parse(localStorage.getItem('swiftLoanStep2') || '{}');
+            
+            let html = '<h4 style="color: var(--primary-blue); margin-bottom: 1rem;">Personal Details</h4>';
+            html += '<div style="margin-bottom: 2rem;">';
+            for (let key in step1) {
+                if (step1[key]) {
+                    html += `<p><strong>${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</strong> ${step1[key]}</p>`;
+                }
+            }
+            html += '</div>';
+            
+            if (Object.keys(step2).length > 0) {
+                html += '<h4 style="color: var(--primary-blue); margin-bottom: 1rem;">Other Details</h4>';
+                html += '<div>';
+                for (let key in step2) {
+                    if (step2[key]) {
+                        html += `<p><strong>${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</strong> ${step2[key]}</p>`;
+                    }
+                }
+                html += '</div>';
+            }
+            
+            document.getElementById('referenceData').innerHTML = html;
+            document.getElementById('referenceModal').classList.add('active');
+        });
+
+        document.getElementById('closeReference').addEventListener('click', function() {
+            document.getElementById('referenceModal').classList.remove('active');
+        });
+
+        // Check if user has already applied
+        window.addEventListener('load', function() {
+            const hasApplied = localStorage.getItem('hasApplied');
+            const hasSelectedOffer = localStorage.getItem('selectedOffer');
+            
+            if (hasApplied && hasSelectedOffer) {
+                window.location.href = 'loan-withdrawal.html';
+            } else if (hasApplied) {
+                window.location.href = 'offers.html';
+            }
+        });
+    </script>
+</body>
+  </html>
