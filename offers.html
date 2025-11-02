@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Offers - Swift Loan Limited</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #002B5C;
+            --primary-orange: #FF6B35;
+            --light-gray: #F5F5F5;
+            --text-dark: #333;
+            --text-light: #666;
+            --success-green: #28a745;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: var(--light-gray);
+            border: 2px dashed var(--primary-orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-align: center;
+            padding: 5px;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .company-name span {
+            color: var(--primary-orange);
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 3px;
+            background: var(--primary-blue);
+            position: relative;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: var(--primary-blue);
+        }
+
+        .hamburger::before {
+            top: -8px;
+        }
+
+        .hamburger::after {
+            top: 8px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--primary-blue);
+            transition: 0.3s ease-in-out;
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--primary-orange);
+            padding-left: 10px;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 6rem 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-description {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        /* Applicant Details */
+        .applicant-details {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 5px;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        /* Offers Grid */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .offer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .offer-header {
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .offer-amount {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .offer-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .offer-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .offer-row:last-child {
+            border-bottom: none;
+        }
+
+        .offer-label {
+            color: var(--text-light);
+        }
+
+        .offer-value {
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .fee-info-btn {
+            background: none;
+            border: none;
+            color: var(--primary-orange);
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 0.9rem;
+            padding: 0;
+        }
+
+        .select-offer-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-orange);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .select-offer-btn:hover {
+            background: #e55a25;
+        }
+
+        /* Pie Chart */
+        .chart-container {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .pie-chart {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 100%;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            color: var(--primary-blue);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .confirmation-details {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .confirm-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .confirm-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-label input {
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #e55a25;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--text-light);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #555;
+        }
+
+        /* Processing Modal */
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid var(--light-gray);
+            border-top: 6px solid var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 3rem 5% 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-orange);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-placeholder">swiftloan logo.png</div>
+            <div class="company-name">Swift <span>Loan</span> Limited</div>
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <div class="hamburger"></div>
+        </button>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="company-name" style="color: white;">Swift <span>Loan</span></div>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#calculator">Loan Calculator</a></li>
+            <li><a href="eligibility.html">Apply for Loan</a></li>
+            <li><a href="index.html#how-to">How It Works</a></li>
+            <li><a href="index.html#faq">FAQs</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="page-title">Your Loan Offers</h1>
+        <p class="page-description">Select the loan offer that best suits your needs</p>
+
+        <!-- Applicant Details -->
+        <div class="applicant-details">
+            <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">Applicant Information</h3>
+            <div class="details-grid" id="applicantDetails"></div>
+        </div>
+
+        <!-- Loan Offers -->
+        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; text-align: center;">Available Loan Offers</h3>
+        <div class="offers-grid" id="offersContainer"></div>
+    </div>
+
+    <!-- Fee Information Modal -->
+    <div class="modal" id="feeInfoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Why is there a processing fee?</h3>
+                <button class="modal-close" id="closeFeeInfo">&times;</button>
+            </div>
+            <p style="margin-bottom: 1rem; line-height: 1.8;">The processing fee covers essential costs involved in evaluating and processing your loan application, including:</p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
+                <li>Credit bureau checks and verification</li>
+                <li>Document verification and validation</li>
+                <li>System processing and administrative costs</li>
+                <li>Secure disbursement to your account</li>
+                <li>Regulatory compliance and reporting</li>
+            </ul>
+            <p style="line-height: 1.8; color: var(--text-light);">This one-time fee is deducted upfront and ensures that your loan is processed quickly and securely. All our fees are transparent and comply with Central Bank of Kenya regulations.</p>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Your Loan Selection</h3>
+                <button class="modal-close" id="closeConfirmation">&times;</button>
+            </div>
+            <div class="confirmation-details" id="confirmationDetails"></div>
+            <label class="checkbox-label">
+                <input type="checkbox" id="confirmCheckbox">
+                <span>I confirm that I have read and understood the loan details above and wish to proceed with this loan offer.</span>
+            </label>
+            <button class="btn btn-primary" id="confirmBtn" disabled>Confirm Loan Selection</button>
+            <button class="btn btn-secondary" id="cancelBtn">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Processing Modal -->
+    <div class="modal" id="processingModal">
+        <div class="modal-content" style="text-align: center;">
+            <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">Validating Your Selection</h3>
+            <div class="spinner"></div>
+            <p style="color: var(--text-light);">Please wait while we process your loan selection...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="eligibility.html">Apply for Loan</a></li>
+                    <li><a href="index.html#faq">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <span>info@swiftloan.ke</span>
+                </div>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                    <span>Call: 0732202740</span>
+                </div>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+                    </svg>
+                    <span>WhatsApp: 0732202740</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed and regulated by CBK.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sidebar functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+        }
+
+        function closeSidebarFunc() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+        sidebarOverlay.addEventListener('click', closeSidebarFunc);
+
+        // Load applicant details
+        function loadApplicantDetails() {
+            const step1 = JSON.parse(localStorage.getItem('swiftLoanStep1') || '{}');
+            const step2 = JSON.parse(localStorage.getItem('swiftLoanStep2') || '{}');
+
+            const detailsHtml = `
+                <div class="detail-item">
+                    <div class="detail-label">Full Name</div>
+                    <div class="detail-value">${step1.fullName || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">ID Number</div>
+                    <div class="detail-value">${step1.nationalId || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Phone Number</div>
+                    <div class="detail-value">${step1.phoneNumber || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Monthly Income</div>
+                    <div class="detail-value">KSh ${step2.monthlyIncome || 'N/A'}</div>
+                </div>
+            `;
+
+            document.getElementById('applicantDetails').innerHTML = detailsHtml;
+        }
+
+        // Load offers
+        function loadOffers() {
+            const offers = JSON.parse(localStorage.getItem('swiftLoanOffers') || '[]');
+            const container = document.getElementById('offersContainer');
+
+            if (offers.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-light);">No offers available. Please complete your application first.</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+
+            offers.forEach((offer, index) => {
+                const card = document.createElement('div');
+                card.className = 'offer-card';
+                card.innerHTML = `
+                    <div class="offer-header">
+                        <div class="offer-amount">KSh ${offer.loanAmount.toLocaleString()}</div>
+                        <div>Loan Amount</div>
+                    </div>
+                    <div class="offer-details">
+                        <div class="offer-row">
+                            <span class="offer-label">Loan Amount:</span>
+                            <span class="offer-value">KSh ${offer.loanAmount.toLocaleString()}</span>
+                        </div>
+                        <div class="offer-row">
+                            <span class="offer-label">
+                                Processing Fee: 
+                                <button class="fee-info-btn" onclick="showFeeInfo()">why?</button>
+                            </span>
+                            <span class="offer-value">KSh ${offer.fee.toLocaleString()}</span>
+                        </div>
+                        <div class="offer-row">
+                            <span class="offer-label">Monthly Rate:</span>
+                            <span class="offer-value">${offer.monthlyRate}%</span>
+                        </div>
+                        <div class="offer-row">
+                            <span class="offer-label">Repayment Period:</span>
+                            <span class="offer-value">${offer.repaymentPeriod} month(s)</span>
+                        </div>
+                        <div class="offer-row">
+                            <span class="offer-label">You'll Receive:</span>
+                            <span class="offer-value" style="color: var(--success-green);">KSh ${offer.received.toLocaleString()}</span>
+                        </div>
+                        <div class="offer-row">
+                            <span class="offer-label">Monthly Payment:</span>
+                            <span class="offer-value">KSh ${offer.monthlyPayment.toLocaleString()}</span>
+                        </div>
+                        <div class="offer-row">
+                            <span class="offer-label">Total Repayment:</span>
+                            <span class="offer-value">KSh ${offer.totalRepayment.toLocaleString()}</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <svg class="pie-chart" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#ddd" stroke-width="20"/>
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="${index === 0 ? '#FF6B35' : '#002B5C'}" stroke-width="20" 
+                                stroke-dasharray="${(offer.received / offer.loanAmount * 251.2).toFixed(2)} 251.2" 
+                                transform="rotate(-90 50 50)"/>
+                            <text x="50" y="50" text-anchor="middle" dy="0.3em" font-size="12" font-weight="bold" fill="${index === 0 ? '#FF6B35' : '#002B5C'}">
+                                ${((offer.received / offer.loanAmount) * 100).toFixed(1)}%
+                            </text>
+                            <text x="50" y="62" text-anchor="middle" font-size="6" fill="#666">You Receive</text>
+                        </svg>
+                        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">Loan Breakdown</p>
+                    </div>
+                    <button class="select-offer-btn" onclick="selectOffer(${index})">Select This Loan Offer</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Show fee info
+        function showFeeInfo() {
+            document.getElementById('feeInfoModal').classList.add('active');
+        }
+
+        document.getElementById('closeFeeInfo').addEventListener('click', () => {
+            document.getElementById('feeInfoModal').classList.remove('active');
+        });
+
+        // Select offer
+        let selectedOfferIndex = null;
+
+        function selectOffer(index) {
+            selectedOfferIndex = index;
+            const offers = JSON.parse(localStorage.getItem('swiftLoanOffers'));
+            const offer = offers[index];
+
+            const confirmHtml = `
+                <div class="confirm-row">
+                    <strong>Loan Amount:</strong>
+                    <strong>KSh ${offer.loanAmount.toLocaleString()}</strong>
+                </div>
+                <div class="confirm-row">
+                    <strong>Processing Fee:</strong>
+                    <strong>KSh ${offer.fee.toLocaleString()}</strong>
+                </div>
+                <div class="confirm-row">
+                    <strong>You Will Receive:</strong>
+                    <strong style="color: var(--success-green);">KSh ${offer.received.toLocaleString()}</strong>
+                </div>
+                <div class="confirm-row">
+                    <strong>Repayment Period:</strong>
+                    <strong>${offer.repaymentPeriod} month(s)</strong>
+                </div>
+                <div class="confirm-row">
+                    <strong>Monthly Payment:</strong>
+                    <strong>KSh ${offer.monthlyPayment.toLocaleString()}</strong>
+                </div>
+                <div class="confirm-row">
+                    <strong>Total Repayment:</strong>
+                    <strong>KSh ${offer.totalRepayment.toLocaleString()}</strong>
+                </div>
+                <div class="confirm-row">
+                    <strong>Interest Rate:</strong>
+                    <strong>${offer.monthlyRate}% monthly</strong>
+                </div>
+            `;
+
+            document.getElementById('confirmationDetails').innerHTML = confirmHtml;
+            document.getElementById('confirmationModal').classList.add('active');
+        }
+
+        // Confirmation checkbox
+        document.getElementById('confirmCheckbox').addEventListener('change', function() {
+            document.getElementById('confirmBtn').disabled = !this.checked;
+        });
+
+        // Confirm button
+        document.getElementById('confirmBtn').addEventListener('click', function() {
+            document.getElementById('confirmationModal').classList.remove('active');
+            document.getElementById('processingModal').classList.add('active');
+
+            const offers = JSON.parse(localStorage.getItem('swiftLoanOffers'));
+            const selectedOffer = offers[selectedOfferIndex];
+            localStorage.setItem('selectedOffer', JSON.stringify(selectedOffer));
+
+            setTimeout(() => {
+                window.location.href = 'loan-withdrawal.html';
+            }, 7000);
+        });
+
+        // Cancel button
+        document.getElementById('cancelBtn').addEventListener('click', function() {
+            document.getElementById('confirmationModal').classList.remove('active');
+            document.getElementById('confirmCheckbox').checked = false;
+            document.getElementById('confirmBtn').disabled = true;
+        });
+
+        document.getElementById('closeConfirmation').addEventListener('click', function() {
+            document.getElementById('confirmationModal').classList.remove('active');
+            document.getElementById('confirmCheckbox').checked = false;
+            document.getElementById('confirmBtn').disabled = true;
+        });
+
+        // Initialize
+        window.addEventListener('load', () => {
+            const hasApplied = localStorage.getItem('hasApplied');
+            if (!hasApplied) {
+                window.location.href = 'eligibility.html';
+                return;
+            }
+
+            loadApplicantDetails();
+            loadOffers();
+        });
+    </script>
+</body>
+  </html>
