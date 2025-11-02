@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift Loan Limited - Quick & Easy Loans in Kenya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #002B5C;
+            --primary-orange: #FF6B35;
+            --light-gray: #F5F5F5;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: var(--light-gray);
+            border: 2px dashed var(--primary-orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-align: center;
+            padding: 5px;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .company-name span {
+            color: var(--primary-orange);
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 3px;
+            background: var(--primary-blue);
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: var(--primary-blue);
+            transition: 0.3s;
+        }
+
+        .hamburger::before {
+            top: -8px;
+        }
+
+        .hamburger::after {
+            top: 8px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--primary-blue);
+            transition: 0.3s ease-in-out;
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-logo {
+            width: 120px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--primary-orange);
+            padding-left: 10px;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,43,92,0.8), rgba(0,43,92,0.8)), url('hero.bg');
+            background-size: cover;
+            background-position: center;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 8rem 5% 4rem;
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e55a25;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-gray);
+            transform: translateY(-2px);
+        }
+
+        /* Download Section */
+        .download-section {
+            padding: 3rem 5%;
+            background: white;
+            text-align: center;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: black;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        .download-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Calculator Section */
+        .calculator-section {
+            padding: 4rem 5%;
+            background: var(--light-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+        }
+
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .calculator-inputs {
+            margin-bottom: 3rem;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .slider-container {
+            position: relative;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        .slider-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .current-value {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .calculator-results {
+            background: var(--primary-orange);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            font-size: 1rem;
+        }
+
+        .result-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Hero2 Section */
+        .hero2 {
+            background: linear-gradient(rgba(255,107,53,0.9), rgba(255,107,53,0.9)), url('hero2.bg');
+            background-size: cover;
+            background-position: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 4rem 5%;
+            margin: 4rem 0;
+        }
+
+        .hero2 h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero2 p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            padding: 4rem 5%;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--primary-blue);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .feature-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* How to Get Loan */
+        .how-to-section {
+            padding: 4rem 5%;
+            background: var(--light-gray);
+        }
+
+        .steps-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .step-number {
+            background: var(--primary-orange);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 5%;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #e8e8e8;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: white;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 4rem 5%;
+            background: var(--light-gray);
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            min-width: 100%;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-info h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 3rem 5% 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-orange);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .calculator-container {
+                padding: 1.5rem;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-placeholder">swiftloan logo.png</div>
+            <div class="company-name">Swift <span>Loan</span> Limited</div>
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <div class="hamburger"></div>
+        </button>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="company-name" style="color: white;">Swift <span>Loan</span></div>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#calculator">Loan Calculator</a></li>
+            <li><a href="eligibility.html">Apply for Loan</a></li>
+            <li><a href="#how-to">How It Works</a></li>
+            <li><a href="#faq">FAQs</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#">Terms and Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+    </aside>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Building a Brighter Financial Future</h1>
+            <p>Get instant loans from KSh 6,000 to KSh 100,000. Fast approval, flexible repayment, and competitive rates.</p>
+            <div class="hero-buttons">
+                <a href="eligibility.html" class="btn btn-primary">Apply for Loan</a>
+                <a href="#track" class="btn btn-secondary">Track Loan Progress</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download App Section -->
+    <section class="download-section">
+        <h2 style="margin-bottom: 1rem;">Download Our Mobile App</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-light);">Get instant access to loans on your mobile device</p>
+        <a href="https://www.webintoapp.com/download/apk/954772/app-release.apk" class="download-btn">
+            <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M17 17h5v-5M12 12l9.5-9.5M6 9h-3a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3"/>
+            </svg>
+            <div>
+                <div style="font-size: 0.8rem;">GET IT ON</div>
+                <div style="font-size: 1.2rem; font-weight: bold;">Google Play</div>
+            </div>
+        </a>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section" id="calculator">
+        <h2 class="section-title">Calculate Your Loan</h2>
+        <div class="calculator-container">
+            <div class="calculator-inputs">
+                <div class="input-group">
+                    <label>Loan Amount</label>
+                    <div class="slider-container">
+                        <input type="range" min="6000" max="100000" value="7000" step="1000" class="slider" id="loanAmount">
+                        <div class="slider-values">
+                            <span>KSh 6,000</span>
+                            <span>KSh 100,000</span>
+                        </div>
+                        <div class="current-value">KSh <span id="amountValue">7,000</span></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Repayment Period (Months)</label>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="12" value="1" step="1" class="slider" id="loanPeriod">
+                        <div class="slider-values">
+                            <span>1 month</span>
+                            <span>12 months</span>
+                        </div>
+                        <div class="current-value"><span id="periodValue">1</span> month(s)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="calculator-results">
+                <div class="result-row">
+                    <span class="result-label">You are getting:</span>
+                    <span class="result-value">KSh <span id="receivedAmount">6,861</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Term of use:</span>
+                    <span class="result-value"><span id="termDisplay">1</span> month(s)</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">You must return:</span>
+                    <span class="result-value">KSh <span id="repaymentAmount">7,139</span></span>
+                </div>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;" onclick="window.location.href='eligibility.html'">APPLY FOR THIS LOAN</button>
+        </div>
+    </section>
+
+    <!-- Hero2 Section -->
+    <section class="hero2">
+        <div>
+            <h2>Fast, Reliable & Secure</h2>
+            <p>We're committed to providing you with the best loan experience. Our platform is secure, fast, and designed with you in mind.</p>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose" id="about">
+        <h2 class="section-title">Why Choose Swift Loan?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="position: relative;">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <span class="feature-number">01</span>
+                </div>
+                <h3>Swift Approval</h3>
+                <p>Fast loan processing and approval - Get approved within 3 hours of applying!</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="position: relative;">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                    </svg>
+                    <span class="feature-number">02</span>
+                </div>
+                <h3>Competitive Rates</h3>
+                <p>Enjoy low interest rates starting at 1.99% monthly with transparent pricing.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="position: relative;">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span class="feature-number">03</span>
+                </div>
+                <h3>Secure & Safe</h3>
+                <p>Bank-level security with 256-bit encryption to protect your information.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="position: relative;">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <span class="feature-number">04</span>
+                </div>
+                <h3>Flexible Repayment</h3>
+                <p>We offer flexible, tailor-made repayment schedules to meet your specific requirements.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Get Loan -->
+    <section class="how-to-section" id="how-to">
+        <h2 class="section-title">How to Get Your Loan</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Fill Application Form</h3>
+                    <p>Complete our simple online application form with your personal and employment details.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Submit Documents</h3>
+                    <p>Provide necessary documents for verification including your National ID and proof of income.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Get Approved</h3>
+                    <p>Our system evaluates your eligibility and provides instant loan offers tailored to your profile.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Receive Funds</h3>
+                    <p>Choose your preferred withdrawal method (M-Pesa, Airtel Money, or Bank Transfer) and receive your funds instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    What is the minimum loan amount I can apply for?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>The minimum loan amount is KSh 6,000 and the maximum is KSh 100,000. The exact amount you qualify for depends on your income and credit profile.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    How long does it take to get approved?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Our approval process is very fast. Most applications are reviewed and approved within 3 hours of submission.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What are the requirements to apply?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>You must be a Kenyan citizen, at least 18 years old, have a valid National ID, a phone number, and a steady source of income.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What is the interest rate?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Our monthly interest rate is 1.99%. This is clearly displayed in your loan calculation and there are no hidden charges.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I repay my loan?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Repayment is flexible. You can repay via M-Pesa, Airtel Money, or bank transfer. We will contact you before your repayment date with instructions.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is there a processing fee?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, there is a small processing fee that is deducted upfront from your loan amount. For a KSh 7,000 loan, the fee is KSh 139. This fee ensures secure processing and disbursement of your funds.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can I apply if I have a bad credit score?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! We evaluate each application individually. While credit history is considered, we also look at your current income and ability to repay.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I track my loan application?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>You can track your application status through your account dashboard. You'll also receive SMS updates at every stage of the process.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What happens if I can't repay on time?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>We understand that emergencies happen. Please contact our support team immediately to discuss repayment options. We're here to help, not to penalize.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is my personal information secure?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Absolutely! We use bank-grade 256-bit encryption to protect all your personal and financial information. Your data is safe with us.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section" id="testimonials">
+        <h2 class="section-title">Real Stories, Real Impact</h2>
+        <div class="testimonials-slider">
+            <div class="testimonials-track" id="testimonialsTrack">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="Brian.png" alt="Brian" class="testimonial-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23ddd%22 width=%2260%22 height=%2260%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%23999%22%3EB%3C/text%3E%3C/svg%3E'">
+                        <div class="testimonial-info">
+                            <h4>Brian Kamau</h4>
+                            <p>Small Business Owner</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Swift Loan Limited helped me grow my business when I needed capital urgently. The process was smooth and the funds were in my account within hours. Highly recommended!"
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="george.png" alt="George" class="testimonial-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23ddd%22 width=%2260%22 height=%2260%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%23999%22%3EG%3C/text%3E%3C/svg%3E'">
+                        <div class="testimonial-info">
+                            <h4>George Odhiambo</h4>
+                            <p>Teacher</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "I needed emergency funds for a family medical situation. Swift Loan came through for me quickly and professionally. The interest rates are fair and transparent."
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="Ken.png" alt="Ken" class="testimonial-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23ddd%22 width=%2260%22 height=%2260%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%23999%22%3EK%3C/text%3E%3C/svg%3E'">
+                        <div class="testimonial-info">
+                            <h4>Ken Mwangi</h4>
+                            <p>Taxi Driver</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "As a taxi driver, I sometimes face cash flow challenges. Swift Loan has been a reliable partner, always there when I need quick financial support."
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="Mark.png" alt="Mark" class="testimonial-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23ddd%22 width=%2260%22 height=%2260%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%23999%22%3EM%3C/text%3E%3C/svg%3E'">
+                        <div class="testimonial-info">
+                            <h4>Mark Kipchoge</h4>
+                            <p>Freelance Designer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "The mobile app makes it so easy to apply and track my loans. I've used Swift Loan three times now, and each experience has been excellent. Great customer service!"
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="mercy.png" alt="Mercy" class="testimonial-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23ddd%22 width=%2260%22 height=%2260%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%23999%22%3EM%3C/text%3E%3C/svg%3E'">
+                        <div class="testimonial-info">
+                            <h4>Mercy Wanjiru</h4>
+                            <p>Salon Owner</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "I love how transparent Swift Loan is with their fees and interest rates. No hidden charges, just honest service. This is the loan company Kenya needs!"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="eligibility.html">Apply for Loan</a></li>
+                    <li><a href="#how-to">How It Works</a></li>
+                    <li><a href="#faq">FAQs</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <span>info@swiftloan.ke</span>
+                </div>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                    <span>Call: 0732202740</span>
+                </div>
+                <div class="contact-info">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+                    </svg>
+                    <span>WhatsApp: 0732202740</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed and regulated by CBK.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sidebar functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+        }
+
+        function closeSidebarFunc() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFunc);
+        sidebarOverlay.addEventListener('click', closeSidebarFunc);
+
+        // Calculator functionality
+        const loanAmount = document.getElementById('loanAmount');
+        const loanPeriod = document.getElementById('loanPeriod');
+        const amountValue = document.getElementById('amountValue');
+        const periodValue = document.getElementById('periodValue');
+        const receivedAmount = document.getElementById('receivedAmount');
+        const termDisplay = document.getElementById('termDisplay');
+        const repaymentAmount = document.getElementById('repaymentAmount');
+
+        function calculateLoan() {
+            const principal = parseInt(loanAmount.value);
+            const months = parseInt(loanPeriod.value);
+            
+            // Fee calculation (approximately 1.99% of principal)
+            const fee = Math.round(principal * 0.0199);
+            const received = principal - fee;
+            
+            // Monthly interest rate
+            const monthlyRate = 0.0199;
+            
+            // Calculate total repayment
+            const totalRepayment = Math.round(principal * (1 + (monthlyRate * months)));
+            
+            // Update display
+            amountValue.textContent = principal.toLocaleString();
+            periodValue.textContent = months;
+            receivedAmount.textContent = received.toLocaleString();
+            termDisplay.textContent = months;
+            repaymentAmount.textContent = totalRepayment.toLocaleString();
+        }
+
+        loanAmount.addEventListener('input', calculateLoan);
+        loanPeriod.addEventListener('input', calculateLoan);
+
+        // FAQ functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Testimonials auto-scroll
+        const testimonialsTrack = document.getElementById('testimonialsTrack');
+        let currentIndex = 0;
+        const totalTestimonials = 5;
+
+        function scrollTestimonials() {
+            currentIndex = (currentIndex + 1) % totalTestimonials;
+            testimonialsTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        setInterval(scrollTestimonials, 5000);
+
+        // Initialize calculator
+        calculateLoan();
+    </script>
+</body>
+  </html>
