@@ -195,16 +195,16 @@
 
         /* Hero Section */
         .hero {
-    background: linear-gradient(135deg, rgba(0,31,92,0.85), rgba(0,53,128,0.85)),
-                url('hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    padding: 5rem 5%;
-    color: var(--white);
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-}
+            background: linear-gradient(135deg, rgba(0,31,92,0.95) 0%, rgba(0,53,128,0.95) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23001F5C" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 5%;
+            color: var(--white);
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
 
         .hero-content {
             max-width: 1200px;
@@ -727,6 +727,88 @@
                 text-align: center;
             }
         }
+.experience-section {
+  background: #fff;
+  padding: 4rem 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.experience-container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+}
+
+.experience-image {
+  position: relative;
+  text-align: center;
+}
+
+.experience-image img {
+  width: 100%;
+  max-width: 450px;
+  z-index: 2;
+  position: relative;
+}
+
+.orange-frame {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 70%;
+  border: 6px solid #FF6B00;
+  z-index: 1;
+}
+
+.experience-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #001F5C;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 3;
+}
+
+.experience-box h2 {
+  font-size: 3rem;
+  margin: 0;
+  color: #fff;
+}
+
+.experience-box p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+  .orange-frame {
+    width: 90%;
+    height: 60%;
+    left: 5%;
+    top: 15%;
+  }
+
+  .experience-box {
+    flex-direction: column;
+    align-items: flex-start;
+    bottom: 10px;
+    left: 10px;
+    padding: 1rem;
+  }
+
+  .experience-box h2 {
+    font-size: 2.2rem;
+  }
+}
     </style>
 </head>
 <body>
@@ -793,6 +875,19 @@
             </a>
         </div>
     </section>
+<!-- Experience Counter Section -->
+<section class="experience-section">
+  <div class="experience-container">
+    <div class="experience-image">
+      <img src="experience-hero.png" alt="Experienced financial expert">
+      <div class="orange-frame"></div>
+      <div class="experience-box">
+        <h2><span id="experience-count">0</span></h2>
+        <p>Years of Experience<br>In Finance</p>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- Calculator Section -->
     <section class="calculator-section" id="calculator">
@@ -1291,6 +1386,33 @@
                 }
             });
         });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const counter = document.getElementById('experience-count');
+  let started = false;
+
+  function animateCounter() {
+    const section = document.querySelector('.experience-section');
+    const sectionPos = section.getBoundingClientRect().top;
+    const screenPos = window.innerHeight;
+
+    if (sectionPos < screenPos && !started) {
+      started = true;
+      let count = 0;
+      const target = 13;
+      const speed = 100;
+      const interval = setInterval(() => {
+        count++;
+        counter.textContent = count;
+        if (count >= target) clearInterval(interval);
+      }, speed);
+    }
+  }
+
+  window.addEventListener('scroll', animateCounter);
+});
+
     </script>
 </body>
 </html>
