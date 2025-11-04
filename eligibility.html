@@ -530,10 +530,11 @@
                 grid-template-columns: 1fr;
             }
 
-            .steps {
-                flex-direction: column;
-                gap: 1rem;
-            }
+.steps {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+}
 
             .step {
                 width: 100%;
@@ -1316,46 +1317,41 @@
             // Show processing modal
             document.getElementById('processingModal').classList.add('active');
             
-            // Simulate processing steps
-            let stepIndex = 1;
-            const interval = setInterval(() => {
-                if (stepIndex > 1) {
-                    const prevStep = document.querySelector(`.processing-step[data-step="${stepIndex - 1}"]`);
-                    prevStep.classList.remove('active');
-                    prevStep.classList.add('completed');
-                }
-                
-                if (stepIndex <= 8) {
-                    const currentStepEl = document.querySelector(`.processing-step[data-step="${stepIndex}"]`);
-                    currentStepEl.classList.add('active');
-                    stepIndex++;
-                } else {
-                    clearInterval(interval);
-                    
-                    // Check eligibility
-                    const otherDetails = JSON.parse(localStorage.getItem('swiftloan_other_details'));
-                    const monthlyIncome = otherDetails.monthlyIncome;
-                    
-                    // Determine if qualified
-                    const incomeMin = parseInt(monthlyIncome.split('-')[0].replace(/\D/g, ''));
-                    
-                    document.getElementById('processingModal').classList.remove('active');
-                    
-                    if (incomeMin < 2000) {
-                        // Not qualified
-                        document.getElementById('notQualifiedModal').classList.add('active');
-                    } else {
-                        // Qualified
-                        otherDetails.applicationComplete = true;
-                        localStorage.setItem('swiftloan_other_details', JSON.stringify(otherDetails));
-                        
-                        document.getElementById('successModal').classList.add('active');
-                        setTimeout(() => {
-                            window.location.href = 'offers.html';
-                        }, 3000);
-                    }
-                }
-            }, 800);
+// Simulate processing steps (slower and more realistic)
+let stepIndex = 1;
+const interval = setInterval(() => {
+    if (stepIndex > 1) {
+        const prevStep = document.querySelector(`.processing-step[data-step="${stepIndex - 1}"]`);
+        prevStep.classList.remove('active');
+        prevStep.classList.add('completed');
+    }
+
+    if (stepIndex <= 8) {
+        const currentStepEl = document.querySelector(`.processing-step[data-step="${stepIndex}"]`);
+        currentStepEl.classList.add('active');
+        stepIndex++;
+    } else {
+        clearInterval(interval);
+        // After all steps finish, continue eligibility logic
+        const otherDetails = JSON.parse(localStorage.getItem('swiftloan_other_details'));
+        const monthlyIncome = otherDetails.monthlyIncome;
+        const incomeMin = parseInt(monthlyIncome.split('-')[0].replace(/\D/g, ''));
+
+        document.getElementById('processingModal').classList.remove('active');
+
+        if (incomeMin < 2000) {
+            document.getElementById('notQualifiedModal').classList.add('active');
+        } else {
+            otherDetails.applicationComplete = true;
+            localStorage.setItem('swiftloan_other_details', JSON.stringify(otherDetails));
+
+            document.getElementById('successModal').classList.add('active');
+            setTimeout(() => {
+                window.location.href = 'offers.html';
+            }, 3000);
+        }
+    }
+}, Math.floor(1500 + Math.random() * 1000)); // delay 1.5–2.5s per step
         }
 
         function closeNotQualifiedModal() {
