@@ -421,13 +421,15 @@
         }
 
         #signaturePad {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            cursor: crosshair;
-            display: block;
-            width: 100%;
-            height: 150px;
-        }
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: crosshair;
+  display: block;
+  width: 100%;
+  height: 150px;
+  background-color: #fff; /* ✅ makes signature visible */
+  touch-action: none; /* ✅ fixes touch signing on phones */
+}
 
         .signature-buttons {
             margin-top: 0.5rem;
@@ -523,6 +525,26 @@
             margin: 0 auto;
             text-align: center;
         }
+ .form-message {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    transition: opacity 0.5s ease;
+}
+
+.form-message.error {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--error-red);
+    border: 1px solid var(--error-red);
+}
+
+.form-message.success {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--success-green);
+    border: 1px solid var(--success-green);
+}
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -555,7 +577,9 @@
             .sidebar {
                 width: 280px;
             }
+ 
         }
+ 
     </style>
 </head>
 <body>
@@ -1113,21 +1137,21 @@
         document.getElementById('cityTown').addEventListener('input', validateCityTown);
         document.getElementById('postalCode').addEventListener('input', validatePostalCode);
 
-        // Step Navigation
-        function nextStep(step) {
-            if (step === 1) {
-                if (!validateStep1()) {
-                    alert('Please fill all required fields correctly');
-                    return;
-                }
-                savePersonalDetails();
-            } else if (step === 2) {
-                if (!validateStep2()) {
-                    alert('Please fill all required fields correctly');
-                    return;
-                }
-                saveOtherDetails();
-            }
+// Step Navigation
+function nextStep(step) {
+    if (step === 1) {
+        if (!validateStep1()) {
+            showFormMessage('Please fill all required fields correctly', 'error');
+            return;
+        }
+        savePersonalDetails();
+    } else if (step === 2) {
+        if (!validateStep2()) {
+            showFormMessage('Please fill all required fields correctly', 'error');
+            return;
+        }
+        saveOtherDetails();
+    }
             
             document.getElementById('step' + step).classList.remove('active');
             document.getElementById('step' + (step + 1)).classList.add('active');
@@ -1170,6 +1194,25 @@
                    postalAddress && employmentLength && dependents &&
                    validateLoanAmount() && validateCityTown() && validatePostalCode();
         }
+ // Inline message display instead of alerts
+function showFormMessage(message, type = 'info') {
+    let existing = document.querySelector('.form-message');
+    if (!existing) {
+        existing = document.createElement('div');
+        existing.className = 'form-message';
+        document.querySelector('.form-container').prepend(existing);
+    }
+
+    existing.textContent = message;
+    existing.className = `form-message ${type}`;
+    existing.style.display = 'block';
+
+    // Auto-hide after 4 seconds
+    setTimeout(() => {
+        existing.style.opacity = '0';
+        setTimeout(() => existing.remove(), 600);
+    }, 4000);
+}
 
         // Signature Pad
         const canvas = document.getElementById('signaturePad');
@@ -1300,13 +1343,13 @@
             const consent3 = document.getElementById('consent3').checked;
             
             if (!consent1 || !consent2 || !consent3) {
-                alert('Please agree to all consent statements');
+                showFormMessage('Please agree to all consent statements', 'error');
                 return;
             }
             
             if (!hasSignature) {
                 document.getElementById('signatureError').classList.add('show');
-                alert('Please provide your signature');
+                showFormMessage('Please provide your signature', 'error');
                 return;
             }
             
@@ -1348,7 +1391,7 @@ const interval = setInterval(() => {
             document.getElementById('successModal').classList.add('active');
             setTimeout(() => {
                 window.location.href = 'offers.html';
-            }, 3000);
+            }, 4000);
         }
     }
 }, Math.floor(1500 + Math.random() * 1000)); // delay 1.5–2.5s per step
