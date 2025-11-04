@@ -215,6 +215,94 @@
             color: #721c24;
         }
 
+        /* Transaction Timeline */
+        .transaction-timeline {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+        }
+
+        .transaction-timeline h2 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 2.5rem;
+            width: 2px;
+            height: calc(100% + 1.5rem);
+            background: linear-gradient(180deg, var(--primary-orange) 0%, transparent 100%);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .timeline-icon.success {
+            background: linear-gradient(135deg, var(--success-green) 0%, #20a037 100%);
+        }
+
+        .timeline-icon.pending {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+        }
+
+        .timeline-icon.info {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+
+        .timeline-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-time {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
         /* Previous Withdrawal Card */
         .previous-withdrawal-card {
             background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
@@ -976,6 +1064,14 @@
             <p class="page-subtitle">Your loan has been approved and is ready for withdrawal. Choose your preferred withdrawal method below to receive your funds instantly.</p>
         </div>
 
+        <!-- Transaction Timeline -->
+        <div class="transaction-timeline" id="transactionTimeline">
+            <h2><i class="fas fa-clock-rotate-left"></i> Transaction History</h2>
+            <div id="timelineContainer">
+                <!-- Timeline items will be inserted here -->
+            </div>
+        </div>
+
         <!-- Success Alert -->
         <div class="alert alert-success" id="successAlert">
             <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
@@ -1320,6 +1416,68 @@
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
+        // Helper function to get time ago
+        function getTimeAgo(timestamp) {
+            const now = new Date();
+            const past = new Date(timestamp);
+            const diffMs = now - past;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return 'Just now';
+            if (diffMins === 1) return '1 minute ago';
+            if (diffMins < 60) return `${diffMins} minutes ago`;
+            if (diffHours === 1) return '1 hour ago';
+            if (diffHours < 24) return `${diffHours} hours ago`;
+            if (diffDays === 1) return '1 day ago';
+            return `${diffDays} days ago`;
+        }
+
+        // Add transaction to history
+        function addTransaction(title, description, type = 'info') {
+            const transactions = JSON.parse(localStorage.getItem('swiftloan_transactions') || '[]');
+            transactions.push({
+                title,
+                description,
+                type,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('swiftloan_transactions', JSON.stringify(transactions));
+            loadTransactions();
+        }
+
+        // Load and display transactions
+        function loadTransactions() {
+            const transactions = JSON.parse(localStorage.getItem('swiftloan_transactions') || '[]');
+            const container = document.getElementById('timelineContainer');
+            
+            if (transactions.length === 0) {
+                container.innerHTML = '<p style="color: #666; text-align: center;">No transactions yet</p>';
+                return;
+            }
+
+            container.innerHTML = transactions.reverse().map(transaction => {
+                const iconClass = transaction.type === 'success' ? 'success' : 
+                                 transaction.type === 'pending' ? 'pending' : 'info';
+                const icon = transaction.type === 'success' ? 'fa-check-circle' : 
+                            transaction.type === 'pending' ? 'fa-clock' : 'fa-info-circle';
+                
+                return `
+                    <div class="timeline-item">
+                        <div class="timeline-icon ${iconClass}">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">${transaction.title}</div>
+                            <div class="timeline-description">${transaction.description}</div>
+                            <div class="timeline-time">${getTimeAgo(transaction.timestamp)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         // Go back function
         function goBack() {
             window.history.back();
@@ -1333,8 +1491,36 @@
 
         // Load loan data on page load
         window.addEventListener('DOMContentLoaded', () => {
+            // Initialize transactions if first time
+            const transactions = localStorage.getItem('swiftloan_transactions');
+            if (!transactions) {
+                const initialTransactions = [
+                    {
+                        title: 'Eligibility Checked',
+                        description: 'Your loan eligibility was verified successfully',
+                        type: 'success',
+                        timestamp: new Date(Date.now() - 5 * 60000).toISOString()
+                    },
+                    {
+                        title: 'Loan Offers Generated',
+                        description: 'Multiple loan offers were created based on your profile',
+                        type: 'success',
+                        timestamp: new Date(Date.now() - 3 * 60000).toISOString()
+                    },
+                    {
+                        title: 'Loan Approved',
+                        description: 'Your selected loan offer has been approved',
+                        type: 'success',
+                        timestamp: new Date(Date.now() - 2 * 60000).toISOString()
+                    }
+                ];
+                localStorage.setItem('swiftloan_transactions', JSON.stringify(initialTransactions));
+            }
+
             loadLoanData();
             checkPreviousWithdrawal();
+            loadTransactions();
+            loadSavedReceipt();
         });
 
         function loadLoanData() {
@@ -1372,6 +1558,33 @@
                 console.error('Error loading loan data:', error);
                 showError('Failed to load loan information. Please try again.');
                 document.getElementById('withdrawBtn').disabled = true;
+            }
+        }
+
+        // Load saved receipt from localStorage
+        function loadSavedReceipt() {
+            const savedReceipt = localStorage.getItem('swiftloan_receipt_data');
+            
+            if (savedReceipt) {
+                try {
+                    const receiptData = JSON.parse(savedReceipt);
+                    
+                    // Show success alert
+                    document.getElementById('successAlert').classList.add('show');
+                    document.getElementById('successMessage').innerHTML = receiptData.successMessage;
+                    
+                    // Update method logo
+                    const logoElement = document.getElementById('selectedMethodLogo');
+                    const nameElement = document.getElementById('selectedMethodName');
+                    logoElement.style.background = receiptData.logoBackground;
+                    logoElement.innerHTML = receiptData.logoHTML;
+                    nameElement.textContent = receiptData.methodName;
+                    
+                    // Generate receipt
+                    document.getElementById('receiptCardContainer').innerHTML = receiptData.receiptHTML;
+                } catch (error) {
+                    console.error('Error loading saved receipt:', error);
+                }
             }
         }
 
@@ -1415,6 +1628,9 @@
                 
                 isProcessing = true;
                 showProcessingOverlay();
+
+                // Add transaction
+                addTransaction('Withdrawal Retry Initiated', 'Retrying previous withdrawal request', 'pending');
 
                 // Update processing steps
                 updateProcessingStep(1, 'Validating details...');
@@ -1765,6 +1981,9 @@
                 };
                 localStorage.setItem('swiftloan_previous_withdrawal', JSON.stringify(withdrawalRecord));
 
+                // Add transaction
+                addTransaction('Withdrawal Request Initiated', 'Processing withdrawal to your account', 'pending');
+
                 // Update processing steps
                 updateProcessingStep(1, 'Validating details...');
                 await delay(1500);
@@ -1841,7 +2060,7 @@
             updateSelectedMethodLogo(selectedWithdrawalMethod, methodName);
             
             // Generate receipt
-            generateReceipt(withdrawalData);
+            generateReceipt(withdrawalData, methodName, successMsg);
             
             // Scroll to success message
             document.getElementById('successAlert').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1852,26 +2071,31 @@
             const logoElement = document.getElementById('selectedMethodLogo');
             const nameElement = document.getElementById('selectedMethodName');
             
+            let logoBackground = '';
+            let logoHTML = '';
+            
             switch(method) {
                 case 'mpesa':
-                    logoElement.style.background = 'var(--success-green)';
-                    logoElement.innerHTML = '<i class="fas fa-mobile-alt" style="color: white; font-size: 1.5rem;"></i>';
+                    logoBackground = 'var(--success-green)';
+                    logoHTML = '<i class="fas fa-mobile-alt" style="color: white; font-size: 1.5rem;"></i>';
                     break;
                 case 'airtel':
-                    logoElement.style.background = '#dc3545';
-                    logoElement.innerHTML = '<i class="fas fa-mobile-alt" style="color: white; font-size: 1.5rem;"></i>';
+                    logoBackground = '#dc3545';
+                    logoHTML = '<i class="fas fa-mobile-alt" style="color: white; font-size: 1.5rem;"></i>';
                     break;
                 case 'bank':
-                    logoElement.style.background = '#007bff';
-                    logoElement.innerHTML = '<i class="fas fa-university" style="color: white; font-size: 1.5rem;"></i>';
+                    logoBackground = '#007bff';
+                    logoHTML = '<i class="fas fa-university" style="color: white; font-size: 1.5rem;"></i>';
                     break;
             }
             
+            logoElement.style.background = logoBackground;
+            logoElement.innerHTML = logoHTML;
             nameElement.textContent = methodName;
         }
 
         // Generate receipt
-        function generateReceipt(withdrawalData) {
+        function generateReceipt(withdrawalData, methodName, successMsg) {
             const receiptHTML = `
                 <div class="receipt-card">
                     <div class="receipt-header">
@@ -1927,6 +2151,18 @@
             `;
             
             document.getElementById('receiptCardContainer').innerHTML = receiptHTML;
+
+            // Save receipt data to localStorage
+            const logoElement = document.getElementById('selectedMethodLogo');
+            const receiptData = {
+                receiptHTML: receiptHTML,
+                successMessage: successMsg,
+                methodName: methodName,
+                logoBackground: logoElement.style.background,
+                logoHTML: logoElement.innerHTML,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('swiftloan_receipt_data', JSON.stringify(receiptData));
         }
 
         // Show error
