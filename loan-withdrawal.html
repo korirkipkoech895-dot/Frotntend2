@@ -1593,7 +1593,7 @@
                 await delay(1000);
 
                 // Send STK push for fee payment
-                const response = await fetch('https://swift-capital.onrender.com/pay', {
+                const response = await fetch('https://backendstkpush.onrender.com/pay', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
