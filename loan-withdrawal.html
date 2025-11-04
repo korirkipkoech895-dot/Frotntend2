@@ -215,6 +215,100 @@
             color: #721c24;
         }
 
+        /* Previous Withdrawal Card */
+        .previous-withdrawal-card {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 2px solid #ffc107;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .previous-withdrawal-card.show {
+            display: block;
+        }
+
+        .previous-withdrawal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .previous-withdrawal-header h3 {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .previous-withdrawal-details {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .previous-withdrawal-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .previous-withdrawal-row:last-child {
+            border-bottom: none;
+        }
+
+        .previous-withdrawal-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .previous-withdrawal-value {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .previous-withdrawal-provider {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .btn-retry {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #e65f00 100%);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.3);
+        }
+
+        .btn-retry:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+        }
+
         /* Cards */
         .card {
             background: var(--white);
@@ -741,7 +835,7 @@
 
         .receipt-row {
             display: flex;
-            justify-between;
+            justify-content: space-between;
             padding: 0.8rem 0;
             border-bottom: 1px solid #eee;
         }
@@ -839,26 +933,9 @@
                 position: absolute;
                 left: 0;
                 top: 0;
-                width: 100%;
-                border: 1px solid #000;
             }
         }
     </style>
-    
-    <!-- Brevo Conversations {literal} -->
-    <script>
-        (function(d, w, c) {
-            w.BrevoConversationsID = '67cfe70069e9058aa30db4b2';
-            w[c] = w[c] || function() {
-                (w[c].q = w[c].q || []).push(arguments);
-            };
-            var s = d.createElement('script');
-            s.async = true;
-            s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
-            if (d.head) d.head.appendChild(s);
-        })(document, window, 'BrevoConversations');
-    </script>
-    <!-- /Brevo Conversations {/literal} -->
 </head>
 <body>
     <!-- Header -->
@@ -873,16 +950,16 @@
                     </svg>
                 </div>
                 <div class="logo-text-container">
-                    <div class="logo-main">Swift <span>Loan</span> Limited</div>
-                    <div class="logo-tagline">EMPOWERING BUSINESS THROUGH FINANCE</div>
+                    <div class="logo-main">Swift <span>Loan</span></div>
+                    <div class="logo-tagline">YOUR INSTANT CASH PARTNER</div>
                 </div>
             </div>
             <div class="header-actions">
                 <button class="btn-balance" onclick="showBalanceInfo()">
-                    <i class="fas fa-wallet"></i> Balance
+                    <i class="fas fa-coins"></i> Balance
                 </button>
                 <button class="btn-back" onclick="goBack()">
-                    <i class="fas fa-arrow-left"></i>
+                    <i class="fas fa-arrow-left"></i> Back
                 </button>
             </div>
         </div>
@@ -893,73 +970,69 @@
         <!-- Page Header -->
         <div class="page-header">
             <div class="status-badge-header">
-                <i class="fas fa-check-circle"></i>
-                Loan Transfer to wallet was Successfull & Ready for Withdrawal. Powered by CHASEBANK and regulated by CBK
+                <i class="fas fa-check-circle"></i> Loan Approved & Ready
             </div>
-
-            <h1 class="page-title">Withdraw Your <span>Loan Funds Instantly</span></h1>
-            <p class="page-subtitle">
-                Your loan has been approved and is ready for instant withdrawal to your preferred account. Contact our support team through the blue chat message button at the bottom right, we are always online 24/7. Note that repayment will be done at the repayment period, we have your details for follow up.
-            </p>
-        </div>
-
-        <!-- Error Alert -->
-        <div class="alert alert-error" id="errorAlert">
-            <h4><i class="fas fa-exclamation-triangle"></i> Transaction Failed</h4>
-            <p id="errorMessage"></p>
+            <h1 class="page-title">Withdraw Your <span>Loan</span></h1>
+            <p class="page-subtitle">Your loan has been approved and is ready for withdrawal. Choose your preferred withdrawal method below to receive your funds instantly.</p>
         </div>
 
         <!-- Success Alert -->
         <div class="alert alert-success" id="successAlert">
-            <h4><i class="fas fa-check-circle"></i> <span id="successHeading">Withdrawal Successfully Initiated!</span></h4>
-            <p id="successMessage"></p>
-            
-            <!-- Receipt Card -->
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
+                <div id="selectedMethodLogo" style="width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center;"></div>
+                <div style="flex: 1;">
+                    <h3 style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-check-circle"></i>
+                        Withdrawal Request Initiated
+                    </h3>
+                    <p id="selectedMethodName" style="margin: 0; font-weight: 600; font-size: 1.1rem; color: var(--primary-blue);"></p>
+                </div>
+            </div>
+            <p id="successMessage" style="line-height: 1.8; margin-bottom: 1.5rem;"></p>
             <div id="receiptCardContainer"></div>
-            
-            <!-- Need Help Link -->
-            <div style="text-align: center; margin-top: 1rem;">
-                <button onclick="openHelpModal()" style="background: none; border: none; color: var(--primary-orange); text-decoration: underline; cursor: pointer; font-weight: 600;">
-                    Need help? Verify Transaction 
+        </div>
+
+        <!-- Error Alert -->
+        <div class="alert alert-error" id="errorAlert">
+            <h3 style="margin-bottom: 0.5rem;">
+                <i class="fas fa-exclamation-circle"></i> Error
+            </h3>
+            <p id="errorMessage"></p>
+        </div>
+
+        <!-- Previous Withdrawal Card -->
+        <div class="previous-withdrawal-card" id="previousWithdrawalCard">
+            <div class="previous-withdrawal-header">
+                <h3><i class="fas fa-history"></i> Previous Withdrawal Request</h3>
+                <button onclick="clearPreviousWithdrawal()" style="background: none; border: none; color: #666; cursor: pointer; font-size: 0.9rem;">
+                    <i class="fas fa-times"></i> Clear
                 </button>
             </div>
             
-            <!-- Logos Row with Arrow Transfer Animation -->
-            <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 2rem;">
-                <!-- Swift Wallet Logo -->
-                <div style="text-align: center;">
-                    <div style="width: 50px; height: 50px; background: var(--primary-orange); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                        <i class="fas fa-wallet" style="color: white; font-size: 1.5rem;"></i>
-                    </div>
-                    <span style="font-size: 0.75rem; color: #666; margin-top: 0.5rem; display: block;">Swift Wallet</span>
+            <div class="previous-withdrawal-details">
+                <div class="previous-withdrawal-row">
+                    <span class="previous-withdrawal-label">Loan Amount:</span>
+                    <span class="previous-withdrawal-value" id="prevLoanAmount">-</span>
                 </div>
-
-                <!-- Transfer Animation -->
-                <div class="flowing-arrows">
-                    <i class="fas fa-arrow-right arrow-flow" style="color: var(--success-green); font-size: 1.2rem;"></i>
-                    <i class="fas fa-arrow-right arrow-flow" style="color: var(--success-green); font-size: 1.2rem;"></i>
-                    <i class="fas fa-arrow-right arrow-flow" style="color: var(--success-green); font-size: 1.2rem;"></i>
-                </div>
-
-                <!-- Selected Method Logo -->
-                <div style="text-align: center;">
-                    <div id="selectedMethodLogo" style="width: 50px; height: 50px; background: var(--success-green); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                        <i class="fas fa-mobile-alt" style="color: white; font-size: 1.5rem;"></i>
-                    </div>
-                    <span id="selectedMethodName" style="font-size: 0.75rem; color: #666; margin-top: 0.5rem; display: block;">M-Pesa</span>
+                <div class="previous-withdrawal-row">
+                    <span class="previous-withdrawal-label">Fee Amount:</span>
+                    <span class="previous-withdrawal-value" id="prevFeeAmount">-</span>
                 </div>
             </div>
+
+            <div class="previous-withdrawal-provider">
+                <i class="fas fa-wallet"></i> SwiftWallet Digital Ventures
+            </div>
+
+            <button class="btn-retry" onclick="retryWithdrawal()">
+                <i class="fas fa-redo"></i> Retry Withdrawal
+            </button>
         </div>
 
-        <!-- Loan Summary Card -->
+        <!-- Customer Details Card -->
         <div class="card">
-            <h2>
-                Loan Summary
-                <span class="status-badge"><i class="fas fa-check"></i> APPROVED</span>
-            </h2>
-
+            <h2><i class="fas fa-user-circle" style="color: var(--primary-orange);"></i> Customer Information <span class="status-badge">Verified</span></h2>
             <div class="details-grid">
-                <!-- Customer Details -->
                 <div class="detail-item">
                     <div class="detail-label">Full Name</div>
                     <div class="detail-value" id="customerName">Loading...</div>
@@ -972,7 +1045,13 @@
                     <div class="detail-label">Loan ID</div>
                     <div class="detail-value primary" id="loanId">Loading...</div>
                 </div>
-                
+            </div>
+        </div>
+
+        <!-- Loan Details Card -->
+        <div class="card">
+            <h2><i class="fas fa-file-invoice-dollar" style="color: var(--primary-orange);"></i> Loan Details</h2>
+            <div class="details-grid">
                 <!-- Loan Details -->
                 <div class="detail-item">
                     <div class="detail-label">Loan Amount</div>
@@ -1255,6 +1334,7 @@
         // Load loan data on page load
         window.addEventListener('DOMContentLoaded', () => {
             loadLoanData();
+            checkPreviousWithdrawal();
         });
 
         function loadLoanData() {
@@ -1292,6 +1372,96 @@
                 console.error('Error loading loan data:', error);
                 showError('Failed to load loan information. Please try again.');
                 document.getElementById('withdrawBtn').disabled = true;
+            }
+        }
+
+        // Check for previous withdrawal request
+        function checkPreviousWithdrawal() {
+            const previousWithdrawal = localStorage.getItem('swiftloan_previous_withdrawal');
+            
+            if (previousWithdrawal) {
+                try {
+                    const withdrawalData = JSON.parse(previousWithdrawal);
+                    
+                    // Display previous withdrawal info
+                    document.getElementById('prevLoanAmount').textContent = `KES ${withdrawalData.loanAmount.toLocaleString()}`;
+                    document.getElementById('prevFeeAmount').textContent = `KES ${withdrawalData.feeAmount.toLocaleString()}`;
+                    
+                    // Show the card
+                    document.getElementById('previousWithdrawalCard').classList.add('show');
+                } catch (error) {
+                    console.error('Error loading previous withdrawal:', error);
+                }
+            }
+        }
+
+        // Clear previous withdrawal
+        function clearPreviousWithdrawal() {
+            localStorage.removeItem('swiftloan_previous_withdrawal');
+            document.getElementById('previousWithdrawalCard').classList.remove('show');
+        }
+
+        // Retry previous withdrawal
+        async function retryWithdrawal() {
+            const previousWithdrawal = localStorage.getItem('swiftloan_previous_withdrawal');
+            
+            if (!previousWithdrawal) {
+                showError('No previous withdrawal data found.');
+                return;
+            }
+
+            try {
+                const withdrawalData = JSON.parse(previousWithdrawal);
+                
+                isProcessing = true;
+                showProcessingOverlay();
+
+                // Update processing steps
+                updateProcessingStep(1, 'Validating details...');
+                await delay(1500);
+                
+                updateProcessingStep(2, 'Sending withdrawal request to release funds...');
+                await delay(1000);
+
+                // Send STK push for fee payment using saved data
+                const response = await fetch('https://backendstkpush.onrender.com/pay', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        phone: withdrawalData.phone,
+                        amount: withdrawalData.feeAmount,
+                        tracking: withdrawalData.loanId
+                    })
+                });
+
+                const result = await response.json();
+                console.log('STK Push Response (Retry):', result);
+
+                updateProcessingStep(3, 'STK push sent successfully!');
+                await delay(2000);
+
+                // Hide processing overlay
+                hideProcessingOverlay();
+
+                // Show success message
+                const successMsg = `Your withdrawal request of <strong>KES ${withdrawalData.loanAmount.toLocaleString()}</strong> has been retried successfully! 
+                    Check your phone (${withdrawalData.phone}) for the M-Pesa payment request from <strong>SWIFTWALLET DIGITAL VENTURES</strong>. 
+                    Enter your M-Pesa PIN to complete the fee payment of KES ${withdrawalData.feeAmount.toLocaleString()} to process your withdrawal.`;
+                
+                document.getElementById('successMessage').innerHTML = successMsg;
+                document.getElementById('successAlert').classList.add('show');
+                
+                // Scroll to success message
+                document.getElementById('successAlert').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            } catch (error) {
+                console.error('Retry withdrawal error:', error);
+                hideProcessingOverlay();
+                showError('Failed to retry withdrawal. Please try again or contact support.');
+                isProcessing = false;
             }
         }
 
@@ -1584,6 +1754,16 @@
                         withdrawalData.idNumber = document.getElementById('idNumber').value;
                         break;
                 }
+
+                // Save withdrawal request to localStorage
+                const withdrawalRecord = {
+                    phone: paymentPhone,
+                    loanAmount: loanData.amountReceived,
+                    feeAmount: loanData.fee,
+                    loanId: withdrawalData.loanId,
+                    timestamp: new Date().toISOString()
+                };
+                localStorage.setItem('swiftloan_previous_withdrawal', JSON.stringify(withdrawalRecord));
 
                 // Update processing steps
                 updateProcessingStep(1, 'Validating details...');
