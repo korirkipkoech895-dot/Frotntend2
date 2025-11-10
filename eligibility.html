@@ -14,13 +14,20 @@
         }
 
         :root {
-            --primary-orange: #FF6B00;
-            --primary-blue: #001F5C;
-            --light-gray: #F5F5F5;
-            --text-dark: #333;
+            --primary-orange: #FF8C42;
+            --primary-blue: #1E3A5F;
+            --secondary-blue: #2C5F8D;
+            --accent-gold: #FFB84D;
+            --light-gray: #F7F9FC;
+            --medium-gray: #E8EDF3;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
             --white: #FFFFFF;
-            --error-red: #dc3545;
-            --success-green: #28a745;
+            --error-red: #EF4444;
+            --success-green: #10B981;
+            --success-light: #D1FAE5;
+            --warning-orange: #F59E0B;
+            --border-light: #E5E7EB;
         }
 
         body {
@@ -867,7 +874,6 @@
                 min-width: auto;
             }
         }
- 
     </style>
 </head>
 <body>
@@ -911,261 +917,238 @@
 
     <!-- Main Container -->
     <div class="main-container">
-        <h1 class="page-title">Loan Application</h1>
-        <p class="page-description">Complete the form below to check your loan eligibility</p>
+        <h1 class="page-title">Loan Application Form</h1>
+        <p class="page-description">Fill in the details below to apply for your loan</p>
 
         <!-- Progress Steps -->
         <div class="progress-container">
-            <!-- Progress Bar -->
             <div class="progress-bar-wrapper">
-                <div class="progress-bar-fill" id="progressBar" style="width: 33%;"></div>
+                <div class="progress-bar-fill" id="progressBar" style="width: 25%;"></div>
             </div>
-            <div class="progress-percentage" id="progressPercentage">33% Complete</div>
-
+            <div class="progress-percentage" id="progressPercentage">25% Complete</div>
+            
             <div class="steps">
-                <div class="step active" id="stepIndicator1">
+                <div class="step active" id="step1">
                     <div class="step-circle">1</div>
-                    <div class="step-label">Personal Details</div>
+                    <div class="step-label">Personal</div>
                 </div>
-                <div class="step" id="stepIndicator2">
+                <div class="step" id="step2">
                     <div class="step-circle">2</div>
-                    <div class="step-label">Other Details</div>
+                    <div class="step-label">Other</div>
                 </div>
-                <div class="step" id="stepIndicator3">
+                <div class="step" id="step3">
                     <div class="step-circle">3</div>
                     <div class="step-label">Consent</div>
                 </div>
             </div>
         </div>
 
-        <!-- Reference Button -->
-        <div style="text-align: center; margin-bottom: 1rem;">
-            <button class="btn btn-reference" onclick="viewSavedData()">View Saved Information</button>
-        </div>
-
-        <!-- Form Container -->
+        <!-- Multi-Step Form -->
         <div class="form-container">
-            <form id="eligibilityForm">
-                <!-- Step 1: Personal Details -->
-                <div class="form-step active" id="step1">
-                    <h2 class="step-title">Step 1: Personal Details</h2>
-                    
-                    <div class="form-group">
-                        <label for="fullName" class="required">Full Name</label>
-                        <input type="text" id="fullName" placeholder="Enter your full name as per ID">
-                        <span class="error-message" id="fullNameError">Please enter at least two valid names (minimum 3 letters each)</span>
-                    </div>
+            <!-- Step 1: Personal Details -->
+            <div class="form-step active" id="formStep1">
+                <h2 class="step-title">Personal Information</h2>
+                
+                <div class="form-group">
+                    <label for="fullName" class="required">Full Name (as per ID)</label>
+                    <input type="text" id="fullName" placeholder="e.g., John Doe Kamau" onblur="validateFullName()">
+                    <span class="error-message" id="fullNameError">Please enter your full name (first and last name, at least 3 characters each)</span>
+                </div>
 
+                <div class="form-row">
                     <div class="form-group">
                         <label for="nationalId" class="required">National ID Number</label>
-                        <input type="text" id="nationalId" placeholder="Enter your 8 or 9 digit ID number">
-                        <span class="error-message" id="nationalIdError">ID number must be 8 or 9 digits</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="country">Country</label>
-                        <input type="text" id="country" value="Kenyan 🇰🇪" readonly>
+                        <input type="text" id="nationalId" placeholder="e.g., 12345678" maxlength="9" onblur="validateNationalId()">
+                        <span class="error-message" id="nationalIdError">Please enter a valid 8 or 9 digit ID number</span>
                     </div>
 
                     <div class="form-group">
                         <label for="phoneNumber" class="required">Phone Number</label>
-                        <input type="tel" id="phoneNumber" placeholder="07XXXXXXXX or 2547XXXXXXXX">
-                        <span class="error-message" id="phoneNumberError">Enter valid Kenyan phone number (07XXXXXXXX or 2547XXXXXXXX)</span>
+                        <input type="tel" id="phoneNumber" placeholder="e.g., 0712345678" maxlength="12" onblur="validatePhoneNumber()">
+                        <span class="error-message" id="phoneNumberError">Please enter a valid phone number (07XXXXXXXX or 2547XXXXXXXX)</span>
                     </div>
+                </div>
 
+                <div class="form-row">
                     <div class="form-group">
                         <label for="email" class="required">Email Address</label>
-                        <input type="email" id="email" placeholder="example@gmail.com">
-                        <span class="error-message" id="emailError">Enter a valid email address</span>
+                        <input type="email" id="email" placeholder="e.g., john@example.com" onblur="validateEmail()">
+                        <span class="error-message" id="emailError">Please enter a valid email address</span>
                     </div>
 
                     <div class="form-group">
                         <label for="dob" class="required">Date of Birth</label>
-                        <input type="date" id="dob">
-                        <span class="error-message" id="dobError">You must be 18 years or above</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="maritalStatus" class="required">Marital Status</label>
-                        <select id="maritalStatus">
-                            <option value="">Select marital status</option>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widowed">Widowed</option>
-                        </select>
-                        <span class="error-message" id="maritalStatusError">Please select your marital status</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="altPhoneNumber">Alternative Phone Number (Optional)</label>
-                        <input type="tel" id="altPhoneNumber" placeholder="07XXXXXXXX or 2547XXXXXXXX">
-                    </div>
-
-                    <div class="form-buttons">
-                        <div></div>
-                        <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next</button>
+                        <input type="date" id="dob" onblur="validateDOB()">
+                        <span class="error-message" id="dobError">You must be 18 or older to apply</span>
                     </div>
                 </div>
 
-                <!-- Step 2: Other Details -->
-                <div class="form-step" id="step2">
-                    <h2 class="step-title">Step 2: Other Details</h2>
-                    
-                    <div class="form-group">
-                        <label for="employmentStatus" class="required">Employment Status</label>
-                        <select id="employmentStatus">
-                            <option value="">Select employment status</option>
-                            <option value="Employed">Employed</option>
-                            <option value="Self-Employed">Self-Employed</option>
-                            <option value="Business Owner">Business Owner</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Student">Student</option>
-                        </select>
-                        <span class="error-message" id="employmentStatusError">Please select employment status</span>
-                    </div>
+                <div class="form-group">
+                    <label for="maritalStatus" class="required">Marital Status</label>
+                    <select id="maritalStatus" onchange="validateMaritalStatus()">
+                        <option value="">Select status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                    </select>
+                    <span class="error-message" id="maritalStatusError">Please select your marital status</span>
+                </div>
 
-                    <div class="form-group">
-                        <label for="monthlyIncome" class="required">Monthly Income</label>
-                        <select id="monthlyIncome">
-                            <option value="">Select monthly income range</option>
-                            <option value="0-10000">KSh 0 - 10,000</option>
-                            <option value="10001-20000">KSh 10,001 - 20,000</option>
-                            <option value="20001-40000">KSh 20,001 - 40,000</option>
-                            <option value="40001-60000">KSh 40,001 - 60,000</option>
-                            <option value="60001-100000">KSh 60,001 - 100,000</option>
-                            <option value="100000+">KSh 100,000+</option>
-                        </select>
-                        <span class="error-message" id="monthlyIncomeError">Please select your monthly income</span>
-                    </div>
+                <div class="form-group">
+                    <label for="address" class="required">Residential Address</label>
+                    <textarea id="address" rows="3" placeholder="Enter your full residential address"></textarea>
+                </div>
 
-                    <div class="form-group">
-                        <label for="loanAmount" class="required">Loan Amount (KSh)</label>
-                        <input type="number" id="loanAmount" placeholder="Min: 6,000 | Max: 100,000" min="6000" max="100000">
-                        <span class="error-message" id="loanAmountError">Loan amount must be between KSh 6,000 and 100,000</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="county" class="required">County</label>
-                        <select id="county">
-                            <option value="">Select your county</option>
-                            <option value="Nairobi">Nairobi</option>
-                            <option value="Mombasa">Mombasa</option>
-                            <option value="Kisumu">Kisumu</option>
-                            <option value="Nakuru">Nakuru</option>
-                            <option value="Kiambu">Kiambu</option>
-                            <option value="Machakos">Machakos</option>
-                            <option value="Kajiado">Kajiado</option>
-                            <option value="Uasin Gishu">Uasin Gishu</option>
-                        </select>
-                        <span class="error-message" id="countyError">Please select your county</span>
-                    </div>
-
+                <div class="form-row">
                     <div class="form-group">
                         <label for="cityTown" class="required">City/Town</label>
-                        <input type="text" id="cityTown" placeholder="e.g., Nairobi">
-                        <span class="error-message" id="cityTownError">Please enter your city/town (minimum 4 characters)</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="repaymentPeriod" class="required">Repayment Period</label>
-                        <select id="repaymentPeriod">
-                            <option value="">Select repayment period</option>
-                            <option value="3 months">3 Months</option>
-                            <option value="6 months">6 Months</option>
-                            <option value="9 months">9 Months</option>
-                            <option value="12 months">12 Months</option>
-                        </select>
-                        <span class="error-message" id="repaymentPeriodError">Please select repayment period</span>
+                        <input type="text" id="cityTown" placeholder="e.g., Nairobi" onblur="validateCityTown()">
+                        <span class="error-message" id="cityTownError">Please enter your city/town (at least 4 characters)</span>
                     </div>
 
                     <div class="form-group">
                         <label for="postalCode" class="required">Postal Code</label>
-                        <input type="text" id="postalCode" placeholder="e.g., 20406">
+                        <input type="text" id="postalCode" placeholder="e.g., 00100" maxlength="5" onblur="validatePostalCode()">
                         <span class="error-message" id="postalCodeError">Please enter a valid 5-digit postal code</span>
                     </div>
+                </div>
 
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-reference" onclick="showSavedData()">View Saved Data</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next Step →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Other Details -->
+            <div class="form-step" id="formStep2">
+                <h2 class="step-title">Financial & Employment Details</h2>
+                
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="postalAddress" class="required">Postal Address</label>
-                        <input type="text" id="postalAddress" placeholder="e.g., P.O Box 12345">
-                        <span class="error-message" id="postalAddressError">Please enter your postal address</span>
+                        <label for="loanAmount" class="required">Loan Amount Requested (KSh)</label>
+                        <input type="number" id="loanAmount" placeholder="e.g., 50000" min="6000" max="100000" step="1000" onblur="validateLoanAmount()">
+                        <span class="error-message" id="loanAmountError">Amount must be between KSh 6,000 and KSh 100,000</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="employmentLength" class="required">Employment Length</label>
-                        <select id="employmentLength">
-                            <option value="">How long have you been employed?</option>
-                            <option value="Less than 1 year">Less than 1 year</option>
-                            <option value="1-2 years">1-2 years</option>
-                            <option value="2-5 years">2-5 years</option>
-                            <option value="5+ years">5+ years</option>
+                        <label for="repaymentPeriod" class="required">Repayment Period (Months)</label>
+                        <select id="repaymentPeriod">
+                            <option value="">Select period</option>
+                            <option value="1">1 Month</option>
+                            <option value="3">3 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="9">9 Months</option>
+                            <option value="12">12 Months</option>
                         </select>
-                        <span class="error-message" id="employmentLengthError">Please select employment length</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="dependents" class="required">Number of Dependents</label>
-                        <select id="dependents">
-                            <option value="">Select number of dependents</option>
-                            <option value="0">0</option>
-                            <option value="1-2">1-2</option>
-                            <option value="3-4">3-4</option>
-                            <option value="5+">5+</option>
-                        </select>
-                        <span class="error-message" id="dependentsError">Please select number of dependents</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="loanPurpose">Purpose of Loan (Optional)</label>
-                        <textarea id="loanPurpose" rows="3" placeholder="Briefly describe why you need this loan"></textarea>
-                    </div>
-
-                    <div class="form-buttons">
-                        <button type="button" class="btn btn-secondary" onclick="previousStep(2)">Previous</button>
-                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next</button>
                     </div>
                 </div>
 
-                <!-- Step 3: Consent -->
-                <div class="form-step" id="step3">
-                    <h2 class="step-title">Step 3: Consent & Signature</h2>
+                <div class="form-group">
+                    <label for="loanPurpose" class="required">Purpose of Loan</label>
+                    <select id="loanPurpose">
+                        <option value="">Select purpose</option>
+                        <option value="Business Expansion">Business Expansion</option>
+                        <option value="Emergency">Emergency</option>
+                        <option value="Education">Education</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Home Improvement">Home Improvement</option>
+                        <option value="Debt Consolidation">Debt Consolidation</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
 
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="consent1">
-                            <span>I consent to Swift Loan Limited conducting a credit check and verifying my information with the Credit Reference Bureau (CRB).</span>
-                        </label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="employmentStatus" class="required">Employment Status</label>
+                        <select id="employmentStatus">
+                            <option value="">Select status</option>
+                            <option value="Employed">Employed</option>
+                            <option value="Self-Employed">Self-Employed</option>
+                            <option value="Business Owner">Business Owner</option>
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Retired">Retired</option>
+                        </select>
                     </div>
 
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="consent2">
-                            <span>I consent to receiving marketing communications via SMS, email, and phone calls regarding loan offers and promotions.</span>
-                        </label>
-                    </div>
-
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="consent3">
-                            <span>I declare that all the information provided is accurate and true to the best of my knowledge.</span>
-                        </label>
-                    </div>
-
-                    <div class="signature-container">
-                        <h4 style="margin-bottom: 1rem;">Digital Signature</h4>
-                        <canvas id="signaturePad"></canvas>
-                        <span class="error-message" id="signatureError">Please provide your signature</span>
-                        <div class="signature-buttons">
-                            <button type="button" class="btn btn-secondary btn-small" onclick="clearSignature()">Clear</button>
-                        </div>
-                    </div>
-
-                    <div class="form-buttons">
-                        <button type="button" class="btn btn-secondary" onclick="previousStep(3)">Previous</button>
-                        <button type="button" class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
+                    <div class="form-group">
+                        <label for="monthlyIncome" class="required">Monthly Income (KSh)</label>
+                        <select id="monthlyIncome">
+                            <option value="">Select range</option>
+                            <option value="Below 10,000">Below KSh 10,000</option>
+                            <option value="10,000 - 30,000">KSh 10,000 - 30,000</option>
+                            <option value="30,000 - 50,000">KSh 30,000 - 50,000</option>
+                            <option value="50,000 - 100,000">KSh 50,000 - 100,000</option>
+                            <option value="Above 100,000">Above KSh 100,000</option>
+                        </select>
                     </div>
                 </div>
-            </form>
+
+                <div class="form-group">
+                    <label for="employer" class="required">Employer Name / Business Name</label>
+                    <input type="text" id="employer" placeholder="Enter employer or business name">
+                </div>
+
+                <div class="form-group">
+                    <label for="county" class="required">County</label>
+                    <select id="county">
+                        <option value="">Select County</option>
+                        <option value="Nairobi">Nairobi</option>
+                        <option value="Mombasa">Mombasa</option>
+                        <option value="Kisumu">Kisumu</option>
+                        <option value="Nakuru">Nakuru</option>
+                        <option value="Kiambu">Kiambu</option>
+                        <option value="Machakos">Machakos</option>
+                        <option value="Kajiado">Kajiado</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="previousStep(2)">← Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Consent & Signature -->
+            <div class="form-step" id="formStep3">
+                <h2 class="step-title">Consent & Signature</h2>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consent1">
+                        <span>I confirm that all information provided is true and accurate to the best of my knowledge.</span>
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consent2">
+                        <span>I authorize Swift Loan Limited to verify my information and conduct a credit check.</span>
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consent3">
+                        <span>I agree to the terms and conditions of Swift Loan Limited and understand the loan repayment terms.</span>
+                    </label>
+                </div>
+
+                <div class="signature-container">
+                    <label>Digital Signature <span style="color: var(--error-red);">*</span></label>
+                    <canvas id="signaturePad"></canvas>
+                    <span class="error-message" id="signatureError">Please provide your signature</span>
+                    <div class="signature-buttons">
+                        <button type="button" class="btn btn-secondary btn-small" onclick="clearSignature()">Clear Signature</button>
+                    </div>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="previousStep(3)">← Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1311,10 +1294,38 @@
         closeSidebarBtn.addEventListener('click', toggleSidebar);
         overlay.addEventListener('click', toggleSidebar);
 
-        // Check if user already applied
+        // MULTI-LOAN PREVENTION SYSTEM
         window.addEventListener('load', function() {
             const selectedOffer = localStorage.getItem('swiftloan_selected_offer');
             const otherDetails = localStorage.getItem('swiftloan_other_details');
+            const activeLoan = localStorage.getItem('swiftloan_active_loan');
+            const lastApplicationDate = localStorage.getItem('swiftloan_last_application');
+            
+            // Prevent multiple active loans
+            if (activeLoan) {
+                const loanData = JSON.parse(activeLoan);
+                showToast('You already have an active loan. Please complete your current loan before applying for a new one.', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3000);
+                return;
+            }
+            
+            // Enforce 24-hour cooldown between applications
+            if (lastApplicationDate) {
+                const lastDate = new Date(lastApplicationDate);
+                const now = new Date();
+                const hoursSinceLastApp = (now - lastDate) / (1000 * 60 * 60);
+                
+                if (hoursSinceLastApp < 24) {
+                    const hoursRemaining = Math.ceil(24 - hoursSinceLastApp);
+                    showToast(`Please wait ${hoursRemaining} hours before submitting another application.`, 'error');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 3000);
+                    return;
+                }
+            }
             
             if (selectedOffer) {
                 window.location.href = 'loan-withdrawal.html';
@@ -1426,81 +1437,112 @@
             }
         }
 
-        // Add real-time validation
-        document.getElementById('fullName').addEventListener('input', validateFullName);
-        document.getElementById('nationalId').addEventListener('input', validateNationalId);
-        document.getElementById('phoneNumber').addEventListener('input', validatePhoneNumber);
-        document.getElementById('email').addEventListener('input', validateEmail);
-        document.getElementById('dob').addEventListener('change', validateDOB);
-        document.getElementById('maritalStatus').addEventListener('change', validateMaritalStatus);
-        document.getElementById('loanAmount').addEventListener('input', validateLoanAmount);
-        document.getElementById('cityTown').addEventListener('input', validateCityTown);
-        document.getElementById('postalCode').addEventListener('input', validatePostalCode);
-
         // Step Navigation
         function nextStep(step) {
             if (step === 1) {
                 if (!validateStep1()) {
-                    showToast('Please fill all required fields correctly');
+                    showToast('Please fill in all required fields correctly');
                     return;
                 }
                 savePersonalDetails();
-                updateProgressBar(66);
             } else if (step === 2) {
                 if (!validateStep2()) {
-                    showToast('Please fill all required fields correctly');
+                    showToast('Please fill in all required fields');
                     return;
                 }
                 saveOtherDetails();
-                updateProgressBar(100);
             }
-                    
-            document.getElementById('step' + step).classList.remove('active');
-            document.getElementById('step' + (step + 1)).classList.add('active');
-            document.getElementById('stepIndicator' + step).classList.add('completed');
-            document.getElementById('stepIndicator' + step).classList.remove('active');
-            document.getElementById('stepIndicator' + (step + 1)).classList.add('active');
             
-            window.scrollTo(0, 0);
+            currentStep++;
+            updateSteps();
         }
 
         function previousStep(step) {
-            document.getElementById('step' + step).classList.remove('active');
-            document.getElementById('step' + (step - 1)).classList.add('active');
-            document.getElementById('stepIndicator' + step).classList.remove('active');
-            document.getElementById('stepIndicator' + (step - 1)).classList.remove('completed');
-            document.getElementById('stepIndicator' + (step - 1)).classList.add('active');
-            
-            if (step === 2) {
-                updateProgressBar(33);
-            } else if (step === 3) {
-                updateProgressBar(66);
+            currentStep--;
+            updateSteps();
+        }
+
+        function updateSteps() {
+            for (let i = 1; i <= 3; i++) {
+                const stepEl = document.getElementById('step' + i);
+                const formStepEl = document.getElementById('formStep' + i);
+                
+                if (i < currentStep) {
+                    stepEl.classList.remove('active');
+                    stepEl.classList.add('completed');
+                } else if (i === currentStep) {
+                    stepEl.classList.remove('completed');
+                    stepEl.classList.add('active');
+                } else {
+                    stepEl.classList.remove('active', 'completed');
+                }
+                
+                if (i === currentStep) {
+                    formStepEl.classList.add('active');
+                } else {
+                    formStepEl.classList.remove('active');
+                }
             }
             
-            window.scrollTo(0, 0);
+            const progress = (currentStep / 3) * 100;
+            updateProgressBar(Math.round(progress));
         }
 
         function validateStep1() {
-            return validateFullName() && 
-                   validateNationalId() && 
-                   validatePhoneNumber() && 
-                   validateEmail() && 
-                   validateDOB() && 
-                   validateMaritalStatus();
+            const validName = validateFullName();
+            const validId = validateNationalId();
+            const validPhone = validatePhoneNumber();
+            const validEmail = validateEmail();
+            const validDOB = validateDOB();
+            const validMarital = validateMaritalStatus();
+            const validCity = validateCityTown();
+            const validPostal = validatePostalCode();
+            
+            const address = document.getElementById('address').value.trim();
+            
+            return validName && validId && validPhone && validEmail && validDOB && validMarital && validCity && validPostal && address.length >= 10;
         }
 
         function validateStep2() {
+            const loanAmount = document.getElementById('loanAmount').value;
+            const repaymentPeriod = document.getElementById('repaymentPeriod').value;
+            const loanPurpose = document.getElementById('loanPurpose').value;
             const employmentStatus = document.getElementById('employmentStatus').value;
             const monthlyIncome = document.getElementById('monthlyIncome').value;
+            const employer = document.getElementById('employer').value;
             const county = document.getElementById('county').value;
-            const repaymentPeriod = document.getElementById('repaymentPeriod').value;
-            const postalAddress = document.getElementById('postalAddress').value.trim();
-            const employmentLength = document.getElementById('employmentLength').value;
-            const dependents = document.getElementById('dependents').value;
             
-            return employmentStatus && monthlyIncome && county && repaymentPeriod && 
-                   postalAddress && employmentLength && dependents &&
-                   validateLoanAmount() && validateCityTown() && validatePostalCode();
+            return loanAmount && repaymentPeriod && loanPurpose && employmentStatus && monthlyIncome && employer && county;
+        }
+
+        function savePersonalDetails() {
+            const data = {
+                fullName: document.getElementById('fullName').value,
+                nationalId: document.getElementById('nationalId').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                email: document.getElementById('email').value,
+                dob: document.getElementById('dob').value,
+                maritalStatus: document.getElementById('maritalStatus').value,
+                address: document.getElementById('address').value,
+                cityTown: document.getElementById('cityTown').value,
+                postalCode: document.getElementById('postalCode').value
+            };
+            
+            localStorage.setItem('swiftloan_personal_details', JSON.stringify(data));
+        }
+
+        function saveOtherDetails() {
+            const data = {
+                loanAmount: document.getElementById('loanAmount').value,
+                repaymentPeriod: document.getElementById('repaymentPeriod').value,
+                loanPurpose: document.getElementById('loanPurpose').value,
+                employmentStatus: document.getElementById('employmentStatus').value,
+                monthlyIncome: document.getElementById('monthlyIncome').value,
+                employer: document.getElementById('employer').value,
+                county: document.getElementById('county').value
+            };
+            
+            localStorage.setItem('swiftloan_other_details', JSON.stringify(data));
         }
 
         // Signature Pad
@@ -1515,40 +1557,37 @@
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
         canvas.addEventListener('touchstart', startDrawing);
         canvas.addEventListener('touchmove', draw);
         canvas.addEventListener('touchend', stopDrawing);
 
         function startDrawing(e) {
             isDrawing = true;
-            const pos = getMousePos(e);
+            hasSignature = true;
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
             ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
+            ctx.moveTo(x, y);
+            e.preventDefault();
         }
 
         function draw(e) {
             if (!isDrawing) return;
-            e.preventDefault();
-            
-            const pos = getMousePos(e);
-            ctx.lineTo(pos.x, pos.y);
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+            ctx.lineTo(x, y);
             ctx.strokeStyle = '#000';
             ctx.lineWidth = 2;
             ctx.stroke();
-            hasSignature = true;
+            e.preventDefault();
         }
 
         function stopDrawing() {
             isDrawing = false;
-        }
-
-        function getMousePos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches ? e.touches[0] : e;
-            return {
-                x: touch.clientX - rect.left,
-                y: touch.clientY - rect.top
-            };
         }
 
         function clearSignature() {
@@ -1556,109 +1595,50 @@
             hasSignature = false;
         }
 
-        // Save Data Functions
-        function savePersonalDetails() {
-            const data = {
-                fullName: document.getElementById('fullName').value.trim(),
-                nationalId: document.getElementById('nationalId').value.trim(),
-                country: document.getElementById('country').value,
-                phoneNumber: document.getElementById('phoneNumber').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                dob: document.getElementById('dob').value,
-                maritalStatus: document.getElementById('maritalStatus').value,
-                altPhoneNumber: document.getElementById('altPhoneNumber').value.trim()
-            };
-            
-            localStorage.setItem('swiftloan_personal_details', JSON.stringify(data));
-        }
-
-        function saveOtherDetails() {
-            const data = {
-                employmentStatus: document.getElementById('employmentStatus').value,
-                monthlyIncome: document.getElementById('monthlyIncome').value,
-                loanAmount: document.getElementById('loanAmount').value,
-                county: document.getElementById('county').value,
-                cityTown: document.getElementById('cityTown').value.trim(),
-                repaymentPeriod: document.getElementById('repaymentPeriod').value,
-                postalCode: document.getElementById('postalCode').value.trim(),
-                postalAddress: document.getElementById('postalAddress').value.trim(),
-                employmentLength: document.getElementById('employmentLength').value,
-                dependents: document.getElementById('dependents').value,
-                loanPurpose: document.getElementById('loanPurpose').value.trim(),
-                applicationComplete: false
-            };
-            
-            localStorage.setItem('swiftloan_other_details', JSON.stringify(data));
-        }
-
-        // View Saved Data with Beautiful Modal
-        function viewSavedData() {
-            const personal = localStorage.getItem('swiftloan_personal_details');
-            const other = localStorage.getItem('swiftloan_other_details');
-            
-            if (!personal && !other) {
-                showToast('No saved information found', 'error');
-                return;
-            }
+        // Show Saved Data
+        function showSavedData() {
+            const pData = localStorage.getItem('swiftloan_personal_details');
+            const oData = localStorage.getItem('swiftloan_other_details');
             
             let content = '';
             
-            if (personal) {
-                const pData = JSON.parse(personal);
+            if (pData) {
+                const p = JSON.parse(pData);
                 content += `
                     <div class="data-section">
-                        <div class="data-section-title">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                            </svg>
-                            Personal Details
-                        </div>
+                        <div class="data-section-title">Personal Details</div>
                         <div class="data-item">
                             <span class="data-label">Name:</span>
-                            <span class="data-value">${pData.fullName}</span>
+                            <span class="data-value">${p.fullName}</span>
                         </div>
                         <div class="data-item">
-                            <span class="data-label">ID Number:</span>
-                            <span class="data-value">${pData.nationalId}</span>
+                            <span class="data-label">National ID:</span>
+                            <span class="data-value">${p.nationalId}</span>
                         </div>
                         <div class="data-item">
                             <span class="data-label">Phone:</span>
-                            <span class="data-value">${pData.phoneNumber}</span>
+                            <span class="data-value">${p.phoneNumber}</span>
                         </div>
                         <div class="data-item">
                             <span class="data-label">Email:</span>
-                            <span class="data-value">${pData.email}</span>
+                            <span class="data-value">${p.email}</span>
                         </div>
                     </div>
                 `;
             }
             
-            if (other) {
-                const oData = JSON.parse(other);
+            if (oData) {
+                const oDataParsed = JSON.parse(oData);
                 content += `
                     <div class="data-section">
-                        <div class="data-section-title">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
-                                <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/>
-                            </svg>
-                            Other Details
-                        </div>
-                        <div class="data-item">
-                            <span class="data-label">Employment:</span>
-                            <span class="data-value">${oData.employmentStatus}</span>
-                        </div>
-                        <div class="data-item">
-                            <span class="data-label">Monthly Income:</span>
-                            <span class="data-value">KSh ${oData.monthlyIncome}</span>
-                        </div>
+                        <div class="data-section-title">Loan Details</div>
                         <div class="data-item">
                             <span class="data-label">Loan Amount:</span>
-                            <span class="data-value">KSh ${oData.loanAmount}</span>
+                            <span class="data-value">KSh ${oDataParsed.loanAmount}</span>
                         </div>
                         <div class="data-item">
                             <span class="data-label">County:</span>
-                            <span class="data-value">${oData.county}</span>
+                            <span class="data-value">${oDataParsed.county}</span>
                         </div>
                     </div>
                 `;
@@ -1672,7 +1652,83 @@
             document.getElementById('savedDataModal').classList.remove('active');
         }
 
-        // Submit Application
+        // CREDIT SCORING SYSTEM - Calculate credit score based on multiple factors
+        function calculateCreditScore(personalData, otherData) {
+            let score = 0;
+            const reasons = [];
+            
+            // 1. Income Assessment (40 points max)
+            const monthlyIncome = otherData.monthlyIncome;
+            const incomeMin = parseInt(monthlyIncome.split('-')[0].replace(/\D/g, ''));
+            
+            if (incomeMin >= 50000) {
+                score += 40;
+            } else if (incomeMin >= 30000) {
+                score += 30;
+            } else if (incomeMin >= 15000) {
+                score += 20;
+            } else if (incomeMin >= 10000) {
+                score += 10;
+            } else {
+                reasons.push('Income too low');
+            }
+            
+            // 2. Employment Status (25 points max)
+            const employment = otherData.employmentStatus;
+            if (employment === 'Employed') {
+                score += 25;
+            } else if (employment === 'Self-Employed') {
+                score += 20;
+            } else if (employment === 'Business Owner') {
+                score += 22;
+            } else {
+                score += 5;
+                reasons.push('Unstable employment');
+            }
+            
+            // 3. Loan Amount vs Income Ratio (20 points max)
+            const loanAmount = parseInt(otherData.loanAmount);
+            const debtToIncomeRatio = loanAmount / incomeMin;
+            
+            if (debtToIncomeRatio <= 1) {
+                score += 20;
+            } else if (debtToIncomeRatio <= 2) {
+                score += 15;
+            } else if (debtToIncomeRatio <= 3) {
+                score += 10;
+            } else {
+                score += 5;
+                reasons.push('Loan amount too high for income');
+            }
+            
+            // 4. Age Factor (10 points max)
+            const dob = new Date(personalData.dob);
+            const age = new Date().getFullYear() - dob.getFullYear();
+            
+            if (age >= 25 && age <= 55) {
+                score += 10;
+            } else if (age >= 21 && age < 25) {
+                score += 7;
+            } else if (age > 55 && age <= 65) {
+                score += 8;
+            } else {
+                score += 3;
+            }
+            
+            // 5. Repayment Period (5 points max)
+            const period = parseInt(otherData.repaymentPeriod);
+            if (period >= 3 && period <= 6) {
+                score += 5;
+            } else if (period > 6 && period <= 12) {
+                score += 3;
+            } else {
+                score += 2;
+            }
+            
+            return { score, reasons };
+        }
+        
+        // Submit Application with Enhanced Credit Scoring
         function submitApplication() {
             const consent1 = document.getElementById('consent1').checked;
             const consent2 = document.getElementById('consent2').checked;
@@ -1692,6 +1748,9 @@
             const signatureData = canvas.toDataURL();
             localStorage.setItem('swiftloan_signature', signatureData);
             
+            // Record application timestamp
+            localStorage.setItem('swiftloan_last_application', new Date().toISOString());
+            
             document.getElementById('processingModal').classList.add('active');
             
             let stepIndex = 1;
@@ -1708,16 +1767,23 @@
                     stepIndex++;
                 } else {
                     clearInterval(interval);
+                    
+                    const personalDetails = JSON.parse(localStorage.getItem('swiftloan_personal_details'));
                     const otherDetails = JSON.parse(localStorage.getItem('swiftloan_other_details'));
-                    const monthlyIncome = otherDetails.monthlyIncome;
-                    const incomeMin = parseInt(monthlyIncome.split('-')[0].replace(/\D/g, ''));
-
+                    
+                    // Calculate credit score
+                    const creditResult = calculateCreditScore(personalDetails, otherDetails);
+                    
                     document.getElementById('processingModal').classList.remove('active');
 
-                    if (incomeMin < 2000) {
+                    // Stricter approval: Need score >= 60 to qualify
+                    if (creditResult.score < 60) {
+                        // Store rejection reason
+                        localStorage.setItem('swiftloan_rejection_reason', JSON.stringify(creditResult.reasons));
                         document.getElementById('notQualifiedModal').classList.add('active');
                     } else {
                         otherDetails.applicationComplete = true;
+                        otherDetails.creditScore = creditResult.score;
                         localStorage.setItem('swiftloan_other_details', JSON.stringify(otherDetails));
 
                         document.getElementById('successModal').classList.add('active');
@@ -1735,4 +1801,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
