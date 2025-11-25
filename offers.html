@@ -27,6 +27,7 @@
             --success-light: #D1FAE5;
             --warning-orange: #F59E0B;
             --border-light: #E5E7EB;
+            --error-red: #EF4444;
         }
 
         body {
@@ -36,20 +37,20 @@
             background: var(--light-gray);
         }
 
-        /* Notification Ticker */
+        /* Notification Ticker - Bottom Left */
         .notification-ticker {
             position: fixed;
-            top: 80px;
-            right: 20px;
+            bottom: 20px;
+            left: 20px;
             background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-            border-left: 4px solid var(--success-green);
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-left: 3px solid var(--success-green);
             z-index: 500;
-            max-width: 350px;
+            max-width: 280px;
             opacity: 0;
-            transform: translateX(400px);
+            transform: translateX(-100%);
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
@@ -61,48 +62,51 @@
         .notification-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 0.5rem;
+            gap: 8px;
+            margin-bottom: 0.3rem;
         }
 
         .notification-icon {
-            width: 35px;
-            height: 35px;
+            width: 28px;
+            height: 28px;
             background: linear-gradient(135deg, var(--success-green) 0%, #20a037 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.1rem;
+            font-size: 0.85rem;
         }
 
         .notification-title {
             font-weight: 700;
             color: var(--success-green);
-            font-size: 0.9rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .notification-content {
-            padding-left: 45px;
+            padding-left: 36px;
         }
 
         .notification-name {
             font-weight: 600;
             color: var(--primary-blue);
-            margin-bottom: 0.2rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.15rem;
         }
 
         .notification-details {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #666;
-            line-height: 1.6;
+            line-height: 1.4;
         }
 
         .notification-time {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: #999;
-            margin-top: 0.3rem;
+            margin-top: 0.2rem;
         }
 
         /* Header */
@@ -273,136 +277,286 @@
             color: #666;
         }
 
-        /* Applicant Details */
+        /* Enhanced Applicant Details */
         .details-box {
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             margin-bottom: 2rem;
-            border: 1px solid rgba(255, 107, 0, 0.1);
+            border: 1px solid rgba(30, 58, 95, 0.1);
+            overflow: hidden;
         }
 
-        .details-box h3 {
-            color: var(--primary-blue);
-            margin-bottom: 1.5rem;
+        .details-header {
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #2a4a6f 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .details-header:hover {
+            background: linear-gradient(135deg, #2a4a6f 0%, var(--primary-blue) 100%);
+        }
+
+        .details-header h3 {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
+            gap: 12px;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
-        .details-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-orange) 0%, #e65f00 100%);
+        .details-header-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 140, 66, 0.25);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: rgba(255,255,255,0.15);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-icon:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .details-content {
+            padding: 1.5rem;
+            max-height: 600px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: linear-gradient(180deg, rgba(255,140,66,0.03) 0%, transparent 100%);
+        }
+
+        .details-box.collapsed .details-content {
+            max-height: 0;
+            padding: 0 1.5rem;
         }
 
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
         .detail-item {
-            padding: 1.2rem;
+            padding: 1rem;
             background: var(--white);
-            border-radius: 10px;
+            border-radius: 12px;
             border-left: 4px solid var(--primary-orange);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(255,140,66,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
         }
 
         .detail-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,140,66,0.15);
         }
 
         .detail-label {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-size: 0.7rem;
+            color: #888;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
         }
 
         .detail-value {
             font-weight: 700;
             color: var(--text-dark);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
         }
 
-        /* Loan Offers */
+        /* Loading Animation */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            padding: 3rem;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .loading-dots span {
+            width: 14px;
+            height: 14px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+            animation: loadingBounce 1.4s ease-in-out infinite;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: 0s; }
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes loadingBounce {
+            0%, 80%, 100% {
+                transform: scale(0.6);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .loading-text {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Loan Offers Grid */
         .offers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
 
-        .offer-card {
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            animation: slideUp 0.6s ease;
-            position: relative;
-            border: 2px solid transparent;
+        .offers-grid.hidden {
+            display: none;
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        /* Enhanced Offer Card */
+        .offer-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fc 100%);
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            border: 2px solid transparent;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+        }
+
+        .offer-card.animate-in {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
         .offer-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.2);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(255, 140, 66, 0.25);
             border-color: var(--primary-orange);
+        }
+
+        .offer-card.not-eligible {
+            opacity: 0.75;
+        }
+
+        .offer-card.not-eligible:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: #ccc;
+        }
+
+        .offer-card-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #2a4a6f 100%);
+            padding: 1.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-card.not-eligible .offer-card-header {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+        }
+
+        .offer-card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
         }
 
         .offer-badge {
             position: absolute;
-            top: -10px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: linear-gradient(135deg, var(--primary-orange) 0%, #e65f00 100%);
             color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(255, 107, 0, 0.3);
+            padding: 0.4rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 10px rgba(255, 107, 0, 0.4);
         }
 
-        .offer-card h3 {
-            color: var(--primary-blue);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+        .offer-card.not-eligible .offer-badge {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .offer-amount {
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-top: 0.5rem;
         }
 
-        .offer-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary-orange) 0%, #e65f00 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .offer-amount-currency {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .offer-card-body {
+            padding: 1.5rem 2rem 2rem;
         }
 
         .offer-details {
@@ -412,8 +566,8 @@
         .offer-row {
             display: flex;
             justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e8e8e8;
+            padding: 0.9rem 0;
+            border-bottom: 1px dashed #e8e8e8;
             align-items: center;
         }
 
@@ -426,26 +580,36 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .offer-label svg {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             fill: var(--primary-orange);
         }
 
         .offer-value {
             font-weight: 700;
             color: var(--text-dark);
-            font-size: 1.05rem;
+            font-size: 1rem;
+        }
+
+        .offer-value.highlight {
+            color: var(--success-green);
+            font-size: 1.1rem;
+        }
+
+        .offer-value.total {
+            color: var(--primary-orange);
+            font-size: 1.1rem;
         }
 
         .info-icon {
             color: var(--primary-orange);
             cursor: help;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             transition: 0.3s;
         }
 
@@ -453,85 +617,143 @@
             transform: scale(1.2);
         }
 
-        .btn {
-            width: 100%;
-            padding: 1.2rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-select {
-            background: linear-gradient(135deg, var(--primary-orange) 0%, #e65f00 100%);
-            color: var(--white);
-            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
-        }
-
-        .btn-select:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
-        }
-
-        /* Pie Chart */
+        /* Professional Pie Chart */
         .chart-container {
             margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: var(--white);
-            border-radius: 12px;
+            padding: 1.2rem;
+            background: linear-gradient(145deg, #f8f9fc 0%, #fff 100%);
+            border-radius: 15px;
             border: 1px solid #e8e8e8;
         }
 
         .chart-title {
             text-align: center;
             color: var(--primary-blue);
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 1rem;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .pie-chart-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .pie-chart-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
         }
 
         .pie-chart {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
+            transform: rotate(-90deg);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .pie-chart circle {
+            transition: all 0.8s ease;
+        }
+
+        .pie-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .pie-center-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .pie-center-label {
+            font-size: 0.6rem;
+            color: #888;
+            text-transform: uppercase;
         }
 
         .chart-legend {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
+            gap: 0.6rem;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
+            gap: 8px;
+            font-size: 0.8rem;
         }
 
         .legend-color {
-            width: 20px;
-            height: 20px;
+            width: 14px;
+            height: 14px;
             border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .legend-label {
             color: #666;
-            flex: 1;
         }
 
         .legend-value {
             font-weight: 700;
             color: var(--text-dark);
+            margin-left: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 1.1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-select {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #e65f00 100%);
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.35);
+        }
+
+        .btn-select:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.45);
+        }
+
+        .btn-disabled {
+            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+            color: var(--white);
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .not-eligible-text {
+            text-align: center;
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            font-style: italic;
         }
 
         /* Modal */
@@ -658,23 +880,81 @@
             background: #5a6268;
         }
 
-        /* Processing Modal */
-        .processing-container {
+        /* Processing Modal - Big Colorless */
+        .processing-modal-content {
+            background: var(--white);
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
+            animation: modalZoomIn 0.3s ease;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
         }
 
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255,107,0,0.2);
-            border-top-color: var(--primary-orange);
+        .processing-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--light-gray) 0%, #e8edf3 100%);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .processing-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--primary-blue);
+            animation: walletPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes walletPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .processing-title {
+            color: var(--primary-blue);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .processing-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .processing-dots span {
+            width: 16px;
+            height: 16px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            animation: processingBounce 1.4s ease-in-out infinite;
+        }
+
+        .processing-dots span:nth-child(1) { animation-delay: 0s; }
+        .processing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .processing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes processingBounce {
+            0%, 80%, 100% {
+                transform: scale(0.6);
+                opacity: 0.4;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .processing-text {
+            color: #888;
+            font-size: 1rem;
         }
 
         /* Footer */
@@ -741,19 +1021,39 @@
             }
 
             .notification-ticker {
-                right: 10px;
                 left: 10px;
+                right: 10px;
                 max-width: calc(100% - 20px);
             }
 
             .pie-chart-wrapper {
                 flex-direction: column;
             }
+
+            .offer-amount {
+                font-size: 2rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
     
+    <!-- Notification Ticker -->
+    <div class="notification-ticker" id="notificationTicker">
+        <div class="notification-header">
+            <div class="notification-icon">✓</div>
+            <div class="notification-title">Loan Approved</div>
+        </div>
+        <div class="notification-content">
+            <div class="notification-name" id="notifName">John M***</div>
+            <div class="notification-details" id="notifDetails">Received KES 20,000</div>
+            <div class="notification-time" id="notifTime">2 minutes ago</div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header>
@@ -797,52 +1097,55 @@
             <p class="page-description">Select the loan offer that best suits your needs</p>
         </div>
 
-        <!-- Applicant Details -->
-        <div class="details-box">
-            <h3>
-                <div class="details-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                </div>
-                Applicant Details
-            </h3>
-            <div class="details-grid" id="applicantDetails">
-                <!-- Will be populated by JavaScript -->
+        <!-- Enhanced Applicant Details -->
+        <div class="details-box" id="detailsBox">
+            <div class="details-header" onclick="toggleDetails()">
+                <h3>
+                    <div class="details-header-icon">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    Applicant Details
+                </h3>
+                <span class="toggle-icon" id="toggleIcon">+</span>
             </div>
+            <div class="details-content">
+                <div class="details-grid" id="applicantDetails">
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Animation -->
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="loading-text">Loading personalized offers...</div>
         </div>
 
         <!-- Loan Offers Grid -->
-        <div class="offers-grid" id="offersGrid">
-            <!-- Will be populated by JavaScript -->
+        <div class="offers-grid hidden" id="offersGrid">
         </div>
     </div>
 
-    <!-- Fee Explanation Modal -->
+    <!-- Fee Information Modal -->
     <div class="modal" id="feeModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Why Processing Fee?</h3>
+                <h3 class="modal-title">Processing Fee Information</h3>
                 <button class="close-modal" onclick="closeFeeModal()">&times;</button>
             </div>
-            <p style="line-height: 1.8; color: #666;">
-                Our <strong>0.85% processing fee</strong> is one of the lowest in the market and covers essential administrative costs to ensure the security of your loan.
-                <br><br>
-                <strong>Example:</strong> For a KSh 50,000 loan, you pay only KSh 425 as processing fee.
-                <br><br>
-                <strong>What the fee covers:</strong>
-            </p>
-            <ul style="margin: 1rem 0; padding-left: 2rem; color: #666; line-height: 2;">
-                <li>Comprehensive credit verification and assessment</li>
-                <li>Fraud detection and prevention systems</li>
-                <li>Document processing and verification</li>
-                <li>Bank-grade 256-bit encryption security</li>
-                <li>Instant fund disbursement to your account</li>
+            <p style="margin-bottom: 1rem; color: #666;">Our processing fee is calculated at <strong>1.29%</strong> of your approved loan amount.</p>
+            <p style="color: #666;">Repayment period is based on your loan amount:</p>
+            <ul style="margin: 1rem 0; padding-left: 1.5rem; color: #666;">
+                <li>KES 10,000: 1 Month repayment</li>
+                <li>KES 20,000: 2 Months repayment</li>
+                <li>KES 30,000: 3 Months repayment</li>
             </ul>
-            <p style="line-height: 1.8; color: #666;">
-                <strong>Why we keep it low:</strong> We believe in fair, transparent lending. Our 0.85% fee is significantly lower than the industry average of 2-5%, making loans more affordable for you.
-            </p>
-            <button class="btn btn-select" onclick="closeFeeModal()">I Understand</button>
+            <button class="btn btn-select" onclick="closeFeeModal()">Close</button>
         </div>
     </div>
 
@@ -853,42 +1156,90 @@
                 <h3 class="modal-title">Confirm Your Loan Selection</h3>
                 <button class="close-modal" onclick="closeConfirmationModal()">&times;</button>
             </div>
-            
             <div class="confirmation-details" id="confirmationDetails">
-                <!-- Will be populated by JavaScript -->
             </div>
-
             <div class="checkbox-container">
                 <input type="checkbox" id="confirmCheckbox">
-                <label for="confirmCheckbox">I confirm that I have reviewed all loan details and agree to proceed with this loan offer.</label>
+                <label for="confirmCheckbox">I confirm that I understand the loan terms and agree to proceed with this offer.</label>
             </div>
-
             <div class="modal-buttons">
                 <button class="btn btn-cancel" onclick="closeConfirmationModal()">Cancel</button>
-                <button class="btn btn-confirm" onclick="confirmLoanSelection()">Confirm</button>
+                <button class="btn btn-confirm" onclick="confirmLoanSelection()">Confirm & Continue</button>
             </div>
         </div>
     </div>
 
-    <!-- Processing Modal -->
+    <!-- Processing Modal - Big Colorless with Validating Wallet -->
     <div class="modal" id="processingModal">
-        <div class="modal-content">
-            <div class="processing-container">
-                <div class="spinner"></div>
-                <h3 style="color: var(--primary-blue); margin: 1.5rem 0;">Processing Your Request...</h3>
-                <p style="color: #666;">Please wait while we finalize your loan details</p>
+        <div class="processing-modal-content">
+            <div class="processing-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                </svg>
             </div>
+            <h3 class="processing-title">Validating wallet</h3>
+            <div class="processing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p class="processing-text">Please wait while we verify your details...</p>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">Our Story</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="eligibility.html">Apply for Loan</a></li>
+                        <li><a href="index.html#calculator">Loan Calculator</a></li>
+                        <li><a href="#">Loan Repayment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html#faq">FAQs</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
             <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed by Central Bank of Kenya.</p>
         </div>
     </footer>
 
     <script>
+        // Toggle Applicant Details
+        function toggleDetails() {
+            const detailsBox = document.getElementById('detailsBox');
+            const toggleIcon = document.getElementById('toggleIcon');
+            detailsBox.classList.toggle('collapsed');
+            
+            if (detailsBox.classList.contains('collapsed')) {
+                toggleIcon.textContent = '+';
+            } else {
+                toggleIcon.textContent = '-';
+            }
+        }
+
+        // Start collapsed
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('detailsBox').classList.add('collapsed');
+            document.getElementById('toggleIcon').textContent = '+';
+        });
+
         // Sidebar Toggle
         const hamburger = document.getElementById('hamburger');
         const sidebar = document.getElementById('sidebar');
@@ -896,7 +1247,6 @@
         const closeSidebarBtn = document.getElementById('closeSidebar');
 
         function toggleSidebar() {
-            hamburger.classList.toggle('active');
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
         }
@@ -907,224 +1257,343 @@
 
         let selectedOffer = null;
 
-        // Load applicant details and generate offers
-        window.addEventListener('load', function() {
-            const personal = localStorage.getItem('swiftloan_personal_details');
-            const other = localStorage.getItem('swiftloan_other_details');
+        // Fake notification data
+        const fakeNotifications = [
+            { name: "James M***", amount: "30,000", time: "Just now" },
+            { name: "Faith W***", amount: "20,000", time: "1 minute ago" },
+            { name: "Peter K***", amount: "10,000", time: "2 minutes ago" },
+            { name: "Grace N***", amount: "30,000", time: "3 minutes ago" },
+            { name: "David O***", amount: "20,000", time: "5 minutes ago" },
+            { name: "Mary A***", amount: "10,000", time: "7 minutes ago" },
+            { name: "Joseph M***", amount: "30,000", time: "10 minutes ago" },
+            { name: "Ann K***", amount: "20,000", time: "12 minutes ago" }
+        ];
 
-            if (!personal || !other) {
+        let notifIndex = 0;
+
+        function showNotification() {
+            const ticker = document.getElementById('notificationTicker');
+            const notif = fakeNotifications[notifIndex];
+            
+            document.getElementById('notifName').textContent = notif.name;
+            document.getElementById('notifDetails').textContent = `Received KES ${notif.amount}`;
+            document.getElementById('notifTime').textContent = notif.time;
+            
+            ticker.classList.add('show');
+            
+            setTimeout(() => {
+                ticker.classList.remove('show');
+                notifIndex = (notifIndex + 1) % fakeNotifications.length;
+            }, 4000);
+        }
+
+        setInterval(showNotification, 6000);
+        setTimeout(showNotification, 2000);
+
+        // Load application data and generate offers
+        window.addEventListener('load', function() {
+            const personalDetails = localStorage.getItem('swiftloan_personal_details');
+            const otherDetails = localStorage.getItem('swiftloan_other_details');
+            
+            if (!personalDetails || !otherDetails) {
+                alert('No application data found. Redirecting to application page...');
                 window.location.href = 'eligibility.html';
                 return;
             }
-
-            const personalData = JSON.parse(personal);
-            const otherData = JSON.parse(other);
-
-            // Display applicant details
-            const detailsHTML = `
-                <div class="detail-item">
-                    <div class="detail-label">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="#FF6B00">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/>
-                        </svg>
-                        Full Name
-                    </div>
-                    <div class="detail-value">${personalData.fullName}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="#FF6B00">
-                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                        </svg>
-                        Phone
-                    </div>
-                    <div class="detail-value">${personalData.phoneNumber}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="#FF6B00">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                        Email
-                    </div>
-                    <div class="detail-value">${personalData.email}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="#FF6B00">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        County
-                    </div>
-                    <div class="detail-value">${otherData.county}</div>
-                </div>
-            `;
-
-            document.getElementById('applicantDetails').innerHTML = detailsHTML;
-
-            // Generate loan offers
-            generateLoanOffers(otherData);
+            
+            const parsedPersonal = JSON.parse(personalDetails);
+            const parsedOther = JSON.parse(otherDetails);
+            
+            displayApplicantDetails(parsedPersonal, parsedOther);
+            
+            // Show loading for 5 seconds before showing offers
+            setTimeout(() => {
+                document.getElementById('loadingContainer').style.display = 'none';
+                document.getElementById('offersGrid').classList.remove('hidden');
+                generateOffers(parsedPersonal, parsedOther);
+            }, 5000);
         });
 
-        function generateLoanOffers(otherDetails) {
-            const requestedAmount = parseInt(otherDetails.loanAmount);
-            const monthlyIncome = otherDetails.monthlyIncome;
-            const repaymentPeriod = parseInt(otherDetails.repaymentPeriod);
+        function displayApplicantDetails(personal, other) {
+            const detailsHTML = `
+                <div class="detail-item">
+                    <div class="detail-label">Full Name</div>
+                    <div class="detail-value">${personal.fullName}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">ID Number</div>
+                    <div class="detail-value">${personal.nationalId}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Phone</div>
+                    <div class="detail-value">${personal.phoneNumber}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Monthly Income</div>
+                    <div class="detail-value">${other.monthlyIncome}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Employment</div>
+                    <div class="detail-value">${other.employmentStatus}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Loan Purpose</div>
+                    <div class="detail-value">${other.loanPurpose}</div>
+                </div>
+            `;
             
-            // Generate 3 loan offers based on requested amount
-            const offers = [];
-            
-            // Offer 1: Requested amount
-            offers.push(generateOffer(requestedAmount, repaymentPeriod, 'Requested'));
-            
-            // Offer 2: 50% more (if within limits)
-            const higherAmount = Math.min(requestedAmount * 1.5, 100000);
-            if (higherAmount > requestedAmount) {
-                offers.push(generateOffer(higherAmount, repaymentPeriod, 'Premium'));
+            document.getElementById('applicantDetails').innerHTML = detailsHTML;
+        }
+
+        let applicantIdNumber = '';
+
+        function generateOffers(personal, other) {
+            applicantIdNumber = personal.nationalId;
+            const monthlyIncome = other.monthlyIncome;
+            const employmentStatus = other.employmentStatus;
+            const purposeOfLoan = other.loanPurpose;
+            const requestedAmount = parseInt(other.loanAmount);
+
+            let incomeValue = 0;
+            if (monthlyIncome.includes('Below')) {
+                incomeValue = 5000;
+            } else if (monthlyIncome.includes('-')) {
+                const parts = monthlyIncome.split('-');
+                incomeValue = parseInt(parts[0].replace(/\D/g, ''));
+            } else if (monthlyIncome.includes('Above')) {
+                incomeValue = 100000;
             }
-            
-            // Offer 3: Lower amount
-            const lowerAmount = Math.max(requestedAmount * 0.7, 7000);
-            if (lowerAmount < requestedAmount) {
-                offers.push(generateOffer(lowerAmount, repaymentPeriod, 'Starter'));
+
+            let qualifiedLoan;
+            if (incomeValue >= 10000 && incomeValue <= 19999) {
+                qualifiedLoan = 10000;
+            } else if (incomeValue >= 20000 && incomeValue <= 34999) {
+                qualifiedLoan = 20000;
+            } else if (incomeValue >= 35000) {
+                qualifiedLoan = 30000;
+            } else {
+                qualifiedLoan = 10000;
+            }
+
+            if (employmentStatus === 'Unemployed') {
+                qualifiedLoan = 10000;
+            }
+
+            let reductionReason = '';
+            if (purposeOfLoan.toLowerCase().includes('personal')) {
+                if (qualifiedLoan === 30000) {
+                    qualifiedLoan = 20000;
+                    reductionReason = 'Reduced due to personal use purpose';
+                } else if (qualifiedLoan === 20000) {
+                    qualifiedLoan = 10000;
+                    reductionReason = 'Reduced due to personal use purpose';
+                }
+            } else if (purposeOfLoan.toLowerCase().includes('betting')) {
+                alert('Sorry, we cannot approve loans for betting purposes.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            let approvedAmount;
+            if (requestedAmount > qualifiedLoan) {
+                approvedAmount = qualifiedLoan;
+            } else {
+                approvedAmount = requestedAmount;
+            }
+
+            if (approvedAmount > 20000) {
+                approvedAmount = 30000;
+            } else if (approvedAmount > 10000) {
+                approvedAmount = 20000;
+            } else {
+                approvedAmount = 10000;
+            }
+
+            let months;
+            if (approvedAmount === 10000) {
+                months = 1;
+            } else if (approvedAmount === 20000) {
+                months = 2;
+            } else {
+                months = 3;
+            }
+
+            let fee = approvedAmount * 0.0129;
+            if (months === 2) {
+                fee *= 1.10;
+            } else if (months === 3) {
+                fee *= 1.20;
+            }
+
+            let totalRepayment = approvedAmount + fee;
+            let monthlyPayment = totalRepayment / months;
+
+            const offers = [];
+
+            const primaryOffer = {
+                type: 'Approved',
+                approvedAmount: approvedAmount,
+                fee: Math.round(fee),
+                totalRepayment: Math.round(totalRepayment),
+                monthlyPayment: Math.round(monthlyPayment),
+                months: months,
+                reductionReason: reductionReason,
+                eligible: true
+            };
+            offers.push(primaryOffer);
+
+            let nextTier = approvedAmount === 10000 ? 20000 : (approvedAmount === 20000 ? 30000 : null);
+            if (nextTier) {
+                let nextMonths = nextTier === 20000 ? 2 : 3;
+                let nextFee = nextTier * 0.0129;
+                if (nextMonths === 2) nextFee *= 1.10;
+                if (nextMonths === 3) nextFee *= 1.20;
+                const nextTotal = nextTier + nextFee;
+                const nextMonthly = nextTotal / nextMonths;
+
+                offers.push({
+                    type: 'Not Yet Eligible',
+                    approvedAmount: nextTier,
+                    fee: Math.round(nextFee),
+                    totalRepayment: Math.round(nextTotal),
+                    monthlyPayment: Math.round(nextMonthly),
+                    months: nextMonths,
+                    reductionReason: '',
+                    eligible: false
+                });
             }
 
             displayOffers(offers);
         }
 
-        function generateOffer(principal, period, type) {
-            const monthlyRate = 0.015; // 1.5% monthly interest
-            const fee = Math.round(principal * 0.0085); // 0.85% processing fee (KSh 50,000 = KSh 425)
-            const amountReceived = principal - fee;
-            const totalRepayment = Math.round(principal * (1 + (monthlyRate * period)));
-            const monthlyPayment = Math.round(totalRepayment / period);
-            
-            return {
-                type: type,
-                principal: principal,
-                fee: fee,
-                amountReceived: amountReceived,
-                monthlyRate: 1.5,
-                period: period,
-                totalRepayment: totalRepayment,
-                monthlyPayment: monthlyPayment
-            };
-        }
-
         function displayOffers(offers) {
             const offersHTML = offers.map((offer, index) => {
-                const percentageReceived = ((offer.amountReceived / offer.principal) * 100).toFixed(1);
-                const percentageFee = ((offer.fee / offer.principal) * 100).toFixed(1);
+                const principalPercent = (offer.approvedAmount / offer.totalRepayment * 100).toFixed(0);
+                const feePercent = (offer.fee / offer.totalRepayment * 100).toFixed(1);
+                const strokeDasharray = (offer.approvedAmount / offer.totalRepayment) * 314.16;
                 
                 return `
-                <div class="offer-card" style="animation-delay: ${index * 0.15}s;">
-                    ${index === 0 ? '<div class="offer-badge">Recommended</div>' : ''}
-                    <h3>
-                        <div class="offer-icon">
-                            <svg viewBox="0 0 24 24" width="26" height="26" fill="white">
-                                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
-                            </svg>
-                        </div>
-                        KSh ${offer.principal.toLocaleString()}
-                    </h3>
-                    
-                    <div class="offer-details">
-                        <div class="offer-row">
-                            <span class="offer-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/>
-                                </svg>
-                                Loan Amount:
-                            </span>
-                            <span class="offer-value">KSh ${offer.principal.toLocaleString()}</span>
-                        </div>
-                        <div class="offer-row">
-                            <span class="offer-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                                </svg>
-                                Processing Fee: 
-                                <span class="info-icon" onclick="showFeeModal()">ℹ️</span>
-                            </span>
-                            <span class="offer-value">KSh ${offer.fee.toLocaleString()}</span>
-                        </div>
-                        <div class="offer-row">
-                            <span class="offer-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-                                </svg>
-                                Monthly Rate:
-                            </span>
-                            <span class="offer-value">${offer.monthlyRate}%</span>
-                        </div>
-                        <div class="offer-row">
-                            <span class="offer-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
-                                </svg>
-                                Repayment Period:
-                            </span>
-                            <span class="offer-value">${offer.period} month(s)</span>
-                        </div>
-                        <div class="offer-row">
-                            <span class="offer-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                You'll Receive:
-                            </span>
-                            <span class="offer-value" style="color: var(--success-green);">KSh ${offer.amountReceived.toLocaleString()}</span>
-                        </div>
-                        <div class="offer-row">
-                            <span class="offer-label">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3z"/>
-                                </svg>
-                                Monthly Payment:
-                            </span>
-                            <span class="offer-value">KSh ${offer.monthlyPayment.toLocaleString()}</span>
+                <div class="offer-card ${!offer.eligible ? 'not-eligible' : ''}" style="animation-delay: ${index * 0.2}s;">
+                    <div class="offer-card-header">
+                        <div class="offer-badge">${offer.eligible ? 'Recommended' : 'Not Yet Eligible'}</div>
+                        <div class="offer-amount">
+                            <span class="offer-amount-currency">KES</span>
+                            ${offer.approvedAmount.toLocaleString()}
                         </div>
                     </div>
+                    
+                    <div class="offer-card-body">
+                        ${offer.reductionReason ? `<p style="color: var(--warning-orange); margin-bottom: 1rem; font-size: 0.85rem; padding: 0.5rem; background: rgba(245,158,11,0.1); border-radius: 8px;">⚠️ ${offer.reductionReason}</p>` : ''}
+                        
+                        <div class="offer-details">
+                            <div class="offer-row">
+                                <span class="offer-label">
+                                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 12h4v2H4v-2zm10 6H4v-2h10v2zm6 0h-4v-2h4v2zm0-4H10v-2h10v2z"/></svg>
+                                    ID Number
+                                </span>
+                                <span class="offer-value">${applicantIdNumber}</span>
+                            </div>
+                            <div class="offer-row">
+                                <span class="offer-label">
+                                    <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+                                    Loan Amount
+                                </span>
+                                <span class="offer-value">KES ${offer.approvedAmount.toLocaleString()}</span>
+                            </div>
+                            <div class="offer-row">
+                                <span class="offer-label">
+                                    <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>
+                                    Repayment Period
+                                </span>
+                                <span class="offer-value">${offer.months} month${offer.months > 1 ? 's' : ''}</span>
+                            </div>
+                            <div class="offer-row">
+                                <span class="offer-label">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                                    Processing Fee
+                                    <span class="info-icon" onclick="showFeeModal()">ℹ️</span>
+                                </span>
+                                <span class="offer-value">KES ${offer.fee.toLocaleString()}</span>
+                            </div>
+                            <div class="offer-row">
+                                <span class="offer-label">
+                                    <svg viewBox="0 0 24 24"><path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3z"/></svg>
+                                    Total Repayment
+                                </span>
+                                <span class="offer-value total">KES ${offer.totalRepayment.toLocaleString()}</span>
+                            </div>
+                            <div class="offer-row">
+                                <span class="offer-label">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    Monthly Payment
+                                </span>
+                                <span class="offer-value highlight">KES ${offer.monthlyPayment.toLocaleString()}</span>
+                            </div>
+                        </div>
 
-                    <div class="chart-container">
-                        <div class="chart-title">Loan Breakdown</div>
-                        <div class="pie-chart-wrapper">
-                            <svg class="pie-chart" viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#e0e0e0" stroke-width="20"/>
-                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--primary-orange)" stroke-width="20"
-                                    stroke-dasharray="${(offer.amountReceived / offer.principal) * 251.2} 251.2"
-                                    transform="rotate(-90 50 50)"/>
-                                <text x="50" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--primary-blue)">
-                                    ${percentageReceived}%
-                                </text>
-                            </svg>
-                            <div class="chart-legend">
-                                <div class="legend-item">
-                                    <div class="legend-color" style="background: var(--primary-orange);"></div>
-                                    <span class="legend-label">You Receive:</span>
-                                    <span class="legend-value">KSh ${offer.amountReceived.toLocaleString()}</span>
+                        <div class="chart-container">
+                            <div class="chart-title">Repayment Breakdown</div>
+                            <div class="pie-chart-wrapper">
+                                <div class="pie-chart-container">
+                                    <svg class="pie-chart" viewBox="0 0 100 100">
+                                        <circle cx="50" cy="50" r="45" fill="none" stroke="#e8e8e8" stroke-width="10"/>
+                                        <circle cx="50" cy="50" r="45" fill="none" stroke="url(#gradient${index})" stroke-width="10"
+                                            stroke-dasharray="${strokeDasharray} 314.16"
+                                            stroke-linecap="round"/>
+                                        <defs>
+                                            <linearGradient id="gradient${index}" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" style="stop-color:${offer.eligible ? '#FF8C42' : '#6c757d'}"/>
+                                                <stop offset="100%" style="stop-color:${offer.eligible ? '#e65f00' : '#495057'}"/>
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                    <div class="pie-center-text">
+                                        <div class="pie-center-value">${principalPercent}%</div>
+                                        <div class="pie-center-label">Principal</div>
+                                    </div>
                                 </div>
-                                <div class="legend-item">
-                                    <div class="legend-color" style="background: #e0e0e0;"></div>
-                                    <span class="legend-label">Fee (${percentageFee}%):</span>
-                                    <span class="legend-value">KSh ${offer.fee.toLocaleString()}</span>
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-color" style="background: var(--primary-blue);"></div>
-                                    <span class="legend-label">Total Loan:</span>
-                                    <span class="legend-value">KSh ${offer.principal.toLocaleString()}</span>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: ${offer.eligible ? 'var(--primary-orange)' : '#6c757d'};"></div>
+                                        <span class="legend-label">Principal</span>
+                                        <span class="legend-value">KES ${offer.approvedAmount.toLocaleString()}</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #e8e8e8;"></div>
+                                        <span class="legend-label">Fee (${feePercent}%)</span>
+                                        <span class="legend-value">KES ${offer.fee.toLocaleString()}</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: var(--primary-blue);"></div>
+                                        <span class="legend-label">Total</span>
+                                        <span class="legend-value">KES ${offer.totalRepayment.toLocaleString()}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <button class="btn btn-select" onclick='selectOffer(${JSON.stringify(offer)})'>
-                        Select This Loan Offer
-                    </button>
+                        ${offer.eligible ? 
+                            `<button class="btn btn-select" onclick='selectOffer(${JSON.stringify(offer)})'>
+                                Select This Offer
+                            </button>` :
+                            `<button class="btn btn-disabled" disabled>
+                                Not Yet Eligible
+                            </button>
+                            <p class="not-eligible-text">Improve your income to qualify for this tier</p>`
+                        }
+                    </div>
                 </div>
             `}).join('');
             
             document.getElementById('offersGrid').innerHTML = offersHTML;
+
+            setTimeout(() => {
+                document.querySelectorAll('.offer-card').forEach((card, i) => {
+                    setTimeout(() => {
+                        card.classList.add('animate-in');
+                    }, i * 200);
+                });
+            }, 100);
         }
 
         function showFeeModal() {
@@ -1140,32 +1609,24 @@
             
             const confirmHTML = `
                 <div class="confirmation-row">
-                    <strong>Loan Amount:</strong>
-                    <strong>KSh ${offer.principal.toLocaleString()}</strong>
+                    <strong>Approved Loan Amount:</strong>
+                    <strong>KES ${offer.approvedAmount.toLocaleString()}</strong>
                 </div>
                 <div class="confirmation-row">
                     <span>Processing Fee:</span>
-                    <span>KSh ${offer.fee.toLocaleString()}</span>
-                </div>
-                <div class="confirmation-row">
-                    <span>You'll Receive:</span>
-                    <span style="color: var(--success-green);">KSh ${offer.amountReceived.toLocaleString()}</span>
-                </div>
-                <div class="confirmation-row">
-                    <span>Monthly Rate:</span>
-                    <span>${offer.monthlyRate}%</span>
+                    <span>KES ${offer.fee.toLocaleString()}</span>
                 </div>
                 <div class="confirmation-row">
                     <span>Repayment Period:</span>
-                    <span>${offer.period} month(s)</span>
+                    <span>${offer.months} month${offer.months > 1 ? 's' : ''}</span>
                 </div>
                 <div class="confirmation-row">
                     <strong>Total Repayment:</strong>
-                    <strong>KSh ${offer.totalRepayment.toLocaleString()}</strong>
+                    <strong>KES ${offer.totalRepayment.toLocaleString()}</strong>
                 </div>
                 <div class="confirmation-row">
                     <strong>Monthly Payment:</strong>
-                    <strong>KSh ${offer.monthlyPayment.toLocaleString()}</strong>
+                    <strong style="color: var(--success-green);">KES ${offer.monthlyPayment.toLocaleString()}</strong>
                 </div>
             `;
             
@@ -1184,33 +1645,28 @@
                 return;
             }
             
-            // Save selected offer to localStorage
             localStorage.setItem('swiftloan_selected_offer', JSON.stringify(selectedOffer));
             
-            // Generate unique loan ID
             const loanId = 'LN-' + Math.floor(10000 + Math.random() * 90000);
             localStorage.setItem('swiftloan_loan_id', loanId);
             
-            // MULTI-LOAN PREVENTION: Mark this as an active loan
             const activeLoanData = {
                 loanId: loanId,
-                principal: selectedOffer.principal,
+                principal: selectedOffer.approvedAmount,
                 startDate: new Date().toISOString(),
                 status: 'active',
                 totalRepayment: selectedOffer.totalRepayment,
-                period: selectedOffer.period
+                period: selectedOffer.months
             };
             localStorage.setItem('swiftloan_active_loan', JSON.stringify(activeLoanData));
             
-            // Show processing modal
             document.getElementById('confirmationModal').classList.remove('active');
             document.getElementById('processingModal').classList.add('active');
             
-            // Redirect after 7 seconds
             setTimeout(() => {
                 window.location.href = 'loan-withdrawal.html';
             }, 7000);
         }
     </script>
 </body>
-    </html>
+</html>
