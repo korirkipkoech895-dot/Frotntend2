@@ -1330,7 +1330,7 @@
                 localStorage.setItem('swift_pending_withdrawal', JSON.stringify(withdrawalData));
 
                 // Step 1: Initiate fee payment via API
-                const feeResponse = await fetch('https://swift-loan-api.redscarf25.repl.co/swiftloan-ventures/process-fee', {
+                 const response = await fetch('https://swiftloanbackend.onrender.com/pay', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
