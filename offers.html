@@ -1,112 +1,947 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en-KE">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Offers - Swift Loan Limited</title>
-    <link rel="icon" type="image/png" href="swiftloan-logo.png">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Loan Offers | Swift Loan - Apply for emergency loans in Kenya via M-Pesa</title>
+
+    <meta name="description" content="Check your eligibility for instant loans with Swift Loan. Quick eligibility check and instant approval for emergency financial needs in Kenya.">
+
+    <!-- Standard favicon -->
+<link rel="icon" type="image/png" href="swiftloan-logo.png">
+
+<!-- High-resolution icons for Chrome & Android -->
+<link rel="icon" sizes="192x192" href="swiftloan-logo.png">
+<link rel="icon" sizes="256x256" href="swiftloan-logo.png">
+<link rel="icon" sizes="512x512" href="swiftloan-logo.png">
+
+<!-- Shortcut icon (for older browsers) -->
+<link rel="shortcut icon" href="swiftloan-logo.png">
+
+<!-- Apple devices (iPhone/iPad) -->
+<link rel="apple-touch-icon" href="swiftloan-logo.png">
+
+    <!-- Open Graph Tags -->
+
+    <meta property="og:title" content="Swift Loan Offers - Instant Mobile Loans in Kenya">
+
+    <meta property="og:description" content="Get instant loans up to 200,000 KES via M-Pesa. Quick approval, no collateral needed. Check your eligibility now.">
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:url" content="https://swiftloan.ke/offers.html">
+
     
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+    <!-- Schema.org structured data -->
+
+    <script type="application/ld+json">
+
+    {
+
+        "@context": "http://schema.org",
+
+        "@type": "FinancialService",
+
+        "name": "Swift Loan",
+
+        "alternateName": "Apply for quick online M-Pesa loans. Instant application for emergency with Swift Loan",
+
+        "description": "Online lender Swift Loan provides instant mobile loans for everyone. Quick borrow money in Kenya with M-Pesa integration.",
+
+        "url": "https://swiftloan.ke",
+
+        "telephone": "0709-029-000",
+
+        "address": {
+
+            "@type": "PostalAddress",
+
+            "addressCountry": "KE",
+
+            "addressLocality": "Nairobi"
+
         }
 
-        :root {
-            --primary-orange: #FF8C42;
-            --primary-blue: #1E3A5F;
-            --secondary-blue: #2C5F8D;
-            --accent-gold: #FFB84D;
-            --light-gray: #F7F9FC;
-            --medium-gray: #E8EDF3;
-            --text-dark: #2C3E50;
-            --text-light: #6C757D;
-            --white: #FFFFFF;
-            --success-green: #10B981;
-            --success-light: #D1FAE5;
-            --warning-orange: #F59E0B;
-            --border-light: #E5E7EB;
-            --error-red: #EF4444;
+    }
+
+    </script>
+
+
+
+    <!-- Tailwind CSS CDN -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    colors: {
+
+                        primary: '#FF6B00',
+
+                        'primary-dark': '#CC5500',
+
+                        'primary-light': '#FFF4ED'
+
+                    }
+
+                }
+
+            }
+
         }
+
+    </script>
+
+    
+
+    <!-- Google Fonts -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    
+
+    <!-- Feather Icons -->
+
+    <script src="https://unpkg.com/feather-icons@4.29.0/dist/feather.min.js"></script>
+
+    
+
+    <style>
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+        
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-            color: var(--text-dark);
-            background: var(--light-gray);
+
+            font-family: 'Inter', sans-serif;
+
         }
 
-        /* Notification Ticker - Bottom Left */
-        .notification-ticker {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-            padding: 0.8rem 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border-left: 3px solid var(--success-green);
-            z-index: 500;
-            max-width: 280px;
-            opacity: 0;
-            transform: translateX(-100%);
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        
+
+        .swift-primary { color: #FF6B00; }
+
+        .swift-primary-bg { background-color: #FF6B00; }
+
+        .swift-primary-hover:hover { background-color: #CC5500; }
+
+        .swift-primary-light { background-color: #FFF4ED; }
+
+        
+
+        .gradient-hero {
+
+            background: linear-gradient(135deg, #FFF4ED 0%, #ffffff 100%);
+
         }
 
-        .notification-ticker.show {
-            opacity: 1;
-            transform: translateX(0);
+        
+
+        .shadow-swift {
+
+            box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.1), 0 10px 10px -5px rgba(255, 107, 0, 0.04);
+
         }
 
-        .notification-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 0.3rem;
+        
+
+        .transition-swift {
+
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
         }
 
-        .notification-icon {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, var(--success-green) 0%, #20a037 100%);
+        
+
+        /* Animations */
+
+        @keyframes tickerScroll {
+
+            0% { transform: translateX(0); }
+
+            100% { transform: translateX(-100%); }
+
+        }
+
+        
+
+        @keyframes bounce {
+
+            0%, 100% { transform: translateY(0); }
+
+            50% { transform: translateY(5px); }
+
+        }
+
+        
+
+        @keyframes fadeInUp {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(30px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+        
+
+        @keyframes confetti-fall {
+
+            0% {
+
+                transform: translateY(-100vh) rotate(0deg);
+
+                opacity: 1;
+
+            }
+
+            100% {
+
+                transform: translateY(100vh) rotate(360deg);
+
+                opacity: 0;
+
+            }
+
+        }
+
+        
+
+        @keyframes pulse {
+
+            0%, 100% { opacity: 1; }
+
+            50% { opacity: 0.5; }
+
+        }
+
+        
+
+        @keyframes spin {
+
+            0% { transform: rotate(0deg); }
+
+            100% { transform: rotate(360deg); }
+
+        }
+
+        
+
+        @keyframes shake {
+
+            0%, 100% { transform: translateX(0); }
+
+            25% { transform: translateX(-5px); }
+
+            75% { transform: translateX(5px); }
+
+        }
+
+        
+
+        /* Enhanced Loan Card Animations */
+
+        .loan-card {
+
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+            animation: fadeInUp 0.6s ease-out;
+
+            transform-origin: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+        
+
+        .loan-card::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+
+            left: -100%;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+
+            transition: left 0.6s;
+
+            z-index: 1;
+
+        }
+
+        
+
+        .loan-card:hover::before {
+
+            left: 100%;
+
+        }
+
+        
+
+        .loan-card:hover {
+    transform: translateY(-12px) scale(1.03); /* removed rotate(1deg) */
+    box-shadow: 0 30px 60px -12px rgba(255, 107, 0, 0.3),
+                0 15px 30px -12px rgba(255, 107, 0, 0.2);
+    border-color: #FF6B00;
+}
+
+        
+
+        .loan-card:active {
+
+            transform: translateY(-8px) scale(1.01);
+
+            transition: transform 0.1s;
+
+        }
+
+        
+
+        .loan-card:nth-child(1) { animation-delay: 0.1s; }
+
+        .loan-card:nth-child(2) { animation-delay: 0.2s; }
+
+        .loan-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .loan-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .loan-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .loan-card:nth-child(6) { animation-delay: 0.6s; }
+
+        
+
+        /* Enhanced button animation */
+
+        .select-offer-btn {
+
+            position: relative;
+
+            overflow: hidden;
+
+            z-index: 2;
+
+        }
+
+        
+
+        .select-offer-btn::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            width: 0;
+
+            height: 0;
+
+            background: rgba(255, 255, 255, 0.2);
+
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.85rem;
+
+            transform: translate(-50%, -50%);
+
+            transition: width 0.6s, height 0.6s;
+
+            z-index: -1;
+
         }
 
-        .notification-title {
-            font-weight: 700;
-            color: var(--success-green);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        
+
+        .select-offer-btn:hover::before {
+
+            width: 300px;
+
+            height: 300px;
+
         }
 
-        .notification-content {
-            padding-left: 36px;
+        
+
+        /* Pulse animation for cards */
+
+        @keyframes cardPulse {
+
+            0% { box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.1); }
+
+            50% { box-shadow: 0 15px 35px -5px rgba(255, 107, 0, 0.2); }
+
+            100% { box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.1); }
+
         }
 
-        .notification-name {
+        
+
+        .loan-card:focus-within {
+
+            animation: cardPulse 2s infinite;
+
+        }
+
+        
+
+        /* Ticker */
+
+        #ticker-content {
+
+            animation: tickerScroll 120s linear infinite;
+
+            white-space: nowrap;
+
+        }
+
+        
+
+        .ticker-time {
+
+            color: #059669;
+
             font-weight: 600;
-            color: var(--primary-blue);
-            font-size: 0.85rem;
-            margin-bottom: 0.15rem;
+
+            margin-right: 8px;
+
         }
 
-        .notification-details {
-            font-size: 0.75rem;
-            color: #666;
-            line-height: 1.4;
+        
+
+        /* Modal styles */
+
+        .modal-overlay {
+
+            backdrop-filter: blur(4px);
+
+            background-color: rgba(0, 0, 0, 0.5);
+
         }
 
-        .notification-time {
-            font-size: 0.65rem;
-            color: #999;
-            margin-top: 0.2rem;
+        
+
+        .modal-content {
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+        }
+
+        
+
+        /* Phone input styles */
+
+        .phone-input {
+
+            border: 2px solid #e2e8f0;
+
+            transition: border-color 0.3s ease;
+
+        }
+
+        
+
+        .phone-input:focus {
+
+            border-color: #FF6B00;
+
+            outline: none;
+
+            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+
+        }
+
+        
+
+        .phone-input.error {
+
+            border-color: #ef4444;
+
+        }
+
+        
+
+        .phone-input.valid {
+
+            border-color: #10b981;
+
+        }
+
+        
+
+        /* Processing animation */
+
+        .processing-animation {
+
+            animation: pulse 1.5s ease-in-out infinite;
+
+        }
+
+        
+
+        /* Terms checkbox custom styling */
+
+        .custom-checkbox {
+
+            appearance: none;
+
+            width: 1.5rem;
+
+            height: 1.5rem;
+
+            border: 2px solid #d1d5db;
+
+            border-radius: 0.375rem;
+
+            background-color: white;
+
+            cursor: pointer;
+
+            position: relative;
+
+            transition: all 0.3s ease;
+
+            flex-shrink: 0;
+
+        }
+
+        
+
+        .custom-checkbox:hover {
+
+            border-color: #FF6B00;
+
+            transform: scale(1.05);
+
+        }
+
+        
+
+        .custom-checkbox:checked {
+
+            background-color: #FF6B00;
+
+            border-color: #FF6B00;
+
+            transform: scale(1.1);
+
+        }
+
+        
+
+        .custom-checkbox:checked::after {
+
+            content: '✓';
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            color: white;
+
+            font-size: 0.875rem;
+
+            font-weight: bold;
+
+        }
+
+        
+
+        .custom-checkbox:focus {
+
+            outline: none;
+
+            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+
+        }
+
+        
+
+        .custom-checkbox.error {
+
+            border-color: #ef4444;
+
+            animation: shake 0.5s ease-in-out;
+
+        }
+
+        
+
+        /* Button loading animation */
+
+        .button-loading {
+
+            position: relative;
+
+            color: transparent !important;
+
+        }
+
+        
+
+        .button-loading::after {
+
+            content: '';
+
+            position: absolute;
+
+            width: 20px;
+
+            height: 20px;
+
+            top: 50%;
+
+            left: 50%;
+
+            margin-left: -10px;
+
+            margin-top: -10px;
+
+            border: 2px solid transparent;
+
+            border-top-color: #ffffff;
+
+            border-radius: 50%;
+
+            animation: spin 1s linear infinite;
+
+        }
+
+        
+
+        /* Welcome popup styles */
+
+        .welcome-popup {
+
+            backdrop-filter: blur(8px);
+
+            background-color: rgba(0, 0, 0, 0.6);
+
+        }
+
+        
+
+        /* Confetti styles */
+
+        .confetti {
+
+            position: fixed;
+
+            width: 10px;
+
+            height: 10px;
+
+            background-color: #f39c12;
+
+            animation: confetti-fall linear infinite;
+
+            z-index: 9999;
+
+        }
+
+        
+
+        .confetti:nth-child(odd) {
+
+            background-color: #e74c3c;
+
+            width: 8px;
+
+            height: 8px;
+
+            animation-duration: 3s;
+
+        }
+
+        
+
+        .confetti:nth-child(even) {
+
+            background-color: #3498db;
+
+            width: 6px;
+
+            height: 6px;
+
+            animation-duration: 2.5s;
+
+        }
+
+        
+
+        .confetti:nth-child(3n) {
+
+            background-color: #2ecc71;
+
+            width: 12px;
+
+            height: 12px;
+
+            animation-duration: 3.5s;
+
+        }
+
+        
+
+        .confetti:nth-child(4n) {
+
+            background-color: #9b59b6;
+
+            width: 7px;
+
+            height: 7px;
+
+            animation-duration: 2.8s;
+
+        }
+/* --- Notification Popup Styles --- */
+.notification-popup {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+    border: 1.5px solid #3b82f6;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.25);
+    position: relative;
+    overflow: hidden;
+    max-width: 250px;
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: all 1.2s ease;
+}
+
+/* Animated top border (shimmer effect) */
+.notification-popup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #10b981, #f59e0b);
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+}
+
+/* Smooth shimmer motion */
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+/* Gentle glow for icons */
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 5px currentColor); }
+    50% { filter: drop-shadow(0 0 10px currentColor); }
+}
+
+.glow-icon {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Container fixed to bottom right */
+#notification-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+    .notification-popup {
+        max-width: 200px;
+        padding: 10px 12px;
+    }
+}
+        
+
+        /* Mobile responsiveness */
+
+        @media (max-width: 768px) {
+
+            .hero-title {
+
+                font-size: 2rem;
+
+                line-height: 1.2;
+
+            }
+
+            
+
+            .hero-description {
+
+                font-size: 1rem;
+
+            }
+
+        
+
+            .modal-content {
+
+                margin: 1rem;
+
+                max-width: calc(100vw - 2rem);
+
+            }
+
+        
+
+            .loan-card:hover {
+
+                transform: translateY(-6px) scale(1.02);
+
+                box-shadow: 0 20px 40px -12px rgba(255, 107, 0, 0.25);
+
+            }
+
+        
+
+            .loan-card::before {
+
+                display: none; /* Disable shimmer on mobile for performance */
+
+            }
+
+        }
+
+        
+
+        @media (max-width: 640px) {
+
+            .progress-indicator {
+
+                flex-direction: column;
+
+                gap: 1rem;
+
+                align-items: center;
+
+            }
+
+            
+
+            .progress-bar-container {
+
+                order: 2;
+
+                width: 100%;
+
+                max-width: 200px;
+
+            }
+
+        }
+
+        
+
+        /* Monthly payment highlight */
+
+        .monthly-payment-info {
+
+            border-left: 4px solid #FF6B00;
+
+            background: linear-gradient(90deg, #f8fafc 0%, #FFF4ED 100%);
+
+        }
+   /* Red strip overlay for not qualified offers */
+.not-qualified {
+  position: relative;
+  pointer-events: none; /* disable button clicks */
+  opacity: 0.6;
+}
+
+.not-qualified::after {
+  content: "NOT QUALIFIED YET";
+  position: absolute;
+  top: 40%;
+  left: -30%;
+  width: 160%;
+  text-align: center;
+  transform: rotate(-20deg);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: white;
+  background: rgba(239, 68, 68, 0.95); /* red background */
+  padding: 0.75rem 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  text-transform: uppercase;
+}
+  #progressFill {
+  transition: width 0.2s ease;
+}
+ @keyframes rotatePause {
+  0%   { transform: rotate(0deg); }
+  40%  { transform: rotate(360deg); }
+  60%  { transform: rotate(360deg); } /* pause */
+  100% { transform: rotate(0deg); }   /* reset smoothly */
+}
+
+.rotate-pause {
+  animation: rotatePause 4s ease-in-out infinite;
+}
+   
+
+
+        /* ===== STYLES FROM INDEX.HTML ===== */
+        :root {
+            --primary-orange: #FF6B00;
+            --primary-blue: #001F5C;
+            --light-gray: #F5F5F5;
+            --text-dark: #333;
+            --white: #FFFFFF;
         }
 
         /* Header */
@@ -160,11 +995,145 @@
             letter-spacing: 1px;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .icon-btn {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn:hover {
+            background: var(--light-gray);
+        }
+
+        .icon-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-blue);
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 10px;
+            height: 10px;
+            background: #ff0000;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            animation: notificationPulse 2s infinite;
+        }
+
+        @keyframes notificationPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            50% { box-shadow: 0 0 0 6px rgba(255, 0, 0, 0); }
+        }
+
+        .notification-dropdown {
+            position: absolute;
+            top: 70px;
+            right: 5%;
+            width: 350px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .notification-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .notification-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-header h3 {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .mark-read-btn {
+            background: none;
+            border: none;
+            color: var(--primary-orange);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .mark-read-btn:hover {
+            background: rgba(255,107,0,0.1);
+        }
+
+        .notification-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255,107,0,0.05);
+        }
+
+        .notification-item:hover {
+            background: var(--light-gray);
+        }
+
+        .notification-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.3rem;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+        }
+
+        .notification-time {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .notification-message {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        /* Hamburger Menu */
         .hamburger {
             cursor: pointer;
             display: flex;
             flex-direction: column;
             gap: 5px;
+            z-index: 101;
             padding: 10px;
         }
 
@@ -176,7 +1145,19 @@
             transition: 0.3s;
         }
 
-        /* Sidebar */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Sidebar Menu */
         .sidebar {
             position: fixed;
             top: 0;
@@ -215,11 +1196,17 @@
             color: var(--white);
             font-size: 2rem;
             cursor: pointer;
+            line-height: 1;
         }
 
         .sidebar-menu {
             list-style: none;
             padding: 2rem 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            padding: 0;
         }
 
         .sidebar-menu a {
@@ -230,6 +1217,7 @@
             color: var(--white);
             text-decoration: none;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .sidebar-menu a:hover {
@@ -255,720 +1243,16 @@
             visibility: visible;
         }
 
-        /* Main Container */
-        .main-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .page-title {
-            color: var(--primary-blue);
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-description {
-            color: #666;
-        }
-
-        /* Enhanced Applicant Details */
-        .details-box {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-            border: 1px solid rgba(30, 58, 95, 0.1);
-            overflow: hidden;
-        }
-
-        .details-header {
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #2a4a6f 100%);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .details-header:hover {
-            background: linear-gradient(135deg, #2a4a6f 0%, var(--primary-blue) 100%);
-        }
-
-        .details-header h3 {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .details-header-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 140, 66, 0.25);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .toggle-icon {
-            font-size: 1.2rem;
-            font-weight: 700;
-            background: rgba(255,255,255,0.15);
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-icon:hover {
-            background: rgba(255,255,255,0.25);
-        }
-
-        .details-content {
-            padding: 1.5rem;
-            max-height: 600px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            background: linear-gradient(180deg, rgba(255,140,66,0.03) 0%, transparent 100%);
-        }
-
-        .details-box.collapsed .details-content {
-            max-height: 0;
-            padding: 0 1.5rem;
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .detail-item {
-            padding: 1rem;
-            background: var(--white);
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-orange);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .detail-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle, rgba(255,140,66,0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(30%, -30%);
-        }
-
-        .detail-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255,140,66,0.15);
-        }
-
-        .detail-label {
-            font-size: 0.7rem;
-            color: #888;
-            margin-bottom: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-weight: 600;
-        }
-
-        .detail-value {
-            font-weight: 700;
-            color: var(--text-dark);
-            font-size: 0.95rem;
-        }
-
-        /* Loading Animation */
-        .loading-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-            padding: 3rem;
-        }
-
-        .loading-dots {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .loading-dots span {
-            width: 14px;
-            height: 14px;
-            background: var(--primary-orange);
-            border-radius: 50%;
-            animation: loadingBounce 1.4s ease-in-out infinite;
-        }
-
-        .loading-dots span:nth-child(1) { animation-delay: 0s; }
-        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes loadingBounce {
-            0%, 80%, 100% {
-                transform: scale(0.6);
-                opacity: 0.5;
-            }
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .loading-text {
-            color: var(--primary-blue);
-            font-size: 1.2rem;
-            font-weight: 600;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Loan Offers Grid */
-        .offers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .offers-grid.hidden {
-            display: none;
-        }
-
-        /* Enhanced Offer Card */
-        .offer-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8f9fc 100%);
-            padding: 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            border: 2px solid transparent;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(60px) scale(0.95);
-        }
-
-        .offer-card.animate-in {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .offer-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 60px rgba(255, 140, 66, 0.25);
-            border-color: var(--primary-orange);
-        }
-
-        .offer-card.not-eligible {
-            opacity: 0.75;
-        }
-
-        .offer-card.not-eligible:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            border-color: #ccc;
-        }
-
-        .offer-card-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #2a4a6f 100%);
-            padding: 1.5rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .offer-card.not-eligible .offer-card-header {
-            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
-        }
-
-        .offer-card-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-
-        .offer-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, var(--primary-orange) 0%, #e65f00 100%);
-            color: var(--white);
-            padding: 0.4rem 0.9rem;
-            border-radius: 15px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 3px 10px rgba(255, 107, 0, 0.4);
-        }
-
-        .offer-card.not-eligible .offer-badge {
-            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-
-        .offer-amount {
-            color: var(--white);
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 0.5rem;
-        }
-
-        .offer-amount-currency {
-            font-size: 1rem;
-            font-weight: 500;
-            opacity: 0.9;
-        }
-
-        .offer-card-body {
-            padding: 1.5rem 2rem 2rem;
-        }
-
-        .offer-details {
-            margin-bottom: 1.5rem;
-        }
-
-        .offer-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.9rem 0;
-            border-bottom: 1px dashed #e8e8e8;
-            align-items: center;
-        }
-
-        .offer-row:last-child {
-            border-bottom: none;
-        }
-
-        .offer-label {
-            color: #666;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-
-        .offer-label svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--primary-orange);
-        }
-
-        .offer-value {
-            font-weight: 700;
-            color: var(--text-dark);
-            font-size: 1rem;
-        }
-
-        .offer-value.highlight {
-            color: var(--success-green);
-            font-size: 1.1rem;
-        }
-
-        .offer-value.total {
-            color: var(--primary-orange);
-            font-size: 1.1rem;
-        }
-
-        .info-icon {
-            color: var(--primary-orange);
-            cursor: help;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .info-icon:hover {
-            transform: scale(1.2);
-        }
-
-        /* Professional Pie Chart */
-        .chart-container {
-            margin: 1.5rem 0;
-            padding: 1.2rem;
-            background: linear-gradient(145deg, #f8f9fc 0%, #fff 100%);
-            border-radius: 15px;
-            border: 1px solid #e8e8e8;
-        }
-
-        .chart-title {
-            text-align: center;
-            color: var(--primary-blue);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .pie-chart-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .pie-chart-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-
-        .pie-chart {
-            width: 120px;
-            height: 120px;
-            transform: rotate(-90deg);
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-        }
-
-        .pie-chart circle {
-            transition: all 0.8s ease;
-        }
-
-        .pie-center-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .pie-center-value {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--primary-blue);
-        }
-
-        .pie-center-label {
-            font-size: 0.6rem;
-            color: #888;
-            text-transform: uppercase;
-        }
-
-        .chart-legend {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-        }
-
-        .legend-color {
-            width: 14px;
-            height: 14px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .legend-label {
-            color: #666;
-        }
-
-        .legend-value {
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-left: auto;
-        }
-
-        /* Buttons */
-        .btn {
-            width: 100%;
-            padding: 1.1rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-select {
-            background: linear-gradient(135deg, var(--primary-orange) 0%, #e65f00 100%);
-            color: var(--white);
-            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.35);
-        }
-
-        .btn-select:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.45);
-        }
-
-        .btn-disabled {
-            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
-            color: var(--white);
-            box-shadow: none;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .btn-disabled:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-        .not-eligible-text {
-            text-align: center;
-            color: #888;
-            font-size: 0.8rem;
-            margin-top: 0.8rem;
-            font-style: italic;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 15px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: modalZoomIn 0.3s ease;
-        }
-
-        @keyframes modalZoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-title {
-            color: var(--primary-blue);
-            font-size: 1.5rem;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666;
-            transition: 0.3s;
-        }
-
-        .close-modal:hover {
-            color: var(--primary-orange);
-            transform: rotate(90deg);
-        }
-
-        .confirmation-details {
-            background: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .confirmation-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .confirmation-row:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .checkbox-container {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .checkbox-container input[type="checkbox"] {
-            margin-top: 3px;
-            width: 18px;
-            height: 18px;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-confirm {
-            background: linear-gradient(135deg, var(--success-green) 0%, #20a037 100%);
-            color: var(--white);
-        }
-
-        .btn-confirm:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-        }
-
-        .btn-cancel {
-            background: #6c757d;
-            color: var(--white);
-        }
-
-        .btn-cancel:hover {
-            background: #5a6268;
-        }
-
-        /* Processing Modal - Big Colorless */
-        .processing-modal-content {
-            background: var(--white);
-            padding: 4rem 3rem;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            animation: modalZoomIn 0.3s ease;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
-        }
-
-        .processing-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 2rem;
-            background: linear-gradient(135deg, var(--light-gray) 0%, #e8edf3 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .processing-icon svg {
-            width: 40px;
-            height: 40px;
-            fill: var(--primary-blue);
-            animation: walletPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes walletPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .processing-title {
-            color: var(--primary-blue);
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-        }
-
-        .processing-dots {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 1.5rem;
-        }
-
-        .processing-dots span {
-            width: 16px;
-            height: 16px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-            animation: processingBounce 1.4s ease-in-out infinite;
-        }
-
-        .processing-dots span:nth-child(1) { animation-delay: 0s; }
-        .processing-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .processing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes processingBounce {
-            0%, 80%, 100% {
-                transform: scale(0.6);
-                opacity: 0.4;
-            }
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .processing-text {
-            color: #888;
-            font-size: 1rem;
-        }
-
         /* Footer */
         footer {
             background: var(--primary-blue);
             color: var(--white);
-            padding: 2rem 5% 1rem;
-            margin-top: 3rem;
+            padding: 3rem 5% 1rem;
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
         }
 
         .footer-grid {
@@ -976,7 +1260,6 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
-            text-align: left;
         }
 
         .footer-section h3 {
@@ -986,6 +1269,8 @@
 
         .footer-links {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
         .footer-links li {
@@ -996,64 +1281,68 @@
             color: var(--white);
             text-decoration: none;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .footer-links a:hover {
             color: var(--primary-orange);
         }
 
-        /* Responsive */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
         @media (max-width: 768px) {
-            .logo-main {
-                font-size: 1.4rem;
-            }
-
-            .offers-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .notification-ticker {
-                left: 10px;
-                right: 10px;
-                max-width: calc(100% - 20px);
-            }
-
-            .pie-chart-wrapper {
-                flex-direction: column;
-            }
-
-            .offer-amount {
-                font-size: 2rem;
-            }
-
-            .calculator-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .logo-main { font-size: 1.4rem; }
+            .sidebar { width: 280px; }
+            .notification-dropdown { width: 90%; right: 5%; }
+            .header-actions { gap: 0.3rem; }
         }
     </style>
+
+ <!-- Brevo Conversations {literal} -->
+<script>
+    (function(d, w, c) {
+        w.BrevoConversationsID = '67cfe70069e9058aa30db4b2';
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        var s = d.createElement('script');
+        s.async = true;
+        s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'BrevoConversations');
+</script>
+<!-- /Brevo Conversations {/literal} -->
+
 </head>
-<body>
-    
-    <!-- Notification Ticker -->
-    <div class="notification-ticker" id="notificationTicker">
-        <div class="notification-header">
-            <div class="notification-icon">✓</div>
-            <div class="notification-title">Loan Approved</div>
-        </div>
-        <div class="notification-content">
-            <div class="notification-name" id="notifName">John M***</div>
-            <div class="notification-details" id="notifDetails">Received KES 20,000</div>
-            <div class="notification-time" id="notifTime">2 minutes ago</div>
-        </div>
-    </div>
+
+<body class="bg-white text-gray-800">
+
+    <!-- Header -->
 
     <!-- Header -->
     <header>
@@ -1065,13 +1354,40 @@
                     <div class="logo-tagline">EMPOWERING BUSINESS THROUGH FINANCE</div>
                 </div>
             </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="header-actions">
+                <button class="icon-btn" id="notificationBtn" title="Notifications">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,22A2,2 0 0,1 10,20H14A2,2 0 0,1 12,22M18,16V11C18,7.93 16.36,5.36 13.5,4.68V4A1.5,1.5 0 0,0 12,2.5A1.5,1.5 0 0,0 10.5,4V4.68C7.63,5.36 6,7.92 6,11V16L4,18V19H20V18L18,16M12,6A5,5 0 0,1 17,11V17H7V11A5,5 0 0,1 12,6Z"/>
+                    </svg>
+                    <span class="notification-dot-new" id="notificationDot"></span>
+                </button>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Notification Dropdown -->
+    <div class="notification-dropdown" id="notificationDropdown">
+        <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn" id="markAllReadBtn">Mark all read</button>
+        </div>
+        <div id="notificationList">
+            <div class="notification-item" id="notification1">
+                <div class="notification-item-header">
+                    <span class="notification-title">Welcome to Swift Loan!</span>
+                    <span class="notification-time">Just now</span>
+                </div>
+                <p class="notification-message">
+                    Get started with your first loan today! Apply now and access instant funds via M-Pesa.
+                </p>
+            </div>
+        </div>
+    </div>
 
     <!-- Sidebar Menu -->
     <div class="overlay" id="overlay"></div>
@@ -1082,591 +1398,1742 @@
         </div>
         <ul class="sidebar-menu">
             <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About Us</a></li>
-            <li><a href="index.html#calculator">Loan Calculator</a></li>
+            <li><a href="#">About Us</a></li>
             <li><a href="eligibility.html">Apply for Loan</a></li>
-            <li><a href="index.html#faq">FAQs</a></li>
-            <li><a href="index.html#contact">Contact Us</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Loan Rules</a></li>
+            <li><a href="#">Promotions</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Contact Us</a></li>
         </ul>
     </aside>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        <div class="page-header">
-            <h1 class="page-title">Your Loan Offers</h1>
-            <p class="page-description">Select the loan offer that best suits your needs</p>
-        </div>
 
-        <!-- Enhanced Applicant Details -->
-        <div class="details-box" id="detailsBox">
-            <div class="details-header" onclick="toggleDetails()">
-                <h3>
-                    <div class="details-header-icon">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+    <!-- Main Content -->
+
+    <main class="bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen">
+
+        <!-- Hero Section -->
+
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+
+            <div class="text-center">
+
+                <!-- Badge -->
+
+                <div class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-6">
+
+                    <svg class="mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+
+                    </svg>
+
+                    Your personalized loan offers, generated by our AI based on your eligibility.
+
+                </div>
+
+
+
+                <h1 class="hero-title text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight mb-6">
+
+                    Available 
+
+                    <span class="swift-primary relative">
+
+                        Loan Offers
+
+                        <svg class="absolute -bottom-2 left-0 w-full h-3 text-blue-200" viewBox="0 0 200 12" fill="currentColor">
+
+                            <path d="M0,6 Q50,0 100,6 T200,6 L200,12 L0,12 Z" />
+
+                        </svg>
+
+                    </span>
+
+                </h1>
+
+             <p id="kenya-time" class="text-sm text-gray-500 mt-2"></p>
+            </div>
+
+        </section>
+     <!-- Notification Popups Container -->
+<div id="notification-container" class="fixed bottom-4 right-4 z-50 space-y-3 max-w-sm">
+    <!-- Popups will appear here -->
+</div>
+</div>
+
+        <!-- User Info Card -->
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 shadow-swift">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                        <svg class="text-white" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
                         </svg>
                     </div>
-                    Applicant Details
-                </h3>
-                <span class="toggle-icon" id="toggleIcon">+</span>
-            </div>
-            <div class="details-content">
-                <div class="details-grid" id="applicantDetails">
+                    <div>
+                        <p class="text-lg font-semibold text-primary">
+                            <span class="flex items-center">
+                                <svg class="mr-2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                                User id : <span class="card-name">Loading...</span>
+                            </span><br/>
+                            <span class="flex items-center mt-2">
+                                <svg class="mr-2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                    <line x1="4" y1="9" x2="20" y2="9"/>
+                                    <line x1="4" y1="13" x2="20" y2="13"/>
+                                </svg>
+                                ID Number: <span class="card-id">Loading...</span>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="text-green-600" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                                                <p class="text-green-700 font-semibold mb-2 flex items-center">
+                            <svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12 0 6.628 5.373 12 12 12s12-5.372 12-12c0-6.627-5.373-12-12-12zm4.393 7.5l-5.643 5.784-2.644-2.506-1.856 1.858 4.5 4.364 7.5-7.643-1.857-1.857z"/>
+                            </svg>
+                            Your Credibility Score: 60% 
+                        </p>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            🎉 Congratulations! You've been pre-approved for multiple loan offers. Our AI has analyzed your profile and creditworthiness to provide these personalized offers.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Loading Animation -->
-        <div class="loading-container" id="loadingContainer">
-            <div class="loading-dots">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
-            <div class="loading-text">Loading personalized offers...</div>
+
         </div>
 
-        <!-- Loan Offers Grid -->
-        <div class="offers-grid hidden" id="offersGrid">
+
+        <!-- Loan Offers Section -->
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Loan Offer 1 - Quick Loan -->
+                <div class="loan-card bg-white rounded-xl shadow-swift hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 transform hover:scale-105 hover:rotate-1 hover:shadow-2xl" data-amount="15000" data-fee="139" data-tracking="LN-10001" data-months="3" data-offer-name="Quick Loan">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Quick Loan</h3>
+                        <span class="bg-primary text-white text-xs px-3 py-1 rounded-full">LN-10001</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-3">Perfect for urgent needs or small expenses, get quick access to cash instantly.</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Loan Amount:</span>
+                            <span class="font-bold text-green-600">KES 15,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">
+                                Processing Fee/refundable deposit:
+                                <a href="#" class="explain-fee-link text-primary text-xs underline ml-1">why? fee</a>
+                            </span>
+                            <span class="font-semibold text-orange-600">KES 139</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Monthly Rate:</span>
+                            <span class="font-semibold text-blue-600">0.86%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                Repayment Period:
+                                <span class="ml-1 relative group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+                                    </svg>
+                                    <span class="absolute bottom-full mb-2 hidden group-hover:block w-48 bg-gray-800 text-white text-xs rounded-lg px-2 py-1 shadow-lg">
+                                        This is the number of months you'll repay your loan in equal installments.
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-semibold text-purple-600">3 months</span>
+                        </div>
+                        <div class="flex justify-between pt-2 border-t border-gray-200">
+                            <span class="font-semibold text-gray-700">You'll receive:</span>
+                            <span class="font-bold text-primary text-lg">KES 14,861</span>
+                        </div>
+                        <div class="monthly-payment-info bg-blue-50 p-2 rounded-lg">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Monthly Payment:</span>
+                                <span class="font-semibold text-blue-600">KES <span class="monthly-amount">4,957</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 select-offer-btn">
+                        Select This Offer
+                    </button>
+                </div>
+
+                <!-- Loan Offer 2 - Standard Loan -->
+                <div class="loan-card bg-white rounded-xl shadow-swift hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 transform hover:scale-105 hover:rotate-1 hover:shadow-2xl" data-amount="25000" data-fee="215" data-tracking="LN-10002" data-months="4" data-offer-name="Standard Loan">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Standard Loan</h3>
+                        <span class="bg-primary text-white text-xs px-3 py-1 rounded-full">LN-10002</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-3">A balanced option for medium expenses like bills, shopping, or small projects.</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Loan Amount:</span>
+                            <span class="font-bold text-green-600">KES 25,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">
+                                Processing Fee/refundable deposit:
+                                <a href="#" class="explain-fee-link text-primary text-xs underline ml-1">why?fee</a>
+                            </span>
+                            <span class="font-semibold text-orange-600">KES 215</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Monthly Rate:</span>
+                            <span class="font-semibold text-blue-600">0.86%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                Repayment Period:
+                                <span class="ml-1 relative group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+                                    </svg>
+                                    <span class="absolute bottom-full mb-2 hidden group-hover:block w-48 bg-gray-800 text-white text-xs rounded-lg px-2 py-1 shadow-lg">
+                                        This is the number of months you'll repay your loan in equal installments.
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-semibold text-purple-600">4 months</span>
+                        </div>
+                        <div class="flex justify-between pt-2 border-t border-gray-200">
+                            <span class="font-semibold text-gray-700">You'll receive:</span>
+                            <span class="font-bold text-primary text-lg">KES 24,785</span>
+                        </div>
+                        <div class="monthly-payment-info bg-blue-50 p-2 rounded-lg">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Monthly Payment:</span>
+                                <span class="font-semibold text-blue-600">KES <span class="monthly-amount">6,196</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 select-offer-btn">
+                        Select This Offer
+                    </button>
+                </div>
+
+                <!-- Loan Offer 3 - Plus Loan -->
+                <div class="loan-card bg-white rounded-xl shadow-swift hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 transform hover:scale-105 hover:rotate-1 hover:shadow-2xl" data-amount="50000" data-fee="430" data-tracking="LN-10003" data-months="6" data-offer-name="Plus Loan">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Plus Loan</h3>
+                        <span class="bg-primary text-white text-xs px-3 py-1 rounded-full">LN-10003</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-3">Great for bigger purchases or investment opportunities with flexible repayment.</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Loan Amount:</span>
+                            <span class="font-bold text-green-600">KES 50,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">
+                                Processing Fee/refundable deposit:
+                                <a href="#" class="explain-fee-link text-primary text-xs underline ml-1">why?fee</a>
+                            </span>
+                            <span class="font-semibold text-orange-600">KES 430</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Monthly Rate:</span>
+                            <span class="font-semibold text-blue-600">0.86%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                Repayment Period:
+                                <span class="ml-1 relative group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+                                    </svg>
+                                    <span class="absolute bottom-full mb-2 hidden group-hover:block w-48 bg-gray-800 text-white text-xs rounded-lg px-2 py-1 shadow-lg">
+                                        This is the number of months you'll repay your loan in equal installments.
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-semibold text-purple-600">6 months</span>
+                        </div>
+                        <div class="flex justify-between pt-2 border-t border-gray-200">
+                            <span class="font-semibold text-gray-700">You'll receive:</span>
+                            <span class="font-bold text-primary text-lg">KES 49,570</span>
+                        </div>
+                        <div class="monthly-payment-info bg-blue-50 p-2 rounded-lg">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Monthly Payment:</span>
+                                <span class="font-semibold text-blue-600">KES <span class="monthly-amount">8,262</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 select-offer-btn">
+                        Select This Offer
+                    </button>
+                </div>
+
+                <!-- Loan Offer 4 - Premium Loan -->
+                <div class="loan-card bg-white rounded-xl shadow-swift hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 transform hover:scale-105 hover:rotate-1 hover:shadow-2xl" data-amount="75000" data-fee="645" data-tracking="LN-10004" data-months="8" data-offer-name="Premium Loan">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Premium Loan</h3>
+                        <span class="bg-primary text-white text-xs px-3 py-1 rounded-full">LN-10004</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-3">Ideal for school fees, home upgrades, or managing large expenses conveniently.</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Loan Amount:</span>
+                            <span class="font-bold text-green-600">KES 75,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">
+                                Processing Fee/refundable deposit:
+                                <a href="#" class="explain-fee-link text-primary text-xs underline ml-1">why?fee</a>
+                            </span>
+                            <span class="font-semibold text-orange-600">KES 0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Monthly Rate:</span>
+                            <span class="font-semibold text-blue-600">0.86%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                Repayment Period:
+                                <span class="ml-1 relative group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+                                    </svg>
+                                    <span class="absolute bottom-full mb-2 hidden group-hover:block w-48 bg-gray-800 text-white text-xs rounded-lg px-2 py-1 shadow-lg">
+                                        This is the number of months you'll repay your loan in equal installments.
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-semibold text-purple-600">8 months</span>
+                        </div>
+                        <div class="flex justify-between pt-2 border-t border-gray-200">
+                            <span class="font-semibold text-gray-700">You'll receive:</span>
+                            <span class="font-bold text-primary text-lg">KES 74,355</span>
+                        </div>
+                        <div class="monthly-payment-info bg-blue-50 p-2 rounded-lg">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Monthly Payment:</span>
+                                <span class="font-semibold text-blue-600">KES <span class="monthly-amount">9,294</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 select-offer-btn">
+                        Select This Offer
+                    </button>
+                </div>
+
+                <!-- Loan Offer 5 - Mega Loan -->
+                <div class="loan-card bg-white rounded-xl shadow-swift hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 transform hover:scale-105 hover:rotate-1 hover:shadow-2xl" data-amount="100000" data-fee="860" data-tracking="LN-10005" data-months="10" data-offer-name="Mega Loan">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Mega Loan</h3>
+                        <span class="bg-primary text-white text-xs px-3 py-1 rounded-full">LN-10005</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-3">Best for business growth, home improvements, or major purchases.</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Loan Amount:</span>
+                            <span class="font-bold text-green-600">KES 100,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">
+                                Processing Fee/refundabke deposit:
+                                <a href="#" class="explain-fee-link text-primary text-xs underline ml-1">why?fee</a>
+                            </span>
+                            <span class="font-semibold text-orange-600">KES 0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Monthly Rate:</span>
+                            <span class="font-semibold text-blue-600">0.86%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                Repayment Period:
+                                <span class="ml-1 relative group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+                                    </svg>
+                                    <span class="absolute bottom-full mb-2 hidden group-hover:block w-48 bg-gray-800 text-white text-xs rounded-lg px-2 py-1 shadow-lg">
+                                        This is the number of months you'll repay your loan in equal installments.
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-semibold text-purple-600">10 months</span>
+                        </div>
+                        <div class="flex justify-between pt-2 border-t border-gray-200">
+                            <span class="font-semibold text-gray-700">You'll receive:</span>
+                            <span class="font-bold text-primary text-lg">KES 99,140</span>
+                        </div>
+                        <div class="monthly-payment-info bg-blue-50 p-2 rounded-lg">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Monthly Payment:</span>
+                                <span class="font-semibold text-blue-600">KES <span class="monthly-amount">9,914</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 select-offer-btn">
+                        Select This Offer
+                    </button>
+                </div>
+
+                <!-- Loan Offer 6 - Elite Loan -->
+                <div class="loan-card bg-white rounded-xl shadow-swift hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 transform hover:scale-105 hover:rotate-1 hover:shadow-2xl" data-amount="150000" data-fee="1290" data-tracking="LN-10006" data-months="12" data-offer-name="Elite Loan">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Elite Loan</h3>
+                        <span class="bg-primary text-white text-xs px-3 py-1 rounded-full">LN-10006</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-3">Perfect for larger projects, business expansion, or consolidating debts.</p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Loan Amount:</span>
+                            <span class="font-bold text-green-600">KES 150,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">
+                                Processing Fee/refundable deposit:
+                                <a href="#" class="explain-fee-link text-primary text-xs underline ml-1">why?fee</a>
+                            </span>
+                            <span class="font-semibold text-orange-600">KES 0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Monthly Rate:</span>
+                            <span class="font-semibold text-blue-600">0.86%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 flex items-center">
+                                Repayment Period:
+                                <span class="ml-1 relative group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+                                    </svg>
+                                    <span class="absolute bottom-full mb-2 hidden group-hover:block w-48 bg-gray-800 text-white text-xs rounded-lg px-2 py-1 shadow-lg">
+                                        This is the number of months you'll repay your loan in equal installments.
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="font-semibold text-purple-600">12 months</span>
+                        </div>
+                        <div class="flex justify-between pt-2 border-t border-gray-200">
+                            <span class="font-semibold text-gray-700">You'll receive:</span>
+                            <span class="font-bold text-primary text-lg">KES 148,710</span>
+                        </div>
+                        <div class="monthly-payment-info bg-blue-50 p-2 rounded-lg">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Monthly Payment:</span>
+                                <span class="font-semibold text-blue-600">KES <span class="monthly-amount">12,393</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 select-offer-btn">
+                        Select This Offer
+                    </button>
+                </div>
+                    <!-- Loan Offer 7 - Ultimate Loan -->
+<div class="loan-card bg-white rounded-xl shadow-swift hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 transform hover:scale-105 hover:rotate-1 hover:shadow-2xl" 
+     data-amount="200000" data-fee="1720" data-tracking="LN-10007" data-months="15" data-offer-name="Ultimate Loan">
+
+    <div class="flex justify-between items-start mb-4">
+        <h3 class="text-lg font-bold text-gray-800">Ultimate Loan</h3>
+        <span class="bg-primary text-white text-xs px-3 py-1 rounded-full">LN-10007</span>
+    </div>
+
+    <p class="text-sm text-gray-500 mb-3">
+        Tailored for big investments, property, or long-term financial planning.
+    </p>
+
+    <div class="space-y-3 mb-6">
+        <div class="flex justify-between">
+            <span class="text-gray-600">Loan Amount:</span>
+            <span class="font-bold text-green-600">KES 200,000</span>
+        </div>
+
+        <div class="flex justify-between">
+            <span class="text-gray-600">
+                Processing Fee/refundable deposit:
+                <a href="#" class="explain-fee-link text-primary text-xs underline ml-1">why?fee</a>
+            </span>
+            <span class="font-semibold text-orange-600">KES 0</span>
+        </div>
+
+        <div class="flex justify-between">
+            <span class="text-gray-600">Monthly Rate:</span>
+            <span class="font-semibold text-blue-600">0.86%</span>
+        </div>
+
+        <div class="flex justify-between">
+            <span class="text-gray-600 flex items-center">
+                Repayment Period:
+                <span class="ml-1 relative group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+                    </svg>
+                    <span class="absolute bottom-full mb-2 hidden group-hover:block w-48 bg-gray-800 text-white text-xs rounded-lg px-2 py-1 shadow-lg">
+                        This is the number of months you'll repay your loan in equal installments.
+                    </span>
+                </span>
+            </span>
+            <span class="font-semibold text-purple-600">15 months</span>
+        </div>
+
+        <div class="flex justify-between pt-2 border-t border-gray-200">
+            <span class="font-semibold text-gray-700">You'll receive:</span>
+            <span class="font-bold text-primary text-lg">KES 198,280</span>
+        </div>
+
+        <div class="monthly-payment-info bg-blue-50 p-2 rounded-lg">
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Monthly Payment:</span>
+                <span class="font-semibold text-blue-600">KES <span class="monthly-amount">13,218</span></span>
+            </div>
         </div>
     </div>
 
-    <!-- Fee Information Modal -->
-    <div class="modal" id="feeModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Processing Fee Information</h3>
-                <button class="close-modal" onclick="closeFeeModal()">&times;</button>
+    <button class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 select-offer-btn">
+        Select This Offer
+    </button>
+</div>
             </div>
-            <p style="margin-bottom: 1rem; color: #666;">Our processing fee is calculated at <strong>1.29%</strong> of your approved loan amount.</p>
-            <p style="color: #666;">Repayment period is based on your loan amount:</p>
-            <ul style="margin: 1rem 0; padding-left: 1.5rem; color: #666;">
-                <li>KES 10,000: 1 Month repayment</li>
-                <li>KES 20,000: 2 Months repayment</li>
-                <li>KES 30,000: 3 Months repayment</li>
-            </ul>
-            <button class="btn btn-select" onclick="closeFeeModal()">Close</button>
+        </div>
+    </main>
+   <!-- Offers Eligibility Popup -->
+<div id="welcomePopup" 
+     class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+  <div id="welcomeContent" 
+       class="bg-white rounded-2xl shadow-2xl p-8 m-4 max-w-md w-full transform scale-95 opacity-0 transition-all duration-500 relative">
+
+    <!-- Close Button -->
+    <button id="closeWelcomeBtn" 
+            class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl leading-none">
+      &times;
+    </button>
+
+    <div class="text-center">
+  <!-- Hero Icon (Celebration Star) -->
+  <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 rotate-pause shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l2.39 6.9h7.26l-5.88 4.27 2.25 6.91L12 15.82l-6.02 4.26 2.25-6.91-5.88-4.27h7.26L12 2z"/>
+    </svg>
+  </div>
+</div>
+      
+      <!-- Heading -->
+      <h3 class="text-2xl font-extrabold text-gray-900 mb-3 flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-500" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l2.39 6.9h7.26l-5.88 4.27 2.25 6.91L12 15.82l-6.02 4.26 2.25-6.91-5.88-4.27h7.26L12 2z"/>
+        </svg>
+        Congratulations!
+      </h3>
+
+      <!-- Subtext -->
+      <p class="text-gray-600 text-base mb-3 leading-relaxed">
+        You’re eligible and we’ve found <span class="font-semibold text-primary">7 loan offers</span> for you.  
+        Pick the one that works best and unlock instant funds.
+      </p>
+
+      <!-- Disclaimer -->
+      <p class="text-gray-500 text-sm italic mb-6">
+        ⚠️ Please note, some offers may not be available depending on your credit score and eligibility.Some loan offers may be limited.
+      </p>
+
+      <!-- Progress Bar (processing Credit Score) -->
+      <div class="w-full bg-gray-200 rounded-full h-4 mb-6 overflow-hidden shadow-inner relative">
+        <div id="progressFill" class="bg-gradient-to-r from-green-500 to-blue-600 h-4 w-0"></div>
+        <span id="progressText" 
+              class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-gray-700">
+          Credit Score: 0%
+        </span>
+      </div>
+      
+      <!-- CTA -->
+      <button id="gotItBtn" 
+              class="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-3 px-6 rounded-xl font-bold text-lg shadow-lg flex items-center justify-center gap-2 hover:from-primary-dark hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        View My 7 Offers
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+    <!-- Loan Confirmation Modal -->
+    <div id="loanModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay fixed inset-0"></div>
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-md w-full relative">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="text-white" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <h2 id="modalOfferTitle" class="text-xl font-bold text-gray-900">Confirm Quick Loan</h2>
+                    </div>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="p-6 max-h-[32rem] overflow-y-auto">
+                    <!-- Loan Details -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                        <h3 class="font-semibold text-blue-900 mb-3">Loan Details</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Loan Amount:</span>
+                                <span id="modalAmount" class="font-semibold text-green-600"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Processing Fee/refundable deposit:</span>
+                                <span id="modalFee" class="font-semibold text-orange-600"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">You'll receive:</span>
+                                <span id="modalReceive" class="font-bold text-primary"></span>
+                            </div>
+                            <div class="flex justify-between pt-2 border-t border-blue-200">
+                                <span class="text-gray-600">Tracking ID:</span>
+                                <span id="modalTracking" class="font-mono text-xs bg-gray-100 px-2 py-1 rounded"></span>
+                            </div>
+                            <div class="flex justify-between pt-2 border-t border-blue-200">
+                                <span class="text-gray-600">Monthly Payment:</span>
+                                <span id="modalMonthlyPayment" class="font-semibold text-blue-600"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Repayment Period:</span>
+                                <span id="modalRepayment" class="font-mono text-xs bg-gray-100 px-2 py-1 rounded"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phone Number Input -->
+                    <div class="mb-6">
+                        <label for="phoneInput" class="block text-sm font-medium text-gray-700 mb-2">
+    Your active M-Pesa phone number (used for tracking, contacting you, STK push, and confirmation) e.g. 0722000000 or 0122000000 <span class="text-red-500">*</span>
+</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <span class="text-gray-500 text-sm">🇰🇪 +254</span>
+                            </div>
+                            <input 
+                                type="tel" 
+                                id="phoneInput" 
+                                class="phone-input w-full pl-20 pr-10 py-3 rounded-lg text-sm"
+                                placeholder="712345678"
+                                maxlength="9"
+                                required
+                            >
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                <svg id="phoneCheckIcon" class="hidden w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <svg id="phoneErrorIcon" class="hidden w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div id="phoneError" class="hidden text-red-500 text-xs mt-1"></div>
+                        <div class="text-gray-500 text-xs mt-1">
+                            Enter your M-Pesa number without +254 (e.g., 712345678)
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="mb-6">
+                        <div class="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200 hover:border-primary transition-all duration-300">
+                            <label class="flex items-start space-x-4 cursor-pointer">
+                                <input type="checkbox" id="termsCheckbox" class="custom-checkbox">
+                                <div class="text-sm text-gray-700 leading-relaxed flex-1">
+                                    <span class="font-semibold text-gray-900 block mb-2">📋 Agreement Required <span class="text-red-500">*</span></span>
+                                    <div class="space-y-1">
+                                        <div>✓ I agree to the <a href="#" class="text-primary hover:underline font-medium">Terms and Conditions</a></div>
+                                        <div>✓ I accept the <a href="#" class="text-primary hover:underline font-medium">Privacy Policy</a> and <a href="#" class="text-primary hover:underline font-medium">Loan Agreement</a></div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div id="termsError" class="text-red-600 text-sm mt-2 hidden font-medium">
+                            ⚠️ Please accept all terms and conditions to proceed with your loan application.
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        id="withdrawBtn" 
+                        class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled
+                    >
+                        Confirm My Loan
+                    </button>
+                    
+                    <!-- Payment Failure Warning -->
+                    <div class="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <div class="flex items-start space-x-3">
+                            <svg class="text-red-500 mt-0.5" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-2h-2v2zm0-4h2V7h-2v6z"/>
+                            </svg>
+                            <div class="text-sm text-red-700">
+                                <p class="font-semibold mb-1">⚠️ Important Payment Notice</p>
+                                <p>KYC (Know Your Customer) is coming soon to improve security and trust of the loan Applicant.If payment fails, please ensure your M-Pesa number is active and has sufficient limits. Contact customer service if issues persist.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Confirmation Modal -->
-    <div class="modal" id="confirmationModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Confirm Your Loan Selection</h3>
-                <button class="close-modal" onclick="closeConfirmationModal()">&times;</button>
-            </div>
-            <div class="confirmation-details" id="confirmationDetails">
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="confirmCheckbox">
-                <label for="confirmCheckbox">I confirm that I understand the loan terms and agree to proceed with this offer.</label>
-            </div>
-            <div class="modal-buttons">
-                <button class="btn btn-cancel" onclick="closeConfirmationModal()">Cancel</button>
-                <button class="btn btn-confirm" onclick="confirmLoanSelection()">Confirm & Continue</button>
+    <!-- Processing Modal -->
+    <div id="processingModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay fixed inset-0"></div>
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-primary rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center text-white">
+                <div class="processing-animation mb-6">
+                    <div class="w-16 h-16 bg-primary-dark rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="animate-spin text-white" width="32" height="32" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">
+                        Validating 
+                    </h3>
+                    <p class="text-sm opacity-90">
+                        Please wait while we prepare your loan wallet...
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Processing Modal - Big Colorless with Validating Wallet -->
-    <div class="modal" id="processingModal">
-        <div class="processing-modal-content">
-            <div class="processing-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-                </svg>
-            </div>
-            <h3 class="processing-title">Validating wallet</h3>
-            <div class="processing-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <p class="processing-text">Please wait while we verify your details...</p>
-        </div>
+  <!-- Fee Explanation Modal -->
+<div id="feeModal" class="hidden fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full modal-content">
+    <!-- Header -->
+    <div class="p-4 border-b border-gray-200">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-gray-900">Processing Fee/refundable deposit (via M-Pesa)</h2>
+        <button onclick="hideFeeModal()" class="text-gray-400 hover:text-gray-600">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
     </div>
+
+    <!-- Body -->
+    <div class="p-6">
+      <div class="space-y-4 text-sm text-gray-700">
+        <p>
+          A one-time processing fee/refundable deposit is required to activate your loan. 
+          This payment is requested <b>securely via M-Pesa</b> before disbursement, and it ensures
+          smooth, fast, and reliable service for all customers.
+        </p>
+        
+        <ul class="list-disc list-inside space-y-2 ml-4">
+          <li>Credit scoring and risk evaluation</li>
+          <li>Customer verification and fraud prevention</li>
+          <li>System maintenance and platform security</li>
+          <li>Regulatory compliance and audit checks</li>
+          <li>24/7 customer support availability</li>
+          <li>Record keeping and loan tracking</li>
+        </ul>
+
+        <!-- Info Box -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-4 flex items-start">
+          <svg class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"/>
+          </svg>
+          <p class="text-blue-800 text-xs">
+            The processing fee/refundable deposit is <b>stored securely</b> in our system. 
+            It is fully refundable and will be <b>returned to your M-Pesa wallet after you complete full loan repayment</b>.
+          </p>
+        </div>
+
+        <!-- Extra Assurance -->
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 mt-3 flex items-start">
+          <svg class="w-5 h-5 text-gray-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <p class="text-gray-700 text-xs">
+            If your loan is <b>not approved or disbursed</b>, 
+            the processing fee/refundable deposit will be <b>automatically reversed to your M-Pesa account</b>.
+          </p>
+        </div>
+
+        <!-- Reassurance -->
+        <div class="flex items-start mt-2 text-green-700 text-sm font-medium">
+          <svg class="w-5 h-5 text-green-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+          <p>
+            No hidden charges. Only this one-time processing fee/refundable deposit is required. 
+            Your full loan amount is sent to your M-Pesa wallet once payment is confirmed.
+          </p>
+        </div>
+
+        <!-- Agreement Text -->
+        <p class="mt-4 text-sm text-gray-700 font-medium text-center">
+          I understand and accept that the processing fee/refundable deposit is paid via M-Pesa, 
+          stored securely, refunded after full repayment, 
+          and reversed if the loan is not approved.
+        </p>
+
+        <!-- Understand Button -->
+        <div class="mt-6 text-center">
+          <button onclick="hideFeeModal()" 
+                  class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors">
+            I Understand
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+   
+
+    <script>
+console.log("Swift Loan Offers Page initialized");
+
+// Global variables
+let currentLoanData = {};
+
+// Load user data from localStorage with enhanced functionality
+function loadUserData() {
+    console.log('Loading user data from localStorage...');
+    
+    // Get parameters from the URL first
+    const urlParams = new URLSearchParams(window.location.search);
+    const nameFromURL = urlParams.get('name');
+    const idFromURL = urlParams.get('id');
+
+    // If parameters exist, save them to localStorage for later use
+    if (nameFromURL) {
+        localStorage.setItem('customerName', nameFromURL);
+        console.log('Saved name from URL to localStorage:', nameFromURL);
+    }
+    if (idFromURL) {
+        localStorage.setItem('idNumber', idFromURL);
+        console.log('Saved ID from URL to localStorage:', idFromURL);
+    }
+
+    // Try multiple possible localStorage keys for user data with priority order
+    const possibleNameKeys = [
+        'customerName',      // Priority 1
+        'fullName', 
+        'full_name',
+        'swift_customer_name', 
+        'name',
+        'user_name',
+        'userName'
+    ];
+
+    const possibleIdKeys = [
+        'idNumber',         // Priority 1
+        'id_number', 
+        'customerId',
+        'swift_customer_id',
+        'nationalId',
+        'user_id',
+        'userId'
+    ];
+
+    let customerName = null;
+    let customerId = null;
+
+    // Find the first available name
+    for (const key of possibleNameKeys) {
+        const value = localStorage.getItem(key);
+        if (value && value.trim() !== '') {
+            customerName = value;
+            console.log(`Found name in localStorage with key '${key}':`, customerName);
+            break;
+        }
+    }
+
+    // Find the first available ID
+    for (const key of possibleIdKeys) {
+        const value = localStorage.getItem(key);
+        if (value && value.trim() !== '') {
+            customerId = value;
+            console.log(`Found ID in localStorage with key '${key}':`, customerId);
+            break;
+        }
+    }
+
+    // Update the display elements
+    const cardNameElement = document.querySelector('.card-name');
+    const cardIdElement = document.querySelector('.card-id');
+
+    if (cardNameElement) {
+        if (customerName && customerName.trim() !== '') {
+            cardNameElement.textContent = customerName;
+            cardNameElement.style.color = '#059669'; // Green color for loaded data
+        } else {
+            cardNameElement.textContent = 'USR41277422';
+            cardNameElement.style.color = '#dc2626'; // Red color for missing data
+            console.warn('No valid name found in localStorage');
+        }
+    }
+
+    if (cardIdElement) {
+        if (customerId && customerId.trim() !== '') {
+            cardIdElement.textContent = customerId;
+            cardIdElement.style.color = '#059669'; // Green color for loaded data
+        } else {
+            cardIdElement.textContent = 'Active';
+            cardIdElement.style.color = '#dc2626'; // Red color for missing data
+            console.warn('No valid ID found in localStorage');
+        }
+    }
+
+    // Log all available localStorage keys for debugging
+    console.log('All available localStorage keys:', Object.keys(localStorage));
+    console.log('Final loaded data:', { name: customerName, id: customerId });
+
+    // Return the loaded data
+    return { name: customerName, id: customerId };
+}
+
+// Calculate monthly payment using 0.86% interest rate
+async function calculateMonthlyPayment(principal, months) {
+    try {
+        // Fallback calculation for standalone HTML
+        const monthlyRate = 0.0086; // 0.86%
+        const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+        return Math.round(monthlyPayment);
+    } catch (error) {
+        console.error('Error calculating payment:', error);
+        // Fallback calculation
+        const monthlyRate = 0.0086; // 0.86%
+        const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+        return Math.round(monthlyPayment);
+    }
+}
+
+// Update all monthly payment displays
+async function updateMonthlyPayments() {
+    const loanCards = document.querySelectorAll('.loan-card');
+    
+    for (const card of loanCards) {
+        const amount = parseInt(card.getAttribute('data-amount'));
+        const months = parseInt(card.getAttribute('data-months'));
+        const monthlyAmountEl = card.querySelector('.monthly-amount');
+        
+        if (monthlyAmountEl) {
+            const monthlyPayment = await calculateMonthlyPayment(amount, months);
+            monthlyAmountEl.textContent = monthlyPayment.toLocaleString();
+        }
+    }
+}
+
+// Create confetti effect
+function createConfetti() {
+    const confettiContainer = document.createElement('div');
+    confettiContainer.style.position = 'fixed';
+    confettiContainer.style.top = '0';
+    confettiContainer.style.left = '0';
+    confettiContainer.style.width = '100%';
+    confettiContainer.style.height = '100%';
+    confettiContainer.style.pointerEvents = 'none';
+    confettiContainer.style.zIndex = '9999';
+    document.body.appendChild(confettiContainer);
+
+    // Create 50 confetti pieces
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confettiContainer.appendChild(confetti);
+
+            // Remove confetti after animation
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.parentNode.removeChild(confetti);
+                }
+            }, 4000);
+        }, i * 50);
+    }
+
+    // Remove container after all confetti is done
+    setTimeout(() => {
+        if (confettiContainer.parentNode) {
+            confettiContainer.parentNode.removeChild(confettiContainer);
+        }
+    }, 6000);
+}
+
+// Show welcome popup
+function showWelcomePopup() {
+    const popup = document.getElementById('welcomePopup');
+    const content = document.getElementById('welcomeContent');
+    
+    popup.classList.remove('hidden');
+    popup.classList.add('flex');
+    
+    setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+    }, 50);
+}
+
+// Hide welcome popup
+function hideWelcomePopup() {
+    const popup = document.getElementById('welcomePopup');
+    const content = document.getElementById('welcomeContent');
+    
+    content.classList.add('scale-95', 'opacity-0');
+    content.classList.remove('scale-100', 'opacity-100');
+    
+    setTimeout(() => {
+        popup.classList.add('hidden');
+        popup.classList.remove('flex');
+    }, 300);
+}
+
+// Show fee explanation modal
+function showFeeModal() {
+    const modal = document.getElementById('feeModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+// Hide fee explanation modal
+function hideFeeModal() {
+    const modal = document.getElementById('feeModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+// Update ticker with real time
+function updateTickerTimes() {
+    const now = new Date();
+    const times = [
+        now.toLocaleTimeString('en-KE', { hour12: false, hour: '2-digit', minute: '2-digit' }),
+        new Date(now - 2 * 60000).toLocaleTimeString('en-KE', { hour12: false, hour: '2-digit', minute: '2-digit' }),
+        new Date(now - 5 * 60000).toLocaleTimeString('en-KE', { hour12: false, hour: '2-digit', minute: '2-digit' }),
+        new Date(now - 8 * 60000).toLocaleTimeString('en-KE', { hour12: false, hour: '2-digit', minute: '2-digit' }),
+        new Date(now - 12 * 60000).toLocaleTimeString('en-KE', { hour12: false, hour: '2-digit', minute: '2-digit' }),
+        new Date(now - 15 * 60000).toLocaleTimeString('en-KE', { hour12: false, hour: '2-digit', minute: '2-digit' })
+    ];
+
+    // Update all time elements
+    const currentTimeEl = document.getElementById('current-time');
+    if (currentTimeEl) {
+        currentTimeEl.textContent = `[${times[0]}] `;
+    }
+
+    for (let i = 2; i <= 6; i++) {
+        const timeEl = document.getElementById(`time-${i}`);
+        if (timeEl) {
+            timeEl.textContent = `[${times[i-1]}] `;
+        }
+    }
+}
+
+// Mobile menu toggle
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+}
+
+// Phone number validation for Kenyan format
+function validateKenyanPhone(phone) {
+    // Remove any spaces or dashes
+    const cleanPhone = phone.replace(/[\s-]/g, '');
+    
+    // Check if it's 9 digits and starts with 7, 1, or 0
+    const phoneRegex = /^[701]\d{8}$/;
+    return phoneRegex.test(cleanPhone);
+}
+
+// Format phone number display
+function formatPhoneNumber(phone) {
+    if (phone.length === 9) {
+        return `254${phone}`;
+    }
+    return phone;
+}
+
+// Update phone validation UI
+function updatePhoneValidation(input, isValid, errorMessage = '') {
+    const errorDiv = document.getElementById('phoneError');
+    const checkIcon = document.getElementById('phoneCheckIcon');
+    const errorIcon = document.getElementById('phoneErrorIcon');
+    
+    if (isValid) {
+        input.classList.remove('error');
+        input.classList.add('valid');
+        errorDiv.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+        errorIcon.classList.add('hidden');
+    } else {
+        input.classList.remove('valid');
+        input.classList.add('error');
+        errorDiv.textContent = errorMessage;
+        errorDiv.classList.remove('hidden');
+        checkIcon.classList.add('hidden');
+        errorIcon.classList.remove('hidden');
+    }
+}
+
+// Check if form is valid
+function checkFormValidity() {
+    const phoneInput = document.getElementById('phoneInput');
+    const termsCheckbox = document.getElementById('termsCheckbox');
+    const withdrawBtn = document.getElementById('withdrawBtn');
+    
+    const isPhoneValid = validateKenyanPhone(phoneInput.value);
+    const isTermsChecked = termsCheckbox.checked;
+    
+    withdrawBtn.disabled = !(isPhoneValid && isTermsChecked);
+}
+
+// Show loan confirmation modal
+async function showLoanModal(loanData) {
+    currentLoanData = loanData;
+    
+    // Calculate monthly payment
+    const monthlyPayment = await calculateMonthlyPayment(
+        parseInt(loanData.amount), 
+        parseInt(loanData.months)
+    );
+    
+    // Update modal content
+    document.getElementById('modalOfferTitle').textContent = `Confirm ${loanData.offerName}`;
+    document.getElementById('modalAmount').textContent = `KES ${parseInt(loanData.amount).toLocaleString()}`;
+    document.getElementById('modalFee').textContent = `KES ${parseInt(loanData.fee).toLocaleString()}`;
+    document.getElementById('modalReceive').textContent = `KES ${(parseInt(loanData.amount) - parseInt(loanData.fee)).toLocaleString()}`;
+    document.getElementById('modalTracking').textContent = loanData.tracking;
+    document.getElementById('modalMonthlyPayment').textContent = `KES ${monthlyPayment.toLocaleString()}`;
+    document.getElementById('modalRepayment').textContent = `${loanData.months} months`;
+    
+    // Reset form and pre-populate phone if available
+    const phoneInput = document.getElementById('phoneInput');
+    const storedPhone = localStorage.getItem('swift_customer_phone');
+    if (storedPhone) {
+        phoneInput.value = storedPhone.replace(/^\254/, '');
+    }
+    
+    document.getElementById('termsCheckbox').checked = false;
+    document.getElementById('withdrawBtn').disabled = true;
+    
+    // Clear validation states
+    phoneInput.classList.remove('error', 'valid');
+    document.getElementById('phoneError').classList.add('hidden');
+    document.getElementById('phoneCheckIcon').classList.add('hidden');
+    document.getElementById('phoneErrorIcon').classList.add('hidden');
+    
+    // Show modal
+    document.getElementById('loanModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Hide loan modal
+function hideLoanModal() {
+    document.getElementById('loanModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Show processing modal
+function showProcessingModal() {
+    hideLoanModal();
+    document.getElementById('processingModal').classList.remove('hidden');
+}
+
+// Hide processing modal
+function hideProcessingModal() {
+    document.getElementById('processingModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Process loan withdrawal
+function processLoanWithdrawal() {
+    const phoneInput = document.getElementById('phoneInput');
+    const phone = phoneInput.value;
+    
+    // Final validation
+    if (!validateKenyanPhone(phone)) {
+        updatePhoneValidation(phoneInput, false, 'Please enter a valid Kenyan phone number');
+        return;
+    }
+    
+    const termsCheckbox = document.getElementById('termsCheckbox');
+    const termsError = document.getElementById('termsError');
+    
+    if (!termsCheckbox.checked) {
+        termsCheckbox.classList.add('error');
+        termsError.classList.remove('hidden');
+        setTimeout(() => termsCheckbox.classList.remove('error'), 500);
+        alert('Please accept the terms and conditions to continue.');
+        return;
+    }
+    
+    // Store loan data
+    const selectedOffer = {
+        ...currentLoanData,
+        phone: formatPhoneNumber(phone),
+        timestamp: new Date().toISOString()
+    };
+    
+    localStorage.setItem('swift_selected_offer', JSON.stringify(selectedOffer));
+    localStorage.setItem('swift_customer_phone', formatPhoneNumber(phone));
+    
+    console.log('Processing loan withdrawal:', selectedOffer);
+    
+    // Show processing animation
+    showProcessingModal();
+    
+    // Simulate processing time and redirect
+setTimeout(() => {
+    hideProcessingModal();
+    // Redirect to loan withdrawal page
+    window.location.href = 'loan-withdrawal.html';
+}, 10000);
+}
+
+// Add button loading animation
+function addButtonLoading(button) {
+    button.classList.add('button-loading');
+    button.disabled = true;
+}
+
+// Remove button loading animation
+function removeButtonLoading(button) {
+    button.classList.remove('button-loading');
+    button.disabled = false;
+}
+
+// Enhanced select loan offer function with animation
+function selectLoanOffer(card) {
+    const button = card.querySelector('button');
+    
+    // Add loading animation
+    addButtonLoading(button);
+    
+    // Show animation for 1 second before opening modal
+    setTimeout(() => {
+        removeButtonLoading(button);
+        
+        const amount = card.getAttribute('data-amount');
+        const fee = card.getAttribute('data-fee');
+        const tracking = card.getAttribute('data-tracking');
+        const months = card.getAttribute('data-months');
+        const offerName = card.getAttribute('data-offer-name');
+
+        const loanData = {
+            amount: amount,
+            fee: fee,
+            tracking: tracking,
+            months: months,
+            offerName: offerName
+        };
+
+        console.log('Selected loan offer:', loanData);
+
+        // Show modal instead of immediate redirect
+        showLoanModal(loanData);
+    }, 1000);
+}
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded - starting initialization');
+    
+    // Load user data first
+    const userData = loadUserData();
+    console.log('User data loaded successfully:', userData);
+    
+    // Update monthly payments
+    updateMonthlyPayments();
+    
+    // Show confetti immediately on page load
+    createConfetti();
+    
+    // Show welcome popup after 1 second
+    setTimeout(showWelcomePopup, 1000);
+    
+    // Update ticker times initially and every 30 seconds
+    updateTickerTimes();
+    setInterval(updateTickerTimes, 30000);
+    
+    // Add click handlers to all loan cards
+    const loanCards = document.querySelectorAll('.loan-card');
+    loanCards.forEach(card => {
+        const button = card.querySelector('button');
+        if (button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                selectLoanOffer(card);
+            });
+        }
+    });
+
+    // Phone input validation
+    const phoneInput = document.getElementById('phoneInput');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function () {
+            let phone = this.value.replace(/\D/g, ''); // keep digits only
+
+            // Auto-correct: if user types "07..." → convert to "7..."
+            if (phone.startsWith('07')) {
+                phone = phone.substring(1);
+            }
+
+            // Limit to 9 digits
+            if (phone.length > 9) {
+                phone = phone.substring(0, 9);
+            }
+
+            this.value = phone;
+
+            // Validation checks
+            if (phone.length === 0) {
+                updatePhoneValidation(this, true);
+            } else if (phone.length < 9) {
+                updatePhoneValidation(this, false, 'Phone number must be 9 digits');
+            } else if (!/^(7|1)\d{8}$/.test(phone)) {
+                updatePhoneValidation(this, false, 'Invalid Kenyan phone number format ');
+            } else {
+                updatePhoneValidation(this, true);
+            }
+
+            // Re-check form status
+            checkFormValidity();
+        });
+    }
+    
+    // Terms checkbox validation
+    const termsCheckbox = document.getElementById('termsCheckbox');
+    if (termsCheckbox) {
+        termsCheckbox.addEventListener('change', function() {
+            const checkbox = this;
+            const termsError = document.getElementById('termsError');
+            
+            if (checkbox.checked) {
+                checkbox.classList.remove('error');
+                termsError.classList.add('hidden');
+            } else {
+                termsError.classList.remove('hidden');
+            }
+            
+            checkFormValidity();
+        });
+    }
+    
+    // Withdraw button
+    const withdrawBtn = document.getElementById('withdrawBtn');
+    if (withdrawBtn) {
+        withdrawBtn.addEventListener('click', processLoanWithdrawal);
+    }
+    
+    // Fee explanation links
+    const feeLinks = document.querySelectorAll('.explain-fee-link');
+    feeLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            showFeeModal();
+        });
+    });
+    
+    // Modal close handlers
+    const closeModal = document.getElementById('closeModal');
+    if (closeModal) {
+        closeModal.addEventListener('click', hideLoanModal);
+    }
+    
+    // Close modals when clicking outside
+    const loanModal = document.getElementById('loanModal');
+    if (loanModal) {
+        loanModal.addEventListener('click', function(e) {
+            if (e.target === this) hideLoanModal();
+        });
+    }
+    
+    const feeModal = document.getElementById('feeModal');
+    if (feeModal) {
+        feeModal.addEventListener('click', function(e) {
+            if (e.target === this) hideFeeModal();
+        });
+    }
+
+    // Welcome popup handlers
+    const gotItBtn = document.getElementById('gotItBtn');
+    const closeWelcomeBtn = document.getElementById('closeWelcomeBtn');
+    
+    if (gotItBtn) {
+        gotItBtn.addEventListener('click', hideWelcomePopup);
+    }
+    
+    if (closeWelcomeBtn) {
+        closeWelcomeBtn.addEventListener('click', hideWelcomePopup);
+    }
+    
+    // Auto-close welcome popup after 10 seconds
+    setTimeout(hideWelcomePopup, 10000);
+    
+    console.log('Loan offers page initialization complete');
+});
+
+// Global functions for inline handlers
+window.toggleMobileMenu = toggleMobileMenu;
+window.hideFeeModal = hideFeeModal;
+window.showFeeModal = showFeeModal;
+ 
+  
+  
+  document.querySelectorAll(".select-offer-btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      const card = this.closest(".loan-card");
+      const trackingId = card.getAttribute("data-tracking");
+
+      // Disable specific offers
+      if (trackingId === "LN-10004" ||  // KES 75,000
+          trackingId === "LN-10005" ||  // KES 100,000
+          trackingId === "LN-10006" ||  // KES 150,000
+          trackingId === "LN-10007") {  // KES 200,000
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        card.classList.add("not-qualified");
+// Add explanation text if not already there
+if (!card.querySelector(".not-qualified-reason")) {
+  const reason = document.createElement("p");
+  reason.className = "not-qualified-reason text-red-600 text-sm font-medium mt-3";
+  reason.innerText = "This loan amount is not currently available for you. To qualify, you’ll need to build a 100% credit score by successfully borrowing and repaying your first loan. Please consider selecting another offer.once you have fully paid your first loan youll start getting full access to more loans with ksh 0 fee.";
+  card.appendChild(reason);
+}
+
+        return false;
+      }
+
+      // All other offers run normally
+    }, true);
+  });
+
+
+  // Example credit score value (can be dynamic later)
+  const creditScorePercent = 60; 
+
+  function animateProgressBar() {
+    const fill = document.getElementById("progressFill");
+    const text = document.getElementById("progressText");
+    let progress = 0;
+
+    const interval = setInterval(() => {
+      if (progress >= creditScorePercent) {
+        clearInterval(interval);
+      } else {
+        progress++;
+        fill.style.width = progress + "%";
+        text.innerText = "Credit Score: " + progress + "%";
+      }
+    }, 20); // 20ms per step = ~2 seconds animation
+  }
+
+  // Run animation when popup is shown
+  window.addEventListener("load", animateProgressBar);
+
+
+function updateKenyaTime() {
+    const dateOptions = {
+        timeZone: "Africa/Nairobi",
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    };
+    const timeOptions = {
+        timeZone: "Africa/Nairobi",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    };
+
+    const dateFormatter = new Intl.DateTimeFormat([], dateOptions);
+    const timeFormatter = new Intl.DateTimeFormat([], timeOptions);
+
+    document.getElementById("kenya-time").textContent =
+        "Time: " + timeFormatter.format(new Date()) + " | " + dateFormatter.format(new Date());
+}
+
+updateKenyaTime();
+setInterval(updateKenyaTime, 1000);
+ 
+
+ 
+   
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    }
+
+     
+/* === 60 Realistic Kenyan Names === */
+const kenyaNames = [
+  'James Omondi','Mary Wanjiku','Peter Kamau','Grace Akinyi','David Mwangi',
+  'Faith Chebet','John Kipchoge','Lucy Njeri','Samuel Otieno','Rose Wambui',
+  'Michael Karanja','Jane Moraa','Daniel Mutua','Ann Jepkoech','Brian Koech',
+  'Sarah Wangari','Patrick Odongo','Catherine Kibet','Joseph Ndungu','Elizabeth Adhiambo',
+  'Kelvin Kiptoo','Alice Naliaka','George Oduor','Esther Nyambura','Charles Maina',
+  'Ruth Naliaka','Collins Barasa','Florence Wairimu','Alex Kiplangat','Nancy Chepkemoi',
+  'Allan Otieno','Brenda Wairimu','Vincent Cheruiyot','Diana Atieno','Eric Kimutai',
+  'Agnes Cheptoo','Dennis Kinyua','Mercy Wambui','Robert Kiprono','Janet Moraa',
+  'Felix Mwangi','Caroline Chepkorir','Edwin Ochieng','Pauline Achieng','Stephen Mutinda',
+  'Purity Njeri','Martin Kimani','Dorcas Jepchirchir','Victor Ouma','Naomi Chepkorir',
+  'Justus Mwangi','Beatrice Naliaka','Anthony Kiprotich','Joyce Atieno','Elijah Kiplagat',
+  'Nancy Wairimu','Peter Ochieng','Agnes Wanjiku','George Kipkemoi','Lydia Jepngetich'
+];
+
+/* === 60 Realistic Non-Sequential Kenyan Numbers === */
+const phoneNumbers = [
+  '0722327497','0718369524','0723894121','0745123987','0708456931','0792458713',
+  '0758237490','0719652348','0789134265','0722457893','0748123649','0712349587',
+  '0754678932','0789341257','0725236894','0798234765','0719347821','0758943126',
+  '0745236897','0789234710','0709347852','0792456789','0728436910','0719345278',
+  '0789345210','0758234697','0722346958','0745238901','0719234876','0798456321',
+  '0789236451','0759341278','0745123869','0729234785','0718452396','0709345621',
+  '0758234971','0719348250','0729341856','0792348657','0745238961','0789234571',
+  '0759342785','0728349652','0719236458','0748346920','0709348265','0789345120',
+  '0759342857','0729341864','0718349527','0792348756','0759348214','0745238796',
+  '0719234582','0729348561','0789234157','0709456823','0758349267','0719452836'
+];
+
+/* === Loan Amounts === */
+const amounts = [
+  '5,000','10,000','15,000','20,000','25,000','30,000',
+  '35,000','40,000','50,000','75,000','100,000','150,000'
+];
+
+/* === Helper Functions === */
+function maskPhone(p){
+  return p.length === 10 ? p.slice(0,4)+'XXX'+p.slice(7) : p;
+}
+
+function getRandomItem(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function getRandomTime(){
+  const now = new Date();
+  const mins = Math.floor(Math.random() * 180);
+  const past = new Date(now - mins * 60000);
+  return past.toLocaleTimeString('en-KE',{
+    timeZone:'Africa/Nairobi',
+    hour:'2-digit',
+    minute:'2-digit'
+  });
+}
+
+function getRandomDate(){
+  const d = new Date();
+  const daysAgo = Math.floor(Math.random() * 3);
+  d.setDate(d.getDate() - daysAgo);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
+/* === Notification Popup Logic === */
+let currentIndex = Math.floor(Math.random() * kenyaNames.length);
+
+function createNotificationPopup(){
+  const container = document.getElementById('notification-container');
+  if(!container) return;
+  container.innerHTML = '';
+
+  const index = Math.floor(Math.random() * kenyaNames.length);
+const name = kenyaNames[index];
+const phone = maskPhone(phoneNumbers[index]);
+
+  const amount = getRandomItem(amounts);
+  const time = getRandomTime();
+  const date = getRandomDate();
+
+  const popup = document.createElement('div');
+  popup.className = 'notification-popup';
+  popup.innerHTML = `
+    <div class="flex items-start space-x-2">
+      <svg class="w-6 h-6 text-green-500 glow-icon flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <div class="flex-1">
+        <p class="text-sm font-semibold text-gray-800">${name}</p>
+        <p class="text-xs text-gray-500">${phone} • ${time}</p>
+        <p class="text-xs text-gray-400 mb-1">${date}</p>
+        <p class="text-sm font-bold text-green-700">KES ${amount} Approved!</p>
+      </div>
+    </div>
+  `;
+
+  container.appendChild(popup);
+
+  // Fade in smoothly
+  requestAnimationFrame(() => {
+    popup.style.opacity = '1';
+    popup.style.transform = 'translateY(0) scale(1)';
+  });
+
+  // Stay visible for 7.5s, fade out smoothly
+  setTimeout(() => {
+    popup.style.opacity = '0';
+    popup.style.transform = 'translateY(40px) scale(0.95)';
+    setTimeout(() => popup.remove(), 1500);
+  }, 7500);
+}
+
+/* === Sequential Loop === */
+function startNotifications(){
+  setTimeout(() => {
+    createNotificationPopup();
+    setInterval(createNotificationPopup, 10000); // 10s total interval
+  }, 2500); // delay before first
+}
+
+window.addEventListener('load', startNotifications);
+</script>
+
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="footer-content">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h3>About Us</h3>
+                    <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="index.html#about">Our Story</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Partners</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About Us</a></li>
                         <li><a href="eligibility.html">Apply for Loan</a></li>
-                        <li><a href="index.html#calculator">Loan Calculator</a></li>
-                        <li><a href="#">Loan Repayment</a></li>
+                        <li><a href="#">Loan Calculator</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">FAQs</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Support</h3>
+                    <h3>Legal</h3>
                     <ul class="footer-links">
-                        <li><a href="index.html#faq">FAQs</a></li>
-                        <li><a href="index.html#contact">Contact Us</a></li>
-                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Loan Rules</a></li>
+                        <li><a href="#">Cookie Settings</a></li>
+                        <li><a href="#">Promotions</a></li>
                     </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                            </svg>
+                            <a href="mailto:info@swiftloan.ke">info@swiftloan.ke</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/>
+                            </svg>
+                            <a href="tel:+254732202740">0732202740</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.53 14.27C13.38 14.44 13.24 14.46 13 14.34C12.74 14.21 11.94 13.95 11 13.11C10.26 12.45 9.77 11.64 9.62 11.39C9.5 11.15 9.61 11 9.73 10.89C9.84 10.78 10 10.6 10.1 10.45C10.23 10.31 10.27 10.2 10.35 10.04C10.43 9.87 10.39 9.73 10.33 9.61C10.27 9.5 9.77 8.26 9.56 7.77C9.36 7.29 9.16 7.35 9 7.34C8.86 7.34 8.7 7.33 8.53 7.33Z"/>
+                            </svg>
+                            <a href="https://wa.me/254732202740">WhatsApp: 0732202740</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed by Central Bank of Kenya.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed by Central Bank of Kenya.</p>
+            </div>
         </div>
     </footer>
 
-    <script>
-        // Toggle Applicant Details
-        function toggleDetails() {
-            const detailsBox = document.getElementById('detailsBox');
-            const toggleIcon = document.getElementById('toggleIcon');
-            detailsBox.classList.toggle('collapsed');
-            
-            if (detailsBox.classList.contains('collapsed')) {
-                toggleIcon.textContent = '+';
-            } else {
-                toggleIcon.textContent = '-';
-            }
-        }
+<script>
+    // Sidebar Toggle Functionality
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const closeSidebar = document.getElementById('closeSidebar');
 
-        // Start collapsed
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('detailsBox').classList.add('collapsed');
-            document.getElementById('toggleIcon').textContent = '+';
-        });
+    function toggleSidebar() {
+        hamburger.classList.toggle('active');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
 
-        // Sidebar Toggle
-        const hamburger = document.getElementById('hamburger');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const closeSidebarBtn = document.getElementById('closeSidebar');
+    function closeSidebarMenu() {
+        hamburger.classList.remove('active');
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    }
 
-        function toggleSidebar() {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
+    if (hamburger) {
         hamburger.addEventListener('click', toggleSidebar);
-        closeSidebarBtn.addEventListener('click', toggleSidebar);
-        overlay.addEventListener('click', toggleSidebar);
-
-        let selectedOffer = null;
-
-        // Fake notification data
-        const fakeNotifications = [
-            { name: "James M***", amount: "30,000", time: "Just now" },
-            { name: "Faith W***", amount: "20,000", time: "1 minute ago" },
-            { name: "Peter K***", amount: "10,000", time: "2 minutes ago" },
-            { name: "Grace N***", amount: "30,000", time: "3 minutes ago" },
-            { name: "David O***", amount: "20,000", time: "5 minutes ago" },
-            { name: "Mary A***", amount: "10,000", time: "7 minutes ago" },
-            { name: "Joseph M***", amount: "30,000", time: "10 minutes ago" },
-            { name: "Ann K***", amount: "20,000", time: "12 minutes ago" }
-        ];
-
-        let notifIndex = 0;
-
-        function showNotification() {
-            const ticker = document.getElementById('notificationTicker');
-            const notif = fakeNotifications[notifIndex];
-            
-            document.getElementById('notifName').textContent = notif.name;
-            document.getElementById('notifDetails').textContent = `Received KES ${notif.amount}`;
-            document.getElementById('notifTime').textContent = notif.time;
-            
-            ticker.classList.add('show');
-            
-            setTimeout(() => {
-                ticker.classList.remove('show');
-                notifIndex = (notifIndex + 1) % fakeNotifications.length;
-            }, 4000);
-        }
-
-        setInterval(showNotification, 6000);
-        setTimeout(showNotification, 2000);
-
-        // Load application data and generate offers
-        window.addEventListener('load', function() {
-            const personalDetails = localStorage.getItem('swiftloan_personal_details');
-            const otherDetails = localStorage.getItem('swiftloan_other_details');
-            
-            if (!personalDetails || !otherDetails) {
-                alert('No application data found. Redirecting to application page...');
-                window.location.href = 'eligibility.html';
-                return;
-            }
-            
-            const parsedPersonal = JSON.parse(personalDetails);
-            const parsedOther = JSON.parse(otherDetails);
-            
-            displayApplicantDetails(parsedPersonal, parsedOther);
-            
-            // Show loading for 5 seconds before showing offers
-            setTimeout(() => {
-                document.getElementById('loadingContainer').style.display = 'none';
-                document.getElementById('offersGrid').classList.remove('hidden');
-                generateOffers(parsedPersonal, parsedOther);
-            }, 5000);
+    }
+    if (closeSidebar) {
+        closeSidebar.addEventListener('click', toggleSidebar);
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            toggleSidebar();
         });
+    }
 
-        function displayApplicantDetails(personal, other) {
-            const detailsHTML = `
-                <div class="detail-item">
-                    <div class="detail-label">Full Name</div>
-                    <div class="detail-value">${personal.fullName}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">ID Number</div>
-                    <div class="detail-value">${personal.nationalId}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Phone</div>
-                    <div class="detail-value">${personal.phoneNumber}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Monthly Income</div>
-                    <div class="detail-value">${other.monthlyIncome}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Employment</div>
-                    <div class="detail-value">${other.employmentStatus}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Loan Purpose</div>
-                    <div class="detail-value">${other.loanPurpose}</div>
-                </div>
-            `;
-            
-            document.getElementById('applicantDetails').innerHTML = detailsHTML;
+    // Notification System
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationDropdown = document.getElementById('notificationDropdown');
+    const notificationDot = document.getElementById('notificationDot');
+    const markAllReadBtn = document.getElementById('markAllReadBtn');
+
+    if (notificationBtn) {
+        notificationBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('active');
+        });
+    }
+
+    document.addEventListener('click', function(e) {
+        if (notificationDropdown && !notificationDropdown.contains(e.target) && e.target !== notificationBtn) {
+            notificationDropdown.classList.remove('active');
         }
+    });
 
-        let applicantIdNumber = '';
-
-        function generateOffers(personal, other) {
-            applicantIdNumber = personal.nationalId;
-            const monthlyIncome = other.monthlyIncome;
-            const employmentStatus = other.employmentStatus;
-            const purposeOfLoan = other.loanPurpose;
-            const requestedAmount = parseInt(other.loanAmount);
-
-            let incomeValue = 0;
-            if (monthlyIncome.includes('Below')) {
-                incomeValue = 5000;
-            } else if (monthlyIncome.includes('-')) {
-                const parts = monthlyIncome.split('-');
-                incomeValue = parseInt(parts[0].replace(/\D/g, ''));
-            } else if (monthlyIncome.includes('Above')) {
-                incomeValue = 100000;
-            }
-
-            let qualifiedLoan;
-            if (incomeValue >= 10000 && incomeValue <= 19999) {
-                qualifiedLoan = 10000;
-            } else if (incomeValue >= 20000 && incomeValue <= 34999) {
-                qualifiedLoan = 20000;
-            } else if (incomeValue >= 35000) {
-                qualifiedLoan = 30000;
-            } else {
-                qualifiedLoan = 10000;
-            }
-
-            if (employmentStatus === 'Unemployed') {
-                qualifiedLoan = 10000;
-            }
-
-            let reductionReason = '';
-            if (purposeOfLoan.toLowerCase().includes('personal')) {
-                if (qualifiedLoan === 30000) {
-                    qualifiedLoan = 20000;
-                    reductionReason = 'Reduced due to personal use purpose';
-                } else if (qualifiedLoan === 20000) {
-                    qualifiedLoan = 10000;
-                    reductionReason = 'Reduced due to personal use purpose';
-                }
-            } else if (purposeOfLoan.toLowerCase().includes('betting')) {
-                alert('Sorry, we cannot approve loans for betting purposes.');
-                window.location.href = 'index.html';
-                return;
-            }
-
-            let approvedAmount;
-            if (requestedAmount > qualifiedLoan) {
-                approvedAmount = qualifiedLoan;
-            } else {
-                approvedAmount = requestedAmount;
-            }
-
-            if (approvedAmount > 20000) {
-                approvedAmount = 30000;
-            } else if (approvedAmount > 10000) {
-                approvedAmount = 20000;
-            } else {
-                approvedAmount = 10000;
-            }
-
-            let months;
-            if (approvedAmount === 10000) {
-                months = 1;
-            } else if (approvedAmount === 20000) {
-                months = 2;
-            } else {
-                months = 3;
-            }
-
-            let fee = approvedAmount * 0.0129;
-            if (months === 2) {
-                fee *= 1.10;
-            } else if (months === 3) {
-                fee *= 1.20;
-            }
-
-            let totalRepayment = approvedAmount + fee;
-            let monthlyPayment = totalRepayment / months;
-
-            const offers = [];
-
-            const primaryOffer = {
-                type: 'Approved',
-                approvedAmount: approvedAmount,
-                fee: Math.round(fee),
-                totalRepayment: Math.round(totalRepayment),
-                monthlyPayment: Math.round(monthlyPayment),
-                months: months,
-                reductionReason: reductionReason,
-                eligible: true
-            };
-            offers.push(primaryOffer);
-
-            let nextTier = approvedAmount === 10000 ? 20000 : (approvedAmount === 20000 ? 30000 : null);
-            if (nextTier) {
-                let nextMonths = nextTier === 20000 ? 2 : 3;
-                let nextFee = nextTier * 0.0129;
-                if (nextMonths === 2) nextFee *= 1.10;
-                if (nextMonths === 3) nextFee *= 1.20;
-                const nextTotal = nextTier + nextFee;
-                const nextMonthly = nextTotal / nextMonths;
-
-                offers.push({
-                    type: 'Not Yet Eligible',
-                    approvedAmount: nextTier,
-                    fee: Math.round(nextFee),
-                    totalRepayment: Math.round(nextTotal),
-                    monthlyPayment: Math.round(nextMonthly),
-                    months: nextMonths,
-                    reductionReason: '',
-                    eligible: false
-                });
-            }
-
-            displayOffers(offers);
-        }
-
-        function displayOffers(offers) {
-            const offersHTML = offers.map((offer, index) => {
-                const principalPercent = (offer.approvedAmount / offer.totalRepayment * 100).toFixed(0);
-                const feePercent = (offer.fee / offer.totalRepayment * 100).toFixed(1);
-                const strokeDasharray = (offer.approvedAmount / offer.totalRepayment) * 314.16;
-                
-                return `
-                <div class="offer-card ${!offer.eligible ? 'not-eligible' : ''}" style="animation-delay: ${index * 0.2}s;">
-                    <div class="offer-card-header">
-                        <div class="offer-badge">${offer.eligible ? 'Recommended' : 'Not Yet Eligible'}</div>
-                        <div class="offer-amount">
-                            <span class="offer-amount-currency">KES</span>
-                            ${offer.approvedAmount.toLocaleString()}
-                        </div>
-                    </div>
-                    
-                    <div class="offer-card-body">
-                        ${offer.reductionReason ? `<p style="color: var(--warning-orange); margin-bottom: 1rem; font-size: 0.85rem; padding: 0.5rem; background: rgba(245,158,11,0.1); border-radius: 8px;">⚠️ ${offer.reductionReason}</p>` : ''}
-                        
-                        <div class="offer-details">
-                            <div class="offer-row">
-                                <span class="offer-label">
-                                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 12h4v2H4v-2zm10 6H4v-2h10v2zm6 0h-4v-2h4v2zm0-4H10v-2h10v2z"/></svg>
-                                    ID Number
-                                </span>
-                                <span class="offer-value">${applicantIdNumber}</span>
-                            </div>
-                            <div class="offer-row">
-                                <span class="offer-label">
-                                    <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
-                                    Loan Amount
-                                </span>
-                                <span class="offer-value">KES ${offer.approvedAmount.toLocaleString()}</span>
-                            </div>
-                            <div class="offer-row">
-                                <span class="offer-label">
-                                    <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>
-                                    Repayment Period
-                                </span>
-                                <span class="offer-value">${offer.months} month${offer.months > 1 ? 's' : ''}</span>
-                            </div>
-                            <div class="offer-row">
-                                <span class="offer-label">
-                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                                    Processing Fee
-                                    <span class="info-icon" onclick="showFeeModal()">ℹ️</span>
-                                </span>
-                                <span class="offer-value">KES ${offer.fee.toLocaleString()}</span>
-                            </div>
-                            <div class="offer-row">
-                                <span class="offer-label">
-                                    <svg viewBox="0 0 24 24"><path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3z"/></svg>
-                                    Total Repayment
-                                </span>
-                                <span class="offer-value total">KES ${offer.totalRepayment.toLocaleString()}</span>
-                            </div>
-                            <div class="offer-row">
-                                <span class="offer-label">
-                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                    Monthly Payment
-                                </span>
-                                <span class="offer-value highlight">KES ${offer.monthlyPayment.toLocaleString()}</span>
-                            </div>
-                        </div>
-
-                        <div class="chart-container">
-                            <div class="chart-title">Repayment Breakdown</div>
-                            <div class="pie-chart-wrapper">
-                                <div class="pie-chart-container">
-                                    <svg class="pie-chart" viewBox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="45" fill="none" stroke="#e8e8e8" stroke-width="10"/>
-                                        <circle cx="50" cy="50" r="45" fill="none" stroke="url(#gradient${index})" stroke-width="10"
-                                            stroke-dasharray="${strokeDasharray} 314.16"
-                                            stroke-linecap="round"/>
-                                        <defs>
-                                            <linearGradient id="gradient${index}" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                <stop offset="0%" style="stop-color:${offer.eligible ? '#FF8C42' : '#6c757d'}"/>
-                                                <stop offset="100%" style="stop-color:${offer.eligible ? '#e65f00' : '#495057'}"/>
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-                                    <div class="pie-center-text">
-                                        <div class="pie-center-value">${principalPercent}%</div>
-                                        <div class="pie-center-label">Principal</div>
-                                    </div>
-                                </div>
-                                <div class="chart-legend">
-                                    <div class="legend-item">
-                                        <div class="legend-color" style="background: ${offer.eligible ? 'var(--primary-orange)' : '#6c757d'};"></div>
-                                        <span class="legend-label">Principal</span>
-                                        <span class="legend-value">KES ${offer.approvedAmount.toLocaleString()}</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <div class="legend-color" style="background: #e8e8e8;"></div>
-                                        <span class="legend-label">Fee (${feePercent}%)</span>
-                                        <span class="legend-value">KES ${offer.fee.toLocaleString()}</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <div class="legend-color" style="background: var(--primary-blue);"></div>
-                                        <span class="legend-label">Total</span>
-                                        <span class="legend-value">KES ${offer.totalRepayment.toLocaleString()}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        ${offer.eligible ? 
-                            `<button class="btn btn-select" onclick='selectOffer(${JSON.stringify(offer)})'>
-                                Select This Offer
-                            </button>` :
-                            `<button class="btn btn-disabled" disabled>
-                                Not Yet Eligible
-                            </button>
-                            <p class="not-eligible-text">Improve your income to qualify for this tier</p>`
-                        }
-                    </div>
-                </div>
-            `}).join('');
-            
-            document.getElementById('offersGrid').innerHTML = offersHTML;
-
+    if (markAllReadBtn) {
+        markAllReadBtn.addEventListener('click', function() {
+            const notification = document.getElementById('notification1');
+            if (notification) notification.classList.add('read');
+            if (notificationDot) notificationDot.style.display = 'none';
+            localStorage.setItem('notification_read', 'true');
             setTimeout(() => {
-                document.querySelectorAll('.offer-card').forEach((card, i) => {
-                    setTimeout(() => {
-                        card.classList.add('animate-in');
-                    }, i * 200);
-                });
-            }, 100);
-        }
-
-        function showFeeModal() {
-            document.getElementById('feeModal').classList.add('active');
-        }
-
-        function closeFeeModal() {
-            document.getElementById('feeModal').classList.remove('active');
-        }
-
-        function selectOffer(offer) {
-            selectedOffer = offer;
-            
-            const confirmHTML = `
-                <div class="confirmation-row">
-                    <strong>Approved Loan Amount:</strong>
-                    <strong>KES ${offer.approvedAmount.toLocaleString()}</strong>
-                </div>
-                <div class="confirmation-row">
-                    <span>Processing Fee:</span>
-                    <span>KES ${offer.fee.toLocaleString()}</span>
-                </div>
-                <div class="confirmation-row">
-                    <span>Repayment Period:</span>
-                    <span>${offer.months} month${offer.months > 1 ? 's' : ''}</span>
-                </div>
-                <div class="confirmation-row">
-                    <strong>Total Repayment:</strong>
-                    <strong>KES ${offer.totalRepayment.toLocaleString()}</strong>
-                </div>
-                <div class="confirmation-row">
-                    <strong>Monthly Payment:</strong>
-                    <strong style="color: var(--success-green);">KES ${offer.monthlyPayment.toLocaleString()}</strong>
-                </div>
-            `;
-            
-            document.getElementById('confirmationDetails').innerHTML = confirmHTML;
-            document.getElementById('confirmationModal').classList.add('active');
-        }
-
-        function closeConfirmationModal() {
-            document.getElementById('confirmationModal').classList.remove('active');
-            document.getElementById('confirmCheckbox').checked = false;
-        }
-
-        function confirmLoanSelection() {
-            if (!document.getElementById('confirmCheckbox').checked) {
-                alert('Please confirm that you agree to proceed');
-                return;
-            }
-            
-            localStorage.setItem('swiftloan_selected_offer', JSON.stringify(selectedOffer));
-            
-            const loanId = 'LN-' + Math.floor(10000 + Math.random() * 90000);
-            localStorage.setItem('swiftloan_loan_id', loanId);
-            
-            const activeLoanData = {
-                loanId: loanId,
-                principal: selectedOffer.approvedAmount,
-                startDate: new Date().toISOString(),
-                status: 'active',
-                totalRepayment: selectedOffer.totalRepayment,
-                period: selectedOffer.months
-            };
-            localStorage.setItem('swiftloan_active_loan', JSON.stringify(activeLoanData));
-            
-            document.getElementById('confirmationModal').classList.remove('active');
-            document.getElementById('processingModal').classList.add('active');
-            
-            setTimeout(() => {
-                window.location.href = 'loan-withdrawal.html';
-            }, 7000);
-        }
-    </script>
+                if (notificationDropdown) notificationDropdown.classList.remove('active');
+            }, 500);
+        });
+    }
+</script>
 </body>
-</html>
+    </html>
+
