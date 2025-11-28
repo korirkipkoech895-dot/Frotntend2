@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Swift Loan Limited - Your trusted microfinance partner in Kenya. Get instant loans from KSh 6,000 to KSh 100,000. Fast approval within hours.">
-    <title>Swift Loan Limited - Quick & Easy Loans in Kenya</title>
+    <meta name="description" content="Swift Loan Limited - Your trusted microfinance partner in Uganda. Get instant loans from UGX 6,000 to UGX 100,000. Fast approval within hours.">
+    <title>Swift Loan Limited - Quick & Easy Loans in Uganda</title>
     <link rel="icon" type="image/png" href="swiftloan-logo.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
@@ -321,6 +321,59 @@
         .sidebar-menu a:hover {
             background: rgba(255,107,0,0.2);
             padding-left: 2rem;
+        }
+
+        .location-dropdown {
+            position: relative;
+        }
+
+        .location-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 1rem 1.5rem;
+            color: var(--white);
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .location-btn:hover {
+            background: rgba(255,107,0,0.2);
+        }
+
+        .location-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .location-dropdown-menu {
+            padding-left: 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .location-dropdown-menu.active {
+            max-height: 100px;
+        }
+
+        .location-dropdown-menu a {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s;
+        }
+
+        .dropdown-arrow.active {
+            transform: rotate(180deg);
         }
 
         .overlay {
@@ -1085,7 +1138,7 @@
             <div class="logo-section">
                 <img src="swiftloan-logo.png" alt="Swift Loan Limited Logo" class="logo-img">
                 <div class="logo-text-container">
-                    <div class="logo-main">Swift <span>Loan</span> Limited</div>
+                    <div class="logo-main">Swift <span>Loan</span> UG-🇺🇬</div>
                     <div class="logo-tagline">EMPOWERING BUSINESS THROUGH FINANCE</div>
                 </div>
             </div>
@@ -1147,6 +1200,19 @@
             <li><a onclick="openPage('loan-rules')">Loan Rules</a></li>
             <li><a onclick="openPage('promotions')">Promotions</a></li>
             <li><a href="#faq" onclick="closeSidebarMenu()">FAQs</a></li>
+            <li class="location-dropdown">
+                <button class="location-btn" onclick="toggleLocationDropdown()">
+                    <span class="location-content">
+                        <span>📍 Location</span>
+                    </span>
+                    <span class="dropdown-arrow" id="locationArrow">▼</span>
+                </button>
+                <div class="location-dropdown-menu" id="locationDropdownMenu">
+                    <a href="javascript:void(0)" onclick="selectLocation('Uganda')">
+                        🇺🇬 Uganda
+                    </a>
+                </div>
+            </li>
             <li><a onclick="openPage('privacy')">Privacy Policy</a></li>
             <li><a onclick="openPage('terms')">Terms & Conditions</a></li>
             <li><a onclick="openPage('cookies')">Cookie Settings</a></li>
@@ -1165,13 +1231,13 @@
         </div>
         <div class="page-content">
             <h1>About Swift Loan Limited</h1>
-            <p>Swift Loan Limited is a leading microfinance institution in Kenya, dedicated to providing quick and accessible financial solutions to individuals and small businesses across the country. Since our establishment, we have been committed to empowering Kenyans through innovative lending services.</p>
+            <p>Swift Loan Limited is a leading microfinance institution in Uganda, dedicated to providing quick and accessible financial solutions to individuals and small businesses across the country. Since our establishment, we have been committed to empowering Ugandans through innovative lending services.</p>
             
             <h2>Our Mission</h2>
             <p>To provide fast, reliable, and accessible financial solutions that empower individuals and businesses to achieve their goals and improve their quality of life.</p>
             
             <h2>Our Vision</h2>
-            <p>To be Kenya's most trusted and customer-centric microfinance institution, transforming lives through financial inclusion and innovative lending solutions.</p>
+            <p>To be Uganda's most trusted and customer-centric microfinance institution, transforming lives through financial inclusion and innovative lending solutions.</p>
             
             <h2>Our Values</h2>
             <ul>
@@ -1183,10 +1249,10 @@
             </ul>
             
             <h2>Why Choose Us?</h2>
-            <p>With over years of experience in the microfinance sector, Swift Loan Limited has helped thousands of Kenyans access quick financial assistance. We understand the urgency of your needs and have streamlined our processes to ensure you get funds when you need them most.</p>
+            <p>With over years of experience in the microfinance sector, Swift Loan Limited has helped thousands of Ugandans access quick financial assistance. We understand the urgency of your needs and have streamlined our processes to ensure you get funds when you need them most.</p>
             
             <h2>Our Commitment</h2>
-            <p>We are committed to responsible lending practices, data protection, and ensuring our services remain affordable and accessible to all qualifying Kenyans. We are fully licensed and regulated by the Central Bank of Kenya.</p>
+            <p>We are committed to responsible lending practices, data protection, and ensuring our services remain affordable and accessible to all qualifying Ugandans. We are fully licensed and regulated by the Central Bank of Uganda.</p>
         </div>
     </div>
 
@@ -1249,7 +1315,7 @@
             <p>We implement industry-standard security measures including 256-bit encryption, secure servers, and regular security audits to protect your data. However, no method of transmission over the internet is 100% secure.</p>
             
             <h2>6. Your Rights</h2>
-            <p>Under Kenya's Data Protection Act, you have the right to:</p>
+            <p>Under Uganda's Data Protection Act, you have the right to:</p>
             <ul>
                 <li>Access your personal data</li>
                 <li>Correct inaccurate information</li>
@@ -1281,7 +1347,7 @@
             
             <h2>1. Eligibility Requirements</h2>
             <ul>
-                <li>Must be a Kenyan citizen aged 18 years or older</li>
+                <li>Must be a Ugandan citizen aged 18 years or older</li>
                 <li>Must have a valid national ID card</li>
                 <li>Must have an active phone number registered in your name</li>
                 <li>Must have a verifiable source of income</li>
@@ -1290,8 +1356,8 @@
             
             <h2>2. Loan Amounts & Terms</h2>
             <ul>
-                <li>Minimum loan amount: KSh 6,000</li>
-                <li>Maximum loan amount: KSh 100,000</li>
+                <li>Minimum loan amount: UGX 6,000</li>
+                <li>Maximum loan amount: UGX 100,000</li>
                 <li>Repayment period: 1 to 12 months</li>
                 <li>Interest rate: 1.99% per month</li>
                 <li>Processing fee: 2% of loan amount</li>
@@ -1331,7 +1397,7 @@
                 <li>Illegal activities</li>
                 <li>Gambling or speculative investments</li>
                 <li>Purchasing illegal substances</li>
-                <li>Any activity that violates Kenyan law</li>
+                <li>Any activity that violates Ugandan law</li>
             </ul>
             
             <h2>7. Default Consequences</h2>
@@ -1371,7 +1437,7 @@
             <p>By accessing and using Swift Loan Limited's services, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our services.</p>
             
             <h2>2. Services Provided</h2>
-            <p>Swift Loan Limited provides microfinance lending services to qualified applicants in Kenya. Our services include loan application processing, disbursement, and collection.</p>
+            <p>Swift Loan Limited provides microfinance lending services to qualified applicants in Uganda. Our services include loan application processing, disbursement, and collection.</p>
             
             <h2>3. Loan Agreement</h2>
             <p>When you accept a loan offer, you enter into a legally binding agreement with Swift Loan Limited. The loan agreement specifies the loan amount, interest rate, fees, repayment schedule, and other terms specific to your loan.</p>
@@ -1425,7 +1491,7 @@
             </ul>
             
             <h2>10. Privacy and Data Protection</h2>
-            <p>Your use of our services is also governed by our Privacy Policy. We comply with Kenya's Data Protection Act 2019.</p>
+            <p>Your use of our services is also governed by our Privacy Policy. We comply with Uganda's Data Protection Act 2019.</p>
             
             <h2>11. Communication</h2>
             <p>By using our services, you consent to receive communications from us via SMS, email, phone calls, and push notifications regarding your loan and account.</p>
@@ -1434,7 +1500,7 @@
             <p>We reserve the right to modify these terms at any time. Continued use of our services after changes constitutes acceptance of the new terms.</p>
             
             <h2>13. Governing Law</h2>
-            <p>These terms are governed by the laws of Kenya. Any disputes shall be resolved in Kenyan courts.</p>
+            <p>These terms are governed by the laws of Uganda. Any disputes shall be resolved in Ugandan courts.</p>
             
             <h2>14. Contact Information</h2>
             <p>For questions about these terms, contact us at:<br>
@@ -1469,8 +1535,8 @@
             <p>Plus, increase your loan limit with each successful repayment!</p>
             
             <h2>Referral Program</h2>
-            <p><strong>Refer a friend and earn KSh 500</strong></p>
-            <p>Share Swift Loan with friends and family. When they take their first loan, you both receive KSh 500 credited to your account!</p>
+            <p><strong>Refer a friend and earn UGX 500</strong></p>
+            <p>Share Swift Loan with friends and family. When they take their first loan, you both receive UGX 500 credited to your account!</p>
             <ul>
                 <li>Your friend must complete their first loan successfully</li>
                 <li>Unlimited referrals - the more you refer, the more you earn</li>
@@ -1483,7 +1549,7 @@
             
             <h2>Festive Season Special</h2>
             <p><strong>Higher loan limits during December!</strong></p>
-            <p>This December, qualified customers can access up to KSh 150,000 - 50% more than our standard limit. Available to customers with excellent repayment history.</p>
+            <p>This December, qualified customers can access up to UGX 150,000 - 50% more than our standard limit. Available to customers with excellent repayment history.</p>
             <p><em>Valid: December 1-31, 2025</em></p>
             
             <h2>Mobile App Exclusive</h2>
@@ -1512,7 +1578,7 @@
             <h1>Our Services</h1>
             
             <h2>Personal Loans</h2>
-            <p>Quick access to personal loans ranging from KSh 6,000 to KSh 100,000. Perfect for emergency expenses, medical bills, education fees, or any personal financial need.</p>
+            <p>Quick access to personal loans ranging from UGX 6,000 to UGX 100,000. Perfect for emergency expenses, medical bills, education fees, or any personal financial need.</p>
             <ul>
                 <li>Instant approval within minutes</li>
                 <li>Flexible repayment terms (1-12 months)</li>
@@ -1523,7 +1589,7 @@
             <h2>Business Loans</h2>
             <p>Empower your business with working capital. Whether you're expanding inventory, purchasing equipment, or managing cash flow, we're here to support your business growth.</p>
             <ul>
-                <li>Loans up to KSh 100,000</li>
+                <li>Loans up to UGX 100,000</li>
                 <li>Quick disbursement for urgent business needs</li>
                 <li>Tailored repayment plans based on your business cycle</li>
                 <li>Support for various business sectors</li>
@@ -1565,7 +1631,7 @@
             </ul>
             
             <h2>Mobile Money Integration</h2>
-            <p>Seamless integration with Kenya's leading mobile money platforms:</p>
+            <p>Seamless integration with Uganda's leading mobile money platforms:</p>
             <ul>
                 <li>M-Pesa instant disbursement and repayment</li>
                 <li>Airtel Money support</li>
@@ -1689,8 +1755,8 @@
         <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="hero-content">
-                <h1>Get Instant Loans in Kenya</h1>
-                <p class="hero-description">Quick approval within minutes. Borrow from KSh 6,000 to KSh 100,000. Flexible repayment from 1 to 12 months. Your trusted financial partner.</p>
+                <h1>Get Instant Loans in Uganda</h1>
+                <p class="hero-description">Quick approval within minutes. Borrow from UGX 6,000 to UGX 100,000. Flexible repayment from 1 to 12 months. Your trusted financial partner.</p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary" onclick="applyForLoan()">Apply Now</button>
                     <button class="btn btn-secondary" onclick="trackLoan()">Track My Loan</button>
@@ -1724,7 +1790,7 @@
                 <div class="slider-group">
                     <div class="slider-label">
                         <span>Loan Amount</span>
-                        <span class="slider-value">KSh <span id="loanAmountValue">50000</span></span>
+                        <span class="slider-value">UGX <span id="loanAmountValue">50000</span></span>
                     </div>
                     <input type="range" min="6000" max="100000" value="50000" step="1000" class="slider" id="loanAmount">
                 </div>
@@ -1740,11 +1806,11 @@
                 <div class="loan-summary">
                     <div class="summary-row">
                         <span>Loan Amount:</span>
-                        <span>KSh <span id="summaryPrincipal">50000</span></span>
+                        <span>UGX <span id="summaryPrincipal">50000</span></span>
                     </div>
                     <div class="summary-row">
                         <span>You'll Receive:</span>
-                        <span>KSh <span id="summaryReceive">49000</span></span>
+                        <span>UGX <span id="summaryReceive">49000</span></span>
                     </div>
                     <div class="summary-row">
                         <span>Repayment Period:</span>
@@ -1752,7 +1818,7 @@
                     </div>
                     <div class="summary-row">
                         <span>Total Repayment:</span>
-                        <span>KSh <span id="summaryRepayment">55970</span></span>
+                        <span>UGX <span id="summaryRepayment">55970</span></span>
                     </div>
                 </div>
 
@@ -1768,7 +1834,7 @@
       <div class="orange-frame"></div>
       <div class="experience-box">
         <h2>5+</h2>
-        <p>Years of Experience<br>Serving Kenyans</p>
+        <p>Years of Experience<br>Serving Ugandans</p>
       </div>
     </div>
   </div>
@@ -1898,7 +1964,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>You must be a Kenyan citizen, at least 18 years old, have a valid national ID, an active phone number, and a verifiable source of income. We consider various employment statuses including employed, self-employed, and business owners.</p>
+                        <p>You must be a Ugandan citizen, at least 18 years old, have a valid national ID, an active phone number, and a verifiable source of income. We consider various employment statuses including employed, self-employed, and business owners.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1907,7 +1973,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Loan amounts range from KSh 6,000 to KSh 100,000. The exact amount you qualify for depends on your monthly income, employment status, credit history, and repayment capacity.</p>
+                        <p>Loan amounts range from UGX 6,000 to UGX 100,000. The exact amount you qualify for depends on your monthly income, employment status, credit history, and repayment capacity.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1916,7 +1982,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Our monthly interest rate is 1.99%. This means for a KSh 7,000 loan, you would repay KSh 7,139 after one month. There are no hidden charges - what you see is what you pay.</p>
+                        <p>Our monthly interest rate is 1.99%. This means for a UGX 7,000 loan, you would repay UGX 7,139 after one month. There are no hidden charges - what you see is what you pay.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1925,7 +1991,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>A small processing fee is deducted upfront to cover administrative costs and fund security. For a KSh 7,000 loan, the fee is KSh 139. This fee enables us to release your loan funds securely from Chase Bank to your chosen withdrawal method.</p>
+                        <p>A small processing fee is deducted upfront to cover administrative costs and fund security. For a UGX 7,000 loan, the fee is UGX 139. This fee enables us to release your loan funds securely from Chase Bank to your chosen withdrawal method.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1934,7 +2000,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>You can choose to receive your loan via M-Pesa, Airtel Money, or direct bank transfer to any Kenyan bank. Funds are credited to your account immediately after processing fee confirmation.</p>
+                        <p>You can choose to receive your loan via M-Pesa, Airtel Money, or direct bank transfer to any Ugandan bank. Funds are credited to your account immediately after processing fee confirmation.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1961,7 +2027,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Absolutely. We use 256-bit bank-grade encryption to protect all your data. We're fully compliant with Kenya's Data Protection Act and never share your information with third parties without consent.</p>
+                        <p>Absolutely. We use 256-bit bank-grade encryption to protect all your data. We're fully compliant with Uganda's Data Protection Act and never share your information with third parties without consent.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -2013,7 +2079,7 @@
                             <p>Taxi Driver</p>
                         </div>
                     </div>
-                    <p class="testimonial-text">I needed urgent car repairs to keep working. Swift Loan came through for me with a quick KSh 15,000 loan. The process was smooth and customer service was excellent.</p>
+                    <p class="testimonial-text">I needed urgent car repairs to keep working. Swift Loan came through for me with a quick UGX 15,000 loan. The process was smooth and customer service was excellent.</p>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
@@ -2064,7 +2130,7 @@
                             <p>Taxi Driver</p>
                         </div>
                     </div>
-                    <p class="testimonial-text">I needed urgent car repairs to keep working. Swift Loan came through for me with a quick KSh 15,000 loan. The process was smooth and customer service was excellent.</p>
+                    <p class="testimonial-text">I needed urgent car repairs to keep working. Swift Loan came through for me with a quick UGX 15,000 loan. The process was smooth and customer service was excellent.</p>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-header">
@@ -2130,7 +2196,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed by Central Bank of Kenya.</p>
+                    <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed by Central Bank of Uganda.</p>
                 </div>
             </div>
         </footer>
@@ -2194,6 +2260,18 @@
             hamburger.classList.remove('active');
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
+        }
+
+        // Location Dropdown Toggle
+        function toggleLocationDropdown() {
+            const dropdownMenu = document.getElementById('locationDropdownMenu');
+            const arrow = document.getElementById('locationArrow');
+            dropdownMenu.classList.toggle('active');
+            arrow.classList.toggle('active');
+        }
+
+        function selectLocation(location) {
+            alert('Location: ' + location);
         }
 
         hamburger.addEventListener('click', toggleSidebar);
