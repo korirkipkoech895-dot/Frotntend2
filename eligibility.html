@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Application - Swift Loan Limited</title>
+    <meta name="description" content="Swift Loan UG - Apply for a loan in Uganda. Quick and easy loan application.">
+    <title>Apply for Loan - Swift Loan UG 🇺🇬</title>
     <link rel="icon" type="image/png" href="swiftloan-logo.png">
     
     <style>
@@ -14,124 +15,21 @@
         }
 
         :root {
-            --primary-orange: #FF8C42;
-            --primary-blue: #1E3A5F;
-            --secondary-blue: #2C5F8D;
-            --accent-gold: #FFB84D;
-            --light-gray: #F7F9FC;
-            --medium-gray: #E8EDF3;
-            --text-dark: #2C3E50;
-            --text-light: #6C757D;
+            --primary-orange: #FF6B00;
+            --primary-blue: #001F5C;
+            --light-gray: #F5F5F5;
+            --text-dark: #333;
             --white: #FFFFFF;
-            --error-red: #EF4444;
-            --success-green: #10B981;
-            --success-light: #D1FAE5;
-            --warning-orange: #F59E0B;
-            --border-light: #E5E7EB;
+            --error-red: #dc3545;
+            --success-green: #28a745;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             color: var(--text-dark);
+            line-height: 1.6;
             background: var(--light-gray);
-        }
-
-        /* Toast Notification Styles */
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .toast {
-            background: var(--error-red);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 300px;
-            animation: slideIn 0.3s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .toast::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: rgba(255,255,255,0.5);
-        }
-
-        .toast.success {
-            background: var(--success-green);
-        }
-
-        .toast-icon {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-        }
-
-        .toast-message {
-            flex: 1;
-            font-weight: 500;
-        }
-
-        .toast-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 0;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .toast-close:hover {
-            opacity: 1;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-
-        .toast.removing {
-            animation: slideOut 0.3s ease-out forwards;
         }
 
         /* Header */
@@ -185,559 +83,598 @@
             letter-spacing: 1px;
         }
 
-        .hamburger {
-            cursor: pointer;
+        .back-to-home {
             display: flex;
-            flex-direction: column;
-            gap: 5px;
-            padding: 10px;
-        }
-
-        .hamburger span {
-            width: 30px;
-            height: 3px;
+            align-items: center;
+            gap: 8px;
+            padding: 0.8rem 1.5rem;
             background: var(--primary-blue);
-            border-radius: 3px;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
             transition: 0.3s;
+            font-weight: 500;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
+        .back-to-home:hover {
+            background: var(--primary-orange);
+            transform: translateY(-2px);
         }
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* Sidebar Menu */
-        .sidebar {
+        /* Error Notification Box */
+        .error-notification-box {
             position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: var(--primary-blue);
-            box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            top: 100px;
+            right: 20px;
+            max-width: 400px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
             z-index: 1000;
-            overflow-y: auto;
+            transform: translateX(150%);
+            transition: transform 0.4s ease;
+            overflow: hidden;
         }
 
-        .sidebar.active {
-            right: 0;
+        .error-notification-box.active {
+            transform: translateX(0);
         }
 
-        .sidebar-header {
-            padding: 2rem 1.5rem;
-            background: rgba(255,107,0,0.1);
-            border-bottom: 2px solid var(--primary-orange);
+        .error-notification-header {
+            background: var(--error-red);
+            color: var(--white);
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .sidebar-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--white);
+        .error-notification-header h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .close-btn {
+        .close-error-btn {
             background: none;
             border: none;
             color: var(--white);
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
+            line-height: 1;
         }
 
-        .sidebar-menu {
-            list-style: none;
-            padding: 2rem 0;
-        }
-
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .error-list {
             padding: 1rem 1.5rem;
-            color: var(--white);
-            text-decoration: none;
-            transition: 0.3s;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
-        .sidebar-menu a:hover {
-            background: rgba(255,107,0,0.2);
-            padding-left: 2rem;
+        .error-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--error-red);
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s;
-            z-index: 99;
+        .error-item:last-child {
+            border-bottom: none;
         }
 
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .error-icon {
+            flex-shrink: 0;
         }
 
-        /* Main Container */
-        .main-container {
+        /* Main Content */
+        .main-content {
             max-width: 900px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 5%;
         }
 
         .page-title {
             text-align: center;
-            color: var(--primary-blue);
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
 
-        .page-description {
-            text-align: center;
+        .page-title h1 {
+            color: var(--primary-blue);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
             color: #666;
-            margin-bottom: 2rem;
         }
 
-        /* Progress Steps */
-        .progress-container {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-        }
-
-        /* Progress Bar */
-        .progress-bar-wrapper {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-orange), #ff8c42);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.3),
-                transparent
-            );
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .progress-percentage {
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--primary-blue);
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-
-        .steps {
+        /* Progress Indicator */
+        .progress-indicator {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 2rem;
         }
 
-        .step {
-            flex: 1;
-            text-align: center;
-            position: relative;
+        .progress-step {
+            display: flex;
+            align-items: center;
         }
 
         .step-circle {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: #ddd;
             color: #666;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 0.5rem;
             font-weight: bold;
             transition: 0.3s;
         }
 
-        .step.active .step-circle {
+        .step-circle.active {
             background: var(--primary-orange);
             color: var(--white);
         }
 
-        .step.completed .step-circle {
+        .step-circle.completed {
             background: var(--success-green);
             color: var(--white);
         }
 
-        .step-label {
-            font-size: 0.9rem;
-            color: #666;
+        .step-line {
+            width: 80px;
+            height: 4px;
+            background: #ddd;
+            transition: 0.3s;
         }
 
-        .step.active .step-label {
-            color: var(--primary-blue);
-            font-weight: 600;
+        .step-line.completed {
+            background: var(--success-green);
         }
 
-        /* Form Container */
-        .form-container {
+        /* Form Sections */
+        .form-section {
             background: var(--white);
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .form-step {
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             display: none;
         }
 
-        .form-step.active {
+        .form-section.active {
             display: block;
+            animation: fadeIn 0.4s ease;
         }
 
-        .step-title {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .section-header h2 {
             color: var(--primary-blue);
             font-size: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            position: relative;
         }
 
-        label {
+        .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            color: var(--primary-blue);
             font-weight: 500;
         }
 
-        label.required::after {
-            content: ' *';
+        .form-group label .required {
             color: var(--error-red);
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="number"],
-        input[type="date"],
-        select,
-        textarea {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.9rem 1rem;
             border: 2px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
             transition: 0.3s;
+            font-family: inherit;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
         }
 
-        input.error,
-        select.error {
-            border-color: var(--error-red);
-        }
-
-        input.success,
-        select.success {
+        .form-group input.valid,
+        .form-group select.valid {
             border-color: var(--success-green);
         }
 
-        .error-message {
+        .form-group input.invalid,
+        .form-group select.invalid {
+            border-color: var(--error-red);
+        }
+
+        .field-error {
             color: var(--error-red);
             font-size: 0.85rem;
             margin-top: 0.3rem;
             display: none;
         }
 
-        .error-message.show {
+        .field-error.show {
             display: block;
+            animation: shake 0.3s ease;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
-        /* Buttons */
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-primary {
-            background: var(--primary-orange);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,107,0,0.4);
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-            color: var(--white);
-        }
-
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-
-        .form-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            gap: 1rem;
-        }
-
-        .btn-reference {
-            background: transparent;
-            color: var(--primary-blue);
-            border: 2px solid var(--primary-blue);
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-        }
-
-        /* Checkbox Container */
-        .checkbox-group {
-            margin-bottom: 1rem;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            cursor: pointer;
-        }
-
-        .checkbox-label input[type="checkbox"] {
-            width: auto;
-            margin-top: 3px;
-        }
-
-        /* Signature Pad */
-        .signature-container {
-            border: 2px dashed #ddd;
-            border-radius: 5px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        #signaturePad {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            cursor: crosshair;
-            display: block;
-            width: 100%;
-            height: 150px;
-            background-color: #fff;
-            touch-action: none;
-        }
-
-        .signature-buttons {
-            margin-top: 0.5rem;
+        .phone-input-group {
             display: flex;
             gap: 0.5rem;
         }
 
-        .btn-small {
-            padding: 0.5rem 1rem;
+        .country-code {
+            width: 80px;
+            text-align: center;
+            background: var(--light-gray);
+            font-weight: bold;
+        }
+
+        .phone-number-input {
+            flex: 1;
+        }
+
+        /* Loan Amount Slider */
+        .loan-slider-container {
+            margin: 1.5rem 0;
+        }
+
+        .loan-amount-display {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .loan-amount-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+        }
+
+        .loan-amount-label {
+            color: #666;
             font-size: 0.9rem;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
+        .loan-slider {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(to right, var(--primary-orange) 50%, #ddd 50%);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .loan-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .loan-range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        /* Checkbox Section */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .checkbox-group:hover {
+            background: rgba(255,107,0,0.1);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: var(--primary-orange);
+        }
+
+        .checkbox-group label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .checkbox-group a {
+            color: var(--primary-orange);
+            text-decoration: none;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navigation Buttons */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-prev {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+        }
+
+        .btn-prev:hover {
+            background: #ddd;
+        }
+
+        .btn-next,
+        .btn-submit {
+            background: var(--primary-orange);
+            color: var(--white);
+            margin-left: auto;
+        }
+
+        .btn-next:hover,
+        .btn-submit:hover {
+            background: #e55f00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,0,0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Processing Popup */
+        .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            justify-content: center;
+            display: none;
             align-items: center;
+            justify-content: center;
+            z-index: 2000;
         }
 
-        .modal.active {
+        .popup-overlay.active {
             display: flex;
         }
 
-        .modal-content {
+        .processing-popup {
             background: var(--white);
+            border-radius: 20px;
             padding: 2.5rem;
-            border-radius: 10px;
             max-width: 500px;
             width: 90%;
             text-align: center;
-            animation: modalFadeIn 0.3s ease-out;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-content h3 {
-            color: var(--primary-blue);
-            margin-bottom: 1.5rem;
-        }
-
-        .processing-steps {
-            text-align: left;
-            margin: 2rem 0;
-        }
-
-        .processing-step {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 0.8rem;
-            background: var(--light-gray);
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .processing-step.active {
-            background: var(--primary-orange);
-            color: var(--white);
-            transform: scale(1.02);
-        }
-
-        .processing-step.completed {
-            background: var(--success-green);
-            color: var(--white);
-        }
-
-        /* Improved Spinner */
-        .spinner {
-            width: 24px;
-            height: 24px;
             position: relative;
+            overflow: hidden;
         }
 
-        .spinner::before,
-        .spinner::after {
-            content: '';
-            position: absolute;
+        .processing-title {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-display-container {
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-item {
+            background: var(--light-gray);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            margin: 0.5rem 0;
+            animation: fadeInOut 2s ease forwards;
+            width: 100%;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            80% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Loading Animation */
+        .loading-container {
+            display: none;
+        }
+
+        .loading-container.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--light-gray);
+            border-top: 5px solid var(--primary-orange);
             border-radius: 50%;
-        }
-
-        .spinner::before {
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top-color: var(--white);
             animation: spin 1s linear infinite;
-        }
-
-        .spinner::after {
-            width: 24px;
-            height: 24px;
-            border: 3px solid transparent;
-            border-top-color: var(--white);
-            animation: spin 0.6s linear infinite reverse;
+            margin: 0 auto 1.5rem;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Success Modal with SVG */
-        .success-popup {
-            max-width: 450px;
+        .loading-text {
+            color: var(--primary-blue);
+            font-weight: 500;
         }
 
-        .success-icon-wrapper {
-            margin: 0 auto 1.5rem;
-            width: 100px;
-            height: 100px;
+        /* Success Animation */
+        .success-container {
+            display: none;
         }
 
-        .success-checkmark {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
+        .success-container.active {
+            display: block;
+            animation: scaleIn 0.5s ease;
         }
 
-        .checkmark-circle {
-            stroke-dasharray: 166;
-            stroke-dashoffset: 166;
-            stroke-width: 3;
-            stroke: var(--success-green);
-            fill: none;
-            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-        }
-
-        .checkmark-check {
-            transform-origin: 50% 50%;
-            stroke-dasharray: 48;
-            stroke-dashoffset: 48;
-            stroke: var(--success-green);
-            stroke-width: 3;
-            fill: none;
-            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
-        }
-
-        @keyframes stroke {
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
             100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .checkmark {
+            width: 40px;
+            height: 40px;
+            stroke: var(--white);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .checkmark-path {
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.5s ease 0.3s forwards;
+        }
+
+        @keyframes drawCheck {
+            to {
                 stroke-dashoffset: 0;
             }
         }
@@ -745,1039 +682,1057 @@
         .success-title {
             color: var(--success-green);
             font-size: 1.8rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .success-message {
             color: #666;
             margin-bottom: 1.5rem;
-            line-height: 1.6;
         }
 
-        /* Saved Data Modal */
-        .saved-data-modal .modal-content {
-            max-width: 600px;
+        .loan-offers-count {
+            background: var(--primary-orange);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: inline-block;
+            animation: pulse 1.5s ease infinite;
         }
 
-        .data-section {
-            text-align: left;
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: var(--light-gray);
-            border-radius: 8px;
-        }
-
-        .data-section-title {
-            color: var(--primary-blue);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .data-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .data-item:last-child {
-            border-bottom: none;
-        }
-
-        .data-label {
-            font-weight: 500;
-            color: #666;
-        }
-
-        .data-value {
-            color: var(--text-dark);
-            font-weight: 600;
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         /* Footer */
         footer {
             background: var(--primary-blue);
             color: var(--white);
-            padding: 2rem 5% 1rem;
-            margin-top: 3rem;
+            padding: 3rem 5%;
+            margin-top: 2rem;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            text-align: center;
         }
 
-        .form-message {
-            text-align: center;
-            padding: 1rem;
-            border-radius: 5px;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-orange);
             margin-bottom: 1rem;
-            font-weight: 500;
-            transition: opacity 0.5s ease;
         }
 
-        .form-message.error {
-            background: rgba(220, 53, 69, 0.1);
-            color: var(--error-red);
-            border: 1px solid var(--error-red);
+        .footer-links {
+            list-style: none;
         }
 
-        .form-message.success {
-            background: rgba(40, 167, 69, 0.1);
-            color: var(--success-green);
-            border: 1px solid var(--success-green);
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.6);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .steps {
-                flex-direction: row;
-                gap: 1rem;
-                justify-content: center;
-            }
-
-            .step {
-                width: 100%;
-            }
-
-            .form-buttons {
+            .header-content {
                 flex-direction: column;
+                gap: 1rem;
             }
 
             .logo-main {
                 font-size: 1.4rem;
             }
+
+            .page-title h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .step-line {
+                width: 40px;
+            }
+
+            .form-navigation {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-prev {
+                order: 2;
+            }
+
+            .btn-next, .btn-submit {
+                order: 1;
+                margin-left: 0;
+            }
+
+            .error-notification-box {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
     <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo-section">
-                <img src="swiftloan-logo.png" alt="Swift Loan Limited Logo" class="logo-img">
+                <img src="swiftloan-logo.png" alt="Swift Loan UG Logo" class="logo-img">
                 <div class="logo-text-container">
-                    <div class="logo-main">Swift <span>Loan</span> Limited</div>
+                    <div class="logo-main">Swift <span>Loan</span> UG-🇺🇬</div>
                     <div class="logo-tagline">EMPOWERING BUSINESS THROUGH FINANCE</div>
                 </div>
             </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <a href="index.html" class="back-to-home">
+                <span>←</span> Back to Home
+            </a>
         </div>
     </header>
 
-    <!-- Sidebar Menu -->
-    <div class="overlay" id="overlay"></div>
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-logo">Menu</div>
-            <button class="close-btn" id="closeSidebar">&times;</button>
+    <!-- Error Notification Box -->
+    <div class="error-notification-box" id="errorNotificationBox">
+        <div class="error-notification-header">
+            <h4><span>⚠️</span> Please Fix These Errors</h4>
+            <button class="close-error-btn" onclick="closeErrorBox()">&times;</button>
         </div>
-        <ul class="sidebar-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About Us</a></li>
-            <li><a href="index.html#calculator">Loan Calculator</a></li>
-            <li><a href="eligibility.html">Apply for Loan</a></li>
-            <li><a href="index.html#faq">FAQs</a></li>
-            <li><a href="index.html#contact">Contact Us</a></li>
-        </ul>
-    </aside>
+        <div class="error-list" id="errorList">
+        </div>
+    </div>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        <h1 class="page-title">Loan Application</h1>
-        <p class="page-description">Complete the form below to apply for a loan</p>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-title">
+            <h1>🇺🇬 Loan Application</h1>
+            <p>Complete the form below to apply for your loan. All fields marked with <span style="color: var(--error-red);">*</span> are required.</p>
+        </div>
 
-        <!-- Progress Bar -->
-        <div class="progress-container">
-            <div class="progress-bar-wrapper">
-                <div class="progress-bar-fill" id="progressBar" style="width: 33%;"></div>
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+            <div class="progress-step">
+                <div class="step-circle active" id="step1Circle">1</div>
             </div>
-            <div class="progress-percentage" id="progressPercentage">33% Complete</div>
-            <div class="steps">
-                <div class="step active" id="step1">
-                    <div class="step-circle">1</div>
-                    <div class="step-label">Personal Info</div>
-                </div>
-                <div class="step" id="step2">
-                    <div class="step-circle">2</div>
-                    <div class="step-label">Loan Details</div>
-                </div>
-                <div class="step" id="step3">
-                    <div class="step-circle">3</div>
-                    <div class="step-label">Consent</div>
-                </div>
+            <div class="step-line" id="line1"></div>
+            <div class="progress-step">
+                <div class="step-circle" id="step2Circle">2</div>
+            </div>
+            <div class="step-line" id="line2"></div>
+            <div class="progress-step">
+                <div class="step-circle" id="step3Circle">3</div>
             </div>
         </div>
 
-        <!-- Form Container -->
-        <div class="form-container">
-            <!-- Step 1: Personal Details -->
-            <div class="form-step active" id="formStep1">
-                <h2 class="step-title">Personal Information</h2>
-                
-                <div class="form-group">
-                    <label for="fullName" class="required">Full Name</label>
-                    <input type="text" id="fullName" placeholder="Enter your full name (at least 2 names)" onblur="validateFullName()">
-                    <span class="error-message" id="fullNameError">Please enter your full name (at least 2 names, each 3+ characters)</span>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nationalId" class="required">National ID Number</label>
-                        <input type="text" id="nationalId" placeholder="e.g., 12345678" maxlength="9" onblur="validateNationalId()">
-                        <span class="error-message" id="nationalIdError">Please enter a valid 8-9 digit National ID</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phoneNumber" class="required">Phone Number</label>
-                        <input type="tel" id="phoneNumber" placeholder="e.g., 0712345678" maxlength="10" onblur="validatePhoneNumber()">
-                        <span class="error-message" id="phoneNumberError">Please enter a valid Kenyan phone number</span>
+        <form id="loanApplicationForm" novalidate>
+            <!-- Section 1: Personal Information -->
+            <div class="form-section active" id="section1">
+                <div class="section-header">
+                    <div class="section-icon">👤</div>
+                    <div>
+                        <h2>Personal Information</h2>
+                        <p style="color: #666; font-size: 0.9rem;">Tell us about yourself</p>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="email" class="required">Email Address</label>
-                        <input type="email" id="email" placeholder="your@email.com" onblur="validateEmail()">
-                        <span class="error-message" id="emailError">Please enter a valid email address</span>
+                        <label>First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" placeholder="Enter your first name" required>
+                        <div class="field-error" id="firstNameError">Please enter your first name</div>
                     </div>
-
                     <div class="form-group">
-                        <label for="dob" class="required">Date of Birth</label>
-                        <input type="date" id="dob" onblur="validateDOB()">
-                        <span class="error-message" id="dobError">You must be 18 or older to apply</span>
+                        <label>Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" placeholder="Enter your last name" required>
+                        <div class="field-error" id="lastNameError">Please enter your last name</div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="maritalStatus" class="required">Marital Status</label>
-                    <select id="maritalStatus" onchange="validateMaritalStatus()">
-                        <option value="">Select status</option>
-                        <option value="Single">Single</option>
-                        <option value="Married">Married</option>
-                        <option value="Divorced">Divorced</option>
-                        <option value="Widowed">Widowed</option>
-                    </select>
-                    <span class="error-message" id="maritalStatusError">Please select your marital status</span>
-                </div>
-
-                <div class="form-group">
-                    <label for="address" class="required">Residential Address</label>
-                    <textarea id="address" rows="3" placeholder="Enter your full residential address"></textarea>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="cityTown" class="required">City/Town</label>
-                        <input type="text" id="cityTown" placeholder="e.g., Nairobi" onblur="validateCityTown()">
-                        <span class="error-message" id="cityTownError">Please enter your city/town (at least 4 characters)</span>
+                        <label>Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dateOfBirth" required>
+                        <div class="field-error" id="dateOfBirthError">You must be at least 18 years old</div>
                     </div>
-
                     <div class="form-group">
-                        <label for="postalCode" class="required">Postal Code</label>
-                        <input type="text" id="postalCode" placeholder="e.g., 00100" maxlength="5" onblur="validatePostalCode()">
-                        <span class="error-message" id="postalCodeError">Please enter a valid 5-digit postal code</span>
+                        <label>Gender <span class="required">*</span></label>
+                        <select id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="field-error" id="genderError">Please select your gender</div>
                     </div>
                 </div>
 
-                <div class="form-buttons">
-                    <button type="button" class="btn btn-reference" onclick="showSavedData()">View Saved Data</button>
-                    <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next Step →</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>National ID Number <span class="required">*</span></label>
+                        <input type="text" id="nationalId" placeholder="e.g., CM12345678ABCDE" maxlength="14" required>
+                        <div class="field-error" id="nationalIdError">Enter valid Ugandan National ID (14 characters)</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" placeholder="your.email@example.com" required>
+                        <div class="field-error" id="emailError">Please enter a valid email address</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <div class="phone-input-group">
+                            <input type="text" class="country-code" value="+256" readonly>
+                            <input type="tel" id="phoneNumber" class="phone-number-input" placeholder="7XX XXX XXX" maxlength="9" required>
+                        </div>
+                        <div class="field-error" id="phoneNumberError">Enter valid 9-digit phone number</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Alternative Phone</label>
+                        <div class="phone-input-group">
+                            <input type="text" class="country-code" value="+256" readonly>
+                            <input type="tel" id="altPhone" class="phone-number-input" placeholder="7XX XXX XXX" maxlength="9">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>District <span class="required">*</span></label>
+                        <select id="district" required>
+                            <option value="">Select District</option>
+                            <option value="Kampala">Kampala</option>
+                            <option value="Wakiso">Wakiso</option>
+                            <option value="Mukono">Mukono</option>
+                            <option value="Jinja">Jinja</option>
+                            <option value="Mbale">Mbale</option>
+                            <option value="Gulu">Gulu</option>
+                            <option value="Lira">Lira</option>
+                            <option value="Mbarara">Mbarara</option>
+                            <option value="Kabale">Kabale</option>
+                            <option value="Fort Portal">Fort Portal</option>
+                            <option value="Masaka">Masaka</option>
+                            <option value="Entebbe">Entebbe</option>
+                            <option value="Arua">Arua</option>
+                            <option value="Soroti">Soroti</option>
+                            <option value="Tororo">Tororo</option>
+                            <option value="Kasese">Kasese</option>
+                            <option value="Hoima">Hoima</option>
+                            <option value="Mityana">Mityana</option>
+                            <option value="Iganga">Iganga</option>
+                            <option value="Busia">Busia</option>
+                            <option value="Kitgum">Kitgum</option>
+                            <option value="Moroto">Moroto</option>
+                            <option value="Kabalore">Kabalore</option>
+                            <option value="Bushenyi">Bushenyi</option>
+                            <option value="Ntungamo">Ntungamo</option>
+                            <option value="Rukungiri">Rukungiri</option>
+                            <option value="Kisoro">Kisoro</option>
+                            <option value="Nebbi">Nebbi</option>
+                            <option value="Pallisa">Pallisa</option>
+                            <option value="Kamuli">Kamuli</option>
+                            <option value="Kumi">Kumi</option>
+                            <option value="Bugiri">Bugiri</option>
+                            <option value="Kayunga">Kayunga</option>
+                            <option value="Nakasongola">Nakasongola</option>
+                            <option value="Luwero">Luwero</option>
+                            <option value="Mpigi">Mpigi</option>
+                            <option value="Rakai">Rakai</option>
+                            <option value="Sembabule">Sembabule</option>
+                            <option value="Kalangala">Kalangala</option>
+                            <option value="Bundibugyo">Bundibugyo</option>
+                            <option value="Kabarole">Kabarole</option>
+                            <option value="Kyenjojo">Kyenjojo</option>
+                            <option value="Kibaale">Kibaale</option>
+                            <option value="Masindi">Masindi</option>
+                            <option value="Apac">Apac</option>
+                            <option value="Pader">Pader</option>
+                            <option value="Adjumani">Adjumani</option>
+                            <option value="Moyo">Moyo</option>
+                            <option value="Yumbe">Yumbe</option>
+                            <option value="Koboko">Koboko</option>
+                            <option value="Kapchorwa">Kapchorwa</option>
+                            <option value="Sironko">Sironko</option>
+                            <option value="Bududa">Bududa</option>
+                            <option value="Manafwa">Manafwa</option>
+                            <option value="Bukwa">Bukwa</option>
+                            <option value="Kween">Kween</option>
+                            <option value="Butaleja">Butaleja</option>
+                            <option value="Namutumba">Namutumba</option>
+                            <option value="Kaliro">Kaliro</option>
+                            <option value="Buyende">Buyende</option>
+                            <option value="Luuka">Luuka</option>
+                            <option value="Namayingo">Namayingo</option>
+                            <option value="Mayuge">Mayuge</option>
+                            <option value="Buikwe">Buikwe</option>
+                            <option value="Buvuma">Buvuma</option>
+                            <option value="Nakaseke">Nakaseke</option>
+                            <option value="Kyankwanzi">Kyankwanzi</option>
+                            <option value="Kiboga">Kiboga</option>
+                            <option value="Mubende">Mubende</option>
+                            <option value="Kakumiro">Kakumiro</option>
+                            <option value="Kagadi">Kagadi</option>
+                            <option value="Kiryandongo">Kiryandongo</option>
+                            <option value="Buliisa">Buliisa</option>
+                            <option value="Kibuube">Kibuube</option>
+                            <option value="Kikuube">Kikuube</option>
+                            <option value="Pakwach">Pakwach</option>
+                            <option value="Zombo">Zombo</option>
+                            <option value="Maracha">Maracha</option>
+                            <option value="Terego">Terego</option>
+                            <option value="Madi-Okollo">Madi-Okollo</option>
+                            <option value="Obongi">Obongi</option>
+                            <option value="Amuru">Amuru</option>
+                            <option value="Nwoya">Nwoya</option>
+                            <option value="Lamwo">Lamwo</option>
+                            <option value="Agago">Agago</option>
+                            <option value="Otuke">Otuke</option>
+                            <option value="Alebtong">Alebtong</option>
+                            <option value="Kole">Kole</option>
+                            <option value="Oyam">Oyam</option>
+                            <option value="Kwania">Kwania</option>
+                            <option value="Dokolo">Dokolo</option>
+                            <option value="Amolatar">Amolatar</option>
+                            <option value="Kaberamaido">Kaberamaido</option>
+                            <option value="Serere">Serere</option>
+                            <option value="Ngora">Ngora</option>
+                            <option value="Bukedea">Bukedea</option>
+                            <option value="Katakwi">Katakwi</option>
+                            <option value="Amuria">Amuria</option>
+                            <option value="Kapelebyong">Kapelebyong</option>
+                            <option value="Napak">Napak</option>
+                            <option value="Nakapiripirit">Nakapiripirit</option>
+                            <option value="Amudat">Amudat</option>
+                            <option value="Nabilatuk">Nabilatuk</option>
+                            <option value="Kotido">Kotido</option>
+                            <option value="Abim">Abim</option>
+                            <option value="Kaabong">Kaabong</option>
+                            <option value="Karenga">Karenga</option>
+                            <option value="Ibanda">Ibanda</option>
+                            <option value="Kamwenge">Kamwenge</option>
+                            <option value="Rubirizi">Rubirizi</option>
+                            <option value="Sheema">Sheema</option>
+                            <option value="Mitooma">Mitooma</option>
+                            <option value="Buhweju">Buhweju</option>
+                            <option value="Kanungu">Kanungu</option>
+                            <option value="Rubanda">Rubanda</option>
+                            <option value="Rukiga">Rukiga</option>
+                            <option value="Isingiro">Isingiro</option>
+                            <option value="Kiruhura">Kiruhura</option>
+                            <option value="Lyantonde">Lyantonde</option>
+                            <option value="Lwengo">Lwengo</option>
+                            <option value="Bukomansimbi">Bukomansimbi</option>
+                            <option value="Kalungu">Kalungu</option>
+                            <option value="Gomba">Gomba</option>
+                            <option value="Butambala">Butambala</option>
+                            <option value="Kassanda">Kassanda</option>
+                        </select>
+                        <div class="field-error" id="districtError">Please select your district</div>
+                    </div>
+                    <div class="form-group">
+                        <label>City/Town <span class="required">*</span></label>
+                        <input type="text" id="city" placeholder="Enter your city or town" required>
+                        <div class="field-error" id="cityError">Please enter your city or town</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Physical Address <span class="required">*</span></label>
+                        <input type="text" id="address" placeholder="Street name, Building, etc." required>
+                        <div class="field-error" id="addressError">Please enter your physical address</div>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-next" onclick="nextSection(1)">
+                        Continue <span>→</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- Step 2: Other Details -->
-            <div class="form-step" id="formStep2">
-                <h2 class="step-title">Financial & Employment Details</h2>
-                
+            <!-- Section 2: Business Information -->
+            <div class="form-section" id="section2">
+                <div class="section-header">
+                    <div class="section-icon">💼</div>
+                    <div>
+                        <h2>Business & Employment Information</h2>
+                        <p style="color: #666; font-size: 0.9rem;">Tell us about your income source</p>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="loanAmount" class="required">Loan Amount Requested (KSh)</label>
-                        <input type="number" id="loanAmount" placeholder="e.g., 50000" min="6000" max="100000" step="1000" onblur="validateLoanAmount()">
-                        <span class="error-message" id="loanAmountError">Amount must be between KSh 6,000 and KSh 100,000</span>
+                        <label>Employment Status <span class="required">*</span></label>
+                        <select id="employmentStatus" required>
+                            <option value="">Select Status</option>
+                            <option value="employed">Employed</option>
+                            <option value="self-employed">Self-Employed</option>
+                            <option value="business-owner">Business Owner</option>
+                            <option value="contractor">Contractor/Freelancer</option>
+                            <option value="retired">Retired</option>
+                            <option value="student">Student</option>
+                        </select>
+                        <div class="field-error" id="employmentStatusError">Please select your employment status</div>
                     </div>
-
                     <div class="form-group">
-                        <label for="repaymentPeriod" class="required">Repayment Period (Months)</label>
-                        <select id="repaymentPeriod">
-                            <option value="">Select period</option>
+                        <label>Employer/Business Name <span class="required">*</span></label>
+                        <input type="text" id="employerName" placeholder="Enter company or business name" required>
+                        <div class="field-error" id="employerNameError">Please enter your employer or business name</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Industry/Sector <span class="required">*</span></label>
+                        <select id="industry" required>
+                            <option value="">Select Industry</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="banking">Banking & Finance</option>
+                            <option value="construction">Construction</option>
+                            <option value="education">Education</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="hospitality">Hospitality & Tourism</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="retail">Retail & Trade</option>
+                            <option value="technology">Technology & IT</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="telecom">Telecommunications</option>
+                            <option value="government">Government</option>
+                            <option value="ngo">NGO/Non-Profit</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="field-error" id="industryError">Please select your industry</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Monthly Income (UGX) <span class="required">*</span></label>
+                        <input type="number" id="monthlyIncome" placeholder="e.g., 1500000" required>
+                        <div class="field-error" id="monthlyIncomeError">Please enter your monthly income</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Years at Current Job/Business <span class="required">*</span></label>
+                        <select id="yearsEmployed" required>
+                            <option value="">Select Duration</option>
+                            <option value="less-than-1">Less than 1 year</option>
+                            <option value="1-2">1-2 years</option>
+                            <option value="2-5">2-5 years</option>
+                            <option value="5-10">5-10 years</option>
+                            <option value="more-than-10">More than 10 years</option>
+                        </select>
+                        <div class="field-error" id="yearsEmployedError">Please select duration</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Work Phone</label>
+                        <div class="phone-input-group">
+                            <input type="text" class="country-code" value="+256" readonly>
+                            <input type="tel" id="workPhone" class="phone-number-input" placeholder="7XX XXX XXX" maxlength="9">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Work Address</label>
+                        <input type="text" id="workAddress" placeholder="Enter workplace address">
+                    </div>
+                </div>
+
+                <!-- Loan Amount Section -->
+                <div class="section-header" style="margin-top: 2rem;">
+                    <div class="section-icon">💰</div>
+                    <div>
+                        <h2>Loan Details</h2>
+                        <p style="color: #666; font-size: 0.9rem;">How much do you need?</p>
+                    </div>
+                </div>
+
+                <div class="loan-slider-container">
+                    <div class="loan-amount-display">
+                        <div class="loan-amount-value">UGX <span id="loanAmountValue">3,000,000</span></div>
+                        <div class="loan-amount-label">Requested Loan Amount</div>
+                    </div>
+                    <input type="range" class="loan-slider" id="loanAmountSlider" min="419010" max="5586797" value="3000000" step="10000">
+                    <div class="loan-range-labels">
+                        <span>UGX 419,010</span>
+                        <span>UGX 5,586,797</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Purpose <span class="required">*</span></label>
+                        <select id="loanPurpose" required>
+                            <option value="">Select Purpose</option>
+                            <option value="business-expansion">Business Expansion</option>
+                            <option value="inventory">Inventory/Stock Purchase</option>
+                            <option value="equipment">Equipment Purchase</option>
+                            <option value="education">Education Fees</option>
+                            <option value="medical">Medical Expenses</option>
+                            <option value="home-improvement">Home Improvement</option>
+                            <option value="debt-consolidation">Debt Consolidation</option>
+                            <option value="emergency">Emergency Expenses</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="field-error" id="loanPurposeError">Please select loan purpose</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Repayment Period <span class="required">*</span></label>
+                        <select id="repaymentPeriod" required>
+                            <option value="">Select Period</option>
                             <option value="1">1 Month</option>
                             <option value="2">2 Months</option>
                             <option value="3">3 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="9">9 Months</option>
+                            <option value="12">12 Months</option>
                         </select>
+                        <div class="field-error" id="repaymentPeriodError">Please select repayment period</div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="loanPurpose" class="required">Purpose of Loan</label>
-                    <select id="loanPurpose">
-                        <option value="">Select purpose</option>
-                        <option value="business">Business Expansion</option>
-                        <option value="emergency">Emergency</option>
-                        <option value="personal use">Personal Use</option>
-                        <option value="education">Education</option>
-                        <option value="medical">Medical</option>
-                        <option value="betting">Betting</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="employmentStatus" class="required">Employment Status</label>
-                        <select id="employmentStatus">
-                            <option value="">Select status</option>
-                            <option value="Employed">Employed</option>
-                            <option value="Self-Employed">Self-Employed</option>
-                            <option value="Business Owner">Business Owner</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Retired">Retired</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="monthlyIncome" class="required">Monthly Income (KSh)</label>
-                        <select id="monthlyIncome">
-                            <option value="">Select range</option>
-                            <option value="Below 10,000">Below KSh 10,000</option>
-                            <option value="10,000 - 19,999">KSh 10,000 - 19,999</option>
-                            <option value="20,000 - 34,999">KSh 20,000 - 34,999</option>
-                            <option value="35,000 - 50,000">KSh 35,000 - 50,000</option>
-                            <option value="Above 50,000">Above KSh 50,000</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="employer" class="required">Employer Name / Business Name</label>
-                    <input type="text" id="employer" placeholder="Enter employer or business name">
-                </div>
-
-                <div class="form-group">
-                    <label for="county" class="required">County</label>
-                    <select id="county">
-                        <option value="">Select County</option>
-                        <option value="Nairobi">Nairobi</option>
-                        <option value="Mombasa">Mombasa</option>
-                        <option value="Kisumu">Kisumu</option>
-                        <option value="Nakuru">Nakuru</option>
-                        <option value="Kiambu">Kiambu</option>
-                        <option value="Machakos">Machakos</option>
-                        <option value="Kajiado">Kajiado</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="previousStep(2)">← Previous</button>
-                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step →</button>
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-prev" onclick="prevSection(2)">
+                        <span>←</span> Previous
+                    </button>
+                    <button type="button" class="btn btn-next" onclick="nextSection(2)">
+                        Continue <span>→</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- Step 3: Consent & Signature -->
-            <div class="form-step" id="formStep3">
-                <h2 class="step-title">Consent & Signature</h2>
-                
+            <!-- Section 3: Confirmation -->
+            <div class="form-section" id="section3">
+                <div class="section-header">
+                    <div class="section-icon">✅</div>
+                    <div>
+                        <h2>Terms & Confirmation</h2>
+                        <p style="color: #666; font-size: 0.9rem;">Review and accept the terms</p>
+                    </div>
+                </div>
+
                 <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="consent1">
-                        <span>I confirm that all information provided is true and accurate to the best of my knowledge.</span>
+                    <input type="checkbox" id="termsAgree" required>
+                    <label for="termsAgree">
+                        I have read and agree to the <a href="index.html" onclick="return false;">Terms and Conditions</a> and <a href="index.html" onclick="return false;">Privacy Policy</a> of Swift Loan UG. <span class="required">*</span>
                     </label>
                 </div>
 
                 <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="consent2">
-                        <span>I authorize Swift Loan Limited to verify my information and conduct a credit check.</span>
+                    <input type="checkbox" id="dataConsent" required>
+                    <label for="dataConsent">
+                        I consent to Swift Loan UG collecting, processing, and verifying my personal and financial information for loan assessment purposes. <span class="required">*</span>
                     </label>
                 </div>
 
                 <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="consent3">
-                        <span>I agree to the terms and conditions of Swift Loan Limited and understand the loan repayment terms.</span>
+                    <input type="checkbox" id="crbConsent" required>
+                    <label for="crbConsent">
+                        I authorize Swift Loan UG to check my credit history with Credit Reference Bureaus and report my loan status. <span class="required">*</span>
                     </label>
                 </div>
 
-                <div class="signature-container">
-                    <label>Digital Signature <span style="color: var(--error-red);">*</span></label>
-                    <canvas id="signaturePad"></canvas>
-                    <span class="error-message" id="signatureError">Please provide your signature</span>
-                    <div class="signature-buttons">
-                        <button type="button" class="btn btn-secondary btn-small" onclick="clearSignature()">Clear Signature</button>
-                    </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="accuracyConfirm" required>
+                    <label for="accuracyConfirm">
+                        I confirm that all information provided in this application is true, accurate, and complete to the best of my knowledge. <span class="required">*</span>
+                    </label>
                 </div>
 
-                <div class="form-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="previousStep(3)">← Previous</button>
-                    <button type="button" class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="marketingConsent">
+                    <label for="marketingConsent">
+                        I agree to receive promotional messages and updates from Swift Loan UG via SMS and email. (Optional)
+                    </label>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-prev" onclick="prevSection(3)">
+                        <span>←</span> Previous
+                    </button>
+                    <button type="submit" class="btn btn-submit" id="submitBtn">
+                        Submit Application <span>→</span>
+                    </button>
                 </div>
             </div>
-        </div>
-    </div>
+        </form>
+    </main>
 
-    <!-- Processing Modal -->
-    <div class="modal" id="processingModal">
-        <div class="modal-content">
-            <h3>Processing Your Application</h3>
-            <div class="processing-steps">
-                <div class="processing-step" data-step="1">
-                    <div class="spinner"></div>
-                    <span>Verifying personal information...</span>
-                </div>
-                <div class="processing-step" data-step="2">
-                    <div class="spinner"></div>
-                    <span>Checking credit score...</span>
-                </div>
-                <div class="processing-step" data-step="3">
-                    <div class="spinner"></div>
-                    <span>Analyzing income details...</span>
-                </div>
-                <div class="processing-step" data-step="4">
-                    <div class="spinner"></div>
-                    <span>Validating documents...</span>
-                </div>
-                <div class="processing-step" data-step="5">
-                    <div class="spinner"></div>
-                    <span>Calculating loan eligibility...</span>
-                </div>
-                <div class="processing-step" data-step="6">
-                    <div class="spinner"></div>
-                    <span>Preparing loan offers...</span>
-                </div>
-                <div class="processing-step" data-step="7">
-                    <div class="spinner"></div>
-                    <span>Running final checks...</span>
-                </div>
-                <div class="processing-step" data-step="8">
-                    <div class="spinner"></div>
-                    <span>Finalizing application...</span>
+    <!-- Processing Popup -->
+    <div class="popup-overlay" id="processingPopup">
+        <div class="processing-popup">
+            <div id="processingContent">
+                <h3 class="processing-title">Processing Your Application...</h3>
+                <div class="info-display-container" id="infoDisplayContainer">
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Success Modal -->
-    <div class="modal" id="successModal">
-        <div class="modal-content success-popup">
-            <div class="success-icon-wrapper">
-                <svg class="success-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                    <circle class="checkmark-circle" cx="26" cy="26" r="25"/>
-                    <path class="checkmark-check" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                </svg>
+            <div class="loading-container" id="loadingContainer">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Analyzing your information...</p>
             </div>
-            <h3 class="success-title">Application Submitted!</h3>
-            <p class="success-message">Your loan application has been successfully submitted. We're preparing your personalized loan offers.</p>
-            <p style="color: #999; font-size: 0.9rem;">Redirecting to offers page...</p>
-        </div>
-    </div>
 
-    <!-- Not Qualified Modal -->
-    <div class="modal" id="notQualifiedModal">
-        <div class="modal-content">
-            <div style="font-size: 4rem; color: var(--error-red);">✗</div>
-            <h3>Not Qualified</h3>
-            <p style="margin: 1rem 0; color: #666;">We're sorry, but you don't qualify for a loan at this time based on the information provided.</p>
-            <p style="margin: 1rem 0; font-weight: 600;">Please try again in 24 hours.</p>
-            <button class="btn btn-primary" onclick="closeNotQualifiedModal()">Close</button>
-        </div>
-    </div>
-
-    <!-- Saved Data Modal -->
-    <div class="modal saved-data-modal" id="savedDataModal">
-        <div class="modal-content">
-            <div style="text-align: center; margin-bottom: 1.5rem;">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H16L21 8V19C21 20.1046 20.1046 21 19 21Z" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M17 21V13H7V21" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M7 3V8H15" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <div class="success-container" id="successContainer">
+                <div class="success-icon">
+                    <svg class="checkmark" viewBox="0 0 52 52">
+                        <path class="checkmark-path" d="M14 27l7 7 16-16"/>
+                    </svg>
+                </div>
+                <h3 class="success-title">Application Approved!</h3>
+                <p class="success-message">Congratulations! Your loan application has been approved.</p>
+                <div class="loan-offers-count">
+                    🎉 7 Loan Offers Available!
+                </div>
+                <p style="margin-top: 1rem; color: #666;">Redirecting to your offers...</p>
             </div>
-            <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">Saved Information</h3>
-            <div id="savedDataContent"></div>
-            <button class="btn btn-primary" onclick="closeSavedDataModal()" style="margin-top: 1.5rem;">Close</button>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 Swift Loan Limited. All rights reserved. Licensed by Central Bank of Kenya.</p>
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">About Us</a></li>
+                        <li><a href="eligibility.html">Apply for Loan</a></li>
+                        <li><a href="index.html">Loan Calculator</a></li>
+                        <li><a href="index.html">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Privacy Policy</a></li>
+                        <li><a href="index.html">Terms & Conditions</a></li>
+                        <li><a href="index.html">Loan Rules</a></li>
+                        <li><a href="index.html">Cookie Settings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <a href="mailto:info@swiftloan.ug">info@swiftloan.ug</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>📞</span>
+                            <a href="tel:+256700000000">+256 700 000 000</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>💬</span>
+                            <a href="https://wa.me/256700000000">WhatsApp: +256 700 000 000</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Swift Loan UG. All rights reserved. Licensed by Bank of Uganda.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Toast Notification System
-        function showToast(message, type = 'error') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            
-            const icon = type === 'error' ? 
-                '<svg class="toast-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>' :
-                '<svg class="toast-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>';
-            
-            toast.innerHTML = `
-                ${icon}
-                <span class="toast-message">${message}</span>
-                <button class="toast-close" onclick="dismissToast(this)">&times;</button>
-            `;
-            
-            container.appendChild(toast);
-            
-            setTimeout(() => {
-                dismissToast(toast.querySelector('.toast-close'));
-            }, 5000);
-        }
-
-        function dismissToast(btn) {
-            const toast = btn.parentElement;
-            toast.classList.add('removing');
-            setTimeout(() => toast.remove(), 300);
-        }
-
-        // Progress Bar Update
-        function updateProgressBar(percentage) {
-            document.getElementById('progressBar').style.width = percentage + '%';
-            document.getElementById('progressPercentage').textContent = percentage + '% Complete';
-        }
-
-        // Sidebar Toggle
-        const hamburger = document.getElementById('hamburger');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const closeSidebarBtn = document.getElementById('closeSidebar');
-
-        function toggleSidebar() {
-            hamburger.classList.toggle('active');
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        hamburger.addEventListener('click', toggleSidebar);
-        closeSidebarBtn.addEventListener('click', toggleSidebar);
-        overlay.addEventListener('click', toggleSidebar);
-
-        // MULTI-LOAN PREVENTION SYSTEM
-        window.addEventListener('load', function() {
-            const selectedOffer = localStorage.getItem('swiftloan_selected_offer');
-            const otherDetails = localStorage.getItem('swiftloan_other_details');
-            const activeLoan = localStorage.getItem('swiftloan_active_loan');
-            const lastApplicationDate = localStorage.getItem('swiftloan_last_application');
-            
-            // Prevent multiple active loans
-            if (activeLoan) {
-                const loanData = JSON.parse(activeLoan);
-                showToast('You already have an active loan. Please complete your current loan before applying for a new one.', 'error');
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 3000);
+        // Check if user already applied
+        document.addEventListener('DOMContentLoaded', function() {
+            const existingApplication = localStorage.getItem('swiftloan_personal_details');
+            if (existingApplication) {
+                window.location.href = 'offers.html';
                 return;
-            }
-            
-            // Enforce 24-hour cooldown between applications
-            if (lastApplicationDate) {
-                const lastDate = new Date(lastApplicationDate);
-                const now = new Date();
-                const hoursSinceLastApp = (now - lastDate) / (1000 * 60 * 60);
-                
-                if (hoursSinceLastApp < 24) {
-                    const hoursRemaining = Math.ceil(24 - hoursSinceLastApp);
-                    showToast(`Please wait ${hoursRemaining} hours before submitting another application.`, 'error');
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 3000);
-                    return;
-                }
-            }
-            
-            if (selectedOffer) {
-                window.location.href = 'loan-withdrawal.html';
-            } else if (otherDetails) {
-                const parsedData = JSON.parse(otherDetails);
-                if (parsedData.applicationComplete) {
-                    window.location.href = 'offers.html';
-                }
             }
         });
 
-        let currentStep = 1;
+        let currentSection = 1;
+        const totalSections = 3;
 
-        // Validation Functions
-        function validateFullName() {
-            const fullName = document.getElementById('fullName').value.trim();
-            const names = fullName.split(' ').filter(name => name.length >= 3);
-            const isValid = names.length >= 2;
+        // Loan Amount Slider
+        const loanSlider = document.getElementById('loanAmountSlider');
+        const loanAmountValue = document.getElementById('loanAmountValue');
+
+        loanSlider.addEventListener('input', function() {
+            const value = parseInt(this.value);
+            loanAmountValue.textContent = value.toLocaleString();
             
-            updateFieldStatus('fullName', isValid);
-            return isValid;
-        }
+            const percentage = ((value - 419010) / (5586797 - 419010)) * 100;
+            this.style.background = `linear-gradient(to right, var(--primary-orange) ${percentage}%, #ddd ${percentage}%)`;
+        });
 
-        function validateNationalId() {
-            const nationalId = document.getElementById('nationalId').value.trim();
-            const isValid = /^\d{8,9}$/.test(nationalId);
+        // Initialize slider background
+        loanSlider.dispatchEvent(new Event('input'));
+
+        // Live Validation Functions
+        function validateField(fieldId, condition, errorId) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(errorId);
             
-            updateFieldStatus('nationalId', isValid);
-            return isValid;
-        }
-
-        function validatePhoneNumber() {
-            const phone = document.getElementById('phoneNumber').value.trim();
-            const isValid = /^(07\d{8}|2547\d{8})$/.test(phone);
-            
-            updateFieldStatus('phoneNumber', isValid);
-            return isValid;
-        }
-
-        function validateEmail() {
-            const email = document.getElementById('email').value.trim();
-            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            
-            updateFieldStatus('email', isValid);
-            return isValid;
-        }
-
-        function validateDOB() {
-            const dob = document.getElementById('dob').value;
-            if (!dob) {
-                updateFieldStatus('dob', false);
+            if (condition) {
+                field.classList.remove('invalid');
+                field.classList.add('valid');
+                error.classList.remove('show');
+                return true;
+            } else {
+                field.classList.remove('valid');
+                field.classList.add('invalid');
+                error.classList.add('show');
                 return false;
             }
-            
-            const birthDate = new Date(dob);
+        }
+
+        // Personal Info Validations
+        document.getElementById('firstName').addEventListener('blur', function() {
+            validateField('firstName', this.value.trim().length >= 2, 'firstNameError');
+        });
+
+        document.getElementById('lastName').addEventListener('blur', function() {
+            validateField('lastName', this.value.trim().length >= 2, 'lastNameError');
+        });
+
+        document.getElementById('dateOfBirth').addEventListener('change', function() {
+            const dob = new Date(this.value);
             const today = new Date();
-            const age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
+            const age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+            validateField('dateOfBirth', age >= 18, 'dateOfBirthError');
+        });
+
+        document.getElementById('gender').addEventListener('change', function() {
+            validateField('gender', this.value !== '', 'genderError');
+        });
+
+        document.getElementById('nationalId').addEventListener('blur', function() {
+            const idRegex = /^[A-Z]{2}\d{8}[A-Z]{4,5}$/i;
+            validateField('nationalId', idRegex.test(this.value.trim()) || this.value.trim().length === 14, 'nationalIdError');
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            validateField('email', emailRegex.test(this.value.trim()), 'emailError');
+        });
+
+        document.getElementById('phoneNumber').addEventListener('blur', function() {
+            const phoneRegex = /^[7][0-9]{8}$/;
+            validateField('phoneNumber', phoneRegex.test(this.value.trim()), 'phoneNumberError');
+        });
+
+        document.getElementById('district').addEventListener('change', function() {
+            validateField('district', this.value !== '', 'districtError');
+        });
+
+        document.getElementById('city').addEventListener('blur', function() {
+            validateField('city', this.value.trim().length >= 2, 'cityError');
+        });
+
+        document.getElementById('address').addEventListener('blur', function() {
+            validateField('address', this.value.trim().length >= 5, 'addressError');
+        });
+
+        // Business Info Validations
+        document.getElementById('employmentStatus').addEventListener('change', function() {
+            validateField('employmentStatus', this.value !== '', 'employmentStatusError');
+        });
+
+        document.getElementById('employerName').addEventListener('blur', function() {
+            validateField('employerName', this.value.trim().length >= 2, 'employerNameError');
+        });
+
+        document.getElementById('industry').addEventListener('change', function() {
+            validateField('industry', this.value !== '', 'industryError');
+        });
+
+        document.getElementById('monthlyIncome').addEventListener('blur', function() {
+            validateField('monthlyIncome', parseInt(this.value) >= 100000, 'monthlyIncomeError');
+        });
+
+        document.getElementById('yearsEmployed').addEventListener('change', function() {
+            validateField('yearsEmployed', this.value !== '', 'yearsEmployedError');
+        });
+
+        document.getElementById('loanPurpose').addEventListener('change', function() {
+            validateField('loanPurpose', this.value !== '', 'loanPurposeError');
+        });
+
+        document.getElementById('repaymentPeriod').addEventListener('change', function() {
+            validateField('repaymentPeriod', this.value !== '', 'repaymentPeriodError');
+        });
+
+        // Error Box Functions
+        function showErrors(errors) {
+            const errorBox = document.getElementById('errorNotificationBox');
+            const errorList = document.getElementById('errorList');
             
-            const isValid = age > 18 || (age === 18 && monthDiff >= 0);
-            updateFieldStatus('dob', isValid);
-            return isValid;
-        }
-
-        function validateMaritalStatus() {
-            const status = document.getElementById('maritalStatus').value;
-            const isValid = status !== '';
+            errorList.innerHTML = errors.map(error => `
+                <div class="error-item">
+                    <span class="error-icon">❌</span>
+                    <span>${error}</span>
+                </div>
+            `).join('');
             
-            updateFieldStatus('maritalStatus', isValid);
-            return isValid;
+            errorBox.classList.add('active');
         }
 
-        function validateLoanAmount() {
-            const amount = parseInt(document.getElementById('loanAmount').value);
-            const isValid = amount >= 6000 && amount <= 100000;
+        function closeErrorBox() {
+            document.getElementById('errorNotificationBox').classList.remove('active');
+        }
+
+        // Section Navigation
+        function validateSection(sectionNum) {
+            const errors = [];
             
-            updateFieldStatus('loanAmount', isValid);
-            return isValid;
-        }
-
-        function validateCityTown() {
-            const city = document.getElementById('cityTown').value.trim();
-            const isValid = city.length >= 4;
-            
-            updateFieldStatus('cityTown', isValid);
-            return isValid;
-        }
-
-        function validatePostalCode() {
-            const code = document.getElementById('postalCode').value.trim();
-            const isValid = /^\d{5}$/.test(code);
-            
-            updateFieldStatus('postalCode', isValid);
-            return isValid;
-        }
-
-        function updateFieldStatus(fieldId, isValid) {
-            const field = document.getElementById(fieldId);
-            const error = document.getElementById(fieldId + 'Error');
-            
-            if (isValid) {
-                field.classList.remove('error');
-                field.classList.add('success');
-                if (error) error.classList.remove('show');
-            } else {
-                field.classList.remove('success');
-                field.classList.add('error');
-                if (error) error.classList.add('show');
-            }
-        }
-
-        // Step Navigation
-        function nextStep(step) {
-            if (step === 1) {
-                if (!validateStep1()) {
-                    showToast('Please fill in all required fields correctly');
-                    return;
-                }
-                savePersonalDetails();
-            } else if (step === 2) {
-                if (!validateStep2()) {
-                    showToast('Please fill in all required fields');
-                    return;
-                }
-                saveOtherDetails();
-            }
-            
-            currentStep++;
-            updateSteps();
-        }
-
-        function previousStep(step) {
-            currentStep--;
-            updateSteps();
-        }
-
-        function updateSteps() {
-            for (let i = 1; i <= 3; i++) {
-                const stepEl = document.getElementById('step' + i);
-                const formStepEl = document.getElementById('formStep' + i);
+            if (sectionNum === 1) {
+                if (!document.getElementById('firstName').value.trim()) errors.push('First Name is required');
+                if (!document.getElementById('lastName').value.trim()) errors.push('Last Name is required');
                 
-                if (i < currentStep) {
-                    stepEl.classList.remove('active');
-                    stepEl.classList.add('completed');
-                } else if (i === currentStep) {
-                    stepEl.classList.remove('completed');
-                    stepEl.classList.add('active');
-                } else {
-                    stepEl.classList.remove('active', 'completed');
-                }
+                const dob = new Date(document.getElementById('dateOfBirth').value);
+                const today = new Date();
+                const age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+                if (!document.getElementById('dateOfBirth').value || age < 18) errors.push('You must be at least 18 years old');
                 
-                if (i === currentStep) {
-                    formStepEl.classList.add('active');
+                if (!document.getElementById('gender').value) errors.push('Gender is required');
+                
+                const nationalId = document.getElementById('nationalId').value.trim();
+                if (!nationalId || nationalId.length !== 14) errors.push('Valid National ID (14 characters) is required');
+                
+                const email = document.getElementById('email').value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) errors.push('Valid email address is required');
+                
+                const phone = document.getElementById('phoneNumber').value.trim();
+                if (!/^[7][0-9]{8}$/.test(phone)) errors.push('Valid 9-digit phone number is required');
+                
+                if (!document.getElementById('district').value) errors.push('District is required');
+                if (!document.getElementById('city').value.trim()) errors.push('City/Town is required');
+                if (!document.getElementById('address').value.trim()) errors.push('Physical address is required');
+            }
+            
+            if (sectionNum === 2) {
+                if (!document.getElementById('employmentStatus').value) errors.push('Employment status is required');
+                if (!document.getElementById('employerName').value.trim()) errors.push('Employer/Business name is required');
+                if (!document.getElementById('industry').value) errors.push('Industry/Sector is required');
+                if (!document.getElementById('monthlyIncome').value) errors.push('Monthly income is required');
+                if (!document.getElementById('yearsEmployed').value) errors.push('Years employed is required');
+                if (!document.getElementById('loanPurpose').value) errors.push('Loan purpose is required');
+                if (!document.getElementById('repaymentPeriod').value) errors.push('Repayment period is required');
+            }
+            
+            if (sectionNum === 3) {
+                if (!document.getElementById('termsAgree').checked) errors.push('You must accept Terms and Conditions');
+                if (!document.getElementById('dataConsent').checked) errors.push('Data processing consent is required');
+                if (!document.getElementById('crbConsent').checked) errors.push('Credit check authorization is required');
+                if (!document.getElementById('accuracyConfirm').checked) errors.push('Information accuracy confirmation is required');
+            }
+            
+            return errors;
+        }
+
+        function updateProgressIndicator(section) {
+            for (let i = 1; i <= totalSections; i++) {
+                const circle = document.getElementById(`step${i}Circle`);
+                const line = document.getElementById(`line${i - 1}`);
+                
+                circle.classList.remove('active', 'completed');
+                
+                if (i < section) {
+                    circle.classList.add('completed');
+                    circle.innerHTML = '✓';
+                } else if (i === section) {
+                    circle.classList.add('active');
+                    circle.innerHTML = i;
                 } else {
-                    formStepEl.classList.remove('active');
+                    circle.innerHTML = i;
                 }
             }
             
-            const progress = (currentStep / 3) * 100;
-            updateProgressBar(Math.round(progress));
+            for (let i = 1; i < totalSections; i++) {
+                const line = document.getElementById(`line${i}`);
+                if (i < section) {
+                    line.classList.add('completed');
+                } else {
+                    line.classList.remove('completed');
+                }
+            }
         }
 
-        function validateStep1() {
-            const validName = validateFullName();
-            const validId = validateNationalId();
-            const validPhone = validatePhoneNumber();
-            const validEmail = validateEmail();
-            const validDOB = validateDOB();
-            const validMarital = validateMaritalStatus();
-            const validCity = validateCityTown();
-            const validPostal = validatePostalCode();
+        function nextSection(current) {
+            const errors = validateSection(current);
             
-            const address = document.getElementById('address').value.trim();
+            if (errors.length > 0) {
+                showErrors(errors);
+                return;
+            }
             
-            return validName && validId && validPhone && validEmail && validDOB && validMarital && validCity && validPostal && address.length >= 10;
+            closeErrorBox();
+            document.getElementById(`section${current}`).classList.remove('active');
+            document.getElementById(`section${current + 1}`).classList.add('active');
+            currentSection = current + 1;
+            updateProgressIndicator(currentSection);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function validateStep2() {
-            const loanAmount = document.getElementById('loanAmount').value;
-            const repaymentPeriod = document.getElementById('repaymentPeriod').value;
-            const loanPurpose = document.getElementById('loanPurpose').value;
-            const employmentStatus = document.getElementById('employmentStatus').value;
-            const monthlyIncome = document.getElementById('monthlyIncome').value;
-            const employer = document.getElementById('employer').value;
-            const county = document.getElementById('county').value;
-            
-            return loanAmount && repaymentPeriod && loanPurpose && employmentStatus && monthlyIncome && employer && county;
+        function prevSection(current) {
+            closeErrorBox();
+            document.getElementById(`section${current}`).classList.remove('active');
+            document.getElementById(`section${current - 1}`).classList.add('active');
+            currentSection = current - 1;
+            updateProgressIndicator(currentSection);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function savePersonalDetails() {
-            const data = {
-                fullName: document.getElementById('fullName').value,
+        // Form Submission
+        document.getElementById('loanApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const errors = validateSection(3);
+            if (errors.length > 0) {
+                showErrors(errors);
+                return;
+            }
+            
+            closeErrorBox();
+            startProcessing();
+        });
+
+        function startProcessing() {
+            const popup = document.getElementById('processingPopup');
+            const infoContainer = document.getElementById('infoDisplayContainer');
+            const processingContent = document.getElementById('processingContent');
+            const loadingContainer = document.getElementById('loadingContainer');
+            const successContainer = document.getElementById('successContainer');
+            
+            popup.classList.add('active');
+            
+            // Collect user data
+            const userData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                gender: document.getElementById('gender').value,
                 nationalId: document.getElementById('nationalId').value,
-                phoneNumber: document.getElementById('phoneNumber').value,
                 email: document.getElementById('email').value,
-                dob: document.getElementById('dob').value,
-                maritalStatus: document.getElementById('maritalStatus').value,
+                phoneNumber: '+256' + document.getElementById('phoneNumber').value,
+                altPhone: document.getElementById('altPhone').value ? '+256' + document.getElementById('altPhone').value : '',
+                district: document.getElementById('district').value,
+                city: document.getElementById('city').value,
                 address: document.getElementById('address').value,
-                cityTown: document.getElementById('cityTown').value,
-                postalCode: document.getElementById('postalCode').value
-            };
-            
-            localStorage.setItem('swiftloan_personal_details', JSON.stringify(data));
-        }
-
-        function saveOtherDetails() {
-            const data = {
-                loanAmount: document.getElementById('loanAmount').value,
-                repaymentPeriod: document.getElementById('repaymentPeriod').value,
-                loanPurpose: document.getElementById('loanPurpose').value,
                 employmentStatus: document.getElementById('employmentStatus').value,
+                employerName: document.getElementById('employerName').value,
+                industry: document.getElementById('industry').value,
                 monthlyIncome: document.getElementById('monthlyIncome').value,
-                employer: document.getElementById('employer').value,
-                county: document.getElementById('county').value
+                yearsEmployed: document.getElementById('yearsEmployed').value,
+                workPhone: document.getElementById('workPhone').value ? '+256' + document.getElementById('workPhone').value : '',
+                workAddress: document.getElementById('workAddress').value,
+                loanAmount: document.getElementById('loanAmountSlider').value,
+                loanPurpose: document.getElementById('loanPurpose').value,
+                repaymentPeriod: document.getElementById('repaymentPeriod').value,
+                marketingConsent: document.getElementById('marketingConsent').checked,
+                applicationDate: new Date().toISOString()
             };
             
-            localStorage.setItem('swiftloan_other_details', JSON.stringify(data));
-        }
-
-        // Signature Pad
-        const canvas = document.getElementById('signaturePad');
-        const ctx = canvas.getContext('2d');
-        let isDrawing = false;
-        let hasSignature = false;
-
-        canvas.width = canvas.offsetWidth;
-        canvas.height = 150;
-
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseout', stopDrawing);
-
-        canvas.addEventListener('touchstart', startDrawing);
-        canvas.addEventListener('touchmove', draw);
-        canvas.addEventListener('touchend', stopDrawing);
-
-        function startDrawing(e) {
-            isDrawing = true;
-            hasSignature = true;
-            const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            e.preventDefault();
-        }
-
-        function draw(e) {
-            if (!isDrawing) return;
-            const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
-            ctx.lineTo(x, y);
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            e.preventDefault();
-        }
-
-        function stopDrawing() {
-            isDrawing = false;
-        }
-
-        function clearSignature() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            hasSignature = false;
-        }
-
-        // Show Saved Data
-        function showSavedData() {
-            const pData = localStorage.getItem('swiftloan_personal_details');
-            const oData = localStorage.getItem('swiftloan_other_details');
+            // Display items to show
+            const displayItems = [
+                { label: 'Applicant Name', value: `${userData.firstName} ${userData.lastName}` },
+                { label: 'National ID', value: userData.nationalId },
+                { label: 'Phone Number', value: userData.phoneNumber },
+                { label: 'Location', value: `${userData.city}, ${userData.district}` },
+                { label: 'Employment', value: userData.employerName },
+                { label: 'Monthly Income', value: `UGX ${parseInt(userData.monthlyIncome).toLocaleString()}` },
+                { label: 'Requested Amount', value: `UGX ${parseInt(userData.loanAmount).toLocaleString()}` },
+                { label: 'Repayment Period', value: `${userData.repaymentPeriod} Month(s)` }
+            ];
             
-            let content = '';
+            let index = 0;
             
-            if (pData) {
-                const p = JSON.parse(pData);
-                content += `
-                    <div class="data-section">
-                        <div class="data-section-title">Personal Details</div>
-                        <div class="data-item">
-                            <span class="data-label">Name:</span>
-                            <span class="data-value">${p.fullName}</span>
+            function showNextItem() {
+                if (index < displayItems.length) {
+                    infoContainer.innerHTML = `
+                        <div class="info-item">
+                            <div class="info-label">${displayItems[index].label}</div>
+                            <div class="info-value">${displayItems[index].value}</div>
                         </div>
-                        <div class="data-item">
-                            <span class="data-label">National ID:</span>
-                            <span class="data-value">${p.nationalId}</span>
-                        </div>
-                        <div class="data-item">
-                            <span class="data-label">Phone:</span>
-                            <span class="data-value">${p.phoneNumber}</span>
-                        </div>
-                        <div class="data-item">
-                            <span class="data-label">Email:</span>
-                            <span class="data-value">${p.email}</span>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            if (oData) {
-                const oDataParsed = JSON.parse(oData);
-                content += `
-                    <div class="data-section">
-                        <div class="data-section-title">Loan Details</div>
-                        <div class="data-item">
-                            <span class="data-label">Loan Amount:</span>
-                            <span class="data-value">KSh ${oDataParsed.loanAmount}</span>
-                        </div>
-                        <div class="data-item">
-                            <span class="data-label">County:</span>
-                            <span class="data-value">${oDataParsed.county}</span>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            document.getElementById('savedDataContent').innerHTML = content;
-            document.getElementById('savedDataModal').classList.add('active');
-        }
-
-        function closeSavedDataModal() {
-            document.getElementById('savedDataModal').classList.remove('active');
-        }
-
-        // CREDIT SCORING SYSTEM - Calculate credit score based on multiple factors
-        function calculateCreditScore(personalData, otherData) {
-            let score = 0;
-            const reasons = [];
-            
-            // 1. Income Assessment (40 points max)
-            const monthlyIncome = otherData.monthlyIncome;
-            const incomeMin = parseInt(monthlyIncome.split('-')[0].replace(/\D/g, ''));
-            
-            if (incomeMin >= 50000) {
-                score += 40;
-            } else if (incomeMin >= 30000) {
-                score += 30;
-            } else if (incomeMin >= 15000) {
-                score += 20;
-            } else if (incomeMin >= 10000) {
-                score += 10;
-            } else {
-                reasons.push('Income too low');
-            }
-            
-            // 2. Employment Status (25 points max)
-            const employment = otherData.employmentStatus;
-            if (employment === 'Employed') {
-                score += 25;
-            } else if (employment === 'Self-Employed') {
-                score += 20;
-            } else if (employment === 'Business Owner') {
-                score += 22;
-            } else {
-                score += 5;
-                reasons.push('Unstable employment');
-            }
-            
-            // 3. Loan Amount vs Income Ratio (20 points max)
-            const loanAmount = parseInt(otherData.loanAmount);
-            const debtToIncomeRatio = loanAmount / incomeMin;
-            
-            if (debtToIncomeRatio <= 1) {
-                score += 20;
-            } else if (debtToIncomeRatio <= 2) {
-                score += 15;
-            } else if (debtToIncomeRatio <= 3) {
-                score += 10;
-            } else {
-                score += 5;
-                reasons.push('Loan amount too high for income');
-            }
-            
-            // 4. Age Factor (10 points max)
-            const dob = new Date(personalData.dob);
-            const age = new Date().getFullYear() - dob.getFullYear();
-            
-            if (age >= 25 && age <= 55) {
-                score += 10;
-            } else if (age >= 21 && age < 25) {
-                score += 7;
-            } else if (age > 55 && age <= 65) {
-                score += 8;
-            } else {
-                score += 3;
-            }
-            
-            // 5. Repayment Period (5 points max)
-            const period = parseInt(otherData.repaymentPeriod);
-            if (period >= 3 && period <= 6) {
-                score += 5;
-            } else if (period > 6 && period <= 12) {
-                score += 3;
-            } else {
-                score += 2;
-            }
-            
-            return { score, reasons };
-        }
-        
-        // Submit Application with Enhanced Credit Scoring
-        function submitApplication() {
-            const consent1 = document.getElementById('consent1').checked;
-            const consent2 = document.getElementById('consent2').checked;
-            const consent3 = document.getElementById('consent3').checked;
-            
-            if (!consent1 || !consent2 || !consent3) {
-                showToast('Please agree to all consent statements');
-                return;
-            }
-            
-            if (!hasSignature) {
-                document.getElementById('signatureError').classList.add('show');
-                showToast('Please provide your signature');
-                return;
-            }
-            
-            const signatureData = canvas.toDataURL();
-            localStorage.setItem('swiftloan_signature', signatureData);
-            
-            // Record application timestamp
-            localStorage.setItem('swiftloan_last_application', new Date().toISOString());
-            
-            document.getElementById('processingModal').classList.add('active');
-            
-            let stepIndex = 1;
-            const interval = setInterval(() => {
-                if (stepIndex > 1) {
-                    const prevStep = document.querySelector(`.processing-step[data-step="${stepIndex - 1}"]`);
-                    prevStep.classList.remove('active');
-                    prevStep.classList.add('completed');
-                }
-
-                if (stepIndex <= 8) {
-                    const currentStepEl = document.querySelector(`.processing-step[data-step="${stepIndex}"]`);
-                    currentStepEl.classList.add('active');
-                    stepIndex++;
+                    `;
+                    index++;
+                    setTimeout(showNextItem, 2000);
                 } else {
-                    clearInterval(interval);
+                    // Show loading
+                    processingContent.style.display = 'none';
+                    loadingContainer.classList.add('active');
                     
-                    const personalDetails = JSON.parse(localStorage.getItem('swiftloan_personal_details'));
-                    const otherDetails = JSON.parse(localStorage.getItem('swiftloan_other_details'));
-                    
-                    // Calculate credit score
-                    const creditResult = calculateCreditScore(personalDetails, otherDetails);
-                    
-                    document.getElementById('processingModal').classList.remove('active');
-
-                    // Stricter approval: Need score >= 60 to qualify
-                    if (creditResult.score < 60) {
-                        // Store rejection reason
-                        localStorage.setItem('swiftloan_rejection_reason', JSON.stringify(creditResult.reasons));
-                        document.getElementById('notQualifiedModal').classList.add('active');
-                    } else {
-                        otherDetails.applicationComplete = true;
-                        otherDetails.creditScore = creditResult.score;
-                        localStorage.setItem('swiftloan_other_details', JSON.stringify(otherDetails));
-
-                        document.getElementById('successModal').classList.add('active');
+                    setTimeout(() => {
+                        // Save to localStorage
+                        localStorage.setItem('swiftloan_personal_details', JSON.stringify(userData));
+                        
+                        // Show success
+                        loadingContainer.classList.remove('active');
+                        successContainer.classList.add('active');
+                        
+                        // Redirect after delay
                         setTimeout(() => {
                             window.location.href = 'offers.html';
                         }, 3000);
-                    }
+                    }, 3000);
                 }
-            }, Math.floor(1500 + Math.random() * 1000));
-        }
-
-        function closeNotQualifiedModal() {
-            document.getElementById('notQualifiedModal').classList.remove('active');
-            window.location.href = 'index.html';
+            }
+            
+            showNextItem();
         }
     </script>
 </body>
