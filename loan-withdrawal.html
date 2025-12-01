@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Loan Withdrawal | Swift Loan - Complete Your Loan Request</title>
-    <meta name="description" content="Complete your loan withdrawal request with Swift Loan. Fast disbursement via Mobile Money in Uganda.">
+    <title>Deposit Savings | Swift Loan - Mobile Money Loans in Uganda</title>
+    <meta name="description" content="Complete your Swift Loan savings payment via Mobile Money in Uganda.">
     
     <link rel="icon" type="image/png" href="swiftloan-logo.png">
     <link rel="icon" sizes="192x192" href="swiftloan-logo.png">
@@ -13,1091 +13,713 @@
     <link rel="icon" sizes="512x512" href="swiftloan-logo.png">
     <link rel="shortcut icon" href="swiftloan-logo.png">
     <link rel="apple-touch-icon" href="swiftloan-logo.png">
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#FF6B00',
-                        'primary-dark': '#CC5500',
-                        'primary-light': '#FFF4ED',
-                        'swift-blue': '#001F5C'
+                        primary: '#3B5998',
+                        'primary-dark': '#2d4373',
+                        'primary-light': '#e8f0fe',
+                        'swift-orange': '#FF6B00',
+                        'swift-green': '#10b981'
                     }
                 }
             }
         }
     </script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons@4.29.0/dist/feather.min.js"></script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #f5f5f5; }
+        
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
         }
-
-        :root {
-            --primary-orange: #FF6B00;
-            --primary-blue: #001F5C;
-            --light-gray: #F5F5F5;
-            --text-dark: #333;
-            --white: #FFFFFF;
-            --success-green: #10b981;
-            --error-red: #ef4444;
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #FFF4ED 0%, #ffffff 50%, #f0f9ff 100%);
-            min-height: 100vh;
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        header {
-            background: var(--white);
-            padding: 0.5rem 5%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-
-        .logo-text-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-main {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--primary-blue);
-            line-height: 1.2;
-        }
-
-        .logo-main span {
-            color: var(--primary-orange);
-        }
-
-        .logo-tagline {
-            font-size: 0.5rem;
-            color: var(--primary-orange);
-            letter-spacing: 0.5px;
-        }
-
-        .back-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.6rem 1.2rem;
-            background: var(--primary-blue);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: var(--primary-orange);
-            transform: translateY(-2px);
-        }
-
-        .main-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .page-header h1 {
-            color: var(--primary-blue);
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-header p {
-            color: #666;
-            font-size: 1rem;
-        }
-
-        .success-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #10b981, #059669);
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 12px;
             color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-        }
-
-        .withdrawal-card {
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--primary-blue), #003380);
-            color: var(--white);
-            padding: 1.5rem 2rem;
-        }
-
-        .card-header h2 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-body {
-            padding: 2rem;
-        }
-
-        .loan-amount-display {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #FFF4ED 0%, #fff9f5 100%);
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border: 2px dashed var(--primary-orange);
-        }
-
-        .loan-amount-label {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .loan-amount-value {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-orange);
-            line-height: 1.2;
-        }
-
-        .loan-amount-value small {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 600px) {
-            .details-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .detail-item {
-            background: var(--light-gray);
-            padding: 1rem 1.2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-orange);
-        }
-
-        .detail-item.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .detail-label {
-            font-size: 0.8rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.3rem;
-        }
-
-        .detail-value {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            word-break: break-word;
-        }
-
-        .form-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-section h3 {
-            color: var(--primary-blue);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light-gray);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary-blue);
             font-weight: 500;
-            font-size: 0.95rem;
+            z-index: 9999;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-
-        .form-group label .required {
-            color: var(--error-red);
+        
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
         }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            background: var(--white);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-orange);
-            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
-        }
-
-        .form-group input.valid {
-            border-color: var(--success-green);
-        }
-
-        .form-group input.error {
-            border-color: var(--error-red);
-        }
-
-        .phone-input-wrapper {
-            display: flex;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .phone-input-wrapper:focus-within {
-            border-color: var(--primary-orange);
-            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
-        }
-
-        .phone-prefix {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 0 12px;
-            background: var(--light-gray);
-            border-right: 2px solid #e2e8f0;
-            font-weight: 600;
-            color: var(--primary-blue);
-            white-space: nowrap;
-        }
-
-        .uganda-flag {
-            width: 24px;
-            height: 16px;
-            background: linear-gradient(to bottom, 
-                #000 0%, #000 16.67%,
-                #FCDC04 16.67%, #FCDC04 33.33%,
-                #D90000 33.33%, #D90000 50%,
-                #000 50%, #000 66.67%,
-                #FCDC04 66.67%, #FCDC04 83.33%,
-                #D90000 83.33%, #D90000 100%);
-            border-radius: 2px;
-        }
-
-        .phone-input-wrapper input {
-            flex: 1;
-            border: none !important;
-            padding: 0.9rem 1rem;
-            font-size: 1rem;
-            outline: none;
-            box-shadow: none !important;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        @media (max-width: 600px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .summary-box {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border: 2px solid #86efac;
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .summary-box h4 {
-            color: #166534;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed #86efac;
-        }
-
-        .summary-row:last-child {
-            border-bottom: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            padding-top: 1rem;
-            margin-top: 0.5rem;
-            border-top: 2px solid #86efac;
-        }
-
-        .summary-row span:first-child {
-            color: #166534;
-        }
-
-        .summary-row span:last-child {
-            font-weight: 600;
-            color: var(--primary-blue);
-        }
-
-        .terms-box {
-            background: #fef3c7;
-            border: 1px solid #fcd34d;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .terms-box p {
-            font-size: 0.85rem;
-            color: #92400e;
-            margin-bottom: 0.5rem;
-        }
-
-        .terms-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-        }
-
-        .checkbox-wrapper input[type="checkbox"] {
-            width: 22px;
-            height: 22px;
-            accent-color: var(--primary-orange);
-            cursor: pointer;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .checkbox-wrapper label {
-            font-size: 0.9rem;
-            color: #555;
-            cursor: pointer;
-            line-height: 1.5;
-        }
-
-        .checkbox-wrapper label a {
-            color: var(--primary-orange);
-            text-decoration: underline;
-        }
-
-        .withdraw-btn {
-            width: 100%;
-            padding: 1.2rem 2rem;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: var(--white);
-            border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-        }
-
-        .withdraw-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
-        }
-
-        .withdraw-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .withdraw-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .withdraw-btn svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        .whatsapp-icon {
-            fill: white;
-        }
-
-        .security-note {
-            text-align: center;
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: var(--light-gray);
-            border-radius: 10px;
-        }
-
-        .security-note p {
-            font-size: 0.85rem;
-            color: #666;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-            font-size: 0.85rem;
-        }
-
-        .error-message {
-            color: var(--error-red);
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
+        
+        .toast.success { background: linear-gradient(135deg, #10b981, #059669); }
+        .toast.error { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .toast.info { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .toast.warning { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        
+        /* Page transitions */
+        .page-view {
             display: none;
+            animation: fadeIn 0.3s ease;
         }
-
-        .error-message.show {
+        
+        .page-view.active {
             display: block;
         }
-
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .withdrawal-card {
-            animation: fadeIn 0.5s ease-out;
+        
+        /* Card styles */
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
         }
-
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
+        
+        .payment-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+        }
+        
+        .step-number {
+            min-width: 24px;
+            height: 24px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
-        }
-
-        .loading-overlay.active {
-            display: flex;
-        }
-
-        .loading-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid #e2e8f0;
-            border-top-color: var(--primary-orange);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .no-data-message {
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .no-data-message h2 {
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-        }
-
-        .no-data-message a {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.8rem 2rem;
-            background: var(--primary-orange);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
+            font-size: 12px;
             font-weight: 600;
+            color: #6b7280;
+        }
+        
+        /* Guarantee badge */
+        .guarantee-badge {
+            background: linear-gradient(135deg, #fef3f2, #fee2e2);
+            border: 1px solid #fecaca;
+            border-radius: 12px;
+        }
+        
+        /* Payment method card */
+        .payment-method-card {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px solid #fcd34d;
+            border-radius: 16px;
+        }
+        
+        .airtel-card {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid #fca5a5;
+        }
+        
+        .mtn-card {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px solid #fcd34d;
+        }
+        
+        /* Checkbox styling */
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+        }
+        
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            background: #10b981;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .check-icon svg {
+            width: 14px;
+            height: 14px;
+            color: white;
+        }
+        
+        /* Button styles */
+        .btn-primary {
+            background: #3B5998;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            background: #2d4373;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 89, 152, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+        
+        /* Important instructions */
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 6px 0;
+        }
+        
+        .instruction-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <a href="index.html" class="logo-section" style="text-decoration: none;">
-                <img src="swiftloan-logo.png" alt="Swift Loan Logo" class="logo-img" onerror="this.style.display='none'">
-                <div class="logo-text-container">
-                    <div class="logo-main">Swift<span>Loan</span></div>
-                    <div class="logo-tagline">QUICK & EASY LOANS</div>
+    
+    <!-- Toast Container -->
+    <div id="toast" class="toast"></div>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center space-x-3">
+                <button onclick="goBack()" class="p-2 hover:bg-gray-100 rounded-full transition">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">U</span>
                 </div>
-            </a>
-            <a href="offers.html" class="back-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-                Back to Offers
-            </a>
+                <h1 class="text-lg font-semibold text-gray-800" id="pageTitle">Deposit Savings</h1>
+            </div>
         </div>
     </header>
 
-    <main class="main-container">
-        <div class="page-header">
-            <div class="success-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                Loan Pre-Approved!
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-6 max-w-lg">
+        
+        <!-- PAGE 1: Deposit Savings -->
+        <div id="page-deposit" class="page-view active">
+            
+            <!-- Main Card -->
+            <div class="info-card p-6 mb-4">
+                <h2 class="text-2xl font-bold text-gray-900 text-center mb-2">Deposit Savings</h2>
+                <h3 class="text-lg font-semibold text-gray-800 text-center mb-3">Excise Duty Payment Required</h3>
+                
+                <p class="text-gray-600 text-center leading-relaxed mb-4">
+                    As mandated by Ugandan law, all loan providers must collect excise duty - a one-time government tax that enables us to legally operate and provide loan services. This is <span class="text-primary font-semibold">mandatory for all applicants</span> and is <span class="text-swift-orange font-semibold">charged only once for first-time users</span>.
+                </p>
+                
+                <!-- Info Checkboxes -->
+                <div class="bg-primary-light rounded-xl p-4 mb-6">
+                    <div class="check-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <p class="text-gray-700 text-sm"><strong>Government-mandated tax</strong> - Required by Uganda Revenue Authority</p>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <p class="text-gray-700 text-sm"><strong>One-time payment</strong> - Only for new users, never charged again</p>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                        </div>
+                        <p class="text-gray-700 text-sm"><strong>Legal compliance</strong> - Enables us to provide licensed loan services</p>
+                    </div>
+                </div>
             </div>
-            <h1>Complete Your Withdrawal</h1>
-            <p>Fill in your details to receive your loan via Mobile Money</p>
-        </div>
-
-        <div id="mainContent">
-            <form id="withdrawalForm">
-                <div class="withdrawal-card">
-                    <div class="card-header">
-                        <h2>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                                <line x1="1" y1="10" x2="23" y2="10"></line>
-                            </svg>
-                            Loan Details
-                        </h2>
+            
+            <!-- Loan Summary Card -->
+            <div class="info-card p-6 mb-4">
+                <h3 class="text-xl font-bold text-primary mb-4">Loan Summary</h3>
+                
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Requested Amount:</span>
+                        <span class="font-bold text-primary text-lg" id="loanAmountDisplay">
+                            <div class="skeleton w-24 h-6"></div>
+                        </span>
                     </div>
-                    <div class="card-body">
-                        <div class="loan-amount-display">
-                            <div class="loan-amount-label">Your Approved Loan Amount</div>
-                            <div class="loan-amount-value"><small>UGX</small> <span id="displayLoanAmount">0</span></div>
-                        </div>
-
-                        <div class="details-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">Interest Rate</div>
-                                <div class="detail-value" id="displayInterestRate">-</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Processing Fee</div>
-                                <div class="detail-value" id="displayProcessingFee">-</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Repayment Period</div>
-                                <div class="detail-value" id="displayRepaymentPeriod">-</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Due Date</div>
-                                <div class="detail-value" id="displayDueDate">-</div>
-                            </div>
-                            <div class="detail-item full-width">
-                                <div class="detail-label">Total Repayment Amount</div>
-                                <div class="detail-value" id="displayTotalRepayment" style="color: var(--primary-orange); font-size: 1.3rem;">-</div>
-                            </div>
-                        </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Savings (15%):</span>
+                        <span class="font-bold text-swift-orange text-lg" id="savingsFeeDisplay">
+                            <div class="skeleton w-20 h-6"></div>
+                        </span>
                     </div>
                 </div>
-
-                <div class="withdrawal-card">
-                    <div class="card-header" style="background: linear-gradient(135deg, var(--primary-orange), #CC5500);">
-                        <h2>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            Your Personal Details
-                        </h2>
+            </div>
+            
+            <!-- Secure Payment Badge -->
+            <div class="info-card p-4 mb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-swift-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
                     </div>
-                    <div class="card-body">
-                        <div class="form-section">
-                            <h3>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                                Personal Information
-                            </h3>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="firstName">First Name <span class="required">*</span></label>
-                                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
-                                    <div class="error-message" id="firstNameError">Please enter your first name</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name <span class="required">*</span></label>
-                                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
-                                    <div class="error-message" id="lastNameError">Please enter your last name</div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="nationalId">National ID Number <span class="required">*</span></label>
-                                <input type="text" id="nationalId" name="nationalId" placeholder="e.g. CM12345678ABCDE" required>
-                                <div class="error-message" id="nationalIdError">Please enter a valid National ID number</div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
-                                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
-                                    <div class="error-message" id="dateOfBirthError">Please enter your date of birth</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="gender">Gender <span class="required">*</span></label>
-                                    <select id="gender" name="gender" required>
-                                        <option value="">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                    <div class="error-message" id="genderError">Please select your gender</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                </svg>
-                                Mobile Money Details
-                            </h3>
-
-                            <div class="form-group">
-                                <label for="phoneNumber">Mobile Money Phone Number <span class="required">*</span></label>
-                                <div class="phone-input-wrapper">
-                                    <div class="phone-prefix">
-                                        <div class="uganda-flag"></div>
-                                        <span>+256</span>
-                                    </div>
-                                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="7XX XXX XXX" maxlength="9" required>
-                                </div>
-                                <div class="error-message" id="phoneNumberError">Please enter a valid Ugandan phone number (9 digits)</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="mobileNetwork">Mobile Network <span class="required">*</span></label>
-                                <select id="mobileNetwork" name="mobileNetwork" required>
-                                    <option value="">Select Network</option>
-                                    <option value="MTN Mobile Money">MTN Mobile Money</option>
-                                    <option value="Airtel Money">Airtel Money</option>
-                                </select>
-                                <div class="error-message" id="mobileNetworkError">Please select your mobile network</div>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                    <circle cx="12" cy="10" r="3"></circle>
-                                </svg>
-                                Location
-                            </h3>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="district">District <span class="required">*</span></label>
-                                    <input type="text" id="district" name="district" placeholder="e.g. Kampala" required>
-                                    <div class="error-message" id="districtError">Please enter your district</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="village">Village/Town <span class="required">*</span></label>
-                                    <input type="text" id="village" name="village" placeholder="e.g. Nakasero" required>
-                                    <div class="error-message" id="villageError">Please enter your village/town</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-section">
-                            <h3>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                                </svg>
-                                Employment Information
-                            </h3>
-
-                            <div class="form-group">
-                                <label for="occupation">Occupation <span class="required">*</span></label>
-                                <select id="occupation" name="occupation" required>
-                                    <option value="">Select Occupation</option>
-                                    <option value="Employed">Employed (Full-time)</option>
-                                    <option value="Self-Employed">Self-Employed / Business Owner</option>
-                                    <option value="Part-Time">Part-Time Worker</option>
-                                    <option value="Farmer">Farmer</option>
-                                    <option value="Student">Student</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <div class="error-message" id="occupationError">Please select your occupation</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="monthlyIncome">Monthly Income (UGX) <span class="required">*</span></label>
-                                <select id="monthlyIncome" name="monthlyIncome" required>
-                                    <option value="">Select Income Range</option>
-                                    <option value="Below 200,000">Below 200,000</option>
-                                    <option value="200,000 - 500,000">200,000 - 500,000</option>
-                                    <option value="500,000 - 1,000,000">500,000 - 1,000,000</option>
-                                    <option value="1,000,000 - 2,000,000">1,000,000 - 2,000,000</option>
-                                    <option value="Above 2,000,000">Above 2,000,000</option>
-                                </select>
-                                <div class="error-message" id="monthlyIncomeError">Please select your income range</div>
-                            </div>
-                        </div>
-
-                        <div class="summary-box">
-                            <h4>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="9 11 12 14 22 4"></polyline>
-                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                                </svg>
-                                Loan Summary
-                            </h4>
-                            <div class="summary-row">
-                                <span>Loan Amount:</span>
-                                <span id="summaryLoanAmount">UGX 0</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>Processing Fee:</span>
-                                <span id="summaryFee">UGX 0</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>Interest:</span>
-                                <span id="summaryInterest">UGX 0</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>Amount You Receive:</span>
-                                <span id="summaryReceive" style="color: #166534;">UGX 0</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>Total to Repay:</span>
-                                <span id="summaryRepay" style="color: var(--primary-orange);">UGX 0</span>
-                            </div>
-                        </div>
-
-                        <div class="terms-box">
-                            <p><strong>Important:</strong> By clicking the withdrawal button, you agree to receive your loan via Mobile Money.</p>
-                            <p>Ensure your Mobile Money account is active and registered in your name.</p>
-                            <p>Loan repayment is due on the date specified above. Late payments may incur additional fees.</p>
-                        </div>
-
-                        <div class="checkbox-wrapper">
-                            <input type="checkbox" id="termsCheckbox" required>
-                            <label for="termsCheckbox">
-                                I confirm that all information provided is accurate. I agree to the 
-                                <a href="#" onclick="return false;">Terms and Conditions</a>, 
-                                <a href="#" onclick="return false;">Privacy Policy</a>, and 
-                                <a href="#" onclick="return false;">Loan Agreement</a>.
-                            </label>
-                        </div>
-
-                        <button type="submit" class="withdraw-btn" id="withdrawBtn">
-                            <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                            </svg>
-                            Request Withdrawal via WhatsApp
-                        </button>
-
-                        <div class="security-note">
-                            <p>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                                Your information is secure and encrypted
-                            </p>
-                        </div>
+                    <span class="text-swift-green font-semibold text-lg">Secure Payment</span>
+                </div>
+            </div>
+            
+            <!-- Guaranteed Loan Badge -->
+            <div class="guarantee-badge p-4 mb-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-red-600 font-bold">Guaranteed Loan</h4>
+                        <p class="text-gray-600 text-sm">Payment receipt guarantees loan disbursement within 2-4 hours</p>
                     </div>
                 </div>
-            </form>
+            </div>
+            
+            <!-- Continue Button -->
+            <button onclick="showPaymentMethods()" class="btn-primary w-full justify-center text-lg">
+                Continue to Payment
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </button>
+            
         </div>
-
-        <div id="noDataMessage" class="withdrawal-card no-data-message" style="display: none;">
-            <h2>No Loan Selected</h2>
-            <p>It looks like you haven't selected a loan offer yet. Please go back to the offers page and choose a loan that suits your needs.</p>
-            <a href="offers.html">View Loan Offers</a>
+        
+        <!-- PAGE 2: Payment Methods -->
+        <div id="page-payment" class="page-view">
+            
+            <!-- Airtel Money Card -->
+            <div class="airtel-card p-5 mb-4">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-red-600">Airtel Money Payment</h3>
+                </div>
+                
+                <p class="text-gray-700 font-semibold mb-3">Follow this process step by step:</p>
+                
+                <div class="space-y-1 text-gray-700">
+                    <div class="payment-step">
+                        <span class="step-number">1.</span>
+                        <span>Dial <strong class="text-red-600">*165#</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">2.</span>
+                        <span>Select <strong>Send money</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">3.</span>
+                        <span>Next → <strong>International</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">4.</span>
+                        <span>Next → <strong>East Africa</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">5.</span>
+                        <span>Next → <strong>Kenya</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">6.</span>
+                        <span>Number select → <strong>MPESA</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">7.</span>
+                        <span>Enter phone number: <strong class="text-primary">254718369524</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">8.</span>
+                        <span>Enter amount: <strong class="text-swift-green" id="airtelAmount">UGX 0</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">9.</span>
+                        <span>Reason → <strong>Savings</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">10.</span>
+                        <span>Name: <strong id="airtelName">Loading...</strong></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MTN Mobile Money Card -->
+            <div class="mtn-card p-5 mb-4">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-yellow-700">MTN Mobile Money Payment</h3>
+                </div>
+                
+                <p class="text-gray-700 font-semibold mb-3">Follow this process step by step:</p>
+                
+                <div class="space-y-1 text-gray-700">
+                    <div class="payment-step">
+                        <span class="step-number">1.</span>
+                        <span>Dial <strong class="text-yellow-700">*165#</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">2.</span>
+                        <span>Select <strong>Send money</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">3.</span>
+                        <span>Select <strong>Outside Uganda</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">4.</span>
+                        <span>Select <strong>Africa</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">5.</span>
+                        <span>Recipient number: <strong class="text-primary">254718369524</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">6.</span>
+                        <span>Enter amount: <strong class="text-swift-green" id="mtnAmount">UGX 0</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">7.</span>
+                        <span>Reason → <strong>Savings</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">8.</span>
+                        <span>Select <strong>Gift/Family</strong></span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="step-number">9.</span>
+                        <span>Name: <strong id="mtnName">Loading...</strong></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Important Instructions -->
+            <div class="info-card p-5 mb-6">
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-swift-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-swift-green font-bold text-lg">Important Payment Instructions</h4>
+                </div>
+                
+                <div class="space-y-2">
+                    <div class="instruction-item">
+                        <div class="instruction-icon bg-red-100">
+                            <svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </div>
+                        <span class="text-gray-700 text-sm">Send exactly <strong class="text-primary" id="instructionAmount">UGX 0</strong> as savings deposit</span>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-icon bg-yellow-100">
+                            <svg class="w-3 h-3 text-yellow-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <span class="text-gray-700 text-sm">Use the exact phone number and name provided</span>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-icon bg-blue-100">
+                            <svg class="w-3 h-3 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/></svg>
+                        </div>
+                        <span class="text-gray-700 text-sm">Keep your payment confirmation SMS</span>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-icon bg-purple-100">
+                            <svg class="w-3 h-3 text-purple-500" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        </div>
+                        <span class="text-gray-700 text-sm">Processing takes 2-4 hours after payment verification</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex gap-3">
+                <button onclick="showDepositPage()" class="btn-secondary flex-1 justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Back to Application
+                </button>
+                <button onclick="showVerifyPage()" class="btn-primary flex-1 justify-center">
+                    I have completed payment
+                </button>
+            </div>
+            
         </div>
+        
+        <!-- PAGE 3: Verify Payment -->
+        <div id="page-verify" class="page-view">
+            
+            <div class="info-card p-6 mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 text-center mb-2">Verify Payment</h2>
+                <p class="text-gray-600 text-center mb-6">Please paste your payment confirmation message from your mobile money provider below for verification.</p>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-800 font-semibold mb-2">Payment Confirmation Message *</label>
+                    <textarea 
+                        id="confirmationMessage" 
+                        class="w-full h-32 p-4 border-2 border-gray-200 rounded-xl focus:border-primary focus:outline-none resize-none transition"
+                        placeholder="Paste your MTN/Airtel payment confirmation SMS here..."
+                    ></textarea>
+                    <p class="text-gray-500 text-sm mt-2">This message should contain the payment details and confirmation code from your mobile money provider.</p>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex gap-3">
+                <button onclick="showPaymentMethods()" class="btn-secondary flex-1 justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Back
+                </button>
+                <button onclick="submitApplication()" class="btn-primary flex-1 justify-center">
+                    Submit Application
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </button>
+            </div>
+            
+        </div>
+        
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2024 Swift Loan Limited. All rights reserved.</p>
-        <p>Licensed by Bank of Uganda | Regulated Microfinance Institution</p>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400 mb-3">Need Help? Contact our support team</p>
+            <a href="https://wa.me/256778931247" target="_blank" class="inline-flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2 rounded-lg transition">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                <span>WhatsApp: +256778931247</span>
+            </a>
+            <p class="text-gray-500 text-xs mt-4">&copy; 2024 Swift Loan. All rights reserved.</p>
+        </div>
     </footer>
 
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p>Processing your request...</p>
-        </div>
-    </div>
-
     <script>
+        // Current page state
+        let currentPage = 'deposit';
+        
+        // User data
+        let userData = {
+            loanAmount: 0,
+            savingsFee: 0,
+            userName: '',
+            userPhone: '',
+            trackingId: ''
+        };
+        
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            const loanData = JSON.parse(localStorage.getItem('selectedLoan') || 'null');
-            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            loadUserData();
+        });
+        
+        // Toast notification
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
             
-            if (!loanData) {
-                document.getElementById('mainContent').style.display = 'none';
-                document.getElementById('noDataMessage').style.display = 'block';
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+        
+        // Load user data from localStorage
+        function loadUserData() {
+            console.log('Loading user data...');
+            
+            // Simulate loading delay for visual effect
+            setTimeout(() => {
+                const selectedOfferData = localStorage.getItem('swift_selected_offer');
+                const personalDetails = localStorage.getItem('swiftloan_personal_details');
+                
+                if (selectedOfferData) {
+                    try {
+                        const offer = JSON.parse(selectedOfferData);
+                        userData.loanAmount = parseInt(offer.amount) || 0;
+                        userData.savingsFee = parseInt(offer.fee) || 0;
+                        userData.trackingId = offer.tracking || '';
+                        userData.userPhone = offer.phone || '';
+                    } catch (e) {
+                        console.error('Error parsing offer:', e);
+                    }
+                }
+                
+                if (personalDetails) {
+                    try {
+                        const details = JSON.parse(personalDetails);
+                        userData.userName = details.firstName || 'Customer';
+                    } catch (e) {
+                        console.error('Error parsing details:', e);
+                    }
+                }
+                
+                // Update all displays
+                updateDisplays();
+                
+            }, 800);
+        }
+        
+        // Update all displays with loaded data
+        function updateDisplays() {
+            const loanAmountFormatted = formatCurrency(userData.loanAmount);
+            const savingsFeeFormatted = formatCurrency(userData.savingsFee);
+            const userName = userData.userName || 'Customer';
+            
+            // Page 1 displays
+            document.getElementById('loanAmountDisplay').innerHTML = loanAmountFormatted;
+            document.getElementById('savingsFeeDisplay').innerHTML = savingsFeeFormatted;
+            
+            // Page 2 displays
+            document.getElementById('airtelAmount').textContent = savingsFeeFormatted;
+            document.getElementById('mtnAmount').textContent = savingsFeeFormatted;
+            document.getElementById('airtelName').textContent = userName;
+            document.getElementById('mtnName').textContent = userName;
+            document.getElementById('instructionAmount').textContent = savingsFeeFormatted;
+        }
+        
+        // Format currency
+        function formatCurrency(amount) {
+            const num = parseFloat(amount) || 0;
+            return 'UGX ' + num.toLocaleString('en-UG');
+        }
+        
+        // Navigation functions
+        function showDepositPage() {
+            switchPage('deposit');
+            document.getElementById('pageTitle').textContent = 'Deposit Savings';
+        }
+        
+        function showPaymentMethods() {
+            if (userData.savingsFee <= 0) {
+                showToast('Please wait for data to load', 'warning');
                 return;
             }
-
-            document.getElementById('displayLoanAmount').textContent = formatNumber(loanData.amount || 0);
-            document.getElementById('displayInterestRate').textContent = (loanData.interestRate || '18') + '%';
-            document.getElementById('displayProcessingFee').textContent = 'UGX ' + formatNumber(loanData.processingFee || 0);
-            document.getElementById('displayRepaymentPeriod').textContent = (loanData.term || '30') + ' Days';
-            
-            const dueDate = new Date();
-            dueDate.setDate(dueDate.getDate() + parseInt(loanData.term || 30));
-            document.getElementById('displayDueDate').textContent = dueDate.toLocaleDateString('en-UG', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-
-            const totalRepayment = loanData.totalRepayment || (loanData.amount * 1.18);
-            document.getElementById('displayTotalRepayment').textContent = 'UGX ' + formatNumber(totalRepayment);
-
-            const interestAmount = (loanData.amount || 0) * 0.18;
-            const amountReceive = (loanData.amount || 0) - (loanData.processingFee || 0);
-            
-            document.getElementById('summaryLoanAmount').textContent = 'UGX ' + formatNumber(loanData.amount || 0);
-            document.getElementById('summaryFee').textContent = 'UGX ' + formatNumber(loanData.processingFee || 0);
-            document.getElementById('summaryInterest').textContent = 'UGX ' + formatNumber(interestAmount);
-            document.getElementById('summaryReceive').textContent = 'UGX ' + formatNumber(amountReceive);
-            document.getElementById('summaryRepay').textContent = 'UGX ' + formatNumber(totalRepayment);
-
-            if (userData.firstName) document.getElementById('firstName').value = userData.firstName;
-            if (userData.lastName) document.getElementById('lastName').value = userData.lastName;
-            if (userData.phone) {
-                let phone = userData.phone.replace(/^\+?256/, '').replace(/\s/g, '');
-                document.getElementById('phoneNumber').value = phone;
-            }
-            if (userData.nationalId) document.getElementById('nationalId').value = userData.nationalId;
-            if (userData.district) document.getElementById('district').value = userData.district;
-
-            const form = document.getElementById('withdrawalForm');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (!validateForm()) {
-                    return;
-                }
-
-                const formData = {
-                    firstName: document.getElementById('firstName').value.trim(),
-                    lastName: document.getElementById('lastName').value.trim(),
-                    nationalId: document.getElementById('nationalId').value.trim(),
-                    dateOfBirth: document.getElementById('dateOfBirth').value,
-                    gender: document.getElementById('gender').value,
-                    phoneNumber: '+256' + document.getElementById('phoneNumber').value.trim(),
-                    mobileNetwork: document.getElementById('mobileNetwork').value,
-                    district: document.getElementById('district').value.trim(),
-                    village: document.getElementById('village').value.trim(),
-                    occupation: document.getElementById('occupation').value,
-                    monthlyIncome: document.getElementById('monthlyIncome').value
-                };
-
-                const fullName = formData.firstName + ' ' + formData.lastName;
-                const loanAmount = formatNumber(loanData.amount || 0);
-                const totalRepay = formatNumber(totalRepayment);
-                const repaymentPeriod = (loanData.term || '30') + ' Days';
-
-                const whatsappMessage = `Hello, my name is ${fullName}.
-
-*LOAN WITHDRAWAL REQUEST*
-
-*Personal Details:*
-- Full Name: ${fullName}
-- National ID: ${formData.nationalId}
-- Date of Birth: ${formData.dateOfBirth}
-- Gender: ${formData.gender}
-- Phone Number: ${formData.phoneNumber}
-- Mobile Network: ${formData.mobileNetwork}
-- District: ${formData.district}
-- Village/Town: ${formData.village}
-- Occupation: ${formData.occupation}
-- Monthly Income: ${formData.monthlyIncome}
-
-*Loan Details:*
-- Loan Amount: UGX ${loanAmount}
-- Repayment Period: ${repaymentPeriod}
-- Total to Repay: UGX ${totalRepay}
-
-I am qualified for a Loan of UGX ${loanAmount} and I am requesting a withdrawal to my ${formData.mobileNetwork} number ${formData.phoneNumber}.
-
-Please process my loan request. Thank you.`;
-
-                const whatsappNumber = '256778931247';
-                const encodedMessage = encodeURIComponent(whatsappMessage);
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-                document.getElementById('loadingOverlay').classList.add('active');
-                
-                setTimeout(function() {
-                    document.getElementById('loadingOverlay').classList.remove('active');
-                    window.open(whatsappUrl, '_blank');
-                }, 1500);
-            });
-
-            const phoneInput = document.getElementById('phoneNumber');
-            phoneInput.addEventListener('input', function(e) {
-                this.value = this.value.replace(/[^0-9]/g, '').substring(0, 9);
-            });
-
-            const nationalIdInput = document.getElementById('nationalId');
-            nationalIdInput.addEventListener('input', function(e) {
-                this.value = this.value.toUpperCase();
-            });
-        });
-
-        function formatNumber(num) {
-            return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            switchPage('payment');
+            document.getElementById('pageTitle').textContent = 'Payment Methods';
         }
-
-        function validateForm() {
-            let isValid = true;
-            const fields = [
-                { id: 'firstName', errorId: 'firstNameError', validate: (v) => v.trim().length >= 2 },
-                { id: 'lastName', errorId: 'lastNameError', validate: (v) => v.trim().length >= 2 },
-                { id: 'nationalId', errorId: 'nationalIdError', validate: (v) => v.trim().length >= 8 },
-                { id: 'dateOfBirth', errorId: 'dateOfBirthError', validate: (v) => v !== '' },
-                { id: 'gender', errorId: 'genderError', validate: (v) => v !== '' },
-                { id: 'phoneNumber', errorId: 'phoneNumberError', validate: (v) => /^[0-9]{9}$/.test(v.trim()) },
-                { id: 'mobileNetwork', errorId: 'mobileNetworkError', validate: (v) => v !== '' },
-                { id: 'district', errorId: 'districtError', validate: (v) => v.trim().length >= 2 },
-                { id: 'village', errorId: 'villageError', validate: (v) => v.trim().length >= 2 },
-                { id: 'occupation', errorId: 'occupationError', validate: (v) => v !== '' },
-                { id: 'monthlyIncome', errorId: 'monthlyIncomeError', validate: (v) => v !== '' }
-            ];
-
-            fields.forEach(field => {
-                const input = document.getElementById(field.id);
-                const error = document.getElementById(field.errorId);
-                
-                if (!field.validate(input.value)) {
-                    input.classList.add('error');
-                    input.classList.remove('valid');
-                    error.classList.add('show');
-                    isValid = false;
-                } else {
-                    input.classList.remove('error');
-                    input.classList.add('valid');
-                    error.classList.remove('show');
-                }
-            });
-
-            const termsCheckbox = document.getElementById('termsCheckbox');
-            if (!termsCheckbox.checked) {
-                alert('Please agree to the Terms and Conditions to proceed.');
-                isValid = false;
+        
+        function showVerifyPage() {
+            switchPage('verify');
+            document.getElementById('pageTitle').textContent = 'Verify Payment';
+        }
+        
+        function switchPage(page) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            currentPage = page;
+            window.scrollTo(0, 0);
+        }
+        
+        // Go back function
+        function goBack() {
+            if (currentPage === 'verify') {
+                showPaymentMethods();
+            } else if (currentPage === 'payment') {
+                showDepositPage();
+            } else {
+                // Go back to offers page
+                window.history.back();
             }
-
-            if (!isValid) {
-                const firstError = document.querySelector('.error-message.show');
-                if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
+        }
+        
+        // Submit application
+        function submitApplication() {
+            const message = document.getElementById('confirmationMessage').value.trim();
+            
+            if (!message) {
+                showToast('Please paste your payment confirmation message', 'error');
+                return;
             }
-
-            return isValid;
+            
+            if (message.length < 20) {
+                showToast('Please paste a valid confirmation message', 'error');
+                return;
+            }
+            
+            // Show success
+            showToast('Application submitted successfully! You will receive your loan within 2-4 hours.', 'success');
+            
+            // Store submission data
+            const submissionData = {
+                ...userData,
+                confirmationMessage: message,
+                submittedAt: new Date().toISOString()
+            };
+            localStorage.setItem('swift_submission', JSON.stringify(submissionData));
+            
+            // Disable the button
+            event.target.disabled = true;
+            event.target.textContent = 'Submitted';
         }
     </script>
+
 </body>
-</html>
+    </html>
